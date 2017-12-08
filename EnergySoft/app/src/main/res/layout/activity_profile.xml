@@ -16,38 +16,50 @@
     <RelativeLayout
         android:background="@drawable/bd_header"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="128dp">
         
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:background="@drawable/img"
-                android:layout_marginTop="32dp"
-                android:layout_gravity="center"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilepic"
                 android:src="@drawable/protest"
                 android:layout_width="90dp"
-                android:layout_height="90dp" />
+                android:layout_height="90dp"
+                android:paddingLeft="15dp"
+                android:layout_marginStart="16dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp" />
+
             <TextView
-                android:layout_marginTop="10dp"
-                android:textSize="18dp"
-                android:layout_gravity="center"
-                android:textColor="#fff"
-                android:text="EMP120653"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="EMP120653"
+                android:textColor="#fff"
+                android:textSize="18dp"
+                android:layout_alignTop="@+id/profilepic"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_marginTop="12dp" />
+
             <TextView
-                android:layout_marginTop="10dp"
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 android:textColor="#fff"
                 android:text="Ravichandran V"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:id="@+id/textView2"
+                android:layout_below="@+id/textView"
+                android:layout_toEndOf="@+id/profilepic"
+                android:layout_marginTop="14dp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </RelativeLayout>
@@ -58,15 +70,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="600dp">
+            android:layout_height="400dp">
 
             <TextView
                 android:textColor="@color/blueText"
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="39dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="14dp"
                 android:text="Email"
                 android:textSize="16sp"
                 android:layout_alignParentTop="true"
@@ -92,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/email"
                 android:layout_below="@+id/email"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="DOB"
                 android:textSize="16sp" />
 
@@ -114,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/dob"
                 android:layout_below="@+id/dob"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Mobile"
                 android:textSize="16sp" />
 
@@ -136,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/mobile"
                 android:layout_below="@+id/mobile"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="DOJ"
                 android:textSize="16sp" />
 
@@ -159,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/doj"
                 android:layout_below="@+id/doj"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Designation"
                 android:textSize="16sp" />
 
@@ -181,8 +193,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/designation"
                 android:layout_below="@+id/designation"
-                android:layout_marginTop="25dp"
-                android:text="Blood"
+                android:layout_marginTop="15dp"
+                android:text="Blood Group"
                 android:textSize="16sp" />
 
             <TextView
@@ -203,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/blood"
                 android:layout_below="@+id/blood"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Address"
                 android:textSize="16sp" />
 
@@ -225,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/address"
                 android:layout_below="@+id/address_data"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Aadhar ID"
                 android:textSize="16sp" />
 
@@ -247,7 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/aadhar"
                 android:layout_below="@+id/aadhar"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Emp. Dept. ID"
                 android:textSize="16sp" />
 
@@ -269,7 +281,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/empdept_id"
                 android:layout_below="@+id/empdept_id"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Exp. Years"
                 android:textSize="16sp" />
 
