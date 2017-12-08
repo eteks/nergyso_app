@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.user.energysoft.ProfileActivity">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+
+        />
+
+    <RelativeLayout
+        android:background="@drawable/bd_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:background="@drawable/img"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/protest"
+                android:layout_width="90dp"
+                android:layout_height="90dp" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="18dp"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:text="EMP120653"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:text="Ravichandran V"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="600dp">
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="39dp"
+                android:text="Email"
+                android:textSize="16sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/email_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/email"
+                android:layout_alignBottom="@+id/email"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/empdept_id"
+                android:text="ravi@gmail.com"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/dob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/email"
+                android:layout_below="@+id/email"
+                android:layout_marginTop="25dp"
+                android:text="DOB"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/dob_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/email_data"
+                android:layout_alignTop="@+id/dob"
+                android:text="11.11.1993"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/dob"
+                android:layout_below="@+id/dob"
+                android:layout_marginTop="25dp"
+                android:text="Mobile"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/mobile_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/dob_data"
+                android:layout_alignTop="@+id/mobile"
+                android:text="9874563210"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/doj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/mobile"
+                android:layout_below="@+id/mobile"
+                android:layout_marginTop="25dp"
+                android:text="DOJ"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/doj_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/doj"
+                android:layout_alignBottom="@+id/doj"
+                android:layout_alignStart="@+id/mobile_data"
+                android:text="23.12.2007"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/doj"
+                android:layout_below="@+id/doj"
+                android:layout_marginTop="25dp"
+                android:text="Designation"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/designation_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/designation"
+                android:layout_alignStart="@+id/doj_data"
+                android:text="UI Developer"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/blood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/designation"
+                android:layout_below="@+id/designation"
+                android:layout_marginTop="25dp"
+                android:text="Blood"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/blood_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/blood"
+                android:layout_alignStart="@+id/designation_data"
+                android:text="B +ve"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/blood"
+                android:layout_below="@+id/blood"
+                android:layout_marginTop="25dp"
+                android:text="Address"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/address_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/blood_data"
+                android:layout_alignTop="@+id/address"
+                android:text="9, murugan kovil street, RK nagar, Pondicherry, 605007."
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/aadhar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/address"
+                android:layout_below="@+id/address_data"
+                android:layout_marginTop="25dp"
+                android:text="Aadhar ID"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/aadhar_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/address_data"
+                android:layout_alignTop="@+id/aadhar"
+                android:text="789693254102"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empdept_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/aadhar"
+                android:layout_below="@+id/aadhar"
+                android:layout_marginTop="25dp"
+                android:text="Emp. Dept. ID"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/empdept_id_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/empdept_id"
+                android:layout_alignStart="@+id/aadhar_data"
+                android:text="965874"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/expyears"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/empdept_id"
+                android:layout_below="@+id/empdept_id"
+                android:layout_marginTop="25dp"
+                android:text="Exp. Years"
+                android:textSize="16sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:textStyle="bold|normal"
+                android:id="@+id/expyears_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/empdept_id_data"
+                android:layout_alignTop="@+id/expyears"
+                android:text="5"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
