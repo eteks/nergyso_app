@@ -49,7 +49,7 @@
                 <!--android:layout_centerHorizontal="true" />-->
 
             <EditText
-                android:id="@+id/clientUsername"
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -64,11 +64,11 @@
 
 
             <EditText
-                android:id="@+id/clientPassword"
+                android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/clientUsername"
-                android:layout_below="@+id/clientUsername"
+                android:layout_alignStart="@+id/username"
+                android:layout_below="@+id/username"
                 android:layout_marginTop="21dp"
                 android:ems="10"
                 android:fontFamily="sans-serif"
@@ -84,9 +84,9 @@
                 android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/clientPassword"
-                android:layout_alignStart="@+id/clientPassword"
-                android:layout_below="@+id/clientPassword"
+                android:layout_alignEnd="@+id/password"
+                android:layout_alignStart="@+id/password"
+                android:layout_below="@+id/password"
                 android:layout_marginTop="27dp"
                 android:background="@drawable/rounded_edge"
                 android:fontFamily="sans-serif-smallcaps"
