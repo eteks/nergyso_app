@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilepic"
+                android:id="@+id/empPhoto"
                 android:src="@drawable/protest"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
@@ -35,28 +35,26 @@
                 android:layout_marginTop="15dp" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/empId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="EMP120653"
                 android:textColor="#fff"
-                android:textSize="18dp"
-                android:layout_alignTop="@+id/profilepic"
-                android:layout_alignStart="@+id/textView2"
+                android:textSize="20dp"
+                android:layout_alignTop="@+id/empPhoto"
+                android:layout_alignStart="@+id/empName"
                 android:layout_marginTop="12dp" />
 
             <TextView
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 android:textColor="#fff"
-                android:text="Ravichandran V"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
-                android:id="@+id/textView2"
-                android:layout_below="@+id/textView"
-                android:layout_toEndOf="@+id/profilepic"
+                android:id="@+id/empName"
+                android:layout_below="@+id/empId"
+                android:layout_toEndOf="@+id/empPhoto"
                 android:layout_marginTop="14dp" />
 
         </RelativeLayout>
@@ -87,14 +85,13 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/email_data"
+                android:id="@+id/empEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/email"
                 android:layout_alignBottom="@+id/email"
                 android:layout_marginStart="24dp"
                 android:layout_toEndOf="@+id/empdept_id"
-                android:text="ravi@gmail.com"
                 android:textSize="16sp" />
 
             <TextView
@@ -111,12 +108,11 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/dob_data"
+                android:id="@+id/empDob"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/email_data"
+                android:layout_alignStart="@+id/empEmail"
                 android:layout_alignTop="@+id/dob"
-                android:text="11.11.1993"
                 android:textSize="16sp" />
 
             <TextView
@@ -133,12 +129,11 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/mobile_data"
+                android:id="@+id/empMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/dob_data"
+                android:layout_alignStart="@+id/empDob"
                 android:layout_alignTop="@+id/mobile"
-                android:text="9874563210"
                 android:textSize="16sp" />
 
             <TextView
@@ -155,13 +150,12 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/doj_data"
+                android:id="@+id/empDoj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/doj"
                 android:layout_alignBottom="@+id/doj"
-                android:layout_alignStart="@+id/mobile_data"
-                android:text="23.12.2007"
+                android:layout_alignStart="@+id/empMobile"
                 android:textSize="16sp" />
 
             <TextView
@@ -178,12 +172,11 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/designation_data"
+                android:id="@+id/empDesignation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/designation"
-                android:layout_alignStart="@+id/doj_data"
-                android:text="UI Developer"
+                android:layout_alignStart="@+id/empDoj"
                 android:textSize="16sp" />
 
             <TextView
@@ -200,12 +193,11 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/blood_data"
+                android:id="@+id/empBloodGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/blood"
-                android:layout_alignStart="@+id/designation_data"
-                android:text="B +ve"
+                android:layout_alignStart="@+id/empDesignation"
                 android:textSize="16sp" />
 
             <TextView
@@ -222,12 +214,11 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/address_data"
+                android:id="@+id/empAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/blood_data"
+                android:layout_alignStart="@+id/empBloodGroup"
                 android:layout_alignTop="@+id/address"
-                android:text="9, murugan kovil street, RK nagar, Pondicherry, 605007."
                 android:textSize="16sp" />
 
             <TextView
@@ -236,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/address"
-                android:layout_below="@+id/address_data"
+                android:layout_below="@+id/empAddress"
                 android:layout_marginTop="15dp"
                 android:text="Aadhar ID"
                 android:textSize="16sp" />
@@ -244,12 +235,11 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/aadhar_data"
+                android:id="@+id/empAadharId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/address_data"
+                android:layout_alignStart="@+id/empAddress"
                 android:layout_alignTop="@+id/aadhar"
-                android:text="789693254102"
                 android:textSize="16sp" />
 
             <TextView
@@ -260,18 +250,17 @@
                 android:layout_alignStart="@+id/aadhar"
                 android:layout_below="@+id/aadhar"
                 android:layout_marginTop="15dp"
-                android:text="Emp. Dept. ID"
+                android:text="Department"
                 android:textSize="16sp" />
 
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/empdept_id_data"
+                android:id="@+id/empDeptId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/empdept_id"
-                android:layout_alignStart="@+id/aadhar_data"
-                android:text="965874"
+                android:layout_alignStart="@+id/empAadharId"
                 android:textSize="16sp" />
 
             <TextView
@@ -288,12 +277,11 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:id="@+id/expyears_data"
+                android:id="@+id/EmpExpYears"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/empdept_id_data"
+                android:layout_alignStart="@+id/empDeptId"
                 android:layout_alignTop="@+id/expyears"
-                android:text="5"
                 android:textSize="16sp" />
 
 

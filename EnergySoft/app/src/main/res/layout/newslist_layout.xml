@@ -11,32 +11,30 @@
 
         <ImageView
             android:src="@drawable/protest"
-            android:id="@+id/imageview"
+            android:id="@+id/news_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_weight="0.11"/>
 
         <TextView
-            android:text="NewsTitle"
-            android:id="@+id/tvnewstitle"
+            android:id="@+id/news_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageview"
-            android:layout_toRightOf="@+id/imageview"
+            android:layout_toEndOf="@+id/news_image"
+            android:layout_toRightOf="@+id/news_image"
             android:paddingLeft="10dp"
             android:textColor="#333"
             android:textSize="22dp"
             android:textStyle="bold"/>
 
         <TextView
-            android:text="Description Hari ius the most hansome person "
-            android:id="@+id/tvnewsdescription"
+            android:id="@+id/news_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvnewstitle"
-            android:layout_toEndOf="@+id/imageview"
-            android:layout_toRightOf="@+id/imageview"
+            android:layout_below="@+id/news_title"
+            android:layout_toEndOf="@+id/news_image"
+            android:layout_toRightOf="@+id/news_image"
             android:paddingLeft="10dp"
             android:layout_weight="1"
             android:textColor="#333"/>
@@ -46,11 +44,11 @@
             android:id="@+id/tvnewsreadmore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvnewsdescription"
-            android:layout_alignEnd="@+id/tvnewsdescription"
             android:paddingLeft="10dp"
             android:layout_weight="1"
-            android:textColor="#333"/>
+            android:textColor="#333"
+            android:layout_below="@+id/news_description"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
