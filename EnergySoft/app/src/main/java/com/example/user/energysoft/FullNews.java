@@ -5,6 +5,11 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -13,6 +18,8 @@ import java.util.TimerTask;
 import me.relex.circleindicator.CircleIndicator;
 
 public class FullNews extends AppCompatActivity {
+
+    Toolbar toolbar;
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static final Integer[] XMEN= {R.drawable.beast,R.drawable.charles,R.drawable.magneto,R.drawable.mystique,R.drawable.wolverine};
@@ -21,6 +28,9 @@ public class FullNews extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_news);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
         init();
 
     }
@@ -52,6 +62,23 @@ public class FullNews extends AppCompatActivity {
                 handler.post(Update);
             }
         }, 2500, 2500);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int res_id = item.getItemId();
+        if(res_id == R.id.action_home)
+        {
+            Toast.makeText(getApplicationContext(),"You selet Home",Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
