@@ -1,15 +1,40 @@
 package com.example.user.energysoft;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by root on 9/12/17.
  */
 
-public class news {
-    public String news_title;
-    public String news_description;
-    public String news_image;
-    public String news_video;
-    public String news_document;
+public class News {
+    String news_title;
+    String news_description;
+    String news_image;
+    String news_video;
+    String news_document;
+    int id;
+
+    public News() {
+    }
+
+    public News(String title) {
+        this.news_title = title;
+    }
+
+    public String getTitle() {
+        System.out.println("inside getTitle"+news_title);
+        return news_title;
+    }
+
+    public int getId() {
+        System.out.println("inside getTitle"+id);
+        return id;
+    }
+
+    public String getNews_description() {
+        return news_description;
+    }
 
 //    public news(String news_title, String news_description, String news_image, String news_video, String news_document){
 //        this.setTitle(news_title);
@@ -20,7 +45,13 @@ public class news {
 //    }
 
     public void setTitle(String text){
-        news_title = text;
+        System.out.println("inside setTitle"+news_title);
+        this.news_title = text;
+    }
+
+    public void setId(int id){
+        System.out.println("inside setTitle"+id);
+        this.id = id;
     }
 
     public void setDescription(String text){
@@ -38,5 +69,19 @@ public class news {
     public void setDocument(String text){
         news_document = text;
     }
+
+//    public static List<News> createMovies(int itemCount) {
+//        List<News> newsList = new ArrayList<>();
+//        for (int i = 0; i < 5; i++) {
+//            News news = new News();
+//            news.news_image = "";
+//            news.news_title = "Title "+ (itemCount == 0 ?
+//                    (itemCount + 1 + i) : (itemCount + i));
+//            news.news_description = "Description" + i;
+//            newsList.add(news);
+//        }
+//        return newsList;
+//    }
+
 }
 

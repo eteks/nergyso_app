@@ -13,19 +13,19 @@
 
         <ImageView
             android:src="@drawable/protest"
-            android:id="@+id/imageviewevent"
+            android:id="@+id/events_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_weight="0.11"/>
 
         <TextView
             android:text="EventTitle"
-            android:id="@+id/tveventtitle"
+            android:id="@+id/events_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageviewevent"
-            android:layout_toRightOf="@+id/imageviewevent"
+            android:layout_toEndOf="@+id/events_image"
+            android:layout_toRightOf="@+id/events_image"
             android:paddingLeft="10dp"
             android:textColor="#333"
             android:textSize="22dp"
@@ -33,12 +33,12 @@
 
         <TextView
             android:text="Description Hari is the most hansome person"
-            android:id="@+id/tvnewsdescription"
+            android:id="@+id/events_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tveventtitle"
-            android:layout_toEndOf="@+id/imageviewevent"
-            android:layout_toRightOf="@+id/imageviewevent"
+            android:layout_below="@+id/events_title"
+            android:layout_toEndOf="@+id/events_image"
+            android:layout_toRightOf="@+id/events_image"
             android:paddingLeft="10dp"
             android:layout_weight="1"
             android:textColor="#333"/>

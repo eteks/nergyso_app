@@ -5,6 +5,9 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -14,6 +17,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class FullNews extends AppCompatActivity {
     private static ViewPager mPager;
+    private static ScrollView mScrollView;
     private static int currentPage = 0;
     private static final Integer[] XMEN= {R.drawable.beast,R.drawable.charles,R.drawable.magneto,R.drawable.mystique,R.drawable.wolverine};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
@@ -28,10 +32,46 @@ public class FullNews extends AppCompatActivity {
         for(int i=0;i<XMEN.length;i++){
             XMENArray.add(XMEN[i]);
         }
-
-
+//        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
+//        scrollView.setFillViewport (true);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new MyAdapter(FullNews.this,XMENArray));
+        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
+        mScrollView.setFillViewport(true);
+        mPager.setOnTouchListener(new View.OnTouchListener() {
+            int dragthreshold = 30;
+            int downX;
+            int downY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        downX = (int) event.getRawX();
+                        downY = (int) event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        int distanceX = Math.abs((int) event.getRawX() - downX);
+                        int distanceY = Math.abs((int) event.getRawY() - downY);
+
+                        if (distanceY > distanceX && distanceY > dragthreshold) {
+                            mPager.getParent().requestDisallowInterceptTouchEvent(false);
+                            mScrollView.getParent().requestDisallowInterceptTouchEvent(true);
+                        } else if (distanceX > distanceY && distanceX > dragthreshold) {
+                            mPager.getParent().requestDisallowInterceptTouchEvent(true);
+                            mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
+                        mPager.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+                return false;
+            }
+        });
+
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
