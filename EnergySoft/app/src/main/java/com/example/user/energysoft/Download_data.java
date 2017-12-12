@@ -72,35 +72,19 @@ public class Download_data implements Runnable  {
         URL website;
         StringBuilder response = null;
         try {
-            website = new URL("http://demos.vetbossel.in/ajson/sample");
-            System.out.println("Data ");
-
+            website = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) website.openConnection();
-            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("charset", "utf-32");
             connection.setRequestMethod("GET");
-            connection.connect();
+//            connection.connect();
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
                             connection.getInputStream()));
-            System.out.println("Connection"+connection.getInputStream());
             response = new StringBuilder();
-            String next;
-//            while ((next = in.readLine()) != null){
-//                JSONArray ja = new JSONArray(next);
-//
-//                for (int i = 0; i < ja.length(); i++) {
-//                    JSONObject jo = (JSONObject) ja.get(i);
-//                    System.out.println(jo);
-//                    System.out.println("object"+jo.getString("news_title"));
-////                    items.add(jo.getString("text"));
-//                }
-//            }
-//            String inputLine;
-//
-//            while ((inputLine = in.readLine()) != null)
-//                response.append(inputLine);
-//
-//            in.close();
+            String inputLine;
+            while ((inputLine = in.readLine()) != null)
+                response.append(inputLine);
+            in.close();
             System.out.println("Response"+response.toString());
         } catch (Exception  e) {
             Log.e("ERROR", e.getMessage(), e);

@@ -11,7 +11,7 @@
         tools:listitem="@layout/eventlist_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewevent"
+        android:id="@+id/event_list"
         android:divider="@null"
         />
     <include
