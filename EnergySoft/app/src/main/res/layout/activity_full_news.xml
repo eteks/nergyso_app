@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/tool_bar"
-
-        />
-
     <RelativeLayout
         android:id="@+id/newshead_layout"
         android:layout_width="match_parent"
@@ -47,7 +41,7 @@
             android:layout_toRightOf="@+id/imageview"
             android:layout_weight="1"
             android:paddingLeft="10dp"
-            android:text="Description It is a long established fact that a reader will be distracted"
+            android:text="Description Hari ius the most hansome person "
             android:textColor="#333" />
 
     </RelativeLayout>
@@ -61,7 +55,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newshead_layout">
-
 
         <TextView
             android:id="@+id/textView4"
