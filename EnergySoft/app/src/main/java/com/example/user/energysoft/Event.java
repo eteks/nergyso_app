@@ -12,8 +12,18 @@ public class Event {
     String events_document;
     String events_venue;
     String events_location;
+    int id;
     String events_date;
 
+    public String getTitle() {
+        System.out.println("inside getTitle"+events_title);
+        return events_title;
+    }
+
+    public int getId() {
+        System.out.println("inside getTitle"+id);
+        return id;
+    }
 
 
 //    public news(String news_title, String news_description, String news_image, String news_video, String news_document){
@@ -25,8 +35,15 @@ public class Event {
 //    }
 
     public void setTitle(String text){
-        events_title = text;
+        System.out.println("inside setTitle"+events_title);
+        this.events_title = text;
     }
+
+    public void setId(int id){
+        System.out.println("inside setTitle"+id);
+        this.id = id;
+    }
+
 
     public void setDescription(String text){
         events_description = text;

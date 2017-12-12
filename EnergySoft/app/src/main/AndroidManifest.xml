@@ -11,19 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FullNews">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NewsMain" />
+        <activity android:name=".FullNews" />
+        <activity android:name=".GalleryZoomActivity" />
         <activity android:name=".Feedback" />
         <activity android:name=".EventMain" />
-        <activity android:name=".GalleryActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".GalleryActivity" />
         <activity android:name=".Shoutout"/>
+        <activity android:name=".GridList"/>
     </application>
 
 </manifest>

@@ -35,10 +35,38 @@ public class GridList extends AppCompatActivity {
         simpleGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // set an Intent to Another Activity
-                Intent intent = new Intent(GridList.this, SecondActivity.class);
-                intent.putExtra("image", logos[position]); // put image data in Intent
-                startActivity(intent); // start Intent
+                switch (position){
+                    case 0 : {
+                        Intent intent = new Intent(GridList.this, EventMain.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 1 : {
+                        Intent intent = new Intent(GridList.this, NewsMain.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 2 : {
+                        Intent intent = new Intent(GridList.this, GalleryActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 3 : {
+                        Intent intent = new Intent(GridList.this, Shoutout.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 4 : {
+                        Intent intent = new Intent(GridList.this, Feedback.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 5 : {
+                        Intent intent = new Intent(GridList.this, ProfileActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                }
             }
         });
     }

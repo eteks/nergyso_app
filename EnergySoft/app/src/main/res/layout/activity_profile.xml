@@ -85,7 +85,6 @@
             <TextView
                 android:textColor="@color/blueText"
                 android:textStyle="bold|normal"
-                android:text="ravi@gmail.com"
                 android:id="@+id/empEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

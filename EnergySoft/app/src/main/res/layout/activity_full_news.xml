@@ -3,13 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/tool_bar"
 
         />
-
     <RelativeLayout
         android:id="@+id/newshead_layout"
         android:layout_width="match_parent"
@@ -18,20 +16,20 @@
         android:padding="15dp">
 
         <ImageView
-            android:id="@+id/imageview"
+            android:id="@+id/news_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_weight="0.11"
             android:src="@drawable/protest" />
 
         <TextView
-            android:id="@+id/tvnewstitle"
+            android:id="@+id/full_news_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignTop="@+id/imageview"
-            android:layout_toEndOf="@+id/imageview"
-            android:layout_toRightOf="@+id/imageview"
+            android:layout_alignTop="@+id/news_photo"
+            android:layout_toEndOf="@+id/news_photo"
+            android:layout_toRightOf="@+id/news_photo"
             android:paddingLeft="10dp"
             android:text="NewsTitle"
             android:textColor="#333"
@@ -39,15 +37,16 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvnewsdescription"
+            android:id="@+id/full_news_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvnewstitle"
-            android:layout_toEndOf="@+id/imageview"
-            android:layout_toRightOf="@+id/imageview"
+            android:layout_below="@+id/full_news_title"
+            android:layout_toEndOf="@+id/news_photo"
+            android:layout_toRightOf="@+id/news_photo"
             android:layout_weight="1"
             android:paddingLeft="10dp"
-            android:text="Description It is a long established fact that a reader will be distracted"
+            android:maxLines="2"
+            android:text="Description Hari ius the most hansome person "
             android:textColor="#333" />
 
     </RelativeLayout>
@@ -62,15 +61,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/full_text_news_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:padding="5dp"
             android:paddingLeft="10dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when aLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when aan unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when aLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when aan unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum "
+            android:text="Lorem Ipsum is simply  Lorem Ipsum "
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -79,7 +77,7 @@
             android:id="@+id/pager"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/textView4" />
+            android:layout_below="@+id/full_text_news_description" />
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator"
             android:layout_width="match_parent"
