@@ -21,8 +21,8 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         simpleGrid = (GridView) findViewById(R.id.galleryGridView); // init GridView
         // Create an object of CustomAdapter and set Adapter to GirdView
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), logos);
-        simpleGrid.setAdapter(customAdapter);
+        GalleryAdapter galleryAdapter = new GalleryAdapter(getApplicationContext(), logos);
+        simpleGrid.setAdapter(galleryAdapter);
         // implement setOnItemClickListener event on GridView
         simpleGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

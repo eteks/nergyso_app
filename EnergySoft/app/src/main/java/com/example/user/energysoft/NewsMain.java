@@ -313,7 +313,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                     int id = news.getId();
                     Intent intent = new Intent(NewsMain.this,FullNews.class);
                     intent.putExtra("id", id);
-                    finish();
+//                    finish();
                     startActivity(intent);
 //                news.setPage("FullNews");
                 }

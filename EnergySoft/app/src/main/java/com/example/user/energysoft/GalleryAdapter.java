@@ -37,6 +37,7 @@ public class GalleryAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.activity_gridgallery, null); // inflate the layout
         ImageView icon = (ImageView) view.findViewById(R.id.icon); // get the reference of ImageView
+        System.out.println(logos[i]);
         icon.setImageResource(logos[i]); // set logo images
         return view;
     }
