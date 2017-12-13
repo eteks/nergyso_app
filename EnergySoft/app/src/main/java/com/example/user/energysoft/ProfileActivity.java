@@ -78,10 +78,8 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
     public void get_data(String data)
     {
        try {
-                JSONObject object = (JSONObject) new JSONTokener(data).nextValue();
-
-                final JSONObject obj = object.getJSONObject("employee");
-                empId.setText(obj.getString("employee_id"));
+                JSONObject obj = (JSONObject) new JSONTokener(data).nextValue();
+                System.out.println("Object"+obj);
                 empName.setText(obj.getString("employee_name"));
                 empEmail.setText(obj.getString("employee_email"));
                 empDob.setText(obj.getString("employee_dob"));
@@ -91,15 +89,15 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 empDoj.setText(obj.getString("employee_doj"));
                 empAddress.setText(obj.getString("employee_address"));
                 empAadharId.setText(obj.getString("employee_aadhar_id"));
-                empDeptId.setText(obj.getString("employee_depaartment_id"));
-                String empExperience = obj.getString("employee_experience_in_years");
+                empDeptId.setText(obj.getString("employee_department_name"));
+                int empExperience = obj.getInt("employee_experience_in_years");
 //            String[] mySplit = empExperience.split("\\.");
 //            Double years = new Double(mySplit[0]);
 //            Double months = new Double(mySplit[1]);
 //
 //            String experience = years+" "+"Years"+" "+months+" "+"Months";
-                EmpExpYears.setText(empExperience);
-                loadImageFromUrl(obj.getString("employee_photo"));
+                EmpExpYears.setText("\""+empExperience+"\"");
+                loadImageFromUrl((SERVER_URL+obj.getString("employee_photo")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
