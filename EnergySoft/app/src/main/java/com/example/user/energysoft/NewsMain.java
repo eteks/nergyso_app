@@ -44,7 +44,8 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
     PaginationAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     String nextPage;
-    String NEWS_URL = "http://10.0.0.15:8000/api/news/";
+    String SERVER_URL;
+    String NEWS_URL;
     RecyclerView rv;
     ProgressBar progressBar;
 
@@ -62,17 +63,19 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_main);
+        SERVER_URL = getString(R.string.service_url);
+        NEWS_URL = SERVER_URL+ "api/news/";
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
-        ImageView home = (ImageView) findViewById(R.id.action_home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NewsMain.this, GridList.class);
-                startActivity(intent);
-            }
-        });
+//        ImageView home = (ImageView) findViewById(R.id.action_home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(NewsMain.this, GridList.class);
+//                startActivity(intent);
+//            }
+//        });
 //        list = (ListView) findViewById(R.id.newslist);
 //        NewsAdapter = new com.example.user.energysoft.ListAdapter(this);
 //        list.setAdapter(NewsAdapter);

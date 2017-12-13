@@ -1,21 +1,15 @@
 package com.example.user.energysoft;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +25,8 @@ import me.relex.circleindicator.CircleIndicator;
 
 
 public class FullNews extends AppCompatActivity implements Download_data.download_complete{
-    String FULL_NEWS_URL = "http://10.0.0.15:8000/api/news/";
+    String SERVER_URL ;
+    String FULL_NEWS_URL ;
     Toolbar toolbar;
     private static ViewPager mPager;
     private static ScrollView mScrollView;
@@ -44,19 +39,21 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_news);
+        SERVER_URL = getString(R.string.service_url);
+        FULL_NEWS_URL = SERVER_URL+ "api/news/";
         init();
-        ImageView home = (ImageView) findViewById(R.id.action_home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FullNews.this, GridList.class);
-                startActivity(intent);
-            }
-        });
-        full_news_title = (TextView) findViewById(R.id.full_news_title);
+//        ImageView home = (ImageView) findViewById(R.id.action_home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(FullNews.this, GridList.class);
+//                startActivity(intent);
+//            }
+//        });
+        full_news_title = (TextView) findViewById(R.id.full_events_title);
         full_news_description = (TextView) findViewById(R.id.full_news_description);
-        full_text_news_description = (TextView) findViewById(R.id.full_text_news_description);
-        news_photo = (ImageView) findViewById(R.id.news_photo);
+        full_text_news_description = (TextView) findViewById(R.id.full_text_events_description);
+        news_photo = (ImageView) findViewById(R.id.events_photo);
         int id = getIntent().getIntExtra("id",0);
         FULL_NEWS_URL = FULL_NEWS_URL+id+"/";
         Download_data download_data = new Download_data((Download_data.download_complete) this);
@@ -142,14 +139,8 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
                         full_news_title.setText(object.getString("news_title"));
                         full_news_description.setText(object.getString("news_description"));
                         full_text_news_description.setText(object.getString("news_description"));
-                        String photo_link = object.getString("news_image");
-                        String [] photo = photo_link.split("/");
-                        for(int i = 0; i< photo.length ; i++){
-                            System.out.println(photo[i]);
-                        }
-                        photo_link = "http://10.0.0.15:8000/media/images/"+photo[photo.length-1];
-                        System.out.println(photo_link);
-                        loadImageFromUrl(photo_link);
+                        System.out.println(SERVER_URL+object.getString("news_image"));
+                        loadImageFromUrl(SERVER_URL+object.getString("news_image"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

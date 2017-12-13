@@ -18,11 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewsMain" />
+        <!--<activity android:name=".MainActivity" />-->
+        <activity android:name=".Resetpassword_Activity" />
         <activity android:name=".FullNews" />
         <activity android:name=".GalleryZoomActivity" />
         <activity android:name=".Feedback" />
-        <activity android:name=".EventMain" />
+        <activity android:name=".FullEvent" />
         <activity android:name=".GridList" />
         <activity android:name=".ForgetpasswordActivity" />
         <activity android:name=".ProfileActivity" />

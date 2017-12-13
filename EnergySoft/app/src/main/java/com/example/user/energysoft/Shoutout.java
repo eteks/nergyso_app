@@ -31,24 +31,27 @@ import java.net.URLEncoder;
 import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
 
 public class Shoutout extends AppCompatActivity{
-    String SHOUT_URL = "";
+    String SERVER_URL ;
+    String SHOUT_URL ;
     Toolbar toolbar;
     EditText shoutout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoutout);
+        SERVER_URL = getString(R.string.service_url);
+        SHOUT_URL = SERVER_URL+ "";
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
-        ImageView home = (ImageView) findViewById(R.id.action_home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Shoutout.this, GridList.class);
-                startActivity(intent);
-            }
-        });
+//        ImageView home = (ImageView) findViewById(R.id.action_home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Shoutout.this, GridList.class);
+//                startActivity(intent);
+//            }
+//        });
         shoutout = (EditText) findViewById(R.id.shouttext);
         Button shout = (Button) findViewById(R.id.shoutpost);
         shout.setOnClickListener(new View.OnClickListener() {

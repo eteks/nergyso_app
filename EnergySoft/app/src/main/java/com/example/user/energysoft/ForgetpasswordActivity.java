@@ -31,20 +31,27 @@ import static com.example.user.energysoft.R.id.toolbar;
 
 public class ForgetpasswordActivity extends AppCompatActivity {
     EditText email;
-    String FORGOT_PASSWORD_URL = "http://10.0.0.15:8000/api/rest-auth/password/reset/";
+    String SERVER_URL ;
+    String FORGOT_PASSWORD_URL ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgetpassword);
-        ImageView home = (ImageView) findViewById(R.id.action_home);
-        home.setOnClickListener(new View.OnClickListener() {
+        SERVER_URL = getString(R.string.service_url);
+        FORGOT_PASSWORD_URL = SERVER_URL+ "api/rest-auth/password/reset/";
+        email = (EditText) findViewById(R.id.email);
+        Button reset = (Button) findViewById(R.id.cancel);
+        reset.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ForgetpasswordActivity.this, GridList.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        email.setText("");
+                    }
+                });
             }
         });
-        email = (EditText) findViewById(R.id.email);
         Button submit = (Button) findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             int ONE_TIME = 0;
@@ -101,10 +108,10 @@ public class ForgetpasswordActivity extends AppCompatActivity {
                                             Toast.makeText(ForgetpasswordActivity.this, "Password reset e-mail has been sent to your mail.", Toast.LENGTH_SHORT).show();
                                         }
                                     });
-//                                Intent intent = new Intent(ForgetpasswordActivity.this, GridList.class);
-////                                    intent.putExtra("key", object.getString("key"));
-////                                    finish();
-//                                startActivity(intent);
+                                Intent intent = new Intent(ForgetpasswordActivity.this, Resetpassword_Activity.class);
+//                                    intent.putExtra("key", object.getString("key"));
+//                                    finish();
+                                startActivity(intent);
                                 }else{
                                     runOnUiThread(new Runnable() {
                                         @Override
@@ -115,12 +122,6 @@ public class ForgetpasswordActivity extends AppCompatActivity {
                                 }
                             } catch (Exception ex) {
                                 System.out.println(ex);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        createAndShowDialog("No internet connection", "Error");
-                                    }
-                                });
                             } finally {
                                 try {
 

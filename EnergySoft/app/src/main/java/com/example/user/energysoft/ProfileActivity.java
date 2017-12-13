@@ -33,7 +33,8 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
     Toolbar toolbar;
     TextView empId, empName, empEmail, empDob, empMobile, empDesignation, empBloodGroup, empDoj, empAddress, empAadharId, empDeptId, EmpExpYears;
     ImageView empPhoto;
-    String EMPLOYEE_URL = "http://10.0.0.15:8000/api/employee/";
+    String SERVER_URL;
+    String EMPLOYEE_URL ;
     JSONObject jsonObject = new JSONObject();
     String str = "{\"employee\":{\"employee_id\":\"EMP001\",\"employee_name\":\"Harihara prabu U\",\"employee_dob\":\"24-04-1995\",\"employee_email\":\"harihara@etekchnoservices.com\",\"employee_mobile\":\"97900 22747\",\"employee_doj\":\"01-08-2017\",\"employee_designation\":\"Software Developer\",\"employee_photo\":\"http://www.lucidian.net/assets/pages/media/profile/people19.png\",\"employee_bloodgroup\":\"B +ve\",\"employee_address\":\"No: 17, Nalla thanni kinaru street, Kosapalayam, Puducherry-13.\",\"employee_aadhar_id\":\"8521 4785 2369\",\"employee_experience_in_years\":\"0.5\",\"employee_depaartment_id\":\"258\"}}";
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -41,16 +42,18 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        SERVER_URL = getString(R.string.service_url);
+        EMPLOYEE_URL = SERVER_URL+ "api/employee/";
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ImageView home = (ImageView) findViewById(R.id.action_home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, GridList.class);
-                startActivity(intent);
-            }
-        });
+//        ImageView home = (ImageView) findViewById(R.id.action_home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ProfileActivity.this, GridList.class);
+//                startActivity(intent);
+//            }
+//        });
         SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         System.out.println("USer : "+shared.getInt("id",0));
         EMPLOYEE_URL = EMPLOYEE_URL+shared.getInt("id",0)+"/";
