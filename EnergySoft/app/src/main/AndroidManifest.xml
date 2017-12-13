@@ -27,6 +27,7 @@
         <activity android:name=".ForgetpasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Shoutout" />
+        <activity android:name=".Changepassword_Activity"></activity>
     </application>
 
 </manifest>
