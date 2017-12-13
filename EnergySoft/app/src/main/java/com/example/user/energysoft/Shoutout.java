@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -33,7 +34,6 @@ public class Shoutout extends AppCompatActivity{
     String SHOUT_URL = "";
     Toolbar toolbar;
     EditText shoutout;
-    int ONE_TIME = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +41,18 @@ public class Shoutout extends AppCompatActivity{
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+        ImageView home = (ImageView) findViewById(R.id.action_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Shoutout.this, GridList.class);
+                startActivity(intent);
+            }
+        });
         shoutout = (EditText) findViewById(R.id.shouttext);
         Button shout = (Button) findViewById(R.id.shoutpost);
         shout.setOnClickListener(new View.OnClickListener() {
+            int ONE_TIME = 0;
             @Override
             public void onClick(View view) {
                 ONE_TIME++;

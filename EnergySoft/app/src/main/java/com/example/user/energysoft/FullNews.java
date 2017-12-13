@@ -45,6 +45,14 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_news);
         init();
+        ImageView home = (ImageView) findViewById(R.id.action_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FullNews.this, GridList.class);
+                startActivity(intent);
+            }
+        });
         full_news_title = (TextView) findViewById(R.id.full_news_title);
         full_news_description = (TextView) findViewById(R.id.full_news_description);
         full_text_news_description = (TextView) findViewById(R.id.full_text_news_description);

@@ -2,6 +2,7 @@ package com.example.user.energysoft;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.math.BigDecimal;
 import android.os.Build;
@@ -42,6 +43,14 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
         setContentView(R.layout.activity_profile);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ImageView home = (ImageView) findViewById(R.id.action_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, GridList.class);
+                startActivity(intent);
+            }
+        });
         SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         System.out.println("USer : "+shared.getInt("id",0));
         EMPLOYEE_URL = EMPLOYEE_URL+shared.getInt("id",0)+"/";

@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -64,6 +65,14 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+        ImageView home = (ImageView) findViewById(R.id.action_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewsMain.this, GridList.class);
+                startActivity(intent);
+            }
+        });
 //        list = (ListView) findViewById(R.id.newslist);
 //        NewsAdapter = new com.example.user.energysoft.ListAdapter(this);
 //        list.setAdapter(NewsAdapter);

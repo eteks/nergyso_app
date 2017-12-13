@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 public class GalleryActivity extends AppCompatActivity {
 
@@ -19,6 +20,14 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+        ImageView home = (ImageView) findViewById(R.id.action_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GalleryActivity.this, GridList.class);
+                startActivity(intent);
+            }
+        });
         simpleGrid = (GridView) findViewById(R.id.galleryGridView); // init GridView
         // Create an object of CustomAdapter and set Adapter to GirdView
         GalleryAdapter galleryAdapter = new GalleryAdapter(getApplicationContext(), logos);

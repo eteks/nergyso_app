@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -41,6 +42,14 @@ public class Feedback extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+        ImageView home = (ImageView) findViewById(R.id.action_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Feedback.this, GridList.class);
+                startActivity(intent);
+            }
+        });
         final EditText Feedback = (EditText) findViewById(R.id.feedback);
         final EditText Query = (EditText) findViewById(R.id.query);
         final RatingBar mBar = (RatingBar) findViewById(R.id.ratingBar);

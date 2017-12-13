@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -32,6 +34,7 @@ import static com.example.user.energysoft.R.drawable.user;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
+    TextView forgot_password ;
     String URL = "http://10.0.0.15:8000/api/rest-auth/login/";
     public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
@@ -40,7 +43,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+        forgot_password = (TextView) findViewById(R.id.forgot_password);
+        forgot_password.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ForgetpasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageView home = (ImageView) findViewById(R.id.action_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GridList.class);
+                startActivity(intent);
+            }
+        });
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             int ONE_TIME = 0;
