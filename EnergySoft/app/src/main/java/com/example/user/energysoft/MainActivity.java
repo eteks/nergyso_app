@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     private void createAndShowDialog(Exception exception, String title) {
         Throwable ex = exception;
         if(exception.getCause() != null){

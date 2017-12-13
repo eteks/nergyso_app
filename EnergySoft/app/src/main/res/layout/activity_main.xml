@@ -21,12 +21,11 @@
                 android:id="@+id/photo_image_view"
                 android:layout_width="250dp"
                 android:layout_height="100dp"
-
                 android:layout_marginTop="128dp"
                 android:foregroundGravity="center_vertical|center_horizontal|center"
                 android:padding="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/logo_ess"
+                android:src="@drawable/logo_vdart"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>

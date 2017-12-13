@@ -67,10 +67,12 @@
             android:layout_marginTop="14dp"
             android:padding="5dp"
             android:paddingLeft="10dp"
-            android:text="Lorem Ipsum is simply  Lorem Ipsum "
+            android:text="Lorem Ipsum is simply  Lorem Ipsum When you successfully handle a menu item, return true. If you don't handle the menu item, you should pass the menu item to the superclass implementation. If your activity includes fragments, the activity receives this callback first. By calling the superclass when unhandled, the system passes the event to the respective callbackWhen you successfully handle a menu item, return true. If you don't handle the menu item, you should pass the menu item to the superclass implementation. If your activity includes fragments, the activity receives this callback first. By calling the superclass when unhandled, the system passes the event to the respective callbackWhen you successfully handle a menu item, return true. If you don't handle the menu item, you should pass the menu item to the superclass implementation. If your activity includes fragments, the activity receives this callback first. By calling the superclass when unhandled, the system passes the event to the respective callbackWhen you successfully handle a menu item, return true. If you don't handle the menu item, you should pass the menu item to the superclass implementation. If your activity includes fragments, the activity receives this callback first. By calling the superclass when unhandled, the system passes the event to the respective callbackWhen you successfully handle a menu item, return true. If you don't handle the menu item, you should pass the menu item to the superclass implementation. If your activity includes fragments, the activity receives this callback first. By calling the superclass when unhandled, the system passes the event to the respective callbackWhen you successfully handle a menu item, return true. If you don't handle the menu item, you should pass the menu item to the superclass implementation. If your activity includes fragments, the activity receives this callback first. By calling the superclass when unhandled, the system passes the event to the respective callbackWhen you successfully handle a menu item, return true. If you don't handle the menu item, you should pass the menu item to the superclass implementation. If your activity includes fragments, the activity receives this callback first. By calling the superclass when unhandled, the system passes the event to the respective callback "
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
+    </ScrollView>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -82,8 +84,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"/>
-    </RelativeLayout>
 
-    </ScrollView>
 
 </LinearLayout>

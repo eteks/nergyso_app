@@ -19,10 +19,28 @@
         android:icon="@drawable/ic_action_search"
         app:showAsAction="always"
         />
-    <item
-        android:id="@+id/action_menu"
-        android:title="Menu"
-        android:icon="@drawable/ic_action_menu"
-        app:showAsAction="always"
-        />
+
+    <item android:id="@+id/profile"
+        android:title="Profile"/>
+
+    <item android:id="@+id/events"
+        android:title="Events" />
+
+    <item android:id="@+id/news"
+        android:title="News" />
+
+    <item android:id="@+id/shoutout"
+        android:title="Shoutout" />
+
+    <item android:id="@+id/gallery"
+        android:title="Gallery" />
+
+    <item android:id="@+id/info"
+        android:title="Info" />
+
+    <item android:id="@+id/settings"
+        android:title="Settings" />
+
+    <item android:id="@+id/logout"
+        android:title="Logout" />
 </menu>

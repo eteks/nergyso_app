@@ -8,29 +8,31 @@ import android.view.MotionEvent;
 import android.widget.ScrollView;
 
 public class VerticalScrollView extends ScrollView {
-
-    private GestureDetector mGestureDetector;
+    private float xDistance, yDistance, lastX, lastY;
 
     public VerticalScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mGestureDetector = new GestureDetector(context, new YScrollDetector());
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return super.onInterceptTouchEvent(ev)
-                && mGestureDetector.onTouchEvent(ev);
-    }
-
-    class YScrollDetector extends SimpleOnGestureListener {
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2,
-                                float distanceX, float distanceY) {
-            /**
-             * If we rolling closer to the horizontal direction, return false, let the child to handle it
-             */
-            return (Math.abs(distanceY) > Math.abs(distanceX));
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                xDistance = yDistance = 0f;
+                lastX = ev.getX();
+                lastY = ev.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                final float curX = ev.getX();
+                final float curY = ev.getY();
+                xDistance += Math.abs(curX - lastX);
+                yDistance += Math.abs(curY - lastY);
+                lastX = curX;
+                lastY = curY;
+                if(xDistance > yDistance)
+                    return false;
         }
+
+        return super.onInterceptTouchEvent(ev);
     }
 }

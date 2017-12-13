@@ -38,7 +38,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
     TextView full_news_title, full_news_description, full_text_news_description;
     ImageView news_photo ;
     private static int currentPage = 0;
-    private static final Integer[] XMEN= {};
+    private static final Integer[] XMEN= {R.drawable.beast,R.drawable.charles,R.drawable.magneto,R.drawable.mystique,R.drawable.wolverine};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
