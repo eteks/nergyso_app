@@ -212,6 +212,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
             e.printStackTrace();
+            loadFirstPage();
         }
 
     }

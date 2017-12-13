@@ -209,6 +209,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
 
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
+            loadFirstPage();
             e.printStackTrace();
         }
 
