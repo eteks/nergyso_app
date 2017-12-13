@@ -11,23 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewsMain">
-            <intent-filter>
+        <activity android:name=".MainActivity">
+                    <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".NewsMain" />-->
+        <activity android:name=".NewsMain" />
         <activity android:name=".Resetpassword_Activity" />
+        <activity android:name=".FullNews" />
         <activity android:name=".GalleryZoomActivity" />
         <activity android:name=".Feedback" />
-        <activity android:name=".EventMain" />
+        <activity android:name=".FullEvent" />
         <activity android:name=".GridList" />
-        <activity android:name=".Shoutout" />
         <activity android:name=".ForgetpasswordActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".Shoutout" />
+        <activity android:name=".Changepassword_Activity"></activity>
     </application>
 
 </manifest>

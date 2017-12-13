@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -43,7 +44,8 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
     PaginationAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     String nextPage;
-    String EVENT_URL = "http://10.0.0.15:8000/api/events/";
+    String SERVER_URL ;
+    String EVENT_URL ;
     RecyclerView rv;
     ProgressBar progressBar;
 
@@ -59,9 +61,19 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
+        SERVER_URL = getString(R.string.service_url);
+        EVENT_URL = SERVER_URL+ "api/events/";
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+//        ImageView home = (ImageView) findViewById(R.id.action_home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(EventMain.this, GridList.class);
+//                startActivity(intent);
+//            }
+//        });
 //        list = (ListView) findViewById(R.id.newslist);
 //        NewsAdapter = new com.example.user.energysoft.ListAdapter(this);
 //        list.setAdapter(NewsAdapter);
@@ -197,6 +209,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
 
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
+            loadFirstPage();
             e.printStackTrace();
         }
 
@@ -309,7 +322,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                     Event event = eventList.get(viewHolder.getAdapterPosition());
                     System.out.println("CLICKed"+event.getId());
                     int id = event.getId();
-                    Intent intent = new Intent(EventMain.this,FullNews.class);
+                    Intent intent = new Intent(EventMain.this,FullEvent.class);
                     intent.putExtra("id", id);
 //                    finish();
                     startActivity(intent);

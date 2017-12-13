@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -31,16 +33,26 @@ import java.net.URLEncoder;
 import static com.example.user.energysoft.R.drawable.user;
 
 public class MainActivity extends AppCompatActivity {
+    String SERVER_URL,LOGIN_URL;
     Toolbar toolbar;
-    String URL = "http://10.0.0.15:8000/api/rest-auth/login/";
+    TextView forgot_password ;
     public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SERVER_URL = getString(R.string.service_url);
+        LOGIN_URL = SERVER_URL+ "api/rest-auth/login/";
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        forgot_password = (TextView) findViewById(R.id.forgot_password);
+        forgot_password.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ForgetpasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             int ONE_TIME = 0;
@@ -76,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 ONE_TIME = 0;
                                 // Defined URL  where to send data
-                                URL url = new URL(URL);
+                                URL url = new URL(LOGIN_URL);
 
                                 // Send POST data request
-                                System.out.println("URL:" + URL);
+                                System.out.println("URL:" + LOGIN_URL);
                                 URLConnection conn = url.openConnection();
                                 conn.setDoOutput(true);
                                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
@@ -114,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("username",object.getString("username"));
                                     editor.putString("email",object.getString("email"));
                                     editor.commit();
-                                    Intent intent = new Intent(MainActivity.this, GridList.class);
+                                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
 //                                    intent.putExtra("key", object.getString("key"));
 //                                    finish();
                                     startActivity(intent);

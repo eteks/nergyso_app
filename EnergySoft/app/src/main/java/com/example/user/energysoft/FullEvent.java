@@ -31,16 +31,17 @@ import java.util.TimerTask;
 import me.relex.circleindicator.CircleIndicator;
 
 
-public class FullNews extends AppCompatActivity implements Download_data.download_complete{
+public class FullEvent extends AppCompatActivity implements Download_data.download_complete{
     String SERVER_URL ;
-    String FULL_NEWS_URL ;
-    int ONE_TIME = 0, TOTAL_PAGES = 0;
-    String RECENT_NEWS_URL ;
+    String FULL_EVENTS_URL ;
+    String RECENT_EVENTS_URL ;
+    int TOTAL_PAGES = 0;
     Toolbar toolbar;
+    int ONE_TIME = 0;
     private static ViewPager mPager;
     private static ScrollView mScrollView;
-    TextView full_news_title, full_news_description, full_text_news_description;
-    ImageView news_photo ;
+    TextView full_events_title, full_events_description, full_text_events_description;
+    ImageView events_photo ;
     private static int currentPage = 0;
     private static final String[] XMEN = new String[200];
     private static final int[] ID = new int[200];
@@ -48,11 +49,11 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_full_news);
+        setContentView(R.layout.activity_full_event);
         SERVER_URL = getString(R.string.service_url);
-        FULL_NEWS_URL = SERVER_URL+ "api/news/";
-        RECENT_NEWS_URL = SERVER_URL +"api/news/recent_news";
-        init();
+        FULL_EVENTS_URL = SERVER_URL+ "api/events/";
+        RECENT_EVENTS_URL = SERVER_URL+"api/events/recent_events/";
+//        init();
 //        ImageView home = (ImageView) findViewById(R.id.action_home);
 //        home.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -61,14 +62,14 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
 //                startActivity(intent);
 //            }
 //        });
-        full_news_title = (TextView) findViewById(R.id.full_news_title);
-        full_news_description = (TextView) findViewById(R.id.full_news_description);
-        full_text_news_description = (TextView) findViewById(R.id.full_text_news_description);
-        news_photo = (ImageView) findViewById(R.id.news_photo);
+        full_events_title = (TextView) findViewById(R.id.full_news_title);
+        full_events_description = (TextView) findViewById(R.id.full_events_description);
+        full_text_events_description = (TextView) findViewById(R.id.full_text_news_description);
+        events_photo = (ImageView) findViewById(R.id.news_photo);
         int id = getIntent().getIntExtra("id",0);
-        FULL_NEWS_URL = FULL_NEWS_URL+id+"/";
+        FULL_EVENTS_URL = FULL_EVENTS_URL+id+"/";
         Download_data download_data = new Download_data((Download_data.download_complete) this);
-        download_data.download_data_from_link(FULL_NEWS_URL);
+        download_data.download_data_from_link(FULL_EVENTS_URL);
     }
     private void init() {
 //        for(int i=0;i<XMEN.length;i++){
@@ -77,7 +78,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
 //        scrollView.setFillViewport (true);
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(FullNews.this,XMENArray));
+        mPager.setAdapter(new MyAdapter(FullEvent.this,XMENArray));
         mScrollView = (ScrollView) findViewById(R.id.news_scroll);
         mScrollView.setFillViewport(true);
         mPager.setOnTouchListener(new View.OnTouchListener() {
@@ -121,7 +122,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == XMEN.length) {
+                if (currentPage == TOTAL_PAGES) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
@@ -147,16 +148,17 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
                 for (int i = 0; i < object.length(); i++) {
                     JSONObject obj = new JSONObject(object.get(i).toString());
                     System.out.println("Images" + obj);
-                    XMEN[i] = (obj.getString("news_image"));
+                    XMEN[i] = (obj.getString("events_image"));
                     ID[i] = obj.getInt("id");
                     XMENArray.add(XMEN[i]);
                     TOTAL_PAGES = i;
                 }
+
                 init();
             } catch (JSONException e) {
                 e.printStackTrace();
                 Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(RECENT_NEWS_URL);
+                download_data.download_data_from_link(RECENT_EVENTS_URL);
                 ONE_TIME--;
             }
         }
@@ -168,30 +170,28 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
                     @Override
                     public void run() {
                         try {
-                            full_news_title.setText(object.getString("news_title"));
-                            full_news_description.setText(object.getString("news_description"));
-                            full_text_news_description.setText(object.getString("news_description"));
-                            System.out.println(SERVER_URL+object.getString("news_image"));
-                            loadImageFromUrl(SERVER_URL+object.getString("news_image"));
+                            full_events_title.setText(object.getString("events_title"));
+                            full_events_description.setText(object.getString("events_description"));
+                            full_text_events_description.setText(object.getString("events_description"));
+                            System.out.println(SERVER_URL+object.getString("events_image"));
+                            loadImageUrl(SERVER_URL+object.getString("events_image"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 });
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             Download_data download_data = new Download_data((Download_data.download_complete) this);
-            download_data.download_data_from_link(RECENT_NEWS_URL);
+            download_data.download_data_from_link(RECENT_EVENTS_URL);
         }
         ONE_TIME += 1;
     }
 
-    private void loadImageFromUrl(String employee_photo) {
+    private void loadImageUrl(String employee_photo) {
         Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
-                .into(news_photo, new com.squareup.picasso.Callback(){
+                .into(events_photo, new com.squareup.picasso.Callback(){
 
                     @Override
                     public void onSuccess() {
@@ -250,8 +250,6 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         public boolean isViewFromObject(View view, Object object) {
             return view.equals(object);
         }
-
-
     }
     private void loadImageFromUrl(ImageView myImage,String employee_photo) {
         Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
@@ -270,14 +268,10 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
     }
 
     public void generateList(int position){
-        Intent intent = new Intent(FullNews.this,FullNews.class);
+        Intent intent = new Intent(FullEvent.this,FullEvent.class);
         intent.putExtra("id",ID[position]);
         finish();
         startActivity(intent);
         ONE_TIME = 0;
     }
-
-
 }
-
-
