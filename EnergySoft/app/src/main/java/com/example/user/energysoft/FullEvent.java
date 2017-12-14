@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -79,41 +83,41 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 //        scrollView.setFillViewport (true);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new MyAdapter(FullEvent.this,XMENArray));
-        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
-        mScrollView.setFillViewport(true);
-        mPager.setOnTouchListener(new View.OnTouchListener() {
-            int dragthreshold = 30;
-            int downX;
-            int downY;
+//        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
+//        mScrollView.setFillViewport(true);
+//        mPager.setOnTouchListener(new View.OnTouchListener() {
+//            int dragthreshold = 30;
+//            int downX;
+//            int downY;
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        downX = (int) event.getRawX();
-                        downY = (int) event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int distanceX = Math.abs((int) event.getRawX() - downX);
-                        int distanceY = Math.abs((int) event.getRawY() - downY);
-
-                        if (distanceY > distanceX && distanceY > dragthreshold) {
-                            mPager.getParent().requestDisallowInterceptTouchEvent(false);
-                            mScrollView.getParent().requestDisallowInterceptTouchEvent(true);
-                        } else if (distanceX > distanceY && distanceX > dragthreshold) {
-                            mPager.getParent().requestDisallowInterceptTouchEvent(true);
-                            mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
-                        mPager.getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
-                }
-                return false;
-            }
-        });
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        downX = (int) event.getRawX();
+//                        downY = (int) event.getRawY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        int distanceX = Math.abs((int) event.getRawX() - downX);
+//                        int distanceY = Math.abs((int) event.getRawY() - downY);
+//
+//                        if (distanceY > distanceX && distanceY > dragthreshold) {
+//                            mPager.getParent().requestDisallowInterceptTouchEvent(false);
+//                            mScrollView.getParent().requestDisallowInterceptTouchEvent(true);
+//                        } else if (distanceX > distanceY && distanceX > dragthreshold) {
+//                            mPager.getParent().requestDisallowInterceptTouchEvent(true);
+//                            mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
+//                        }
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
+//                        mPager.getParent().requestDisallowInterceptTouchEvent(false);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
 
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
@@ -134,7 +138,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             public void run() {
                 handler.post(Update);
             }
-        }, 5000, 5000);
+        }, 2500, 2500);
     }
 
 
@@ -153,7 +157,6 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                     XMENArray.add(XMEN[i]);
                     TOTAL_PAGES = i;
                 }
-
                 init();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -172,7 +175,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                         try {
                             full_events_title.setText(object.getString("events_title"));
                             full_events_description.setText(object.getString("events_description"));
-                            full_text_events_description.setText(object.getString("events_description"));
+//                            full_text_events_description.setText(object.getString("events_description"));
                             System.out.println(SERVER_URL+object.getString("events_image"));
                             loadImageUrl(SERVER_URL+object.getString("events_image"));
                         } catch (JSONException e) {
@@ -273,5 +276,73 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         finish();
         startActivity(intent);
         ONE_TIME = 0;
+    }
+
+    // Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_home:
+                intent = new Intent(FullEvent.this,GridList.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(FullEvent.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(FullEvent.this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(FullEvent.this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(FullEvent.this,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(FullEvent.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(FullEvent.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(FullEvent.this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(FullEvent.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

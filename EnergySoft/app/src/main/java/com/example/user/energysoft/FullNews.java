@@ -133,7 +133,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
             public void run() {
                 handler.post(Update);
             }
-        }, 5000, 5000);
+        }, 2500, 2500);
     }
 
 

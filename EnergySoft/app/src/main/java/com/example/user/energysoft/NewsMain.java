@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.energysoft.utils.PaginationScrollListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -191,8 +192,8 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                 add.news_title = obj.getString("news_title");
                 add.setTitle(obj.getString("news_title"));
                 add.setId(obj.getInt("id"));
-//                add.news_description = obj.getString("news_description");
-//                add.news_image = obj.getString("news_image");
+                add.news_description = obj.getString("news_description");
+                add.news_image = obj.getString("news_image");
                 System.out.println("News Id"+obj.getInt("id"));
 //                news.add(add);
                 runOnUiThread(new Runnable() {
@@ -325,9 +326,9 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
             switch (getItemViewType(position)) {
                 case ITEM:
                     NewsVH newsVH = (NewsVH) holder;
-
                     newsVH.news_title.setText(news.getTitle());
-//                newsVH.news_description.setText("Description");
+                    newsVH.news_description.setText(news.getNews_description());
+                    loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
                     break;
                 case LOADING:
 //                Do nothing
@@ -414,6 +415,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
          */
         protected class NewsVH extends RecyclerView.ViewHolder {
             TextView news_title,news_description;
+            ImageView news_image;
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public NewsVH(View itemView) {
                 super(itemView);
@@ -425,7 +427,8 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
                 news_title = (TextView) itemView.findViewById(R.id.news_title);
-//                news_description = (TextView) itemView.findViewById(R.id.news_description);
+                news_description = (TextView) itemView.findViewById(R.id.news_description);
+                news_image = (ImageView) itemView.findViewById(R.id.news_image);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
 //            TextView news = (TextView) convertView.findViewById(R.id.news_title);
@@ -519,5 +522,20 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         }
     }
 
+    private void loadImageFromUrl(ImageView myImage,String employee_photo) {
+        System.out.println("Image "+myImage+employee_photo);
+        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+                .into(myImage, new com.squareup.picasso.Callback(){
 
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+    }
 }

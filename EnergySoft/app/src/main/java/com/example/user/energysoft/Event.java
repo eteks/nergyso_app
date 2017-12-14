@@ -20,9 +20,19 @@ public class Event {
         return events_title;
     }
 
+    public String getEvents_description() {
+        System.out.println("inside getTitle"+events_description);
+        return events_description;
+    }
+
     public int getId() {
         System.out.println("inside getTitle"+id);
         return id;
+    }
+
+    public String getEvents_image() {
+        System.out.println("inside getTitle"+events_image);
+        return events_image;
     }
 
 

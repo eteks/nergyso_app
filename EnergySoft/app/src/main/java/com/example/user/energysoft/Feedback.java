@@ -123,7 +123,7 @@ public class Feedback extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        createAndShowDialog("No connection", "Error");
+                                        createAndShowDialog("Coming soon", "Not Ready");
                                     }
                                 });
                             } finally {
@@ -208,20 +208,71 @@ public class Feedback extends AppCompatActivity {
         }
     }
 
+    // Initiating Menu XML file (menu.xml)
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main,menu);
-        return super.onCreateOptionsMenu(menu);
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int res_id = item.getItemId();
-        if(res_id == R.id.action_home)
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
         {
-            Toast.makeText(getApplicationContext(),"You selet Home",Toast.LENGTH_SHORT).show();
+            case R.id.action_home:
+                intent = new Intent(Feedback.this,GridList.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(Feedback.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(Feedback.this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(Feedback.this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(Feedback.this,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(Feedback.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(Feedback.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(Feedback.this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(Feedback.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

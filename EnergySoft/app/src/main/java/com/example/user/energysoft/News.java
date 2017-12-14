@@ -2,6 +2,7 @@ package com.example.user.energysoft;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by root on 9/12/17.
@@ -32,8 +33,14 @@ public class News {
         return id;
     }
 
+
+
     public String getNews_description() {
         return news_description;
+    }
+
+    public String getNews_image(){
+        return news_image;
     }
 
 //    public news(String news_title, String news_description, String news_image, String news_video, String news_document){

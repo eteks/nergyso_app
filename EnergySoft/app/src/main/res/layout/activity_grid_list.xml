@@ -18,4 +18,5 @@
         android:footerDividersEnabled="false"
         android:padding="5dp"
         android:numColumns="2" />
+
 </LinearLayout>

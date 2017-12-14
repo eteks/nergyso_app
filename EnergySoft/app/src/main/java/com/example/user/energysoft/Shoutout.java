@@ -125,7 +125,7 @@ public class Shoutout extends AppCompatActivity{
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        createAndShowDialog("No internet connection", "Error");
+                                        createAndShowDialog("Coming soon", "Not Ready");
                                     }
                                 });
                             }
@@ -204,21 +204,72 @@ public class Shoutout extends AppCompatActivity{
             return task.execute();
         }
     }
+    // Initiating Menu XML file (menu.xml)
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main,menu);
-        return super.onCreateOptionsMenu(menu);
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int res_id = item.getItemId();
-        if(res_id == R.id.action_home)
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
         {
-            Toast.makeText(getApplicationContext(),"You selet Home",Toast.LENGTH_SHORT).show();
+            case R.id.action_home:
+                intent = new Intent(Shoutout.this,GridList.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(Shoutout.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(Shoutout.this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(Shoutout.this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(Shoutout.this,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(Shoutout.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(Shoutout.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(Shoutout.this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(Shoutout.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
 }

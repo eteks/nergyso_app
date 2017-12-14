@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("username",object.getString("username"));
                                     editor.putString("email",object.getString("email"));
                                     editor.commit();
-                                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                    Intent intent = new Intent(MainActivity.this, GridList.class);
 //                                    intent.putExtra("key", object.getString("key"));
 //                                    finish();
                                     startActivity(intent);

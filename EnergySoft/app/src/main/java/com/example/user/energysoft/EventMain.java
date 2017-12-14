@@ -28,11 +28,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.energysoft.utils.PaginationScrollListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +45,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
     LinearLayoutManager linearLayoutManager;
     String nextPage;
     String SERVER_URL ;
+    EventMain main;
     String EVENT_URL ;
     RecyclerView rv;
     ProgressBar progressBar;
@@ -189,8 +190,11 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                 add.events_title = obj.getString("events_title");
                 add.setTitle(obj.getString("events_title"));
                 add.setId(obj.getInt("id"));
-//                add.news_description = obj.getString("news_description");
-//                add.news_image = obj.getString("news_image");
+                add.events_description = obj.getString("events_description");
+                add.setTitle(obj.getString("events_title"));
+                add.setDescription(obj.getString("events_description"));
+                add.events_image = obj.getString("events_image");
+                add.setImage(obj.getString("events_image"));
                 System.out.println("Events Id"+obj.getInt("id"));
 //                news.add(add);
                 runOnUiThread(new Runnable() {
@@ -215,21 +219,72 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
 
     }
 
+    // Initiating Menu XML file (menu.xml)
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main,menu);
-        return super.onCreateOptionsMenu(menu);
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int res_id = item.getItemId();
-        if(res_id == R.id.action_home)
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
         {
-            Toast.makeText(getApplicationContext(),"You selet Home",Toast.LENGTH_SHORT).show();
+            case R.id.action_home:
+                intent = new Intent(EventMain.this,GridList.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(EventMain.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(EventMain.this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(EventMain.this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(EventMain.this,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(EventMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(EventMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(EventMain.this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(EventMain.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
 
@@ -279,6 +334,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
         private List<Event> eventList;
         private Context context;
         private boolean isLoadingAdded = false;
+        ImageView events_image;
 
         public PaginationAdapter(Context context) {
             this.context = context;
@@ -341,9 +397,9 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
             switch (getItemViewType(position)) {
                 case ITEM:
                     EventVH eventVH = (EventVH) holder;
-
                     eventVH.events_title.setText(event.getTitle());
-//                newsVH.news_description.setText("Description");
+                    eventVH.events_description.setText(event.getEvents_description());
+                    loadImageFromUrl(eventVH.events_image,(SERVER_URL+event.getEvents_image()));
                     break;
                 case LOADING:
 //                Do nothing
@@ -429,7 +485,8 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
          * Main list's content ViewHolder
          */
         protected class EventVH extends RecyclerView.ViewHolder {
-            TextView events_title,news_description;
+            TextView events_title,events_description;
+            ImageView events_image;
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public EventVH(View itemView) {
                 super(itemView);
@@ -440,7 +497,9 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
 
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
-                events_title = (TextView) itemView.findViewById(R.id.events_title);
+                events_title = (TextView) itemView.findViewById(R.id.news_title);
+                events_description = (TextView) itemView.findViewById(R.id.news_description);
+                events_image = (ImageView) itemView.findViewById(R.id.news_image);
 //                news_description = (TextView) itemView.findViewById(R.id.news_description);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
@@ -465,6 +524,24 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
         }
 
 
+
+    }
+
+    private void loadImageFromUrl(ImageView myImage,String employee_photo) {
+        System.out.println("Image "+myImage+employee_photo);
+        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+                .into(myImage, new com.squareup.picasso.Callback(){
+
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
     }
 
 
