@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-                    <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,8 +28,7 @@
         <activity android:name=".ForgetpasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Shoutout" />
-        <activity android:name=".Changepassword_Activity"></activity>
-
+        <activity android:name=".Changepassword_Activity" />
     </application>
 
 </manifest>

@@ -54,6 +54,9 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_event);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
         SERVER_URL = getString(R.string.service_url);
         FULL_EVENTS_URL = SERVER_URL+ "api/events/";
         RECENT_EVENTS_URL = SERVER_URL+"api/events/recent_events/";
@@ -138,7 +141,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             public void run() {
                 handler.post(Update);
             }
-        }, 2500, 2500);
+        }, 6000, 6000);
     }
 
 
@@ -155,7 +158,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                     XMEN[i] = (obj.getString("events_image"));
                     ID[i] = obj.getInt("id");
                     XMENArray.add(XMEN[i]);
-                    TOTAL_PAGES = i;
+                    TOTAL_PAGES = object.length();
                 }
                 init();
             } catch (JSONException e) {

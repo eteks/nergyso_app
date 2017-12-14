@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -50,6 +54,9 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_news);
         SERVER_URL = getString(R.string.service_url);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
         FULL_NEWS_URL = SERVER_URL+ "api/news/";
         RECENT_NEWS_URL = SERVER_URL +"api/news/recent_news";
         init();
@@ -121,7 +128,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == XMEN.length) {
+                if (currentPage == TOTAL_PAGES) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
@@ -133,7 +140,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
             public void run() {
                 handler.post(Update);
             }
-        }, 2500, 2500);
+        }, 6000, 6000);
     }
 
 
@@ -150,7 +157,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
                     XMEN[i] = (obj.getString("news_image"));
                     ID[i] = obj.getInt("id");
                     XMENArray.add(XMEN[i]);
-                    TOTAL_PAGES = i;
+                    TOTAL_PAGES = object.length();
                 }
                 init();
             } catch (JSONException e) {
@@ -277,6 +284,73 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         ONE_TIME = 0;
     }
 
+    // Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_home:
+                intent = new Intent(FullNews.this,GridList.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(FullNews.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(FullNews.this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(FullNews.this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(FullNews.this,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(FullNews.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(FullNews.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(FullNews.this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(FullNews.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }
 
