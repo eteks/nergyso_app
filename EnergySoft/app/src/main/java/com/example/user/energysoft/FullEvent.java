@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,28 +37,29 @@ import java.util.TimerTask;
 import me.relex.circleindicator.CircleIndicator;
 
 
-public class FullEvent extends AppCompatActivity implements Download_data.download_complete{
-    String SERVER_URL ;
-    String FULL_EVENTS_URL ;
-    String RECENT_EVENTS_URL ;
+public class FullEvent extends AppCompatActivity implements Download_data.download_complete {
+    String SERVER_URL;
+    String FULL_EVENTS_URL;
+    String RECENT_EVENTS_URL;
     int TOTAL_PAGES = 0;
     Toolbar toolbar;
     int ONE_TIME = 0;
     private static ViewPager mPager;
     private static ScrollView mScrollView;
     TextView full_events_title, full_events_description, full_text_events_description;
-    ImageView events_photo ;
+    ImageView events_photo;
     private static int currentPage = 0;
     private static final String[] XMEN = new String[200];
     private static final int[] ID = new int[200];
     private ArrayList<String> XMENArray = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_event);
         SERVER_URL = getString(R.string.service_url);
-        FULL_EVENTS_URL = SERVER_URL+ "api/events/";
-        RECENT_EVENTS_URL = SERVER_URL+"api/events/recent_events/";
+        FULL_EVENTS_URL = SERVER_URL + "api/events/";
+        RECENT_EVENTS_URL = SERVER_URL + "api/events/recent_events/";
 //        init();
 //        ImageView home = (ImageView) findViewById(R.id.action_home);
 //        home.setOnClickListener(new View.OnClickListener() {
@@ -66,15 +69,16 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 //                startActivity(intent);
 //            }
 //        });
-        full_events_title = (TextView) findViewById(R.id.full_news_title);
+        full_events_title = (TextView) findViewById(R.id.full_events_title);
         full_events_description = (TextView) findViewById(R.id.full_events_description);
-        full_text_events_description = (TextView) findViewById(R.id.full_text_news_description);
-        events_photo = (ImageView) findViewById(R.id.news_photo);
-        int id = getIntent().getIntExtra("id",0);
-        FULL_EVENTS_URL = FULL_EVENTS_URL+id+"/";
+        full_text_events_description = (TextView) findViewById(R.id.full_text_events_description);
+        events_photo = (ImageView) findViewById(R.id.events_photo);
+        int id = getIntent().getIntExtra("id", 0);
+        FULL_EVENTS_URL = FULL_EVENTS_URL + id + "/";
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(FULL_EVENTS_URL);
     }
+
     private void init() {
 //        for(int i=0;i<XMEN.length;i++){
 //            XMENArray.add(XMEN[i]);
@@ -82,7 +86,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
 //        scrollView.setFillViewport (true);
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(FullEvent.this,XMENArray));
+        mPager.setAdapter(new MyAdapter(FullEvent.this, XMENArray));
 //        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
 //        mScrollView.setFillViewport(true);
 //        mPager.setOnTouchListener(new View.OnTouchListener() {
@@ -142,10 +146,9 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     }
 
 
-
     @Override
     public void get_data(String data) {
-        if(ONE_TIME == 1) {
+        if (ONE_TIME == 1) {
             try {
                 final JSONArray object = (JSONArray) new JSONTokener(data).nextValue();
                 System.out.println("Object" + object);
@@ -165,19 +168,19 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                 ONE_TIME--;
             }
         }
-        if(ONE_TIME == 0){
+        if (ONE_TIME == 0) {
             try {
                 final JSONObject object = (JSONObject) new JSONTokener(data).nextValue();
-                System.out.println("Object"+object);
+                System.out.println("Object" + object);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             full_events_title.setText(object.getString("events_title"));
                             full_events_description.setText(object.getString("events_description"));
-//                            full_text_events_description.setText(object.getString("events_description"));
-                            System.out.println(SERVER_URL+object.getString("events_image"));
-                            loadImageUrl(SERVER_URL+object.getString("events_image"));
+                            full_text_events_description.setText(object.getString("events_description"));
+                            System.out.println(SERVER_URL + object.getString("events_image"));
+                            loadImageUrl(SERVER_URL + object.getString("events_image"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -194,7 +197,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
     private void loadImageUrl(String employee_photo) {
         Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
-                .into(events_photo, new com.squareup.picasso.Callback(){
+                .into(events_photo, new com.squareup.picasso.Callback() {
 
                     @Override
                     public void onSuccess() {
@@ -216,7 +219,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
         public MyAdapter(Context context, ArrayList<String> images) {
             this.context = context;
-            this.images=images;
+            this.images = images;
             inflater = LayoutInflater.from(context);
         }
 
@@ -236,10 +239,10 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             ImageView myImage = (ImageView) myImageLayout
                     .findViewById(R.id.image);
 //            myImage.setImageResource(images.get(position));
-            System.out.println("List "+images.get(position));
-            loadImageFromUrl(myImage,(SERVER_URL+images.get(position)));
-            myImageLayout.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
+            System.out.println("List " + images.get(position));
+            loadImageFromUrl(myImage, (SERVER_URL + images.get(position)));
+            myImageLayout.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
                     //this will log the page number that was click
                     Log.i("TAG", "This page was clicked: " + position);
                     generateList(position);
@@ -254,9 +257,10 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             return view.equals(object);
         }
     }
-    private void loadImageFromUrl(ImageView myImage,String employee_photo) {
+
+    private void loadImageFromUrl(ImageView myImage, String employee_photo) {
         Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
-                .into(myImage, new com.squareup.picasso.Callback(){
+                .into(myImage, new com.squareup.picasso.Callback() {
 
                     @Override
                     public void onSuccess() {
@@ -270,9 +274,9 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                 });
     }
 
-    public void generateList(int position){
-        Intent intent = new Intent(FullEvent.this,FullEvent.class);
-        intent.putExtra("id",ID[position]);
+    public void generateList(int position) {
+        Intent intent = new Intent(FullEvent.this, FullEvent.class);
+        intent.putExtra("id", ID[position]);
         finish();
         startActivity(intent);
         ONE_TIME = 0;
@@ -280,8 +284,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
     // Initiating Menu XML file (menu.xml)
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
         return true;
@@ -290,35 +293,33 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     /**
      * Event Handling for Individual menu item selected
      * Identify single menu item by it's id
-     * */
+     */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.action_home:
-                intent = new Intent(FullEvent.this,GridList.class);
+                intent = new Intent(FullEvent.this, GridList.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(FullEvent.this,ProfileActivity.class);
+                intent = new Intent(FullEvent.this, ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(FullEvent.this,EventMain.class);
+                intent = new Intent(FullEvent.this, EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(FullEvent.this,NewsMain.class);
+                intent = new Intent(FullEvent.this, NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.shoutout:
-                intent = new Intent(FullEvent.this,Shoutout.class);
+                intent = new Intent(FullEvent.this, Shoutout.class);
                 startActivity(intent);
                 return true;
 
@@ -331,12 +332,12 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                 return true;
 
             case R.id.settings:
-                intent = new Intent(FullEvent.this,Changepassword_Activity.class);
+                intent = new Intent(FullEvent.this, Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(FullEvent.this,MainActivity.class);
+                intent = new Intent(FullEvent.this, MainActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -344,5 +345,32 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public class CustomScrollView extends ScrollView {
+
+        private GestureDetector mGestureDetector;
+
+        public CustomScrollView(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            mGestureDetector = new GestureDetector(context, new YScrollDetector());
+            setFadingEdgeLength(0);
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            return super.onInterceptTouchEvent(ev)
+                    && mGestureDetector.onTouchEvent(ev);
+        }
+
+        // Return false if we're scrolling in the x direction
+        class YScrollDetector extends GestureDetector.SimpleOnGestureListener {
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2,
+                                    float distanceX, float distanceY) {
+                return (Math.abs(distanceY) > Math.abs(distanceX));
+            }
+        }
+
     }
 }

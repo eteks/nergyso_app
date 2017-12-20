@@ -30,6 +30,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 import static android.R.attr.rating;
+import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
 
 public class Feedback extends AppCompatActivity {
     Toolbar toolbar;
@@ -41,10 +42,13 @@ public class Feedback extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         SERVER_URL = getString(R.string.service_url);
-        FEEDBACK_URL = SERVER_URL+ "";
+        FEEDBACK_URL = SERVER_URL+ "api/feedback/";
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+        SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        System.out.println("USer : "+shared.getInt("id",0));
+        final int id = shared.getInt("id",0);
 //        ImageView home = (ImageView) findViewById(R.id.action_home);
 //        home.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -68,12 +72,17 @@ public class Feedback extends AppCompatActivity {
                     System.out.println("Feedback:" + feedback + "Query:" + query);
                     String data = null;
                     try {
-                        data = URLEncoder.encode("feedback", "UTF-8")
+                        data = URLEncoder.encode("feedback_description", "UTF-8")
                                 + "=" + URLEncoder.encode(feedback, "UTF-8");
-                        data += "&" + URLEncoder.encode("query", "UTF-8") + "="
-                                + URLEncoder.encode(query, "UTF-8");
-                        data += "&" + URLEncoder.encode("rating", "UTF-8") + "="
+                        data += "&" + URLEncoder.encode("feedback_category", "UTF-8") + "="
+                                + URLEncoder.encode("general", "UTF-8");
+                        data += "&" + URLEncoder.encode("feedback_rating_count", "UTF-8") + "="
                                 + URLEncoder.encode(rating, "UTF-8");
+                        data += "&" + URLEncoder.encode("feedback_employee", "UTF-8") + "="
+                                + id;
+                        data += "&" + URLEncoder.encode("feedback_queries", "UTF-8") + "="
+                                + URLEncoder.encode(query, "UTF-8");
+
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }

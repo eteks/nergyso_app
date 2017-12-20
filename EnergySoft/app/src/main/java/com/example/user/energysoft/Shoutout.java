@@ -40,10 +40,13 @@ public class Shoutout extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoutout);
         SERVER_URL = getString(R.string.service_url);
-        SHOUT_URL = SERVER_URL+ "";
+        SHOUT_URL = SERVER_URL+ "api/shoutout/";
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+        SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        System.out.println("USer : "+shared.getInt("id",0));
+        final int id = shared.getInt("id",0);
 //        ImageView home = (ImageView) findViewById(R.id.action_home);
 //        home.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -63,8 +66,10 @@ public class Shoutout extends AppCompatActivity{
                 String shout = shoutout.getText().toString();
                 String data = null;
                 try {
-                    data = URLEncoder.encode("shouttext", "UTF-8")
+                    data = URLEncoder.encode("shoutout_description", "UTF-8")
                             + "=" + URLEncoder.encode(shout, "UTF-8");
+                    data += "&" + URLEncoder.encode("shoutout_employee", "UTF-8") + "="
+                            + id;
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
