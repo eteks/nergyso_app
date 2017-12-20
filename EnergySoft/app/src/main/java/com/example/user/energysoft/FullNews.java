@@ -53,7 +53,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scroll);
+        setContentView(R.layout.activity_full_news);
         SERVER_URL = getString(R.string.service_url);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,8 +89,8 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
 //        }
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
 //        scrollView.setFillViewport (true);
-//        mPager = (ViewPager) findViewById(R.id.pager);
-//        mPager.setAdapter(new MyAdapter(FullNews.this,XMENArray));
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new MyAdapter(FullNews.this,XMENArray));
 //        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
 //        mScrollView.setFillViewport(true);
 //        mPager.setOnTouchListener(new View.OnTouchListener() {
