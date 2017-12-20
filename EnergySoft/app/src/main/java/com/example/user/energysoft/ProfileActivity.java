@@ -67,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
         empBloodGroup = (TextView) findViewById(R.id.empBloodGroup);
         empDoj = (TextView) findViewById(R.id.empDoj);
         empAddress = (TextView) findViewById(R.id.empAddress);
-        empAadharId = (TextView) findViewById(R.id.empAadharId);
+//        empAadharId = (TextView) findViewById(R.id.empAadharId);
         empDeptId = (TextView) findViewById(R.id.empDeptId);
         EmpExpYears = (TextView) findViewById(R.id.EmpExpYears);
         empPhoto = (ImageView) findViewById(R.id.empPhoto);
@@ -88,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 empBloodGroup.setText(obj.getString("employee_bloodgroup"));
                 empDoj.setText(obj.getString("employee_doj"));
                 empAddress.setText(obj.getString("employee_address"));
-                empAadharId.setText(obj.getString("employee_aadhar_id"));
+//                empAadharId.setText(obj.getString("employee_aadhar_id"));
                 empDeptId.setText(obj.getString("employee_department_name"));
                 int empExperience = obj.getInt("employee_experience_in_years");
 //            String[] mySplit = empExperience.split("\\.");

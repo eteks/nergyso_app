@@ -13,9 +13,10 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:scaleType="fitXY"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/events_tile" />
+        android:src="@drawable/events_tile"
+        android:padding="10dp"/>
 </LinearLayout>
