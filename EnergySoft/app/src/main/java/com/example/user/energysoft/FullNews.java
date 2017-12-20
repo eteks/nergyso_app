@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.support.v7.widget.Toolbar;
@@ -76,6 +77,11 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         FULL_NEWS_URL = FULL_NEWS_URL+id+"/";
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(FULL_NEWS_URL);
+//        String text = "guhsfuguig u sghusfu gsgiug siuguiosgui iiu guigsugujgsg ii,"+
+//                "hjksg hk ujhfjkhg vbjkgkj gjkg gjk fd jhgjuhg jkgjk,"+
+//                "jhsgujj hgsjvjhgjhdf jhgjgjgj jghsjgjgsj jhgjsgj";
+//        WebView webView = (WebView) findViewById(R.id.full_text_news_description);
+//                webView.loadData("<p style=\"text-align: justify\">"+ text + "</p>", "text/html", "UTF-8");
     }
     private void init() {
 //        for(int i=0;i<XMEN.length;i++){

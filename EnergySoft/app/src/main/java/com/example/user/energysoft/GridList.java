@@ -18,7 +18,7 @@ public class GridList extends AppCompatActivity {
     Toolbar toolbar;
     GridView simpleGrid;
     int logos[] = {R.drawable.events_tile, R.drawable.news_tile, R.drawable.gallery_tile, R.drawable.shoutout_tile,
-            R.drawable.feedback_tile, R.drawable.profile_tile};
+            R.drawable.feedback_tile, R.drawable.profile_tile,R.drawable.polls_tile, R.drawable.live_tile};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

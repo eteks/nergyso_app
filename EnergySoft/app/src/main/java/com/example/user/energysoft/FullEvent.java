@@ -178,7 +178,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                         try {
                             full_events_title.setText(object.getString("events_title"));
                             full_events_description.setText(object.getString("events_description"));
-//                            full_text_events_description.setText(object.getString("events_description"));
+                            full_text_events_description.setText(object.getString("events_description"));
                             System.out.println(SERVER_URL+object.getString("events_image"));
                             loadImageUrl(SERVER_URL+object.getString("events_image"));
                         } catch (JSONException e) {

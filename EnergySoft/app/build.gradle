@@ -35,5 +35,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'me.biubiubiu.justifytext:library:1.1'
+    compile 'com.uncopt:android.justified:1.0'
+    compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
     testCompile 'junit:junit:4.12'
 }
