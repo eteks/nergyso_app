@@ -16,19 +16,19 @@
         android:padding="15dp">
 
         <ImageView
-            android:id="@+id/news_photo"
+            android:id="@+id/events_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_weight="0.11"/>
 
         <TextView
-            android:id="@+id/full_news_title"
+            android:id="@+id/full_events_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignTop="@+id/news_photo"
-            android:layout_toEndOf="@+id/news_photo"
-            android:layout_toRightOf="@+id/news_photo"
+            android:layout_alignTop="@+id/events_photo"
+            android:layout_toEndOf="@+id/events_photo"
+            android:layout_toRightOf="@+id/events_photo"
             android:paddingLeft="10dp"
             android:textColor="#333"
             android:textSize="22dp"
@@ -38,9 +38,9 @@
             android:id="@+id/full_news_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/full_news_title"
-            android:layout_toEndOf="@+id/news_photo"
-            android:layout_toRightOf="@+id/news_photo"
+            android:layout_below="@+id/full_events_title"
+            android:layout_toEndOf="@+id/events_photo"
+            android:layout_toRightOf="@+id/events_photo"
             android:layout_weight="1"
             android:paddingLeft="10dp"
             android:maxLines="2"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/full_text_news_description"
+            android:id="@+id/full_text_events_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -78,7 +78,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginTop="28dp"
-            android:layout_below="@+id/full_text_news_description"
+            android:layout_below="@+id/full_text_events_description"
             android:layout_marginLeft="5dp"/>
 
         <android.support.v4.view.ViewPager

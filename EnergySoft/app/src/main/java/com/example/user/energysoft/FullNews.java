@@ -53,7 +53,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_full_news);
+        setContentView(R.layout.scroll);
         SERVER_URL = getString(R.string.service_url);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,10 +69,10 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
 //                startActivity(intent);
 //            }
 //        });
-        full_news_title = (TextView) findViewById(R.id.full_news_title);
+        full_news_title = (TextView) findViewById(R.id.full_events_title);
         full_news_description = (TextView) findViewById(R.id.full_news_description);
-        full_text_news_description = (TextView) findViewById(R.id.full_text_news_description);
-        news_photo = (ImageView) findViewById(R.id.news_photo);
+        full_text_news_description = (TextView) findViewById(R.id.full_text_events_description);
+        news_photo = (ImageView) findViewById(R.id.events_photo);
         int id = getIntent().getIntExtra("id",0);
         FULL_NEWS_URL = FULL_NEWS_URL+id+"/";
         Download_data download_data = new Download_data((Download_data.download_complete) this);
@@ -89,43 +89,43 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
 //        }
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
 //        scrollView.setFillViewport (true);
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(FullNews.this,XMENArray));
-        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
-        mScrollView.setFillViewport(true);
-        mPager.setOnTouchListener(new View.OnTouchListener() {
-            int dragthreshold = 30;
-            int downX;
-            int downY;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        downX = (int) event.getRawX();
-                        downY = (int) event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int distanceX = Math.abs((int) event.getRawX() - downX);
-                        int distanceY = Math.abs((int) event.getRawY() - downY);
-
-                        if (distanceY > distanceX && distanceY > dragthreshold) {
-                            mPager.getParent().requestDisallowInterceptTouchEvent(false);
-                            mScrollView.getParent().requestDisallowInterceptTouchEvent(true);
-                        } else if (distanceX > distanceY && distanceX > dragthreshold) {
-                            mPager.getParent().requestDisallowInterceptTouchEvent(true);
-                            mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
-                        mPager.getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
-                }
-                return false;
-            }
-        });
+//        mPager = (ViewPager) findViewById(R.id.pager);
+//        mPager.setAdapter(new MyAdapter(FullNews.this,XMENArray));
+//        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
+//        mScrollView.setFillViewport(true);
+//        mPager.setOnTouchListener(new View.OnTouchListener() {
+//            int dragthreshold = 30;
+//            int downX;
+//            int downY;
+//
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        downX = (int) event.getRawX();
+//                        downY = (int) event.getRawY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        int distanceX = Math.abs((int) event.getRawX() - downX);
+//                        int distanceY = Math.abs((int) event.getRawY() - downY);
+//
+//                        if (distanceY > distanceX && distanceY > dragthreshold) {
+//                            mPager.getParent().requestDisallowInterceptTouchEvent(false);
+//                            mScrollView.getParent().requestDisallowInterceptTouchEvent(true);
+//                        } else if (distanceX > distanceY && distanceX > dragthreshold) {
+//                            mPager.getParent().requestDisallowInterceptTouchEvent(true);
+//                            mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
+//                        }
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
+//                        mPager.getParent().requestDisallowInterceptTouchEvent(false);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
 
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
