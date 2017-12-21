@@ -24,14 +24,14 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
-        ImageView home = (ImageView) findViewById(R.id.action_home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GalleryActivity.this, GridList.class);
-                startActivity(intent);
-            }
-        });
+//        ImageView home = (ImageView) findViewById(R.id.action_home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(GalleryActivity.this, GridList.class);
+//                startActivity(intent);
+//            }
+//        });
         simpleGrid = (GridView) findViewById(R.id.galleryGridView); // init GridView
         // Create an object of CustomAdapter and set Adapter to GirdView
         GalleryAdapter galleryAdapter = new GalleryAdapter(getApplicationContext(), logos);
@@ -109,7 +109,6 @@ public class GalleryActivity extends AppCompatActivity {
                 intent = new Intent(GalleryActivity.this,MainActivity.class);
                 startActivity(intent);
                 return true;
-
 
             default:
                 return super.onOptionsItemSelected(item);

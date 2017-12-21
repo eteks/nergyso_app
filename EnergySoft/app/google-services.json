@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "271284960175",
+    "firebase_url": "https://vdart-android-app.firebaseio.com",
+    "project_id": "vdart-android-app",
+    "storage_bucket": "vdart-android-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271284960175:android:9af22bff79cfa447",
+        "android_client_info": {
+          "package_name": "com.example.user.energysoft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271284960175-o0914lihmjp0ece0hmgikdv5be15ij02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRYRbIf9GBMufpyOmv7W1T0ZrMoy5C3E8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
