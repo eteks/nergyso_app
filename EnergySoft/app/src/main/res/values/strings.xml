@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VDart</string>
+    <string name="service_url">http://132.148.68.181:8000/</string>
+</resources>

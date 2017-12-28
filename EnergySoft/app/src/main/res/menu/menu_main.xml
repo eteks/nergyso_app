@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_action_home"
+        android:title="Home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_notification"
+        android:title="Notification"
+        android:icon="@drawable/ic_action_notification"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_action_search"
+        app:showAsAction="always"
+        />
+
+    <item android:id="@+id/profile"
+        android:title="Profile"/>
+
+    <item android:id="@+id/events"
+        android:title="Events" />
+
+    <item android:id="@+id/news"
+        android:title="News" />
+
+    <item android:id="@+id/shoutout"
+        android:title="Shoutout" />
+
+    <item android:id="@+id/gallery"
+        android:title="Gallery" />
+
+    <item android:id="@+id/info"
+        android:title="Info" />
+
+    <item android:id="@+id/settings"
+        android:title="Settings" />
+
+    <item android:id="@+id/logout"
+        android:title="Logout" />
+</menu>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.user.energysoft">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".BannerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Feedback" />
+        <activity android:name=".Resetpassword_Activity" />
+        <activity android:name=".GalleryActivity" />
+        <activity android:name=".EventMain" />
+        <activity android:name=".FullEvent" />
+        <activity android:name=".FullNews" />
+        <activity android:name=".NewsMain" />
+        <activity android:name=".GridList" />
+        <activity android:name=".ForgetpasswordActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".Shoutout" />
+        <activity android:name=".GalleryZoomActivity" />
+
+        <service android:name=".MyAndroidFirebaseMsgService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyAndroidFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".MainActivity" />
+        <activity android:name=".BannerItem" />
+    </application>
+
+</manifest>
