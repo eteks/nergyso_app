@@ -33,7 +33,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -426,9 +425,9 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
 
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
-                news_title = (TextView) itemView.findViewById(R.id.news_title);
-                news_description = (TextView) itemView.findViewById(R.id.news_description);
-                news_image = (ImageView) itemView.findViewById(R.id.news_image);
+                news_title = (TextView) itemView.findViewById(R.id.news_title2);
+                news_description = (TextView) itemView.findViewById(R.id.news_description2);
+                news_image = (ImageView) itemView.findViewById(R.id.news_image2);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
 //            TextView news = (TextView) convertView.findViewById(R.id.news_title);

@@ -14,19 +14,19 @@
         android:padding="15dp">
 
         <ImageView
-            android:id="@+id/news_image"
+            android:id="@+id/news_image2"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_weight="0.11"
             android:src="@drawable/megaphone" />
 
         <TextView
-            android:id="@+id/news_title"
+            android:id="@+id/news_title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/news_image"
-            android:layout_toRightOf="@+id/news_image"
+            android:layout_toEndOf="@+id/news_image2"
+            android:layout_toRightOf="@+id/news_image2"
             android:paddingLeft="10dp"
             android:text="Shoutout"
             android:textColor="#333"
@@ -34,12 +34,12 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/news_description"
+            android:id="@+id/news_description2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/news_title"
-            android:layout_toEndOf="@+id/news_image"
-            android:layout_toRightOf="@+id/news_image"
+            android:layout_below="@+id/news_title2"
+            android:layout_toEndOf="@+id/news_image2"
+            android:layout_toRightOf="@+id/news_image2"
             android:layout_weight="1"
             android:maxLines="1"
             android:paddingLeft="10dp"
@@ -47,20 +47,20 @@
             android:textColor="#333" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/imageView72"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="23dp"
             app:srcCompat="@drawable/profile_pc"
-            android:layout_below="@+id/news_description"
-            android:layout_toEndOf="@+id/news_image" />
+            android:layout_below="@+id/news_description2"
+            android:layout_toEndOf="@+id/news_image2" />
 
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignTop="@+id/imageView7"
-            android:layout_toEndOf="@+id/news_title"
+            android:layout_alignTop="@+id/imageView72"
+            android:layout_toEndOf="@+id/news_title2"
             app:srcCompat="@drawable/protest" />
         </RelativeLayout>
 

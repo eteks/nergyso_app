@@ -41,7 +41,7 @@
                     android:layout_height="80dp"
                     android:layout_weight="0.11"/>
                 <TextView
-                    android:text="News Title"
+                    android:text="Harihara Prabhu"
                     android:id="@+id/news_title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                     android:maxLines="1"
                     android:textColor="#333"/>
                 <TextView
-                    android:text="Read more"
+                    android:text="21 Dec"
                     android:id="@+id/tvnewsreadmore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,6 +74,7 @@
                     android:paddingLeft="10dp"
                     android:layout_weight="1"
                     android:textColor="#333"
+                    android:layout_marginTop="10dp"
                     android:gravity="end"/>
         </RelativeLayout>
 </LinearLayout>

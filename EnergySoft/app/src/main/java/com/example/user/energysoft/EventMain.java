@@ -498,9 +498,9 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
 
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
-                events_title = (TextView) itemView.findViewById(R.id.news_title);
-                events_description = (TextView) itemView.findViewById(R.id.news_description);
-                events_image = (ImageView) itemView.findViewById(R.id.news_image);
+                events_title = (TextView) itemView.findViewById(R.id.news_title2);
+                events_description = (TextView) itemView.findViewById(R.id.news_description2);
+                events_image = (ImageView) itemView.findViewById(R.id.news_image2);
 //                news_description = (TextView) itemView.findViewById(R.id.news_description);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
