@@ -1,40 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<!--<RelativeLayout-->
-<!--layout_height="match_parent">-->
-<!--<TextView-->
-<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:id="@+id/events_title"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_alignParentTop="true"-->
-<!--android:textColor="#333"-->
-<!--android:textSize="22dp"-->
-<!--android:padding="8dp"-->
-<!--android:maxLines="1"-->
-<!--android:layout_marginBottom="15dp"-->
-<!--android:layout_marginEnd="8dp"-->
-<!--android:layout_marginLeft="16dp"-->
-<!--android:layout_marginRight="16dp"-->
-<!--android:layout_marginStart="16dp"-->
-<!--android:layout_marginTop="15dp"-->
-<!--android:background="@android:color/white"-->
-<!--tools:text="Title 12"-->
-<!--android:textStyle="bold"/>-->
-
-<!--</RelativeLayout>-->
-
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
 
     <RelativeLayout
-        android:id="@+id/shoutout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
 
 
         <TextView
@@ -84,14 +62,46 @@
             android:hint="Tag name"
             android:inputType="textPersonName" />
 
+        <ListView
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/shoutoutlist_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewshoutout"
+            android:divider="@null"
+            android:layout_below="@+id/shoutpost"
+            />
 
     </RelativeLayout>
+
+    <!--Only the Listveiw-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_below="@+id/shoutout">-->
+
+        <!--<ListView-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--tools:listitem="@layout/shoutoutlist_layout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/listViewshoutout"-->
+            <!--android:divider="@null"-->
+            <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--Only the Listveiw ends-->
 
     <!--<RelativeLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:padding="15dp">-->
+        <!--android:padding="15dp"-->
+        <!--android:id="@+id/listsam"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentStart="true">-->
 
         <!--<ImageView-->
             <!--android:id="@+id/news_image"-->
@@ -142,9 +152,11 @@
             <!--android:layout_alignTop="@+id/imageView7"-->
             <!--android:layout_toEndOf="@+id/news_title"-->
             <!--app:srcCompat="@drawable/protest" />-->
-        <!---->
+
     <!--</RelativeLayout>-->
-</LinearLayout>
+
+
+</RelativeLayout>
 
 
 

@@ -20,7 +20,7 @@ public class BannerActivity extends AppCompatActivity {
     final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
     ViewPager viewPager;
-    int images[] = {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4};
+    int images[] = {R.drawable.image_11, R.drawable.image_22, R.drawable.image_33, R.drawable.image_44};
     MyCustomPagerAdapter myCustomPagerAdapter;
 
     @Override
