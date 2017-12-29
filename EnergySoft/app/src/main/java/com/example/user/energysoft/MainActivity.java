@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
                                     });
                                     System.out.println("object"+object.getString("key"));
                                     String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                                    //Log the token
-                                    System.out.println( "Refreshed token: " + refreshedToken);
+//                                    //Log the token
+//                                    System.out.println( "Refreshed token: " + refreshedToken);
                                     SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
                                     editor.putString("key", object.getString("key"));
