@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/titleAnniversary"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="12dp"
             android:text="Happy 5th Anniversary"
             android:textStyle="bold"
             android:textSize="25sp"
@@ -32,14 +33,24 @@
 
         <TextView
             android:id="@+id/textAnniversary"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textAlignment="center"
             android:text="An Anniversary is a reminder as to why you love and married this person"
             android:layout_below="@+id/imageAnniversary"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true" />
 
+        <ListView
+            tools:listitem="@layout/anniversarylist_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/newslist"
+            android:divider="@null"
+            android:layout_below="@+id/textAnniversary"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
 
     </RelativeLayout>
 </ScrollView>

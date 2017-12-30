@@ -6,15 +6,15 @@
     android:orientation="vertical"
     tools:context="com.example.user.energysoft.MainActivity">
 
-    <!--<ListView-->
-    <!--android:layout_marginTop="60dp"-->
-    <!--tools:listitem="@layout/newslist_layout"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:id="@+id/newslist"-->
-    <!--android:divider="@null"-->
-    <!--/>-->
+    <ListView
+    android:layout_marginTop="60dp"
+    tools:listitem="@layout/newslist_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:id="@+id/newslist"
+    android:divider="@null"
+    />
     <include
         android:id="@+id/toolbar"
         layout="@layout/tool_bar"

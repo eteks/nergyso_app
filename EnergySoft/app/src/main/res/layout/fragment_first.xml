@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="12dp"
         android:text="Happy Birthday"
         android:textStyle="bold"
         android:textSize="25sp"
@@ -25,28 +26,38 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/profile_pc"
+        app:srcCompat="@drawable/profile"
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textAlignment="center"
         android:text="Wish you many more happy returns of the day. Have a wonderful year ahead."
         android:layout_below="@+id/imageView6"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upcomming Birthday"
+            android:layout_below="@+id/textView11"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="18sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
 
         <ListView
-            tools:listitem="@layout/newslist_layout"
+            tools:listitem="@layout/birthdaylist_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/newslist"
             android:divider="@null"
-            android:layout_below="@+id/textView11"
+            android:layout_below="@+id/textView21"
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp" />
 
