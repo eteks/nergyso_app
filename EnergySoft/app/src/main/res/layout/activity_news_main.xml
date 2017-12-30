@@ -15,11 +15,11 @@
         <!--android:id="@+id/newslist"-->
         <!--android:divider="@null"-->
         <!--/>-->
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/tool_bar"
+    <!--<include-->
+        <!--android:id="@+id/toolbar"-->
+        <!--layout="@layout/tool_bar"-->
 
-        />
+        <!--/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_recycler"
@@ -29,9 +29,9 @@
         android:clipToPadding="false"
         android:paddingBottom="24dp"
         android:paddingTop="24dp" />
-    <ProgressBar
-        android:id="@+id/main_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+    <!--<ProgressBar-->
+        <!--android:id="@+id/main_progress"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"/>-->
 </RelativeLayout>

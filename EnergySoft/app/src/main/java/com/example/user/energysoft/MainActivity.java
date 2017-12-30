@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     EditText username = (EditText) findViewById(R.id.username);
                     EditText password = (EditText) findViewById(R.id.password);
                     String userName = username.getText().toString();
-                    String passWord = password.getText().toString();
+                    final String passWord = password.getText().toString();
                     System.out.println("Username:" + userName + "Password:" + passWord);
 
                     String data = null;
@@ -129,12 +129,13 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     });
                                     System.out.println("object"+object.getString("key"));
-                                    String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//                                    String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 //                                    //Log the token
 //                                    System.out.println( "Refreshed token: " + refreshedToken);
                                     SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
                                     editor.putString("key", object.getString("key"));
+                                    editor.putString("password",passWord);
                                     editor.putInt("id",object.getInt("user"));
                                     editor.putString("username",object.getString("username"));
                                     editor.putString("email",object.getString("email"));

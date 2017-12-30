@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -62,15 +62,23 @@
             android:hint="Tag name"
             android:inputType="textPersonName" />
 
-        <ListView
-            android:layout_marginTop="10dp"
-            tools:listitem="@layout/shoutoutlist_layout"
-            android:layout_width="wrap_content"
+        <!--<ListView-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--tools:listitem="@layout/shoutoutlist_layout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/listViewshoutout"-->
+            <!--android:divider="@null"-->
+            <!--android:layout_below="@+id/shoutpost"-->
+            <!--/>-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listViewshoutout"
-            android:divider="@null"
-            android:layout_below="@+id/shoutpost"
-            />
+            android:layout_marginTop="270dp"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            android:paddingTop="24dp" />
 
     </RelativeLayout>
 
@@ -156,7 +164,7 @@
     <!--</RelativeLayout>-->
 
 
-</RelativeLayout>
+</ScrollView>
 
 
 
