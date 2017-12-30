@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.user.energysoft">
+    package="com.vdart.example.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -12,33 +12,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GalleryActivity">
+        <activity android:name="com.vdart.example.app.EventGallery">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Feedback" />
-        <activity android:name=".Resetpassword_Activity" />
-        <activity android:name=".FullNews" />
-        <activity android:name=".EventMain" />
-        <activity android:name=".FullEvent" />
-        <activity android:name=".NewsMain" />
-        <activity android:name=".GridList" />
-        <activity android:name=".ForgetpasswordActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".Shoutout" />
-        <activity android:name=".GalleryZoomActivity" />
+        <activity android:name="com.vdart.example.app.Feedback" />
+        <activity android:name="com.vdart.example.app.Resetpassword_Activity" />
+        <activity android:name="com.vdart.example.app.FullNews" />
+        <activity android:name="com.vdart.example.app.EventMain" />
+        <activity android:name="com.vdart.example.app.FullEvent" />
+        <activity android:name="com.vdart.example.app.NewsMain" />
+        <activity android:name="com.vdart.example.app.GridList" />
+        <activity android:name="com.vdart.example.app.ForgetpasswordActivity" />
+        <activity android:name="com.vdart.example.app.ProfileActivity" />
+        <activity android:name="com.vdart.example.app.Shoutout" />
+        <activity android:name="com.vdart.example.app.DetailActivity" />
+        <!--<activity android:name="com.vdart.example.app.EventGallery" />-->
+        <activity android:name="com.vdart.example.app.Changepassword_Activity" />
         <service
-            android:name=".MyAndroidFirebaseMsgService">
+            android:name="com.vdart.example.app.MyAndroidFirebaseMsgService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
         <service
 
-            android:name=".MyAndroidFirebaseInstanceIdService">
+            android:name="com.vdart.example.app.MyAndroidFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

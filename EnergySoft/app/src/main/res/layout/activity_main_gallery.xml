@@ -5,17 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.example.user.energysoft.MainGallery">
+    tools:context="com.vdart.example.app.MainGallery">
 
-    <ScrollView
-        android:id="@+id/news_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="700dp">
+    <!--<ScrollView-->
+        <!--android:id="@+id/news_scroll"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="700dp">-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="700dp">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
     <TextView
         android:id="@+id/textView4"
@@ -72,30 +77,36 @@
         android:layout_alignStart="@+id/imageButton2" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/events_more"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignStart="@+id/imageButton3"
         android:layout_alignTop="@+id/imageButton5"
         app:srcCompat="@drawable/more" />
 
+        <!--<GridView-->
+            <!--android:id="@+id/eventGridView"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:footerDividersEnabled="false"-->
+            <!--android:padding="1dp"-->
+            <!--android:numColumns="3" />-->
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageButton4"
-        android:layout_below="@+id/imageButton4"
-        android:layout_marginTop="39dp"
-        android:text="News" />
+        android:text="News"
+        android:layout_above="@+id/imageView"
+        android:layout_alignEnd="@+id/textView4" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_below="@+id/textView6"
-        android:layout_marginTop="21dp"
-        app:srcCompat="@drawable/logo5" />
+        app:srcCompat="@drawable/logo5"
+        android:layout_above="@+id/imageView5"
+        android:layout_alignStart="@+id/imageView4" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -109,7 +120,7 @@
         android:id="@+id/imageView3"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignStart="@+id/imageButton6"
+        android:layout_alignStart="@+id/events_more"
         android:layout_alignTop="@+id/imageView2"
         app:srcCompat="@drawable/logo5" />
 
@@ -117,10 +128,10 @@
         android:id="@+id/imageView4"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="13dp"
-        app:srcCompat="@drawable/logo5" />
+        app:srcCompat="@drawable/logo5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageButton4"
+        android:layout_marginBottom="24dp" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -130,17 +141,25 @@
         android:layout_alignTop="@+id/imageView4"
         app:srcCompat="@drawable/logo5" />
 
+        <!--<GridView-->
+            <!--android:id="@+id/newsGridView"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:footerDividersEnabled="false"-->
+            <!--android:padding="1dp"-->
+            <!--android:numColumns="3" />-->
+
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/news_more"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignStart="@+id/imageView3"
         android:layout_alignTop="@+id/imageView5"
         app:srcCompat="@drawable/more" />
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-    </ScrollView>
+    <!--</ScrollView>-->
 
 
 

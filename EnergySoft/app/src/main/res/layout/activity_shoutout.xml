@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.user.energysoft.Shoutout">
+    tools:context="com.vdart.example.app.Shoutout">
     <include
         android:id="@+id/toolbar"
         layout="@layout/tool_bar"

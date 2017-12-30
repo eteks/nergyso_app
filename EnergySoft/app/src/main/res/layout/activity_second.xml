@@ -8,7 +8,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:background="#fff"
-    tools:context="com.example.user.energysoft.SecondActivity">
+    tools:context="com.vdart.example.app.SecondActivity">
 
     <ImageView
         android:id="@+id/selectedImage"
