@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".GridList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,8 @@
         <activity android:name=".FullEvent" />
         <activity android:name=".FullNews" />
         <activity android:name=".NewsMain" />
-        <activity android:name=".GridList" />
+        <activity android:name=".FacebookActivity" />
+        <activity android:name=".TwitterActivity" />
         <activity android:name=".ForgetpasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Shoutout" />

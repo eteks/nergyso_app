@@ -131,6 +131,17 @@ public class GridList extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(GridList.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(GridList.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }

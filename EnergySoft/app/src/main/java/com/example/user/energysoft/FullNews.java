@@ -349,6 +349,17 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(FullNews.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(FullNews.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+
 
             default:
                 return super.onOptionsItemSelected(item);

@@ -68,8 +68,10 @@ public class Shoutout extends AppCompatActivity{
                 try {
                     data = URLEncoder.encode("shoutout_description", "UTF-8")
                             + "=" + URLEncoder.encode(shout, "UTF-8");
-                    data += "&" + URLEncoder.encode("shoutout_employee", "UTF-8") + "="
-                            + id;
+                    data = URLEncoder.encode("shoutout_description", "UTF-8")
+                            + "=" + URLEncoder.encode(shout, "UTF-8");
+                    data = URLEncoder.encode("shoutout_description", "UTF-8")
+                            + "=" + URLEncoder.encode(shout, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -271,7 +273,16 @@ public class Shoutout extends AppCompatActivity{
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(Shoutout.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
 
+            case R.id.twitter:
+                intent = new Intent(Shoutout.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+            
             default:
                 return super.onOptionsItemSelected(item);
         }
