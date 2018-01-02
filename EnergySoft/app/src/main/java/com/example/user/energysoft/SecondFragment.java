@@ -83,22 +83,22 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 
         rv.setAdapter(adapter);
         final News add=new News("Title");
-        add.news_title = "News Title - 1";
-        add.setTitle("News Title - 1");
+//        add.news_title = "News Title - 1";
+        add.setTitle("Banumathy");
         add.setId(1);
-        add.news_description = "at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getInputStream(HttpURLConnectionImpl.java:250)";
+        add.news_description = "14 February";
         add.news_image = "";
         final News add1=new News("Title");
-        add1.news_title = "News Title - 2";
-        add1.setTitle("News Title - 2");
+//        add1.news_title = "News Title - 2";
+        add1.setTitle("Madhivanan");
         add1.setId(1);
-        add1.news_description = "at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getInputStream(HttpURLConnectionImpl.java:250)";
+        add1.news_description = "18 March";
         add1.news_image = "";
         final News add2=new News("Title");
-        add2.news_title = "News Title - 3";
-        add2.setTitle("News Title - 3");
+//        add2.news_title = "News Title - 3";
+        add2.setTitle("Kalaiarasi");
         add2.setId(1);
-        add2.news_description = "at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getInputStream(HttpURLConnectionImpl.java:250)";
+        add2.news_description = "15 April";
         add2.news_image = "";
 //        System.out.println("News Id"+obj.getInt("id"));
 //                news.add(add);
@@ -398,7 +398,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
         @NonNull
         private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
             final RecyclerView.ViewHolder viewHolder;
-            View v1 = inflater.inflate(R.layout.newslist_layout, parent, false);
+            View v1 = inflater.inflate(R.layout.anniversarylist_layout, parent, false);
             viewHolder = new SecondFragment.PaginationAdapter.NewsVH(v1);
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override

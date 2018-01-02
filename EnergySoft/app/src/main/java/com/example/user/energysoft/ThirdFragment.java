@@ -84,19 +84,19 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
         rv.setAdapter(adapter);
         final News add=new News("Title");
         add.news_title = "Shoutout - 1";
-        add.setTitle("Shoutout - 1");
+        add.setTitle("Hi everyone be ready for the treat.");
         add.setId(1);
         add.news_description = "at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getInputStream(HttpURLConnectionImpl.java:250)";
         add.news_image = "";
         final News add1=new News("Title");
         add1.news_title = "Shoutout - 2";
-        add1.setTitle("Shoutout - 2");
+        add1.setTitle("Hi everyone be ready for the treat.");
         add1.setId(1);
         add1.news_description = "at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getInputStream(HttpURLConnectionImpl.java:250)";
         add1.news_image = "";
         final News add2=new News("Title");
         add2.news_title = "Shoutout - 3";
-        add2.setTitle("Shoutout - 3");
+        add2.setTitle("Hi everyone be ready for the treat.");
         add2.setId(1);
         add2.news_description = "at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getInputStream(HttpURLConnectionImpl.java:250)";
         add2.news_image = "";
@@ -426,7 +426,7 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
                 case ITEM:
                     ThirdFragment.PaginationAdapter.NewsVH newsVH = (ThirdFragment.PaginationAdapter.NewsVH) holder;
                     newsVH.news_title.setText(news.getTitle());
-                    newsVH.news_description.setText(news.getNews_description());
+//                    newsVH.news_description.setText(news.getNews_description());
 //                    loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
                     break;
                 case LOADING:
@@ -513,7 +513,7 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
          * Main list's content ViewHolder
          */
         protected class NewsVH extends RecyclerView.ViewHolder {
-            TextView news_title,news_description;
+            TextView news_title;
             ImageView news_image;
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public NewsVH(View itemView) {
@@ -526,7 +526,7 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
                 news_title = (TextView) itemView.findViewById(R.id.news_title2);
-                news_description = (TextView) itemView.findViewById(R.id.news_description2);
+//                news_description = (TextView) itemView.findViewById(R.id.news_description2);
                 news_image = (ImageView) itemView.findViewById(R.id.news_image2);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);

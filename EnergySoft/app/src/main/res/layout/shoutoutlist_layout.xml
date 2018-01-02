@@ -5,20 +5,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
     <RelativeLayout
+        android:id="@+id/shoutoutlist_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/shoutoutlist_layout"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:padding="15dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/news_image2"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_weight="0.11"
-            android:src="@drawable/megaphone" />
+            android:src="@drawable/profile_pc" />
 
         <TextView
             android:id="@+id/news_title2"
@@ -27,41 +26,42 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/news_image2"
             android:layout_toRightOf="@+id/news_image2"
-            android:paddingLeft="10dp"
-            android:text="Shoutout"
+            android:layout_marginLeft="10dp"
+            android:text="Hello everyone be readu for the treat."
             android:textColor="#333"
-            android:textSize="22dp"
-            android:textStyle="bold" />
+            android:textSize="10dp" />
 
-        <TextView
-            android:id="@+id/news_description2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/news_title2"
-            android:layout_toEndOf="@+id/news_image2"
-            android:layout_toRightOf="@+id/news_image2"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:paddingLeft="10dp"
-            android:text="Admin What a awesome presentation"
-            android:textColor="#333" />
+        <!--<TextView-->
+        <!--android:id="@+id/news_description2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/news_title2"-->
+        <!--android:layout_toEndOf="@+id/news_image2"-->
+        <!--android:layout_toRightOf="@+id/news_image2"-->
+        <!--android:layout_weight="1"-->
+        <!--android:maxLines="1"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:text="Admin What a awesome presentation"-->
+        <!--android:textColor="#333" />-->
 
         <ImageView
             android:id="@+id/imageView72"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="23dp"
-            app:srcCompat="@drawable/profile_pc"
-            android:layout_below="@+id/news_description2"
-            android:layout_toEndOf="@+id/news_image2" />
+            android:layout_below="@+id/news_title2"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/news_image2"
+            app:srcCompat="@drawable/profile" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignTop="@+id/imageView72"
-            android:layout_toEndOf="@+id/news_title2"
-            app:srcCompat="@drawable/protest" />
-        </RelativeLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView8"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_alignTop="@+id/imageView72"-->
+            <!--android:layout_marginStart="13dp"-->
+            <!--android:layout_toEndOf="@+id/imageView72"-->
+            <!--app:srcCompat="@drawable/protest" />-->
+    </RelativeLayout>
 
 </LinearLayout>

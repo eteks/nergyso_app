@@ -32,10 +32,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:background="@drawable/border"
             android:padding="15dp">
-                <ImageView
-                    android:src="@drawable/protest"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:src="@drawable/profile_pc"
                     android:id="@+id/news_image2"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -48,34 +48,36 @@
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/news_image2"
                     android:layout_toRightOf="@+id/news_image2"
-                    android:paddingLeft="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="14dp"
                     android:textColor="#333"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"/>
                 <TextView
-                    android:text="The description of news displays here"
+                    android:text="21 December"
                     android:id="@+id/news_description2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/news_title2"
                     android:layout_toEndOf="@+id/news_image2"
                     android:layout_toRightOf="@+id/news_image2"
-                    android:paddingLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:maxLines="1"
+                    android:layout_marginTop="12dp"
                     android:textColor="#333"/>
-                <TextView
-                    android:text="21 Dec"
-                    android:id="@+id/tvnewsreadmore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/news_description2"
-                    android:layout_alignEnd="@+id/news_description2"
-                    android:paddingLeft="10dp"
-                    android:layout_weight="1"
-                    android:textColor="#333"
-                    android:layout_marginTop="10dp"
-                    android:gravity="end"/>
+                <!--<TextView-->
+                    <!--android:text="21 Dec"-->
+                    <!--android:id="@+id/tvnewsreadmore"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/news_description2"-->
+                    <!--android:layout_alignEnd="@+id/news_description2"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:textColor="#333"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:gravity="end"/>-->
         </RelativeLayout>
 </LinearLayout>
 

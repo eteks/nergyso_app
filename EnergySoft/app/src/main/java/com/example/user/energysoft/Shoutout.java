@@ -282,7 +282,7 @@ public class Shoutout extends AppCompatActivity{
                 intent = new Intent(Shoutout.this,TwitterActivity.class);
                 startActivity(intent);
                 return true;
-            
+
             default:
                 return super.onOptionsItemSelected(item);
         }
