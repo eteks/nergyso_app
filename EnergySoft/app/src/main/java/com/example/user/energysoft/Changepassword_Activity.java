@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,8 @@ public class Changepassword_Activity extends AppCompatActivity {
         SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         final String key = shared.getString("key","");
         System.out.println("USer : "+shared.getString("key",""));
+        String password = shared.getString("password","");
+        String username = shared.getString("username","");
         Button reset = (Button) findViewById(R.id.cancel);
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +97,8 @@ public class Changepassword_Activity extends AppCompatActivity {
                                 System.out.println("URL:" + CHANGE_PASSWORD_URL);
                                 URLConnection conn = url.openConnection();
                                 conn.setDoOutput(true);
+                                conn.setRequestProperty("Authorization", "basic " +
+                                        Base64.encode("username:password".getBytes(), Base64.NO_WRAP));
                                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                                 wr.write(finalData);
                                 wr.flush();
@@ -115,7 +120,7 @@ public class Changepassword_Activity extends AppCompatActivity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(Changepassword_Activity.this, "Changed your girlfriend?! Successfully changed the password!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Changepassword_Activity.this, "Breakup?! Successfully changed the password!", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                     Intent intent = new Intent(Changepassword_Activity.this, GridList.class);
