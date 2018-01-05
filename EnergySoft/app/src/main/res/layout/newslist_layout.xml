@@ -52,6 +52,7 @@
                     android:paddingLeft="10dp"
                     android:textColor="#333"
                     android:textSize="18dp"
+                    android:maxLines="1"
                     android:textStyle="bold"/>
                 <TextView
                     android:text="The description of news displays here"

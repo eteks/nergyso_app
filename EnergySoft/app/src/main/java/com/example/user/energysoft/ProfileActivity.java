@@ -171,7 +171,8 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 return true;
 
             case R.id.gallery:
-                Toast.makeText(ProfileActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                intent = new Intent(ProfileActivity.this,EventGallery.class);
+                startActivity(intent);
                 return true;
 
             case R.id.info:

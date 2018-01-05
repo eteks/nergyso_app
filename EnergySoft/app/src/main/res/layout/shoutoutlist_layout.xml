@@ -14,21 +14,18 @@
         android:padding="15dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/news_image2"
+            android:id="@+id/shoutout_from"
             android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="0.11"
-            android:src="@drawable/profile_pc" />
+            android:layout_height="60dp" />
 
         <TextView
             android:id="@+id/news_title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/news_image2"
-            android:layout_toRightOf="@+id/news_image2"
+            android:layout_toEndOf="@+id/shoutout_from"
+            android:layout_toRightOf="@+id/shoutout_from"
             android:layout_marginLeft="10dp"
-            android:text="Hello everyone be readu for the treat."
             android:textColor="#333"
             android:textSize="10dp" />
 
@@ -46,14 +43,14 @@
         <!--android:textColor="#333" />-->
 
         <ImageView
-            android:id="@+id/imageView72"
+            android:id="@+id/shoutout_to"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_below="@+id/news_title2"
             android:layout_marginStart="11dp"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/news_image2"
-            app:srcCompat="@drawable/profile" />
+            android:layout_toEndOf="@+id/shoutout_from"
+             />
 
         <!--<ImageView-->
             <!--android:id="@+id/imageView8"-->
