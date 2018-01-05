@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/titleAnniversary"
             android:layout_marginTop="12dp"
-            android:text="Happy 5th Anniversary"
             android:textStyle="bold"
             android:textSize="25sp"
             android:layout_alignParentTop="true"
@@ -26,7 +25,6 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginTop="20dp"
-            app:srcCompat="@drawable/profile"
             android:layout_below="@+id/titleAnniversary"
             android:layout_centerHorizontal="true" />
 
@@ -37,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textAlignment="center"
-            android:text="An Anniversary is a reminder as to why you love and married this person"
             android:layout_below="@+id/imageAnniversary"
             android:layout_centerHorizontal="true" />
 

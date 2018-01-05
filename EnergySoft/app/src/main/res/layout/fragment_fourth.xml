@@ -51,13 +51,13 @@
             <!--android:layout_weight="1"-->
             <!--android:textColor="#333"-->
             <!--android:gravity="end"/>-->
-        <ListView
-            tools:listitem="@layout/eventlist_layout"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/newslist"
-            android:divider="@null"
-            />
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            android:paddingTop="24dp" />
     </RelativeLayout>
 </ScrollView>

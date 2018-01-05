@@ -30,7 +30,7 @@
             <!--android:textStyle="bold|normal" />-->
 
         <EditText
-            android:id="@+id/shouttext"
+            android:id="@+id/shoutout_description"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -49,18 +49,29 @@
             android:text="Post"
             android:textColor="#fff"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/editText" />
+            android:layout_below="@+id/shoutout_employee_to" />
 
-        <EditText
-            android:id="@+id/editText"
+        <!--<EditText-->
+            <!--android:id="@+id/shoutout_employee_to"-->
+            <!--android:layout_width="270dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@+id/shoutout_description"-->
+            <!--android:layout_below="@+id/shoutout_description"-->
+            <!--android:layout_marginTop="12dp"-->
+            <!--android:ems="10"-->
+            <!--android:hint="Tag name"-->
+            <!--android:inputType="textPersonName" />-->
+
+        <AutoCompleteTextView
+            android:id="@+id/shoutout_employee_to"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/shouttext"
-            android:layout_below="@+id/shouttext"
+            android:layout_alignStart="@+id/shoutout_description"
+            android:layout_below="@+id/shoutout_description"
             android:layout_marginTop="12dp"
             android:ems="10"
             android:hint="Tag name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"/>
 
         <!--<ListView-->
             <!--android:layout_marginTop="10dp"-->

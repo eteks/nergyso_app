@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,9 +33,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
 import static com.google.android.gms.internal.zzahf.runOnUiThread;
 
 
@@ -53,6 +60,9 @@ public class SecondFragment extends Fragment implements Download_data.download_c
     String NEWS_URL;
     RecyclerView rv;
     ProgressBar progressBar;
+    String UPCOMING_ANNIVERSARY_URL = "api/employee/employee_upcoming_anniversary/";
+    TextView titleAnniversary, textAnniversary;
+    ImageView imageAnniversary;
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -82,35 +92,38 @@ public class SecondFragment extends Fragment implements Download_data.download_c
         rv.setItemAnimator(new DefaultItemAnimator());
 
         rv.setAdapter(adapter);
-        final News add=new News("Title");
-//        add.news_title = "News Title - 1";
-        add.setTitle("Banumathy");
-        add.setId(1);
-        add.news_description = "14 February";
-        add.news_image = "";
-        final News add1=new News("Title");
-//        add1.news_title = "News Title - 2";
-        add1.setTitle("Madhivanan");
-        add1.setId(1);
-        add1.news_description = "18 March";
-        add1.news_image = "";
-        final News add2=new News("Title");
-//        add2.news_title = "News Title - 3";
-        add2.setTitle("Kalaiarasi");
-        add2.setId(1);
-        add2.news_description = "15 April";
-        add2.news_image = "";
-//        System.out.println("News Id"+obj.getInt("id"));
-//                news.add(add);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-//                progressBar.setVisibility(View.GONE);
-                adapter.add(add);
-                adapter.add(add1);
-                adapter.add(add2);
-            }
-        });
+
+        textAnniversary = (TextView) view.findViewById(R.id.textAnniversary);
+        titleAnniversary = (TextView) view.findViewById(R.id.titleAnniversary);
+        imageAnniversary = (ImageView) view.findViewById(R.id.imageAnniversary);
+
+        SERVER_URL = getString(R.string.service_url);
+        UPCOMING_ANNIVERSARY_URL = SERVER_URL + UPCOMING_ANNIVERSARY_URL;
+
+        SharedPreferences shared = getActivity().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        System.out.println("USer : "+shared.getString("employee_photo",""));
+        String employee_dob = shared.getString("employee_dob","");
+        String employee_doj = shared.getString("employee_doj","");
+        String employee_photo = shared.getString("employee_photo","");
+
+        if(!employee_doj.isEmpty()){
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                String today = dateFormat.format(date);
+                String today_splitted[] = today.split("-");
+                String doj_splitted[] = employee_doj.split("-");
+                if(today_splitted[1].equals(doj_splitted[1]) &&  (today_splitted[2].equals(doj_splitted[2]))){
+                    System.out.println("Match ");
+                    int anniversary = Integer.parseInt(today_splitted[0]) - Integer.parseInt(doj_splitted[0]);
+                    titleAnniversary.setText("Happy "+anniversary+"th"+" "+"Anniversary" );
+                    textAnniversary.setText("Your hard work and dedication are vital to the success of our organization.");
+                    loadImageFromUrl(imageAnniversary,SERVER_URL+employee_photo);
+                }
+        }
+
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(UPCOMING_ANNIVERSARY_URL);
+
 //        TextView r = (TextView) getView().findViewById(R.id.news_title2);
 //        r.setText("");
         // get the reference of Button
@@ -275,30 +288,32 @@ public class SecondFragment extends Fragment implements Download_data.download_c
     public void get_data(String data)
     {
         try {
-            JSONObject object = new JSONObject(data);
-            System.out.println("Object"+object);
-            JSONArray data_array = object.getJSONArray("results");
+            JSONArray data_array = new JSONArray(data);
             System.out.println("Object"+data_array);
-            nextPage = object.getString("next");
+//            JSONArray data_array = object.getJSONArray("results");
+//            System.out.println("Object"+data_array);
+//            nextPage = object.getString("next");
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
             for (int i = 0 ; i < data_array.length() ; i++)
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
-//                System.out.println("Object"+obj);
+                System.out.println("Object"+obj);
                 final News add=new News("Title");
-                add.news_title = obj.getString("news_title");
-                add.setTitle(obj.getString("news_title"));
+                add.news_title = obj.getString("employee_name");
+                add.setTitle(obj.getString("employee_name"));
                 add.setId(obj.getInt("id"));
-                add.news_description = obj.getString("news_description");
-                add.news_image = obj.getString("news_image");
+                Date date = new Date();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                String strDate = formatter.format(date);
+                add.news_description = strDate;
+                add.news_image = obj.getString("employee_photo");
                 System.out.println("News Id"+obj.getInt("id"));
-//                news.add(add);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        progressBar.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.GONE);
                         adapter.add(add);
                     }
                 });
