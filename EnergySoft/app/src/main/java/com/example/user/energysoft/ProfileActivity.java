@@ -98,6 +98,12 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
 //            String experience = years+" "+"Years"+" "+months+" "+"Months";
                 EmpExpYears.setText("\""+empExperience+"\"");
                 loadImageFromUrl((SERVER_URL+obj.getString("employee_photo")));
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("employee_dob", obj.getString("employee_dob"));
+                editor.putString("employee_photo", obj.getString("employee_photo"));
+                editor.putString("employee_doj",obj.getString("employee_doj"));
+                editor.commit();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

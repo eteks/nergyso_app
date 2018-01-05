@@ -58,6 +58,7 @@ public class FourthFragment extends Fragment implements  Download_data.download_
     String NEWS_URL;
     RecyclerView rv;
     ProgressBar progressBar;
+    String RECENT_EVENTS_URL = "api/events/recent_events/";
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -87,35 +88,43 @@ public class FourthFragment extends Fragment implements  Download_data.download_
         rv.setItemAnimator(new DefaultItemAnimator());
 
         rv.setAdapter(adapter);
-        final News add=new News("Title");
-//        add.news_title = "Event Title - 1";
-        add.setTitle("Clean & Green Trichy - August");
-        add.setId(1);
-        add.news_description = "Member of team trichy participated in their work";
-        add.news_image = "";
-        final News add1=new News("Title");
-//        add1.news_title = "Event Title - 2";
-        add1.setTitle("Trichy Marathon -September");
-        add1.setId(1);
-        add1.news_description = "Trichy Marathon organised by CII";
-        add1.news_image = "";
-        final News add2=new News("Title");
-//        add2.news_title = "Event Title - 3";
-        add2.setTitle("RNR2017");
-        add2.setId(1);
-        add2.news_description = "VDart Group of companies cordially invites the VDart family.";
-        add2.news_image = "";
-//        System.out.println("News Id"+obj.getInt("id"));
-//                news.add(add);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-//                progressBar.setVisibility(View.GONE);
-                adapter.add(add);
-                adapter.add(add1);
-                adapter.add(add2);
-            }
-        });
+
+        SERVER_URL = getString(R.string.service_url);
+        RECENT_EVENTS_URL = SERVER_URL + RECENT_EVENTS_URL;
+
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(RECENT_EVENTS_URL);
+
+
+//        final News add=new News("Title");
+////        add.news_title = "Event Title - 1";
+//        add.setTitle("Clean & Green Trichy - August");
+//        add.setId(1);
+//        add.news_description = "Member of team trichy participated in their work";
+//        add.news_image = "";
+//        final News add1=new News("Title");
+////        add1.news_title = "Event Title - 2";
+//        add1.setTitle("Trichy Marathon -September");
+//        add1.setId(1);
+//        add1.news_description = "Trichy Marathon organised by CII";
+//        add1.news_image = "";
+//        final News add2=new News("Title");
+////        add2.news_title = "Event Title - 3";
+//        add2.setTitle("RNR2017");
+//        add2.setId(1);
+//        add2.news_description = "VDart Group of companies cordially invites the VDart family.";
+//        add2.news_image = "";
+////        System.out.println("News Id"+obj.getInt("id"));
+////                news.add(add);
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+////                progressBar.setVisibility(View.GONE);
+//                adapter.add(add);
+//                adapter.add(add1);
+//                adapter.add(add2);
+//            }
+//        });
 //        TextView r = (TextView) getView().findViewById(R.id.news_title2);
 //        r.setText("");
         // get the reference of Button
@@ -280,11 +289,9 @@ public class FourthFragment extends Fragment implements  Download_data.download_
     public void get_data(String data)
     {
         try {
-            JSONObject object = new JSONObject(data);
-            System.out.println("Object"+object);
-            JSONArray data_array = object.getJSONArray("results");
+            JSONArray data_array = new JSONArray(data);
             System.out.println("Object"+data_array);
-            nextPage = object.getString("next");
+//            nextPage = object.getString("next");
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
@@ -293,17 +300,15 @@ public class FourthFragment extends Fragment implements  Download_data.download_
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
 //                System.out.println("Object"+obj);
                 final News add=new News("Title");
-                add.news_title = obj.getString("news_title");
-                add.setTitle(obj.getString("news_title"));
+                add.news_title = obj.getString("events_title");
                 add.setId(obj.getInt("id"));
-                add.news_description = obj.getString("news_description");
-                add.news_image = obj.getString("news_image");
-                System.out.println("News Id"+obj.getInt("id"));
+                add.news_description = obj.getString("events_description");
+                add.news_image = obj.getString("events_image");
 //                news.add(add);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        progressBar.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.GONE);
                         adapter.add(add);
                     }
                 });

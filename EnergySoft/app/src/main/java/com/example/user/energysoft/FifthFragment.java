@@ -58,6 +58,7 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
     String NEWS_URL;
     RecyclerView rv;
     ProgressBar progressBar;
+    String RECENT_NEWS_URL = "api/news/recent_news";
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -87,35 +88,43 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
         rv.setItemAnimator(new DefaultItemAnimator());
 
         rv.setAdapter(adapter);
-        final News add=new News("Title");
-//        add.news_title = "News Title - 1";
-        add.setTitle("VDart Wins highest Honor");
-        add.setId(1);
-        add.news_description = "Vdart Inc was awarded by the National Mino";
-        add.news_image = "";
-        final News add1=new News("Title");
-//        add1.news_title = "News Title - 2";
-        add1.setTitle("Books for Africa");
-        add1.setId(1);
-        add1.news_description = "Members of team Atlanta pitched in to celebration";
-        add1.news_image = "";
-        final News add2=new News("Title");
-//        add2.news_title = "News Title - 3";
-        add2.setTitle("Vdart named top ten Asian American Company");
-        add2.setId(1);
-        add2.news_description = "At first annua; Diversity in Action awards, hosted by the USPAACC-SE";
-        add2.news_image = "";
-//        System.out.println("News Id"+obj.getInt("id"));
-//                news.add(add);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-//                progressBar.setVisibility(View.GONE);
-                adapter.add(add);
-                adapter.add(add1);
-                adapter.add(add2);
-            }
-        });
+
+        SERVER_URL = getString(R.string.service_url);
+        RECENT_NEWS_URL = SERVER_URL + RECENT_NEWS_URL;
+
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(RECENT_NEWS_URL);
+
+
+//        final News add=new News("Title");
+////        add.news_title = "News Title - 1";
+//        add.setTitle("VDart Wins highest Honor");
+//        add.setId(1);
+//        add.news_description = "Vdart Inc was awarded by the National Mino";
+//        add.news_image = "";
+//        final News add1=new News("Title");
+////        add1.news_title = "News Title - 2";
+//        add1.setTitle("Books for Africa");
+//        add1.setId(1);
+//        add1.news_description = "Members of team Atlanta pitched in to celebration";
+//        add1.news_image = "";
+//        final News add2=new News("Title");
+////        add2.news_title = "News Title - 3";
+//        add2.setTitle("Vdart named top ten Asian American Company");
+//        add2.setId(1);
+//        add2.news_description = "At first annua; Diversity in Action awards, hosted by the USPAACC-SE";
+//        add2.news_image = "";
+////        System.out.println("News Id"+obj.getInt("id"));
+////                news.add(add);
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+////                progressBar.setVisibility(View.GONE);
+//                adapter.add(add);
+//                adapter.add(add1);
+//                adapter.add(add2);
+//            }
+//        });
 //        TextView r = (TextView) getView().findViewById(R.id.news_title2);
 //        r.setText("");
         // get the reference of Button
@@ -280,11 +289,9 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
     public void get_data(String data)
     {
         try {
-            JSONObject object = new JSONObject(data);
-            System.out.println("Object"+object);
-            JSONArray data_array = object.getJSONArray("results");
+            JSONArray data_array = new JSONArray(data);
             System.out.println("Object"+data_array);
-            nextPage = object.getString("next");
+//            nextPage = object.getString("next");
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
@@ -303,7 +310,7 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        progressBar.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.GONE);
                         adapter.add(add);
                     }
                 });

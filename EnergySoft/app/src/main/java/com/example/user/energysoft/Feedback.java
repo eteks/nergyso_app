@@ -74,8 +74,6 @@ public class Feedback extends AppCompatActivity {
                     try {
                         data = URLEncoder.encode("feedback_description", "UTF-8")
                                 + "=" + URLEncoder.encode(feedback, "UTF-8");
-                        data += "&" + URLEncoder.encode("feedback_category", "UTF-8") + "="
-                                + URLEncoder.encode("general", "UTF-8");
                         data += "&" + URLEncoder.encode("feedback_rating_count", "UTF-8") + "="
                                 + URLEncoder.encode(rating, "UTF-8");
                         data += "&" + URLEncoder.encode("feedback_employee", "UTF-8") + "="

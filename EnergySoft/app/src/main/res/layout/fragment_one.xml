@@ -133,7 +133,7 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:drawableLeft="@android:drawable/ic_menu_n"
+            android:drawableLeft="@android:drawable/ic_menu_search"
             android:background="#c5e0f1"
             android:layout_centerVertical="true"
             android:layout_alignStart="@+id/button2" />

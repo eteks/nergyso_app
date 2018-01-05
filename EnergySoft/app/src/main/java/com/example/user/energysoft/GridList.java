@@ -46,7 +46,8 @@ public class GridList extends AppCompatActivity {
                         break;
                     }
                     case 2 : {
-                        Toast.makeText(GridList.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(GridList.this, EventGallery.class);
+                        startActivity(intent);
                         break;
                     }
                     case 3 : {
@@ -114,7 +115,8 @@ public class GridList extends AppCompatActivity {
                 return true;
 
             case R.id.gallery:
-                Toast.makeText(GridList.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                intent = new Intent(GridList.this,EventGallery.class);
+                startActivity(intent);
                 return true;
 
             case R.id.info:

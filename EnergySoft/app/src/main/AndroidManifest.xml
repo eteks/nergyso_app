@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BannerActivity">
+
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,20 +21,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".Slidescreen" />
+        <activity android:name=".BannerActivity"/>
         <activity android:name=".Feedback" />
-        <activity android:name=".GalleryActivity" />
+        <activity android:name=".Resetpassword_Activity" />
         <activity android:name=".EventMain" />
         <activity android:name=".FullEvent" />
         <activity android:name=".FullNews" />
         <activity android:name=".NewsMain" />
         <activity android:name=".GridList" />
-        <activity android:name=".Resetpassword_Activity" />
         <activity android:name=".FacebookActivity" />
         <activity android:name=".TwitterActivity" />
         <activity android:name=".ForgetpasswordActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".Shoutout" />
-        <activity android:name=".GalleryZoomActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".EventGallery" />
+        <activity android:name=".Changepassword_Activity" />
+        <activity android:name=".DetailActivity" />
 
         <service android:name=".MyAndroidFirebaseMsgService">
             <intent-filter>
@@ -47,7 +50,6 @@
         </service>
 
         <activity android:name=".BannerItem" />
-        <activity android:name=".Changepassword_Activity" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".quiz_activity_frag"></activity>
     </application>

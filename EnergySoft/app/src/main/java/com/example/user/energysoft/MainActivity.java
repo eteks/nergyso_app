@@ -137,13 +137,14 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("key", object.getString("key"));
                                     editor.putString("password",passWord);
                                     editor.putInt("id",object.getInt("user"));
+                                    editor.putBoolean("activity_executed", true);
                                     editor.putString("username",object.getString("username"));
                                     editor.putString("email",object.getString("email"));
                                     editor.commit();
 
-                                    Intent intent = new Intent(MainActivity.this, GridList.class);
+                                    Intent intent = new Intent(MainActivity.this, BannerActivity.class);
 //                                    intent.putExtra("key", object.getString("key"));
-//                                    finish();
+                                    finish();
                                     startActivity(intent);
                                 }else{
                                     System.out.println("Password failed");
