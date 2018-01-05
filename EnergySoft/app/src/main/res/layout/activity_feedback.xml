@@ -12,63 +12,62 @@
         layout="@layout/tool_bar"
 
         />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/feedbackactivity"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:id="@+id/feedbackactivity">
+            android:layout_height="500dp">
 
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
-                android:textStyle="bold|normal"
-                android:textColor="@color/blueText"
-                android:layout_marginTop="17dp"
-                android:layout_gravity="center"
-                android:text="FEEDBACK"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="17dp"
+                android:text="FEEDBACK"
+                android:textSize="25sp"
+                android:textStyle="bold|normal" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blueText"
                 android:layout_below="@+id/textView"
-                android:textSize="15sp"
-                android:layout_gravity="center"
                 android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:layout_marginTop="33dp"
-                android:text="Rate Us" />
+                android:text="Rate Us"
+                android:textSize="15sp" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:numStars="5"
-                android:stepSize="0.5"
-                android:layout_marginTop="38dp"
                 android:layout_below="@+id/textView3"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="38dp"
+                android:numStars="5"
+                android:stepSize="0.5" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blueText"
-                android:layout_marginStart="23dp"
-                android:textSize="15sp"
-                android:text="Overall Feedback"
-                android:layout_below="@+id/ratingBar"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="19dp" />
+                android:layout_below="@+id/ratingBar"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="19dp"
+                android:text="Overall Feedback"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/feedback"
@@ -84,12 +83,12 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blueText"
-                android:textSize="15sp"
                 android:layout_alignStart="@+id/feedback"
                 android:layout_below="@+id/feedback"
                 android:layout_marginTop="25dp"
-                android:text="Any Queries" />
+                android:text="Any Queries"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/query"
@@ -105,24 +104,24 @@
                 android:id="@+id/reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#fff"
+                android:layout_alignStart="@+id/query"
+                android:layout_below="@+id/query"
+                android:layout_marginTop="29dp"
                 android:background="@drawable/rounded_edge"
                 android:text="Clear All"
-                android:layout_below="@+id/query"
-                android:layout_alignStart="@+id/query"
-                android:layout_marginTop="29dp" />
+                android:textColor="#fff" />
 
             <Button
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#fff"
-                android:background="@drawable/rounded_edge"
-                android:text="Submit"
                 android:layout_alignBaseline="@+id/reset"
                 android:layout_alignBottom="@+id/reset"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="26dp" />
+                android:layout_marginEnd="26dp"
+                android:background="@drawable/rounded_edge"
+                android:text="Submit"
+                android:textColor="#fff" />
 
             <!--<ProgressBar-->
                 <!--android:id="@+id/feedbackprogressBar"-->

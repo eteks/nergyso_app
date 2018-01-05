@@ -33,14 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        android:background="@drawable/border"
+        android:background="@drawable/border_bottom"
         android:padding="15dp">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:src="@drawable/protest"
             android:id="@+id/news_image2"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_weight="0.11"/>
+            android:layout_height="80dp"/>
         <TextView
             android:id="@+id/news_title2"
             android:layout_width="wrap_content"
@@ -71,6 +70,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/news_description2"
             android:layout_alignParentEnd="true"
+            android:paddingLeft="10dp"
+            android:layout_weight="1"
+            android:textColor="#333"
+            android:gravity="end"/>
+        <TextView
+            android:text="Jan 26"
+            android:id="@+id/tveventvenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvnewsreadmore"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
             android:layout_weight="1"
             android:textColor="#333"
