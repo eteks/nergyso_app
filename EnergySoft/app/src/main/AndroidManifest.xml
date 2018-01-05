@@ -12,26 +12,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BannerActivity">
+        <activity android:name=".Slidescreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".BannerActivity" />
         <activity android:name=".Feedback" />
-        <activity android:name=".Resetpassword_Activity" />
         <activity android:name=".GalleryActivity" />
         <activity android:name=".EventMain" />
         <activity android:name=".FullEvent" />
         <activity android:name=".FullNews" />
         <activity android:name=".NewsMain" />
         <activity android:name=".GridList" />
-        <activity android:name=".ForgetpasswordActivity" />
+        <activity android:name=".Resetpassword_Activity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Shoutout" />
         <activity android:name=".GalleryZoomActivity" />
-        <activity android:name=".Changepassword_Activity" />
+        <activity android:name=".ForgetpasswordActivity" />
+
         <service android:name=".MyAndroidFirebaseMsgService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -42,7 +43,11 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <activity android:name=".BannerItem" />
+        <activity android:name=".Changepassword_Activity" />
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".quiz_activity_frag"></activity>
     </application>
 
 </manifest>

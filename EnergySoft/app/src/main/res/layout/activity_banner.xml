@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/viewPagerdash"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +22,8 @@
         android:id="@+id/menuicons"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/viewPagerdash">
+        android:layout_below="@+id/viewPagerdash"
+        android:layout_alignParentStart="true">
 
         <ImageButton
             android:id="@+id/firstFragment"

@@ -26,6 +26,18 @@
     <item android:id="@+id/events"
         android:title="Events" />
 
+    <item android:id="@+id/ceomsg"
+        android:title="CEO's Message" />
+
+    <item android:id="@+id/live"
+        android:title="Live" />
+
+    <item android:id="@+id/feedback"
+        android:title="Feedback" />
+
+    <item android:id="@+id/polss"
+        android:title="Polls" />
+
     <item android:id="@+id/news"
         android:title="News" />
 
@@ -35,8 +47,8 @@
     <item android:id="@+id/gallery"
         android:title="Gallery" />
 
-    <item android:id="@+id/info"
-        android:title="Info" />
+    <!--<item android:id="@+id/info"-->
+        <!--android:title="Info" />-->
 
     <item android:id="@+id/settings"
         android:title="Settings" />

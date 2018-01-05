@@ -32,10 +32,12 @@ public class BannerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_banner);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
 
         viewPager = (ViewPager)findViewById(R.id.viewPagerdash);
 

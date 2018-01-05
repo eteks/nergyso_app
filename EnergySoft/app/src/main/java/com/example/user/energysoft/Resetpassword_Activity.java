@@ -6,6 +6,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +26,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 public class Resetpassword_Activity extends AppCompatActivity {
+    Toolbar toolbar;
     EditText new_password, confirm_password, uid, token;
     String SERVER_URL;
     String RESET_PASSWORD_URL ;
@@ -51,6 +56,9 @@ public class Resetpassword_Activity extends AppCompatActivity {
             }
         });
         Button submit = (Button) findViewById(R.id.submit);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         submit.setOnClickListener(new View.OnClickListener() {
             int ONE_TIME = 0;
             @Override
@@ -200,6 +208,74 @@ public class Resetpassword_Activity extends AppCompatActivity {
             return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
             return task.execute();
+        }
+    }
+
+    // Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_home:
+                intent = new Intent(Resetpassword_Activity.this,GridList.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(Resetpassword_Activity.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(Resetpassword_Activity.this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(Resetpassword_Activity.this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(Resetpassword_Activity.this,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(Resetpassword_Activity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(Resetpassword_Activity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(Resetpassword_Activity.this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(Resetpassword_Activity.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
