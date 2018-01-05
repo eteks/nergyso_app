@@ -19,22 +19,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".BannerActivity" />
         <activity android:name=".Feedback" />
         <activity android:name=".Resetpassword_Activity" />
         <activity android:name=".EventMain" />
         <activity android:name=".FullEvent" />
         <activity android:name=".FullNews" />
         <activity android:name=".NewsMain" />
+        <activity android:name=".GridList" />
         <activity android:name=".FacebookActivity" />
         <activity android:name=".TwitterActivity" />
         <activity android:name=".ForgetpasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".GridList" />
         <activity android:name=".EventGallery" />
         <activity android:name=".Changepassword_Activity" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".BannerActivity" />
+
         <service android:name=".MyAndroidFirebaseMsgService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -45,7 +46,10 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <activity android:name=".BannerItem" />
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".quiz_activity_frag"></activity>
     </application>
 
 </manifest>

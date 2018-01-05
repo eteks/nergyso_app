@@ -57,6 +57,10 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         SERVER_URL = getString(R.string.service_url);
         BANNER_URL = SERVER_URL+"api/banner/";
 
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+
         viewPager = (ViewPager)findViewById(R.id.viewPagerdash);
 
         myCustomPagerAdapter = new MyCustomPagerAdapter(BannerActivity.this, images);
