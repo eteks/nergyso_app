@@ -5,13 +5,7 @@
     android:padding="1dp"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/tool_bar"
-
-        />
-
-    <ImageView
+  <ImageView
         android:id="@+id/icon"
         android:layout_width="200dp"
         android:layout_height="200dp"

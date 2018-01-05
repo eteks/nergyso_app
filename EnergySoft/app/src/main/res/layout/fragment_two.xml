@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ecf1f4">
 
     <include
         android:id="@+id/toolbar"
@@ -10,27 +11,25 @@
         />
 
     <RelativeLayout
+        android:id="@+id/questionContainer"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/questionContainer"
-        android:layout_weight="4">
+        android:layout_weight="5">
 
         <TextView
+            android:id="@+id/questionText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Text for the second question"
-            android:id="@+id/questionText"
-            android:layout_alignParentRight="true"
-            android:textIsSelectable="false"
             android:enabled="true"
-            android:layout_alignParentEnd="false"
-            android:layout_centerInParent="true"
             android:gravity="center_vertical"
-            android:maxLines = "100"
-            android:scrollbars = "vertical"
-            android:paddingLeft="10dp" />
-
+            android:maxLines="100"
+            android:paddingLeft="10dp"
+            android:scrollbars="vertical"
+            android:text="Text for the second question"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textIsSelectable="false"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
 
     </RelativeLayout>
@@ -40,23 +39,26 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/answers_container"
-        android:layout_weight="3">
+        android:layout_weight="4">
 
         <RelativeLayout
+            android:id="@+id/answer_a_container"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:id="@+id/answer_a_container"
             android:layout_gravity="top"
             android:layout_weight="1">
 
             <RadioButton
+                android:id="@+id/answerA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Varianta A"
-                android:id="@+id/answerA"
-                android:maxLines = "100"
-                android:scrollbars = "vertical"
-                android:hint="0" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="53dp"
+                android:hint="0"
+                android:maxLines="100"
+                android:scrollbars="vertical"
+                android:text="Varianta A" />
 
         </RelativeLayout>
 
@@ -74,7 +76,9 @@
                 android:hint="1"
                 android:maxLines = "100"
                 android:scrollbars = "vertical"
-                android:layout_alignParentRight="false" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="53dp" />
 
         </RelativeLayout>
 
@@ -91,31 +95,47 @@
                 android:id="@+id/answerC"
                 android:maxLines = "100"
                 android:scrollbars = "vertical"
-                android:hint="2" />
+                android:hint="2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="53dp" />
 
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:id="@+id/footer">
+        android:orientation="vertical">
+
+        <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Verifica Raspunsurile"-->
+        <!--android:id="@+id/button"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:onClick="FinishTest" />-->
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vote"
             android:id="@+id/button2"
-            android:layout_gravity="start" />
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="53dp"
+            android:background="@drawable/rounded_edge"
+            android:text="Vote"
+            android:textColor="#fff" />
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Next" />
+            android:layout_marginTop="40dp"
+            android:text="Next"
+            android:background="#c5e0f1"/>
     </LinearLayout>
 
 </LinearLayout>
