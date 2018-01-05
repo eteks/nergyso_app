@@ -272,6 +272,16 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                 Toast.makeText(EventMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(EventMain.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(EventMain.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
             case R.id.settings:
                 intent = new Intent(EventMain.this,Changepassword_Activity.class);
                 startActivity(intent);

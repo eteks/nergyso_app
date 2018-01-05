@@ -182,6 +182,17 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(ProfileActivity.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(ProfileActivity.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+
 
             default:
                 return super.onOptionsItemSelected(item);

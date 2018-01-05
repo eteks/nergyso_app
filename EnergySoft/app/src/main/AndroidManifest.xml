@@ -28,10 +28,12 @@
         <activity android:name=".NewsMain" />
         <activity android:name=".GridList" />
         <activity android:name=".Resetpassword_Activity" />
+        <activity android:name=".FacebookActivity" />
+        <activity android:name=".TwitterActivity" />
+        <activity android:name=".ForgetpasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Shoutout" />
         <activity android:name=".GalleryZoomActivity" />
-        <activity android:name=".ForgetpasswordActivity" />
 
         <service android:name=".MyAndroidFirebaseMsgService">
             <intent-filter>

@@ -515,6 +515,17 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(NewsMain.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(NewsMain.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+
 
             default:
                 return super.onOptionsItemSelected(item);

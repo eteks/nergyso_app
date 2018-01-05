@@ -265,6 +265,17 @@ public class Feedback extends AppCompatActivity {
                 Toast.makeText(Feedback.this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(Feedback.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(Feedback.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+
             case R.id.info:
                 Toast.makeText(Feedback.this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;

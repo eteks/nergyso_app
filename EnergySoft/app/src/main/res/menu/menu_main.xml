@@ -50,6 +50,12 @@
     <!--<item android:id="@+id/info"-->
         <!--android:title="Info" />-->
 
+    <item android:id="@+id/facebook"
+        android:title="Facebook" />
+
+    <item android:id="@+id/twitter"
+        android:title="Twitter" />
+
     <item android:id="@+id/settings"
         android:title="Settings" />
 

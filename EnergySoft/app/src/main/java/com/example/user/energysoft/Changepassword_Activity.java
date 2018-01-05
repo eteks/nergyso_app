@@ -19,6 +19,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.Authenticator;
+import java.net.HttpURLConnection;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -41,8 +44,8 @@ public class Changepassword_Activity extends AppCompatActivity {
         SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         final String key = shared.getString("key","");
         System.out.println("USer : "+shared.getString("key",""));
-        String password = shared.getString("password","");
-        String username = shared.getString("username","");
+        final String password = shared.getString("password","");
+        final String username = shared.getString("username","");
         Button reset = (Button) findViewById(R.id.cancel);
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +98,22 @@ public class Changepassword_Activity extends AppCompatActivity {
 
                                 // Send POST data request
                                 System.out.println("URL:" + CHANGE_PASSWORD_URL);
-                                URLConnection conn = url.openConnection();
-                                conn.setDoOutput(true);
-                                conn.setRequestProperty("Authorization", "basic " +
-                                        Base64.encode("username:password".getBytes(), Base64.NO_WRAP));
+//                                URLConnection conn = url.openConnection();
+//                                conn.setDoOutput(true);
+                                Authenticator.setDefault(new Authenticator(){
+                                    protected PasswordAuthentication getPasswordAuthentication() {
+                                        return new PasswordAuthentication(username,password.toCharArray());
+                                    }});
+                                final String basicAuth = "Basic " + Base64.encodeToString("test:vdart@energy".getBytes(), Base64.NO_WRAP);
+                                System.out.println("Basic "+basicAuth);
+                                HttpURLConnection conn = (HttpURLConnection) new URL(CHANGE_PASSWORD_URL).openConnection();
+                                conn.setUseCaches(false);
+                                conn.setRequestMethod("POST");
+                                conn.setRequestProperty("Authorization", basicAuth);
+//                                conn.setHeader("Authorization", basicAuth);
+                                conn.connect();
+//                                conn.setRequestProperty("Authorization", "basic " +
+//                                        Base64.encode("username:password".getBytes(), Base64.NO_WRAP))
                                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                                 wr.write(finalData);
                                 wr.flush();

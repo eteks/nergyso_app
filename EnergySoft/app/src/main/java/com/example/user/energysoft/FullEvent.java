@@ -336,6 +336,17 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                 Toast.makeText(FullEvent.this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(FullEvent.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(FullEvent.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+
             case R.id.info:
                 Toast.makeText(FullEvent.this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
