@@ -9,6 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout2">
+
     <!--TextView and Button displayed in First Fragment -->
     <TextView
         android:layout_width="wrap_content"
@@ -37,15 +42,16 @@
         android:layout_below="@+id/birthday_photo"
         android:layout_centerHorizontal="true" />
 
+    </RelativeLayout>
         <TextView
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Today's Birthday"
-            android:layout_below="@+id/birthday_wishes"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
+            android:layout_below="@+id/relativeLayout2"
             android:layout_alignStart="@+id/textView22" />
 
 
@@ -84,9 +90,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upcomming Birthday"
-            android:layout_below="@+id/textView12"
+            android:layout_below="@+id/main_recycler2"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="1sp"
+            android:layout_marginTop="15dp"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"/>
 
@@ -135,18 +141,18 @@
             android:textSize="15dp"
             android:text="More..." />
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/main_recycler2"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="15dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:text="More..." />
+        <!--<TextView-->
+            <!--android:id="@+id/textView12"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_below="@+id/main_recycler2"-->
+            <!--android:layout_marginTop="7dp"-->
+            <!--android:layout_marginBottom="30dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="15dp"-->
+            <!--android:text="More..." />-->
 
 
     </RelativeLayout>

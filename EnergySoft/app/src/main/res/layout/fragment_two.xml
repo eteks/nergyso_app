@@ -103,7 +103,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -129,13 +129,27 @@
             android:textColor="#fff" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:id="@+id/buttonnext"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="40dp"
-            android:text="Next"
-            android:background="#c5e0f1"/>
-    </LinearLayout>
+            android:drawable="@android:drawable/ic_menu_search"
+            android:text="gh"
+            android:background="#c5e0f1"
+            android:textSize="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/button2" />
+        <Button
+            android:id="@+id/buttonpre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="hgj"
+            android:textSize="30dp"
+            android:background="#c5e0f1"
+            android:layout_marginEnd="55dp"
+            android:layout_alignTop="@+id/buttonnext"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 
 </LinearLayout>
