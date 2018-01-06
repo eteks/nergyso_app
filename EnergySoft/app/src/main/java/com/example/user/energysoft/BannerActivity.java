@@ -290,6 +290,16 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(BannerActivity.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(BannerActivity.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
 
             default:
                 return super.onOptionsItemSelected(item);

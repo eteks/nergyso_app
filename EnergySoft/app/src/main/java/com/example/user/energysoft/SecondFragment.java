@@ -53,16 +53,19 @@ public class SecondFragment extends Fragment implements Download_data.download_c
     Toolbar toolbar;
     private static final String TAG = "NewsMain";
     String listValue = "NULL";
-    SecondFragment.PaginationAdapter adapter;
-    LinearLayoutManager linearLayoutManager;
+    SecondFragment.PaginationAdapter adapter, adapter2;
+    LinearLayoutManager linearLayoutManager, linearLayoutManager2;
     String nextPage;
     String SERVER_URL;
     String NEWS_URL;
-    RecyclerView rv;
+    RecyclerView rv, rv_today;
     ProgressBar progressBar;
     String UPCOMING_ANNIVERSARY_URL = "api/employee/employee_upcoming_anniversary/";
+    String TODAY_ANNIVERSARY_URL = "api/employee/employee_today_anniversary/";
     TextView titleAnniversary, textAnniversary;
     ImageView imageAnniversary;
+    boolean upcoming = false, today = false;
+    TextView today_anniversary_more, upcoming_anniversary_more;
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -81,17 +84,23 @@ public class SecondFragment extends Fragment implements Download_data.download_c
         view = inflater.inflate(R.layout.fragment_second, container, false);
 //        TextView t = (TextView) view.findViewById(R.id.news_title2);
 //        t.setText("Dei");
-        rv = (RecyclerView) view.findViewById(R.id.main_recycler);
+        rv_today = (RecyclerView) view.findViewById(R.id.main_recycler);
 //        final ProgressBar progressBar = new ProgressBar(getActivity());
-
+        rv = (RecyclerView) view.findViewById(R.id.main_recycler2);
         adapter = new SecondFragment.PaginationAdapter(getActivity());
+        adapter2 = new SecondFragment.PaginationAdapter(getActivity());
 
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
         rv.setLayoutManager(linearLayoutManager);
+        rv_today.setLayoutManager(linearLayoutManager2);
 
         rv.setItemAnimator(new DefaultItemAnimator());
+        rv_today.setItemAnimator(new DefaultItemAnimator());
 
         rv.setAdapter(adapter);
+        rv_today.setAdapter(adapter2);
 
         textAnniversary = (TextView) view.findViewById(R.id.textAnniversary);
         titleAnniversary = (TextView) view.findViewById(R.id.titleAnniversary);
@@ -99,6 +108,28 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 
         SERVER_URL = getString(R.string.service_url);
         UPCOMING_ANNIVERSARY_URL = SERVER_URL + UPCOMING_ANNIVERSARY_URL;
+        TODAY_ANNIVERSARY_URL = SERVER_URL + TODAY_ANNIVERSARY_URL;
+
+
+        today_anniversary_more = (TextView) view.findViewById(R.id.today_anniversary_more);
+        today_anniversary_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListingMore.class);
+                intent.putExtra("more","today_anniversary");
+                startActivity(intent);
+            }
+        });
+
+        upcoming_anniversary_more = (TextView) view.findViewById(R.id.upcoming_anniversary_more);
+        upcoming_anniversary_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListingMore.class);
+                intent.putExtra("more","upcoming_anniversary");
+                startActivity(intent);
+            }
+        });
 
         SharedPreferences shared = getActivity().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         System.out.println("USer : "+shared.getString("employee_photo",""));
@@ -123,6 +154,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(UPCOMING_ANNIVERSARY_URL);
+        upcoming = true;
 
 //        TextView r = (TextView) getView().findViewById(R.id.news_title2);
 //        r.setText("");
@@ -287,49 +319,111 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 
     public void get_data(String data)
     {
-        try {
-            JSONArray data_array = new JSONArray(data);
-            System.out.println("Object"+data_array);
+        if(upcoming){
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object"+data_array);
 //            JSONArray data_array = object.getJSONArray("results");
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
-            if(data_array.length() == 0){
-                createAndShowDialog("Server Error","No connection");
-            }
-            for (int i = 0 ; i < data_array.length() ; i++)
-            {
-                JSONObject obj=new JSONObject(data_array.get(i).toString());
-                System.out.println("Object"+obj);
-                final News add=new News("Title");
-                add.news_title = obj.getString("employee_name");
-                add.setTitle(obj.getString("employee_name"));
-                add.setId(obj.getInt("id"));
-                Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                String strDate = formatter.format(date);
-                add.news_description = strDate;
-                add.news_image = obj.getString("employee_photo");
-                System.out.println("News Id"+obj.getInt("id"));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                if(data_array.length() == 0){
+                    createAndShowDialog("Server Error","No connection");
+                }
+                for (int i = 0 ; i < data_array.length() ; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+                    System.out.println("Object"+obj);
+                    final News add=new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_doj"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    System.out.println("News Id"+obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 //                        progressBar.setVisibility(View.GONE);
-                        adapter.add(add);
-                    }
-                });
+                            adapter.add(add);
+                        }
+                    });
 
-            }
+                }
 //            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
 //            else isLastPage = true;
 
 //            NewsAdapter.notifyDataSetChanged();
 
-        } catch (JSONException e) {
-            createAndShowDialog(e,"No connection");
-            e.printStackTrace();
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                e.printStackTrace();
 //            loadFirstPage();
-        }
+            }
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(TODAY_ANNIVERSARY_URL);
+            rv_today.setLayoutManager(linearLayoutManager2);
+            rv_today.setItemAnimator(new DefaultItemAnimator());
+            rv_today.setAdapter(adapter2);
+            today = true;
+            upcoming = false;
 
+        }else if(today){
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object"+data_array);
+//            JSONArray data_array = object.getJSONArray("results");
+//            System.out.println("Object"+data_array);
+//            nextPage = object.getString("next");
+                if(data_array.length() == 0){
+                    createAndShowDialog("Server Error","No connection");
+                }
+                for (int i = 0 ; i < data_array.length() ; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+                    System.out.println("Object"+obj);
+                    final News add=new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_doj"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+//                    System.out.println(strDate);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    System.out.println("News Id"+obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                            adapter2.add(add);
+                        }
+                    });
+
+                }
+//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
+//            else isLastPage = true;
+
+//            NewsAdapter.notifyDataSetChanged();
+
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                e.printStackTrace();
+//            loadFirstPage();
+            }
+            today = false;
+        }
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     private void createAndShowDialog(final String message, final String title) {

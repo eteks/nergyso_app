@@ -34,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -52,23 +53,23 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
     Toolbar toolbar;
     private static final String TAG = "NewsMain";
     String listValue = "NULL";
-    FirstFragment.PaginationAdapter adapter;
-    LinearLayoutManager linearLayoutManager;
+    FirstFragment.PaginationAdapter adapter, adapter2;
+    LinearLayoutManager linearLayoutManager, linearLayoutManager2;
     String nextPage;
     String SERVER_URL;
-    String NEWS_URL;
-    RecyclerView rv;
+    RecyclerView rv, rv_today;
     ProgressBar progressBar;
     String UPCOMING_BIRTHDAY_URL = "api/employee/employee_upcoming_birthday/";
+//    String UPCOMING_BIRTHDAY_URL = "api/events/recent_events/";
     String BIRTHDAY_WISHES = "Wish you many more happy returns of the day. Have a wonderful year ahead.";
     String BIRTHDAY = "Happy Birthday!";
     TextView birthday, birthday_wishes;
     ImageView birthday_photo;
+    boolean upcoming = false, today = false;
+    String TODAY_BIRTHDAY_URL = "api/employee/employee_today_birthday/";
+    TextView today_birthday_more, upcoming_birthday_more;
 
     private static final int PAGE_START = 0;
-    private boolean isLoading = false;
-    private boolean isLastPage = false;
-    private int TOTAL_PAGES = 5;
     private int currentPage = PAGE_START;
 
     //    String event = "{\"events\":[ {\"id\":\"1\",\"events_title\":\"Event-1\",\"events_description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\"events_venue\":\"Pondicherry\",\"events_image\":\"http://www.fotothing.com/photos/df3/df309f51ae73de90d1ea09aa2e3d312d.jpg\",\"events_video\":\"http://www.fotothing.com/photos/df3/df309f51ae73de90d1ea09aa2e3d312d.jpg\",\"events_document\":\"https://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=4&cad=rja&uact=8&ved=0ahUKEwjM99DFtfzXAhVMqo8KHXxEDg0QFgg5MAM&url=http%3A%2F%2Funec.edu.az%2Fapplication%2Fuploads%2F2014%2F12%2Fpdf-sample.pdf&usg=AOvVaw2a4IUOgpX0IaeRxQpCN2l0\",\"events_date\":\"21-07-2017\"]}";
@@ -84,12 +85,17 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 //        t.setText("Dei");
         rv = (RecyclerView) view.findViewById(R.id.main_recycler);
 //        final ProgressBar progressBar = new ProgressBar(getActivity());
+        rv_today = (RecyclerView) view.findViewById(R.id.main_recycler2);
 
         adapter = new FirstFragment.PaginationAdapter(getActivity());
+        adapter2 = new FirstFragment.PaginationAdapter(getActivity());
 
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
 
+        linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        linearLayoutManager2.setAutoMeasureEnabled(true);
         rv.setItemAnimator(new DefaultItemAnimator());
 
         rv.setAdapter(adapter);
@@ -100,6 +106,27 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 
         SERVER_URL = getString(R.string.service_url);
         UPCOMING_BIRTHDAY_URL = SERVER_URL + UPCOMING_BIRTHDAY_URL;
+        TODAY_BIRTHDAY_URL = SERVER_URL + TODAY_BIRTHDAY_URL;
+
+        today_birthday_more = (TextView) view.findViewById(R.id.today_birthday_more);
+        today_birthday_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListingMore.class);
+                intent.putExtra("more","today_birthday");
+                startActivity(intent);
+            }
+        });
+
+        upcoming_birthday_more = (TextView) view.findViewById(R.id.upcoming_birthday_more);
+        upcoming_birthday_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListingMore.class);
+                intent.putExtra("more","upcoming_birthday");
+                startActivity(intent);
+            }
+        });
 
         SharedPreferences shared = getActivity().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         System.out.println("USer : "+shared.getString("employee_photo",""));
@@ -122,6 +149,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(UPCOMING_BIRTHDAY_URL);
+        upcoming = true;
 //        final News add=new News("Title");
 ////        add.news_title = "Ravichandran";
 //        add.setTitle("Ravichandran");
@@ -290,70 +318,132 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 
     }
 
-    private void loadNextPage() {
-        Log.d(TAG, "loadNextPage: " + currentPage);
-//        final List<News> newsList = News.createMovies(adapter.getItemCount());
-        Download_data download_data = new Download_data((Download_data.download_complete) this);
-        System.out.println(nextPage);
-        download_data.download_data_from_link(nextPage);
-        isLoading = false;
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-//                adapter.removeLoadingFooter();
-//                adapter.addAll(newsList);
-//                if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
-//                else isLastPage = true;
-            }
-        });
-
-    }
+//    private void loadNextPage() {
+//        Log.d(TAG, "loadNextPage: " + currentPage);
+////        final List<News> newsList = News.createMovies(adapter.getItemCount());
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        System.out.println(nextPage);
+//        download_data.download_data_from_link(nextPage);
+//        isLoading = false;
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+////                adapter.removeLoadingFooter();
+////                adapter.addAll(newsList);
+////                if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
+////                else isLastPage = true;
+//            }
+//        });
+//
+//    }
 
     public void get_data(String data)
     {
-        try {
-            JSONArray data_array = new JSONArray(data);
-            System.out.println("Object"+data_array);
+        if(upcoming){
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object"+data_array);
 //            JSONArray data_array = object.getJSONArray("results");
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
-            if(data_array.length() == 0){
-                createAndShowDialog("Server Error","No connection");
-            }
-            for (int i = 0 ; i < data_array.length() ; i++)
-            {
-                JSONObject obj=new JSONObject(data_array.get(i).toString());
-                System.out.println("Object"+obj);
-                final News add=new News("Title");
-                add.news_title = obj.getString("employee_name");
-                add.setTitle(obj.getString("employee_name"));
-                add.setId(obj.getInt("id"));
-                Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                String strDate = formatter.format(date);
-                add.news_description = strDate;
-                add.news_image = obj.getString("employee_photo");
-                System.out.println("News Id"+obj.getInt("id"));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                if(data_array.length() == 0){
+                    createAndShowDialog("Server Error","No connection");
+                }
+                for (int i = 0 ; i < data_array.length() ; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+                    System.out.println("Object"+obj);
+                    final News add=new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_dob"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    System.out.println("News Id"+obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 //                        progressBar.setVisibility(View.GONE);
-                        adapter.add(add);
-                    }
-                });
+                            adapter.add(add);
+                        }
+                    });
 
-            }
+                }
 //            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
 //            else isLastPage = true;
 
 //            NewsAdapter.notifyDataSetChanged();
 
-        } catch (JSONException e) {
-            createAndShowDialog(e,"No connection");
-            e.printStackTrace();
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                e.printStackTrace();
 //            loadFirstPage();
-        }
+            }
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(TODAY_BIRTHDAY_URL);
+            rv_today.setLayoutManager(linearLayoutManager2);
+            rv_today.setItemAnimator(new DefaultItemAnimator());
+            rv_today.setAdapter(adapter2);
+            today = true;
+            upcoming = false;
 
+        }else if(today){
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object"+data_array);
+//            JSONArray data_array = object.getJSONArray("results");
+//            System.out.println("Object"+data_array);
+//            nextPage = object.getString("next");
+                if(data_array.length() == 0){
+                    createAndShowDialog("Server Error","No connection");
+                }
+                for (int i = 0 ; i < data_array.length() ; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+                    System.out.println("Object"+obj);
+                    final News add=new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_dob"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+//                    System.out.println(strDate);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    System.out.println("News Id"+obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                            adapter2.add(add);
+                        }
+                    });
+
+                }
+//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
+//            else isLastPage = true;
+
+//            NewsAdapter.notifyDataSetChanged();
+
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                e.printStackTrace();
+//            loadFirstPage();
+            }
+            today = false;
+        }
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     private void createAndShowDialog(final String message, final String title) {

@@ -37,6 +37,7 @@
         <activity android:name=".EventGallery" />
         <activity android:name=".Changepassword_Activity" />
         <activity android:name=".DetailActivity" />
+        <activity android:name=".ListingMore" />
 
         <service android:name=".MyAndroidFirebaseMsgService">
             <intent-filter>
