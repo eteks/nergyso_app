@@ -53,20 +53,29 @@
             <!--android:textColor="#333"-->
             <!--android:gravity="end"/>-->
 
-        <ListView
-            tools:listitem="@layout/newslist_layout"
+        <!--<ListView-->
+            <!--tools:listitem="@layout/newslist_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/newslist"-->
+            <!--android:divider="@null"-->
+            <!--/>-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/newslist"
-            android:divider="@null"
-            />
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            android:paddingTop="24dp" />
+
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/newslist"
+            android:layout_below="@+id/main_recycler"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="30dp"
             android:layout_marginRight="15dp"

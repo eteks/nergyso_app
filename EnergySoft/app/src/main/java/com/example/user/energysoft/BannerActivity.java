@@ -272,7 +272,8 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 return true;
 
             case R.id.gallery:
-                Toast.makeText(BannerActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                intent = new Intent(BannerActivity.this,EventGallery.class);
+                startActivity(intent);
                 return true;
 
             case R.id.info:
@@ -286,6 +287,16 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
             case R.id.logout:
                 intent = new Intent(BannerActivity.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.facebook:
+                intent = new Intent(BannerActivity.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(BannerActivity.this,TwitterActivity.class);
                 startActivity(intent);
                 return true;
 

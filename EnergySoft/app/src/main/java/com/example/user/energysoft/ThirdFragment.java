@@ -478,33 +478,33 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
                 JSONArray data_array = object.getJSONArray("results");
                 System.out.println("Object"+data_array);
 //                nextPage = object.getString("next");
-//                if(data_array.length() == 0){
-//                    createAndShowDialog("Server Error","No connection");
-//                }
-//                for (int i = 0 ; i < data_array.length() ; i++)
-//                {
-//                    JSONObject obj=new JSONObject(data_array.get(i).toString());
-////                System.out.println("Object"+obj);
-//                    final Event add=new Event();
-//                    add.events_title = obj.getString("events_title");
-//                    add.setTitle(obj.getString("events_title"));
-//                    add.setId(obj.getInt("id"));
-//                    add.events_description = obj.getString("events_description");
+                if(data_array.length() == 0){
+                    createAndShowDialog("Server Error","No connection");
+                }
+                for (int i = 0 ; i < data_array.length() ; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+//                System.out.println("Object"+obj);
+                    final News add=new News();
+                    add.news_title = obj.getString("employee_from_profile");
+                    add.setTitle(obj.getString("employee_from_profile"));
+                    add.setId(obj.getInt("id"));
+                    add.news_description = obj.getString("shoutout_description");
 //                    add.setTitle(obj.getString("events_title"));
 //                    add.setDescription(obj.getString("events_description"));
-//                    add.events_image = obj.getString("events_image");
+                    add.news_image = obj.getString("employee_to_profile");
 //                    add.setImage(obj.getString("events_image"));
 //                    System.out.println("Events Id"+obj.getInt("id"));
 //                news.add(add);
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 //                            progressBar.setVisibility(View.GONE);
-//                            adapter.add(add);
-//                        }
-//                    });
+                            adapter.add(add);
+                        }
+                    });
 
-//                }
+                }
 //            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
 //            else isLastPage = true;
 
@@ -608,14 +608,14 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    News news = newsList.get(viewHolder.getAdapterPosition());
-                    System.out.println("CLICKed"+news.getId());
-                    int id = news.getId();
-                    Intent intent = new Intent(getActivity(),FullNews.class);
-                    intent.putExtra("id", id);
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+//                    News news = newsList.get(viewHolder.getAdapterPosition());
+//                    System.out.println("CLICKed"+news.getId());
+//                    int id = news.getId();
+//                    Intent intent = new Intent(getActivity(),FullNews.class);
+//                    intent.putExtra("id", id);
+////                    finish();
+//                    startActivity(intent);
+////                news.setPage("FullNews");
                 }
             };
             v1.setOnClickListener(mOnClickListener);
@@ -630,9 +630,9 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
             switch (getItemViewType(position)) {
                 case ITEM:
                     ThirdFragment.PaginationAdapter.NewsVH newsVH = (ThirdFragment.PaginationAdapter.NewsVH) holder;
-                    newsVH.news_title.setText(news.getTitle());
-//                    newsVH.news_description.setText(news.getNews_description());
-//                    loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
+                    newsVH.news_title.setText(news.getNews_description());
+                    loadImageFromUrl(newsVH.shoutout_to,(SERVER_URL+news.getTitle()));
+                    loadImageFromUrl(newsVH.shoutout_from,(SERVER_URL+news.getNews_image()));
                     break;
                 case LOADING:
 //                Do nothing
@@ -719,7 +719,7 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
          */
         protected class NewsVH extends RecyclerView.ViewHolder {
             TextView news_title;
-            ImageView news_image;
+            ImageView shoutout_from, shoutout_to;
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public NewsVH(View itemView) {
                 super(itemView);
@@ -731,8 +731,8 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
                 news_title = (TextView) itemView.findViewById(R.id.news_title2);
-//                news_description = (TextView) itemView.findViewById(R.id.news_description2);
-                news_image = (ImageView) itemView.findViewById(R.id.news_image2);
+                shoutout_from = (ImageView) itemView.findViewById(R.id.shoutout_from);
+                shoutout_to = (ImageView) itemView.findViewById(R.id.shoutout_to);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
 //            TextView news = (TextView) convertView.findViewById(R.id.news_title);

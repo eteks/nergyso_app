@@ -84,6 +84,18 @@
             <!--android:textStyle="bold"-->
             <!--android:textSize="15dp"-->
             <!--android:text="More..." />-->
+        <TextView
+            android:id="@+id/today_anniversary_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/main_recycler"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="15dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="More..." />
 
         <TextView
             android:id="@+id/textView211"
@@ -120,7 +132,7 @@
             android:paddingTop="24dp" />
 
         <TextView
-            android:id="@+id/textView121"
+            android:id="@+id/upcoming_anniversary_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

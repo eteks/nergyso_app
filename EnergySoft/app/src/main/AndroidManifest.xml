@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Resetpassword_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,7 @@
         <activity android:name=".Slidescreen" />
         <activity android:name=".BannerActivity"/>
         <activity android:name=".Feedback" />
-        <activity android:name=".Resetpassword_Activity" />
+        <activity android:name=".SplashActivity" />
         <activity android:name=".EventMain" />
         <activity android:name=".FullEvent" />
         <activity android:name=".FullNews" />
@@ -37,6 +37,7 @@
         <activity android:name=".EventGallery" />
         <activity android:name=".Changepassword_Activity" />
         <activity android:name=".DetailActivity" />
+        <activity android:name=".ListingMore" />
 
         <service android:name=".MyAndroidFirebaseMsgService">
             <intent-filter>

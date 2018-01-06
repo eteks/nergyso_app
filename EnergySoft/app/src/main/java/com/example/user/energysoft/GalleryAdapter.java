@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.user.energysoft.ImageModel;
 import com.example.user.energysoft.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(((MyItemHolder) holder).mImg);
+//        Picasso.with(context).load(data.get(position).getUrl()).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+//                .into(((MyItemHolder) holder).mImg, new com.squareup.picasso.Callback(){
+//
+//                    @Override
+//                    public void onSuccess() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//
+//                    }
+//                });
         ((MyItemHolder) holder).mText.setText(text.getName());
 
     }
