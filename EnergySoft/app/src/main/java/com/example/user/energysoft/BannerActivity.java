@@ -1,38 +1,38 @@
 package com.example.user.energysoft;
 
         import android.app.AlertDialog;
-        import android.app.Fragment;
-        import android.app.FragmentManager;
-        import android.app.FragmentTransaction;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.os.AsyncTask;
-        import android.os.Build;
-        import android.os.Handler;
-        import android.support.v4.view.PagerAdapter;
-        import android.support.v4.view.ViewPager;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.support.v7.widget.Toolbar;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.Toast;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-        import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.Timer;
-        import java.util.TimerTask;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BannerActivity extends AppCompatActivity implements Download_data.download_complete{
     Toolbar toolbar;
@@ -82,6 +82,35 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
+
+        //Loading Default Fragment
+        String check = getIntent().getStringExtra("check");
+        switch(check){
+            case "birthday":{
+                loadFragment(new FirstFragment());
+                break;
+            }
+            case "anniversary":{
+                loadFragment(new SecondFragment());
+                break;
+            }
+            case "shoutout":{
+                loadFragment(new ThirdFragment());
+                break;
+            }
+            case "events":{
+                loadFragment(new FourthFragment());
+                break;
+            }
+            case "news":{
+                loadFragment(new FifthFragment());
+                break;
+            }
+            default:{
+                loadFragment(new FirstFragment());
+            }
+        }
+
         // get the reference of Button's
         firstFragment = (ImageButton) findViewById(R.id.firstFragment);
         secondFragment = (ImageButton) findViewById(R.id.secondFragment);
@@ -339,6 +368,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewdash);
 //        imageView.setImageResource(images[position]);
+//            System.out.println("OUT ");
             loadImageFromUrl(imageView,images[position]);
             container.addView(itemView);
 

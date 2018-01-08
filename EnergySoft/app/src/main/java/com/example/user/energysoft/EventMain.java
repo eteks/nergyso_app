@@ -389,7 +389,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
         }
 
         @NonNull
-        private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
+        private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, final LayoutInflater inflater) {
             final RecyclerView.ViewHolder viewHolder;
             View v1 = inflater.inflate(R.layout.eventlist_layout, parent, false);
             viewHolder = new EventVH(v1);
@@ -399,8 +399,10 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                     Event event = eventList.get(viewHolder.getAdapterPosition());
                     System.out.println("CLICKed"+event.getId());
                     int id = event.getId();
+                    String check = "EVENTS";
                     Intent intent = new Intent(EventMain.this,FullEvent.class);
                     intent.putExtra("id", id);
+                    intent.putExtra("check",check);
 //                    finish();
                     startActivity(intent);
 //                news.setPage("FullNews");

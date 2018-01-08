@@ -118,60 +118,25 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
             System.out.println("Object"+object);
             JSONArray data_array = object.getJSONArray("results");
             System.out.println("Object"+data_array);
-//            nextPage = object.getString("next");
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
             for (int i = 0 ; i < data_array.length() ; i++)
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
-////                System.out.println("Object"+obj);
-////                final Event add=new Event();
-////                add.events_title = obj.getString("events_title");
-////                add.setTitle(obj.getString("events_title"));
-////                add.setId(obj.getInt("id"));
-////                add.events_description = obj.getString("events_description");
-////                add.setTitle(obj.getString("events_title"));
-////                add.setDescription(obj.getString("events_description"));
-////                add.events_image = obj.getString("events_image");
-////                add.setImage(obj.getString("events_image"));
-////                System.out.println("Events Id"+obj.getInt("id"));
-////                news.add(add);
                 String splitted_gallery[] = obj.getString("gallery_image").split(",");
-                final ImageModel imageModel = new ImageModel();
-                imageModel.setName(obj.getString("gallery_title"));
-                imageModel.setUrl(SERVER_URL+(obj.getString("gallery_image")));
-//                imageModel.setName("HI");
-//                imageModel.setUrl("https://images.unsplash.com/photo-1439396087961-98bc12c21176?dpr=2&fit=crop&fm=jpg&h=725&q=50&w=1300");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        progressBar.setVisibility(View.GONE);
-                        images.add(imageModel);
-                    }
-                });
-//
+                for(int index = 0; index < splitted_gallery.length; index++){
+                    final ImageModel imageModel = new ImageModel();
+//                    imageModel.setName(obj.getString("gallery_title"));
+                    imageModel.setUrl(SERVER_URL+splitted_gallery[index]);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            images.add(imageModel);
+                        }
+                    });
+                }
             }
-//            for (int i = 0; i < IMGS.length; i++) {
-//
-//                final ImageModel imageModel = new ImageModel();
-//                imageModel.setName("Image " + i);
-//                imageModel.setUrl(IMGS[i]);
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                       images.add(imageModel);
-//
-//                    }
-//                });
-//
-//
-//            }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
-
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
 //            loadFirstPage();

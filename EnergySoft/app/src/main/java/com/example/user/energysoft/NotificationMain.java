@@ -3,6 +3,7 @@ package com.example.user.energysoft;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,28 +35,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static com.google.android.gms.internal.zzahf.runOnUiThread;
+import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
 
-public class ListingMore extends AppCompatActivity implements Download_data.download_complete {
+public class NotificationMain extends AppCompatActivity implements Download_data.download_complete {
     Toolbar toolbar;
     View view;
-    private static final String TAG = "EventMain";
+    private static final String TAG = "NotificationMain";
     String listValue = "NULL";
     PaginationAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     String nextPage;
     String SERVER_URL ;
     EventMain main;
-    String EVENT_URL ;
+    String NOTIFICATION_URL ;
     RecyclerView rv;
     ProgressBar progressBar;
-
+    String DOWNLOAD_URL, category = "" ;
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -64,15 +69,18 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
     public ListView list;
     public ArrayList<Event> eventList = new ArrayList<Event>();
     public ListAdapter NewsAdapter;
+    String notification[] = new String[100];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
         SERVER_URL = getString(R.string.service_url);
-        EVENT_URL = SERVER_URL+ "api/events/";
+        NOTIFICATION_URL = SERVER_URL+ "api/notification/notification_list_by_employee";
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+        int id = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);
+//        NOTIFICATION_URL = NOTIFICATION_URL + "notification_employee" + "=" + id ;
 //        ImageView home = (ImageView) findViewById(R.id.action_home);
 //        home.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -135,41 +143,152 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 loadFirstPage();
             }
         }, 1000);
+        String data = null;
+        try {
+
+            data = URLEncoder.encode("notification_employee", "UTF-8")
+                    + "=" + id;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        final BufferedReader[] reader = {null};
+
+        // Send data
+        final String finalData = data;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    // Defined URL  where to send data
+                    URL url = new URL(NOTIFICATION_URL);
+
+                    // Send POST data request
+                    System.out.println("URL:" + NOTIFICATION_URL);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(finalData);
+                    wr.flush();
+                    System.out.println(finalData);
+                    // Get the server response
+
+                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader[0].readLine()) != null) {
+                        // Append server response in string
+                        sb.append(line + "\n");
+                    }
+                    System.out.println("Output"+sb.toString());
+                    JSONArray data_array = new JSONArray(sb.toString());
+
+                    for (int i = 0 ; i < data_array.length() ; i++)
+                    {
+                        final JSONObject obj=new JSONObject(data_array.get(i).toString());
+                        System.out.println("Object"+obj);
+                        notification[i] = obj.getString("notification_created_date");
+                        category = obj.getString("notification_cateogry").toLowerCase();
+                        switch(category) {
+                            case "events": {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            showEvents(obj.getInt("notification_cateogry_id"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                break;
+                            }
+                            case "news": {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            showNews(obj.getInt("notification_cateogry_id"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                break;
+                            }
+                            case "live": {
+//                                showLive();
+                                break;
+                            }
+                            case "birthday":{
+                                Intent intent = new Intent(NotificationMain.this, BannerActivity.class);
+                                intent.putExtra("check","birthday");
+                                startActivity(intent);
+                            }
+                            case "anniversary":{
+                                Intent intent = new Intent(NotificationMain.this, BannerActivity.class);
+                                intent.putExtra("check","anniversary");
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            mProgressBar.setVisibility(ProgressBar.GONE);
+                            createAndShowDialog("Drunk?! Please check your credentials", "Error");
+                        }
+                    });
+                } finally {
+                    try {
+
+                        reader[0].close();
+                    } catch (Exception ex) {
+//                                    runOnUiThread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            createAndShowDialog("Check your connection","No connection");
+//                                        }
+//                                    });
+
+                    }
+                }
+
+
+                return null;
+            }
+
+        };
+        runAsyncTask(task);
 
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
-//        download_data.download_data_from_link("http://10.0.0.15:8000/api/news/");
-        Intent intent = getIntent();
-        String more = intent.getStringExtra("more");
-        switch (more){
-            case "today_birthday" : {
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(SERVER_URL+"api/employee/employee_today_birthday/");
-                break;
-            }
-            case "upcoming_birthday":{
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(SERVER_URL+"api/employee/employee_upcoming_birthday/");
-                break;
-            }
-            case "today_anniversary":{
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(SERVER_URL+"api/employee/employee_today_anniversary/");
-                break;
-            }
-            case "upcoming_anniversary":{
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(SERVER_URL+"api/employee/employee_upcoming_anniversary/");
-                break;
-            }
-            default: break;
-        }
+//        download_data.download_data_from_link(NOTIFICATION_URL);
     }
+
+    // To display the events from Notification
+    private void showEvents(int id){
+        DOWNLOAD_URL = SERVER_URL + "api/events/" + id + "/";
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(DOWNLOAD_URL);
+    }
+
+    // To display the NEWS from Notification
+    private void showNews(int id){
+        DOWNLOAD_URL = SERVER_URL + "api/news/" + id + "/";
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(DOWNLOAD_URL);
+    }
+
 
     private void loadFirstPage() {
         Log.d(TAG, "loadFirstPage: ");
 //        final List<News> newsList = News.createMovies(adapter.getItemCount());
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
-//        download_data.download_data_from_link(EVENT_URL);
+//        download_data.download_data_from_link(NOTIFICATION_URL);
 
 //        runOnUiThread(new Runnable() {
 //            @Override
@@ -204,29 +323,36 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
 
     public void get_data(String data)
     {
-        try {
-            JSONArray data_array = new JSONArray(data);
-            System.out.println("Object"+data_array);
-//            JSONArray data_array = object.getJSONArray("results");
-//            System.out.println("Object"+data_array);
-//            nextPage = object.getString("next");
-            if(data_array.length() == 0){
-                createAndShowDialog("Server Error","No connection");
+        if(category.equals("events")){
+            try {
+                JSONObject obj = new JSONObject(data);
+                System.out.println("Object"+obj);
+                    final Event add=new Event();
+                    add.setTitle(obj.getString("events_title"));
+                    add.setId(obj.getInt("id"));
+                    add.setDescription(obj.getString("events_description"));
+                    add.setImage(obj.getString("events_image"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            progressBar.setVisibility(View.GONE);
+                            adapter.add(add);
+                        }
+                    });
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                loadFirstPage();
+                e.printStackTrace();
             }
-            for (int i = 0 ; i < data_array.length() ; i++)
-            {
-                JSONObject obj=new JSONObject(data_array.get(i).toString());
+        }else if(category.equals("news")){
+            try {
+                JSONObject obj = new JSONObject(data);
                 System.out.println("Object"+obj);
                 final Event add=new Event();
-                add.events_title = obj.getString("employee_name");
-                add.setTitle(obj.getString("employee_name"));
+                add.setTitle(obj.getString("news_title"));
                 add.setId(obj.getInt("id"));
-                Date date = parseDate(obj.getString("employee_dob"));
-                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                String strDate = formatter.format(date);
-                add.events_description = strDate;
-                add.events_image = obj.getString("employee_photo");
-                System.out.println("News Id"+obj.getInt("id"));
+                add.setDescription(obj.getString("news_description"));
+                add.setImage(obj.getString("news_image"));
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -234,26 +360,11 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                         adapter.add(add);
                     }
                 });
-
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                loadFirstPage();
+                e.printStackTrace();
             }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
-
-        } catch (JSONException e) {
-            createAndShowDialog(e,"No connection");
-            e.printStackTrace();
-//            loadFirstPage();
-        }
-
-    }
-
-    public static Date parseDate(String date) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        } catch (ParseException e) {
-            return null;
         }
     }
 
@@ -277,60 +388,55 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(ListingMore.this,GridList.class);
+                intent = new Intent(NotificationMain.this,GridList.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(ListingMore.this,ProfileActivity.class);
+                intent = new Intent(NotificationMain.this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(ListingMore.this,EventMain.class);
+                intent = new Intent(NotificationMain.this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(ListingMore.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.feedback:
-                intent = new Intent(ListingMore.this,Feedback.class);
+                intent = new Intent(NotificationMain.this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.shoutout:
-                intent = new Intent(ListingMore.this,Shoutout.class);
+                intent = new Intent(NotificationMain.this,Shoutout.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                Toast.makeText(ListingMore.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NotificationMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.info:
-                Toast.makeText(ListingMore.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NotificationMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.facebook:
-                intent = new Intent(ListingMore.this,FacebookActivity.class);
+                intent = new Intent(NotificationMain.this,FacebookActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.twitter:
-                intent = new Intent(ListingMore.this,TwitterActivity.class);
+                intent = new Intent(NotificationMain.this,TwitterActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.settings:
-                intent = new Intent(ListingMore.this,Changepassword_Activity.class);
+                intent = new Intent(NotificationMain.this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(ListingMore.this,MainActivity.class);
+                intent = new Intent(NotificationMain.this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -375,7 +481,7 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
     }
 
     public void clickList(){
-        Intent intent = new Intent(ListingMore.this,FullNews.class);
+        Intent intent = new Intent(NotificationMain.this,FullNews.class);
         startActivity(intent);
     }
 
@@ -421,20 +527,22 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
         }
 
         @NonNull
-        private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
+        private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, final LayoutInflater inflater) {
             final RecyclerView.ViewHolder viewHolder;
-            View v1 = inflater.inflate(R.layout.birthdaylist_layout, parent, false);
+            View v1 = inflater.inflate(R.layout.notificationlist_layout, parent, false);
             viewHolder = new EventVH(v1);
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Event event = eventList.get(viewHolder.getAdapterPosition());
-//                    System.out.println("CLICKed"+event.getId());
-//                    int id = event.getId();
-//                    Intent intent = new Intent(ListingMore.this,FullEvent.class);
-//                    intent.putExtra("id", id);
-////                    finish();
-//                    startActivity(intent);
+                    Event event = eventList.get(viewHolder.getAdapterPosition());
+                    System.out.println("CLICKed"+event.getId());
+                    int id = event.getId();
+                    String check = "EVENTS";
+                    Intent intent = new Intent(NotificationMain.this,FullEvent.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("check",check);
+//                    finish();
+                    startActivity(intent);
 //                news.setPage("FullNews");
                 }
             };
@@ -451,7 +559,7 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 case ITEM:
                     EventVH eventVH = (EventVH) holder;
                     eventVH.events_title.setText(event.getTitle());
-                    eventVH.events_description.setText(event.getEvents_description());
+                    eventVH.events_description.setText("Created on " + notification[position]);
                     loadImageFromUrl(eventVH.events_image,(SERVER_URL+event.getEvents_image()));
                     break;
                 case LOADING:
@@ -551,7 +659,7 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
                 events_title = (TextView) itemView.findViewById(R.id.news_title2);
-                events_description = (TextView) itemView.findViewById(R.id.news_description2);
+                events_description = (TextView) itemView.findViewById(R.id.tvnewsreadmore);
                 events_image = (ImageView) itemView.findViewById(R.id.news_image2);
 //                news_description = (TextView) itemView.findViewById(R.id.news_description);
                 System.out.println(itemView);

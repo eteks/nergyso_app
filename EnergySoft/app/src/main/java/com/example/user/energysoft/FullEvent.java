@@ -1,5 +1,8 @@
 package com.example.user.energysoft;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,115 +70,50 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         SERVER_URL = getString(R.string.service_url);
         FULL_EVENTS_URL = SERVER_URL + "api/events/";
         RECENT_EVENTS_URL = SERVER_URL + "api/events/recent_events/";
-//        init();
-//        ImageView home = (ImageView) findViewById(R.id.action_home);
-//        home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(FullNews.this, GridList.class);
-//                startActivity(intent);
-//            }
-//        });
         full_events_title = (TextView) findViewById(R.id.full_events_title);
         full_events_description = (TextView) findViewById(R.id.full_events_description);
 //        full_text_events_description = (TextView) findViewById(R.id.full_text_events_description);
         events_photo = (ImageView) findViewById(R.id.events_photo);
         int id = getIntent().getIntExtra("id", 0);
+        System.out.println(getIntent().getStringExtra("check"));
         FULL_EVENTS_URL = FULL_EVENTS_URL + id + "/";
         full_text_events_description = (WebView) findViewById(R.id.full_text_events_description);
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(FULL_EVENTS_URL);
-
+        loadFragment(new ImageFragment());
     }
 
-    private void init() {
-//        for(int i=0;i<XMEN.length;i++){
-//            XMENArray.add(XMEN[i]);
-//        }
-//        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
-//        scrollView.setFillViewport (true);
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(FullEvent.this, XMENArray));
-//        mScrollView = (ScrollView) findViewById(R.id.news_scroll);
-//        mScrollView.setFillViewport(true);
-//        mPager.setOnTouchListener(new View.OnTouchListener() {
-//            int dragthreshold = 30;
-//            int downX;
-//            int downY;
-
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        downX = (int) event.getRawX();
-//                        downY = (int) event.getRawY();
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        int distanceX = Math.abs((int) event.getRawX() - downX);
-//                        int distanceY = Math.abs((int) event.getRawY() - downY);
-//
-//                        if (distanceY > distanceX && distanceY > dragthreshold) {
-//                            mPager.getParent().requestDisallowInterceptTouchEvent(false);
-//                            mScrollView.getParent().requestDisallowInterceptTouchEvent(true);
-//                        } else if (distanceX > distanceY && distanceX > dragthreshold) {
-//                            mPager.getParent().requestDisallowInterceptTouchEvent(true);
-//                            mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
-//                        }
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        mScrollView.getParent().requestDisallowInterceptTouchEvent(false);
-//                        mPager.getParent().requestDisallowInterceptTouchEvent(false);
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
-
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(mPager);
-
-        // Auto start of viewpager
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == TOTAL_PAGES) {
-                    currentPage = 0;
-                }
-                mPager.setCurrentItem(currentPage++, true);
-            }
-        };
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 6000, 6000);
+    private void loadFragment(Fragment fragment) {
+        // create a FragmentManager
+        FragmentManager fm = getFragmentManager();
+        // create a FragmentTransaction to begin the transaction and replace the Fragment
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        // replace the FrameLayout with new Fragment
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit(); // save the changes
     }
-
 
     @Override
     public void get_data(String data) {
         if (ONE_TIME == 1) {
-            try {
-                final JSONArray object = (JSONArray) new JSONTokener(data).nextValue();
-                System.out.println("Object" + object);
-                for (int i = 0; i < object.length(); i++) {
-                    JSONObject obj = new JSONObject(object.get(i).toString());
-                    System.out.println("Images" + obj);
-                    XMEN[i] = (obj.getString("events_image"));
-                    ID[i] = obj.getInt("id");
-                    XMENArray.add(XMEN[i]);
-                    TOTAL_PAGES = object.length();
-                }
-                init();
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(RECENT_EVENTS_URL);
-                ONE_TIME--;
-            }
+//            try {
+//                final JSONArray object = (JSONArray) new JSONTokener(data).nextValue();
+//                System.out.println("Object" + object);
+//                for (int i = 0; i < object.length(); i++) {
+//                    JSONObject obj = new JSONObject(object.get(i).toString());
+//                    System.out.println("Images" + obj);
+//                    XMEN[i] = (obj.getString("events_image"));
+//                    ID[i] = obj.getInt("id");
+//                    XMENArray.add(XMEN[i]);
+//                    TOTAL_PAGES = object.length();
+//                }
+////                init();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//                Download_data download_data = new Download_data((Download_data.download_complete) this);
+//                download_data.download_data_from_link(RECENT_EVENTS_URL);
+//                ONE_TIME--;
+//            }
         }
         if (ONE_TIME == 0) {
             try {
@@ -198,8 +136,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Download_data download_data = new Download_data((Download_data.download_complete) this);
-            download_data.download_data_from_link(RECENT_EVENTS_URL);
+//            Download_data download_data = new Download_data((Download_data.download_complete) this);
+//            download_data.download_data_from_link(RECENT_EVENTS_URL);
         }
         ONE_TIME += 1;
     }

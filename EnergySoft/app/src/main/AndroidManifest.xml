@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BannerActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".CeomessageActivity" />
         <activity android:name=".Feedback" />
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".BannerActivity" />
         <activity android:name=".EventMain" />
         <activity android:name=".FullEvent" />
         <activity android:name=".FullNews" />
