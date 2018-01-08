@@ -82,7 +82,6 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
-        loadFragment(new FourthFragment());
         // get the reference of Button's
         firstFragment = (ImageButton) findViewById(R.id.firstFragment);
         secondFragment = (ImageButton) findViewById(R.id.secondFragment);

@@ -15,20 +15,23 @@
         <!--android:id="@+id/newslist"-->
         <!--android:divider="@null"-->
         <!--/>-->
-    <!--<include-->
-        <!--android:id="@+id/toolbar"-->
-        <!--layout="@layout/tool_bar"-->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
 
-        <!--/>-->
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/toolbar"
         android:clipToPadding="false"
+        android:layout_marginTop="55dp"
         android:paddingBottom="24dp"
-        android:paddingTop="24dp" />
+        android:paddingTop="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
     <!--<ProgressBar-->
         <!--android:id="@+id/main_progress"-->
         <!--android:layout_width="wrap_content"-->

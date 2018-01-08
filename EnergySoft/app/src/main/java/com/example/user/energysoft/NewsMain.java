@@ -198,7 +198,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                 runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setVisibility(View.GONE);
+//                    progressBar.setVisibility(View.GONE);
                     adapter.add(add);
                 }
             });
