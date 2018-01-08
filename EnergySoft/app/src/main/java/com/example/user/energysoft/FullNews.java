@@ -307,12 +307,22 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(FullNews.this,GridList.class);
+                intent = new Intent(FullNews.this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
                 intent = new Intent(FullNews.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(FullNews.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(FullNews.this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 

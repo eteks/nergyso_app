@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,8 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +26,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.user.energysoft.utils.PaginationScrollListener;
-import com.google.android.gms.vision.text.Text;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -74,7 +69,7 @@ public class FourthFragment extends Fragment implements  Download_data.download_
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.activity_news_main, container, false);
+        view = inflater.inflate(R.layout.fragment_fourth, container, false);
 //        TextView t = (TextView) view.findViewById(R.id.news_title2);
 //        t.setText("Dei");
         rv = (RecyclerView) view.findViewById(R.id.main_recycler);
@@ -583,7 +578,7 @@ public class FourthFragment extends Fragment implements  Download_data.download_
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(getActivity(),GridList.class);
+                intent = new Intent(getActivity(),BannerActivity.class);
                 startActivity(intent);
                 return true;
 

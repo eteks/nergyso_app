@@ -200,7 +200,17 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(EventGallery.this,GridList.class);
+                intent = new Intent(EventGallery.this,BannerActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(EventGallery.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(EventGallery.this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 

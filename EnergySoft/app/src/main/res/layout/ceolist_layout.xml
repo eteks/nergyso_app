@@ -9,7 +9,7 @@
             android:padding="15dp"
             android:background="@drawable/border">
                 <ImageView
-                    android:src="@drawable/chat"
+                    android:src="@drawable/profile"
                     android:id="@+id/news_image2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"

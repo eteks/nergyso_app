@@ -134,9 +134,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:drawable="@android:drawable/ic_menu_search"
-            android:text="gjg"
+            android:text="Prev"
             android:background="#c5e0f1"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_centerVertical="true"
             android:layout_alignStart="@+id/button2" />
         <Button
@@ -144,8 +144,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="gjgjj"
-            android:textSize="30dp"
+            android:text="Next"
+            android:textSize="20dp"
             android:background="#c5e0f1"
             android:layout_marginEnd="55dp"
             android:layout_alignTop="@+id/buttonnext"

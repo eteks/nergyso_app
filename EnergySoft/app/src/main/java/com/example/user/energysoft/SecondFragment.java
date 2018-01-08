@@ -150,6 +150,12 @@ public class SecondFragment extends Fragment implements Download_data.download_c
                     textAnniversary.setText("Your hard work and dedication are vital to the success of our organization.");
                     loadImageFromUrl(imageAnniversary,SERVER_URL+employee_photo);
                 }
+                else
+                {
+                    titleAnniversary.setVisibility(View.GONE);
+                    textAnniversary.setVisibility(View.GONE);
+                    imageAnniversary.setVisibility(View.GONE);
+                }
         }
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);

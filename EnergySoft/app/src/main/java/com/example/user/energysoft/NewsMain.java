@@ -473,12 +473,22 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(NewsMain.this,GridList.class);
+                intent = new Intent(NewsMain.this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
                 intent = new Intent(NewsMain.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(NewsMain.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(NewsMain.this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 

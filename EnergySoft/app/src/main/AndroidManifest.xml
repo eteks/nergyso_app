@@ -8,12 +8,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Resetpassword_Activity">
+        <activity android:name=".BannerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Slidescreen" />
-        <activity android:name=".BannerActivity"/>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".CeomessageActivity" />
         <activity android:name=".Feedback" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".EventMain" />
@@ -52,7 +52,8 @@
 
         <activity android:name=".BannerItem" />
         <activity android:name=".QuizActivity" />
-        <activity android:name=".quiz_activity_frag"></activity>
+        <activity android:name=".quiz_activity_frag" />
+        <activity android:name=".Resetpassword_Activity"></activity>
     </application>
 
 </manifest>
