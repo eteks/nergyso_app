@@ -240,12 +240,22 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(EventMain.this,GridList.class);
+                intent = new Intent(EventMain.this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
                 intent = new Intent(EventMain.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(EventMain.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(EventMain.this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 

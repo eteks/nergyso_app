@@ -35,11 +35,10 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
@@ -145,10 +144,11 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
                 birthday_wishes.setText(BIRTHDAY_WISHES);
                 loadImageFromUrl(birthday_photo,SERVER_URL+employee_photo);
             }
-            else{
-//                birthday_wishes.setVisibility(View.GONE);
-//                birthday_photo.setVisibility(View.GONE);
-//                birthday.setVisibility(View.GONE);
+            else
+            {
+                birthday.setVisibility(View.GONE);
+                birthday_wishes.setVisibility(View.GONE);
+                birthday_photo.setVisibility(View.GONE);
             }
         }
 

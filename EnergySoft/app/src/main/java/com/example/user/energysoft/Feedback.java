@@ -1,13 +1,12 @@
 package com.example.user.energysoft;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -29,7 +27,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-import static android.R.attr.rating;
 import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
 
 public class Feedback extends AppCompatActivity {
@@ -235,12 +232,22 @@ public class Feedback extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(Feedback.this,GridList.class);
+                intent = new Intent(Feedback.this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
                 intent = new Intent(Feedback.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(Feedback.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(Feedback.this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 

@@ -59,10 +59,6 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         SERVER_URL = getString(R.string.service_url);
         BANNER_URL = SERVER_URL+"api/banner/";
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(0xFFFFFFFF);
-
         viewPager = (ViewPager)findViewById(R.id.viewPagerdash);
 
         myCustomPagerAdapter = new MyCustomPagerAdapter(BannerActivity.this, images);
@@ -277,12 +273,22 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(BannerActivity.this,GridList.class);
+                intent = new Intent(BannerActivity.this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
                 intent = new Intent(BannerActivity.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(BannerActivity.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(BannerActivity.this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 

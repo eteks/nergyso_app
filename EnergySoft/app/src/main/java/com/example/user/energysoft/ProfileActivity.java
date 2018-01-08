@@ -4,25 +4,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.math.BigDecimal;
 import android.os.Build;
-import android.os.StrictMode;
-import android.preference.PreferenceManager;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -146,12 +141,22 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(ProfileActivity.this,GridList.class);
+                intent = new Intent(ProfileActivity.this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
                 intent = new Intent(ProfileActivity.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(ProfileActivity.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(ProfileActivity.this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 

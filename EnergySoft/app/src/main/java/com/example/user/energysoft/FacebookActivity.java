@@ -1,7 +1,12 @@
 package com.example.user.energysoft;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -10,12 +15,15 @@ import android.webkit.WebViewClient;
  * Created by ets-prabhu on 2/1/18.
  */
 
-public class FacebookActivity extends Activity{
+public class FacebookActivity extends AppCompatActivity {
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_facebook);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 //Get a reference to your WebView//
         WebView webView = (WebView) findViewById(R.id.webview);
@@ -36,6 +44,92 @@ public class FacebookActivity extends Activity{
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
+        }
+    }
+
+    // Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_home:
+                intent = new Intent(FacebookActivity.this,BannerActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(FacebookActivity.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(FacebookActivity.this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(FacebookActivity.this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(FacebookActivity.this,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(FacebookActivity.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                intent = new Intent(FacebookActivity.this,EventGallery.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.info:
+                intent = new Intent(FacebookActivity.this,EventGallery.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(FacebookActivity.this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(FacebookActivity.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.facebook:
+                intent = new Intent(FacebookActivity.this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(FacebookActivity.this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
