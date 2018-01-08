@@ -1,5 +1,8 @@
 package com.example.user.energysoft;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,7 +63,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         toolbar.setTitleTextColor(0xFFFFFFFF);
         FULL_NEWS_URL = SERVER_URL+ "api/news/";
         RECENT_NEWS_URL = SERVER_URL +"api/news/recent_news";
-        init();
+//        init();
 //        ImageView home = (ImageView) findViewById(R.id.action_home);
 //        home.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -76,10 +79,23 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         int id = getIntent().getIntExtra("id",0);
         System.out.println(getIntent().getStringExtra("check"));
         FULL_NEWS_URL = FULL_NEWS_URL+id+"/";
+        full_text_news_description = (WebView) findViewById(R.id.full_text_news_description);
+
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(FULL_NEWS_URL);
-        full_text_news_description = (WebView) findViewById(R.id.full_text_news_description);
+        loadFragment(new ImageFragment());
     }
+
+    private void loadFragment(Fragment fragment) {
+        // create a FragmentManager
+        FragmentManager fm = getFragmentManager();
+        // create a FragmentTransaction to begin the transaction and replace the Fragment
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        // replace the FrameLayout with new Fragment
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit(); // save the changes
+    }
+
     private void init() {
 //        for(int i=0;i<XMEN.length;i++){
 //            XMENArray.add(XMEN[i]);
@@ -151,24 +167,24 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
     @Override
     public void get_data(String data) {
         if(ONE_TIME == 1) {
-            try {
-                final JSONArray object = (JSONArray) new JSONTokener(data).nextValue();
-                System.out.println("Object" + object);
-                for (int i = 0; i < object.length(); i++) {
-                    JSONObject obj = new JSONObject(object.get(i).toString());
-                    System.out.println("Images" + obj);
-                    XMEN[i] = (obj.getString("news_image"));
-                    ID[i] = obj.getInt("id");
-                    XMENArray.add(XMEN[i]);
-                    TOTAL_PAGES = object.length();
-                }
-                init();
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(RECENT_NEWS_URL);
-                ONE_TIME--;
-            }
+//            try {
+//                final JSONArray object = (JSONArray) new JSONTokener(data).nextValue();
+//                System.out.println("Object" + object);
+//                for (int i = 0; i < object.length(); i++) {
+//                    JSONObject obj = new JSONObject(object.get(i).toString());
+//                    System.out.println("Images" + obj);
+//                    XMEN[i] = (obj.getString("news_image"));
+//                    ID[i] = obj.getInt("id");
+//                    XMENArray.add(XMEN[i]);
+//                    TOTAL_PAGES = object.length();
+//                }
+//                init();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//                Download_data download_data = new Download_data((Download_data.download_complete) this);
+//                download_data.download_data_from_link(RECENT_NEWS_URL);
+//                ONE_TIME--;
+//            }
         }
         if(ONE_TIME == 0){
             try {
@@ -194,8 +210,8 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Download_data download_data = new Download_data((Download_data.download_complete) this);
-            download_data.download_data_from_link(RECENT_NEWS_URL);
+//            Download_data download_data = new Download_data((Download_data.download_complete) this);
+//            download_data.download_data_from_link(RECENT_NEWS_URL);
         }
         ONE_TIME += 1;
     }

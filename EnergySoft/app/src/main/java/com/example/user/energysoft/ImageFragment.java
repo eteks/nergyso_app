@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -41,9 +42,11 @@ public class ImageFragment extends Fragment implements Download_data.download_co
     String[] images = new String[20];
     int currentPage = 0;
     Timer timer;
-    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    final long DELAY_MS = 750;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
     public static int NUM_PAGES = 0;
+    TextView full_events_title, full_events_description;
+    String check = "";
 
 
 
@@ -52,19 +55,22 @@ public class ImageFragment extends Fragment implements Download_data.download_co
                              Bundle savedInstanceState) {
         SERVER_URL = getString(R.string.service_url);
         int id = getActivity().getIntent().getIntExtra("id", 0);
-        String check = getActivity().getIntent().getStringExtra("check");
+        check = getActivity().getIntent().getStringExtra("check");
         if(check.equals("NEWS")){
             IMAGE_URL = SERVER_URL + "api/news" + "/" + id;
         }else if(check.equals("EVENTS")){
             IMAGE_URL = SERVER_URL + "api/events" + "/" + id;
         }
 
-        view = inflater.inflate(R.layout.activity_full_event, container, false);
-
+        view = inflater.inflate(R.layout.fragement_image, container, false);
+//        full_events_title = (TextView) view.findViewById(R.id.full_events_title);
+//        full_events_description = (TextView) view.findViewById(R.id.full_events_description);
+//
+//        int id = getActivity().getIgetIntExtra("id", 0);
 
         viewPager = (ViewPager) view.findViewById(R.id.viewPagerdash);
 
-        myCustomPagerAdapter = new ImageFragment.MyCustomPagerAdapter();
+        myCustomPagerAdapter = new ImageFragment.MyCustomPagerAdapter(getActivity(), images);
         viewPager.setAdapter(myCustomPagerAdapter);
 
         /*After setting the adapter use the timer */
@@ -91,7 +97,7 @@ public class ImageFragment extends Fragment implements Download_data.download_co
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(IMAGE_URL);
 
-        return null;
+        return view;
     }
 
     public void get_data(String data)
@@ -99,15 +105,19 @@ public class ImageFragment extends Fragment implements Download_data.download_co
         try {
             JSONObject data_array = new JSONObject(data);
             System.out.println("Object"+data_array);
-//            NUM_PAGES = data_array.length();
-            NUM_PAGES = 1;
-            images[0] = SERVER_URL + data_array.getString("events_image");
-            images[1] = SERVER_URL + data_array.getString("events_image");
-            System.out.println("Coming from data "+ images[0]);
-//            for (int i = 0 ; i < 1 ; i++)
-//            {
-//                images[i] = SERVER_URL+obj.getString("events_image");
-//            }
+            if(check.equals("NEWS")){
+                String splitted_gallery[] = data_array.getString("news_image").split(",");
+                NUM_PAGES = splitted_gallery.length;
+                for(int index = 0; index < splitted_gallery.length; index++){
+                    images[index] = SERVER_URL + splitted_gallery[index];
+                }
+            }else if(check.equals("EVENTS")){
+                String splitted_gallery[] = data_array.getString("events_image").split(",");
+                NUM_PAGES = splitted_gallery.length;
+                for(int index = 0; index < splitted_gallery.length; index++){
+                    images[index] = SERVER_URL + splitted_gallery[index];
+                }
+            }
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
             e.printStackTrace();
@@ -131,21 +141,21 @@ public class ImageFragment extends Fragment implements Download_data.download_co
         createAndShowDialog(ex.getMessage(), title);
     }
 
-    public class MyCustomPagerAdapter extends FragmentPagerAdapter {
+    public class MyCustomPagerAdapter extends PagerAdapter {
         Context context;
         String images[];
         LayoutInflater layoutInflater;
 
-        public MyCustomPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-
-//        public MyCustomPagerAdapter(Context context, String images[]) {
-//            this.context = context;
-//            this.images = images;
-//            layoutInflater = LayoutInflater.from(context);
+//        public MyCustomPagerAdapter(FragmentManager fm) {
+//            super(fm);
 //        }
+
+
+        public MyCustomPagerAdapter(Context context, String images[]) {
+            this.context = context;
+            this.images = images;
+            layoutInflater = LayoutInflater.from(context);
+        }
 
         @Override
         public int getCount() {
@@ -155,12 +165,6 @@ public class ImageFragment extends Fragment implements Download_data.download_co
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == ((LinearLayout) object);
-        }
-
-        @Override
-        public android.support.v4.app.Fragment getItem(int position) {
-
-            return null;
         }
 
         @Override

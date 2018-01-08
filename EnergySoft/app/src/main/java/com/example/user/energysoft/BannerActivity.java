@@ -34,6 +34,8 @@ package com.example.user.energysoft;
         import java.util.Timer;
         import java.util.TimerTask;
 
+        import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
+
 public class BannerActivity extends AppCompatActivity implements Download_data.download_complete{
     Toolbar toolbar;
     ImageButton firstFragment, secondFragment, thirdFragment, fourthFragment, fifthFragment;
@@ -86,6 +88,34 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
+
+        //Loading Default Fragment
+        String check = getIntent().getStringExtra("check");
+        switch(check){
+            case "birthday":{
+                loadFragment(new FirstFragment());
+                break;
+            }
+            case "anniversary":{
+                loadFragment(new SecondFragment());
+                break;
+            }
+            case "shoutout":{
+                loadFragment(new ThirdFragment());
+                break;
+            }
+            case "events":{
+                loadFragment(new FourthFragment());
+                break;
+            }
+            case "news":{
+                loadFragment(new FifthFragment());
+                break;
+            }
+            default:{
+                loadFragment(new FirstFragment());
+            }
+        }
 
         // get the reference of Button's
         firstFragment = (ImageButton) findViewById(R.id.firstFragment);
@@ -334,7 +364,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewdash);
 //        imageView.setImageResource(images[position]);
-            System.out.println("OUT ");
+//            System.out.println("OUT ");
             loadImageFromUrl(imageView,images[position]);
             container.addView(itemView);
 

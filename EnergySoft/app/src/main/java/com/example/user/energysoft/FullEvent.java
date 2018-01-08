@@ -78,8 +78,6 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         System.out.println(getIntent().getStringExtra("check"));
         FULL_EVENTS_URL = FULL_EVENTS_URL + id + "/";
         full_text_events_description = (WebView) findViewById(R.id.full_text_events_description);
-        full_text_events_description.getSettings().setJavaScriptEnabled(true);
-        full_text_events_description.getSettings().setDomStorageEnabled(true);
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(FULL_EVENTS_URL);
         loadFragment(new ImageFragment());
@@ -128,7 +126,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                             full_events_title.setText(object.getString("events_title"));
                             String events_description = object.getString("events_description");
                             full_text_events_description.loadData("<p style=\"text-align: justify\">"+ events_description + "</p>", "text/html", "UTF-8");
-//                            System.out.println(SERVER_URL + object.getString("events_image"));
+                            System.out.println(SERVER_URL + object.getString("events_image"));
                             loadImageUrl(SERVER_URL + object.getString("events_image"));
                         } catch (JSONException e) {
                             e.printStackTrace();
