@@ -145,6 +145,11 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
                 birthday_wishes.setText(BIRTHDAY_WISHES);
                 loadImageFromUrl(birthday_photo,SERVER_URL+employee_photo);
             }
+            else{
+//                birthday_wishes.setVisibility(View.GONE);
+//                birthday_photo.setVisibility(View.GONE);
+//                birthday.setVisibility(View.GONE);
+            }
         }
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);

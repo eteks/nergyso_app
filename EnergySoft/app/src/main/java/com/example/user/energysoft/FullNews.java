@@ -74,6 +74,7 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
 //        full_text_news_description = (TextView) findViewById(R.id.full_text_events_description);
         news_photo = (ImageView) findViewById(R.id.events_photo);
         int id = getIntent().getIntExtra("id",0);
+        System.out.println(getIntent().getStringExtra("check"));
         FULL_NEWS_URL = FULL_NEWS_URL+id+"/";
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(FULL_NEWS_URL);

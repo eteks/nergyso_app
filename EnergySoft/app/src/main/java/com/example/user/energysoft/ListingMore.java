@@ -296,6 +296,11 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 startActivity(intent);
                 return true;
 
+            case R.id.feedback:
+                intent = new Intent(ListingMore.this,Feedback.class);
+                startActivity(intent);
+                return true;
+
             case R.id.shoutout:
                 intent = new Intent(ListingMore.this,Shoutout.class);
                 startActivity(intent);

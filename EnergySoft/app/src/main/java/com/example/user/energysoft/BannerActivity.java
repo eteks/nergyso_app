@@ -334,6 +334,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewdash);
 //        imageView.setImageResource(images[position]);
+            System.out.println("OUT ");
             loadImageFromUrl(imageView,images[position]);
             container.addView(itemView);
 
