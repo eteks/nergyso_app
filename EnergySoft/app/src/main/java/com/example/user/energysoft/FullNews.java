@@ -199,7 +199,8 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
                             String news_description = object.getString("news_description");
                             full_text_news_description.loadData("<p style=\"text-align: justify\">"+ news_description + "</p>", "text/html", "UTF-8");
                             System.out.println(SERVER_URL+object.getString("news_image"));
-                            loadImageFromUrl(SERVER_URL+object.getString("news_image"));
+                            String splitted_gallery[] = object.getString("news_image").split("%2C");
+                            loadImageFromUrl(SERVER_URL+splitted_gallery[0]);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

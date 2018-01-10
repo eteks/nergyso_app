@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".CeomessageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,13 +21,14 @@
         </activity>
         <activity android:name=".Slidescreen" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".CeomessageActivity" />
+        <activity android:name=".NotificationMain" />
         <activity android:name=".Feedback" />
         <activity android:name=".BannerActivity" />
         <activity android:name=".EventMain" />
         <activity android:name=".FullEvent" />
         <activity android:name=".FullNews" />
         <activity android:name=".NewsMain" />
+        <activity android:name=".CeoMain" />
         <activity android:name=".GridList" />
         <activity android:name=".FacebookActivity" />
         <activity android:name=".TwitterActivity" />

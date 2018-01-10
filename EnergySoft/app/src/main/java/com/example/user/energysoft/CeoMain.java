@@ -3,80 +3,86 @@ package com.example.user.energysoft;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.energysoft.utils.PaginationScrollListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.user.energysoft.MainActivity.MyPREFERENCES;
-import static com.google.android.gms.internal.zzahf.runOnUiThread;
-
-public class CeomessageActivity extends AppCompatActivity implements Download_data.download_complete{
+public class CeoMain extends AppCompatActivity implements Download_data.download_complete {
     Toolbar toolbar;
-    EditText ceo_message;
-    Button ceo_post;
-    String CEO_POST_URL = "api/ceo_message_post/";
-    String CEO_LIST_URL = "api/ceo_message_list/";
-    String SERVER_URL;
-    RecyclerView rv;
-    CeomessageActivity.PaginationAdapter adapter;
-    ProgressBar progressBar;
+    View view;
+    CeoMain main;
+    private static final String TAG = "EventMain";
+    String listValue = "NULL";
+    PaginationAdapter adapter;
     LinearLayoutManager linearLayoutManager;
-    TextView ceo_more;
+    String nextPage;
+    String SERVER_URL ;
+    String EVENT_URL ;
+    RecyclerView rv;
+    ProgressBar progressBar;
 
+    private static final int PAGE_START = 0;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private int TOTAL_PAGES = 5;
+    private int currentPage = PAGE_START;
+    public ListView list;
+    public ArrayList<Event> eventList = new ArrayList<Event>();
+    public ListAdapter NewsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ceomessage);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+        setContentView(R.layout.activity_event_main);
         SERVER_URL = getString(R.string.service_url);
-        CEO_POST_URL = SERVER_URL + CEO_POST_URL ;
-
-        CEO_LIST_URL = SERVER_URL + CEO_LIST_URL;
-
-        SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-        final int employee_id = shared.getInt("id",0);
-
+        EVENT_URL = SERVER_URL+ "api/ceo_message_list/";
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+//        ImageView home = (ImageView) findViewById(R.id.action_home);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(EventMain.this, GridList.class);
+//                startActivity(intent);
+//            }
+//        });
+//        list = (ListView) findViewById(R.id.newslist);
+//        NewsAdapter = new com.example.user.energysoft.ListAdapter(this);
+//        list.setAdapter(NewsAdapter);
         rv = (RecyclerView) findViewById(R.id.main_recycler);
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
 
-        adapter = new CeomessageActivity.PaginationAdapter(this);
+        adapter = new PaginationAdapter(this);
 
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
@@ -85,125 +91,82 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 
         rv.setAdapter(adapter);
 
-        ceo_more = (TextView) findViewById(R.id.ceo_more);
-        ceo_more.setOnClickListener(new View.OnClickListener(){
+        rv.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CeomessageActivity.this, CeoMain.class);
-                startActivity(intent);
+            protected void loadMoreItems() {
+                isLoading = true;
+                currentPage += 1;
+
+                // mocking network delay for API call
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadNextPage();
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public int getTotalPageCount() {
+                return TOTAL_PAGES;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
             }
         });
 
-        Download_data download_data = new Download_data((Download_data.download_complete) this);
-        download_data.download_data_from_link(CEO_LIST_URL);
 
-        ceo_message = (EditText) findViewById(R.id.ceo_message);
-        ceo_post = (Button) findViewById(R.id.ceo_post);
-        ceo_post.setOnClickListener(new View.OnClickListener() {
-            int ONE_TIME = 0;
+        // mocking network delay for API call
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                String message = ceo_message.getText().toString();
-                String data = null;
-                try {
-                    data = URLEncoder.encode("ceo_message", "UTF-8")
-                            + "=" + URLEncoder.encode(message, "UTF-8");
-                    data += "&" + URLEncoder.encode("ceo_employee", "UTF-8")
-                            + "=" + employee_id;
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+            public void run() {
+                loadFirstPage();
+            }
+        }, 1000);
 
-                final BufferedReader[] reader = {null};
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        download_data.download_data_from_link("http://10.0.0.15:8000/api/news/");
+    }
 
-                // Send data
-                final String finalData = data;
-                System.out.println("Data" + finalData);
-                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        try {
-                            ONE_TIME = 0;
-                            // Defined URL  where to send data
-                            URL url = new URL(CEO_POST_URL);
+    private void loadFirstPage() {
+        Log.d(TAG, "loadFirstPage: ");
+//        final List<News> newsList = News.createMovies(adapter.getItemCount());
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(EVENT_URL);
 
-                            // Send POST data request
-                            URLConnection conn = url.openConnection();
-                            conn.setDoOutput(true);
-                            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                            wr.write(finalData);
-                            wr.flush();
-
-                            // Get the server response
-
-                            reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                            StringBuilder sb = new StringBuilder();
-                            String line = null;
-
-                            // Read Server Response
-                            while ((line = reader[0].readLine()) != null) {
-                                // Append server response in string
-                                sb.append(line + "\n");
-                            }
-                            System.out.println("Output" + sb.toString());
-                            JSONObject object = new JSONObject(sb.toString());
-                            if (object.has("id")) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(CeomessageActivity.this, "Posted successfully!", Toast.LENGTH_SHORT).show();
-                                        ceo_message.setText("");
-                                    }
-                                });
-//                                    System.out.println("object"+object.getString("key"));
-//                                    SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-//                                    SharedPreferences.Editor editor = sharedpreferences.edit();
-//                                    editor.putString("key", object.getString("key"));
-//                                    editor.putInt("id",object.getInt("user"));
-//                                    editor.putString("username",object.getString("username"));
-//                                    editor.putString("email",object.getString("email"));
-//                                    editor.commit();
-//                                Intent intent = new Intent(MainActivity.this, GridList.class);
-////                                    intent.putExtra("key", object.getString("key"));
-////                                    finish();
-//                                startActivity(intent);
-//                                }else{
-//                                    runOnUiThread(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            createAndShowDialog("Coming soon", "Not Ready");
-//                                        }
-//                                    });
-                            }
-                        } catch (Exception ex) {
-                            System.out.println("Error" + ex);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    createAndShowDialog("Message already exists", "Error");
-                                }
-                            });
-                        } finally {
-                            try {
-
-                                reader[0].close();
-                            } catch (Exception ex) {
-//                                    runOnUiThread(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            createAndShowDialog("Check your connection","No connection");
-//                                        }
-//                                    });
-
-                            }
-                        }
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                adapter.addAll(newsList);
+//                if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
+//                else isLastPage = true;
+//            }
+//        });
 
 
-                        return null;
-                    }
-                };
-                runAsyncTask(task);
+    }
 
+    private void loadNextPage() {
+        Log.d(TAG, "loadNextPage: " + currentPage);
+//        final List<News> newsList = News.createMovies(adapter.getItemCount());
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        System.out.println(nextPage);
+        download_data.download_data_from_link(nextPage);
+        isLoading = false;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                adapter.removeLoadingFooter();
+//                adapter.addAll(newsList);
+//                if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
+//                else isLastPage = true;
             }
         });
 
@@ -239,7 +202,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                         adapter.add(add);
                     }
                 });
@@ -257,6 +220,95 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
         }
 
     }
+
+    // Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_home:
+                intent = new Intent(main,BannerActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(main,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(main,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(main,SearchActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(main,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(main,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(main,Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(main, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(main, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.facebook:
+                intent = new Intent(main,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(main,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(main,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(main,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private void createAndShowDialog(final String message, final String title) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -282,94 +334,18 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
         createAndShowDialog(ex.getMessage(), title);
     }
 
-    // Initiating Menu XML file (menu.xml)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
+    private void createAndShowDialogFromTask(final Exception exception, String title) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                createAndShowDialog(exception, "Error");
+            }
+        });
     }
 
-    /**
-     * Event Handling for Individual menu item selected
-     * Identify single menu item by it's id
-     * */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        Intent intent;
-        switch (item.getItemId())
-        {
-            case R.id.action_home:
-                intent = new Intent(CeomessageActivity.this,BannerActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_search:
-                intent = new Intent(CeomessageActivity.this,SearchActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.profile:
-                intent = new Intent(CeomessageActivity.this,ProfileActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.events:
-                intent = new Intent(CeomessageActivity.this,EventMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.news:
-                intent = new Intent(CeomessageActivity.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(CeomessageActivity.this,Shoutout.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.feedback:
-                intent = new Intent(CeomessageActivity.this,Feedback.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.gallery:
-                intent = new Intent(CeomessageActivity.this,EventGallery.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.info:
-                Toast.makeText(CeomessageActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.settings:
-                intent = new Intent(CeomessageActivity.this,Changepassword_Activity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.logout:
-                intent = new Intent(CeomessageActivity.this,MainActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.facebook:
-                intent = new Intent(CeomessageActivity.this,FacebookActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.twitter:
-                intent = new Intent(CeomessageActivity.this,TwitterActivity.class);
-                startActivity(intent);
-                return true;
-
-
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    public void clickList(){
+        Intent intent = new Intent(main,FullNews.class);
+        startActivity(intent);
     }
 
     public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -400,13 +376,14 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
             RecyclerView.ViewHolder viewHolder = null;
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
+
             switch (viewType) {
                 case ITEM:
                     viewHolder = getViewHolder(parent, inflater);
                     break;
                 case LOADING:
                     View v2 = inflater.inflate(R.layout.item_progress, parent, false);
-                    viewHolder = new CeomessageActivity.PaginationAdapter.LoadingVH(v2);
+                    viewHolder = new LoadingVH(v2);
                     break;
             }
             return viewHolder;
@@ -416,7 +393,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
         private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, final LayoutInflater inflater) {
             final RecyclerView.ViewHolder viewHolder;
             View v1 = inflater.inflate(R.layout.ceolist_layout, parent, false);
-            viewHolder = new CeomessageActivity.PaginationAdapter.EventVH(v1);
+            viewHolder = new EventVH(v1);
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -443,7 +420,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 
             switch (getItemViewType(position)) {
                 case ITEM:
-                    CeomessageActivity.PaginationAdapter.EventVH eventVH = (CeomessageActivity.PaginationAdapter.EventVH) holder;
+                    EventVH eventVH = (EventVH) holder;
                     eventVH.events_title.setText(event.getTitle());
                     eventVH.events_description.setText(event.getEvents_description());
                     loadImageFromUrl(eventVH.events_image,(SERVER_URL+event.getEvents_image()));
@@ -590,5 +567,6 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
                     }
                 });
     }
+
 
 }

@@ -192,7 +192,8 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                 add.setTitle(obj.getString("news_title"));
                 add.setId(obj.getInt("id"));
                 add.news_description = obj.getString("news_description");
-                add.news_image = obj.getString("news_image");
+                String splitted_gallery[] = obj.getString("news_image").split("%2C");
+                add.news_image = splitted_gallery[0];
                 System.out.println("News Id"+obj.getInt("id"));
 //                news.add(add);
                 runOnUiThread(new Runnable() {

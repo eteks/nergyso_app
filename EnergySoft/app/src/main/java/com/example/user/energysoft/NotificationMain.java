@@ -223,14 +223,48 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                                 break;
                             }
                             case "birthday":{
-                                Intent intent = new Intent(NotificationMain.this, BannerActivity.class);
-                                intent.putExtra("check","birthday");
-                                startActivity(intent);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                            showBirthday();
+                                    }
+                                });
+                                break;
                             }
                             case "anniversary":{
-                                Intent intent = new Intent(NotificationMain.this, BannerActivity.class);
-                                intent.putExtra("check","anniversary");
-                                startActivity(intent);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showAnniversary();
+                                    }
+                                });
+                                break;
+                            }
+                            case "shoutout":{
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            showShoutout(obj.getInt("notification_cateogry_id"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                break;
+                            }
+                            case "ceo":{
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            showCeoMessage(obj.getInt("notification_cateogry_id"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                break;
                             }
                         }
                     }
@@ -276,11 +310,57 @@ public class NotificationMain extends AppCompatActivity implements Download_data
         download_data.download_data_from_link(DOWNLOAD_URL);
     }
 
+    // To display the shoutout from Notification
+    private void showShoutout(int id){
+        DOWNLOAD_URL = SERVER_URL + "api/shoutout_list/" + id + "/";
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(DOWNLOAD_URL);
+    }
+
+    // To display the CEO's message from Notification
+    private void showCeoMessage(int id){
+        DOWNLOAD_URL = SERVER_URL + "api/ceo_message_list/" + id + "/";
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(DOWNLOAD_URL);
+    }
+
     // To display the NEWS from Notification
     private void showNews(int id){
         DOWNLOAD_URL = SERVER_URL + "api/news/" + id + "/";
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(DOWNLOAD_URL);
+    }
+
+    // To display the birthday from Notification
+    private void showBirthday(){
+        final Event add=new Event();
+        add.setTitle("Happy Birthday! Wish you many more happy returns of the day. Have a wonderful year ahead.");
+        add.setDescription("");
+        add.setImage("1");
+        add.setType("birthday");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                adapter.add(add);
+            }
+        });
+    }
+
+    // To display the anniversary from Notification
+    private void showAnniversary(){
+        final Event add=new Event();
+        add.setTitle("Happy Anniversary! Your hard work and dedication are vital to the success of our organization.");
+        add.setDescription("");
+        add.setImage("2");
+        add.setType("anniversary");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                adapter.add(add);
+            }
+        });
     }
 
 
@@ -323,36 +403,43 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
     public void get_data(String data)
     {
-        if(category.equals("events")){
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Object"+obj);
+        if(obj.has("events_title")){
             try {
-                JSONObject obj = new JSONObject(data);
-                System.out.println("Object"+obj);
-                    final Event add=new Event();
-                    add.setTitle(obj.getString("events_title"));
-                    add.setId(obj.getInt("id"));
-                    add.setDescription(obj.getString("events_description"));
-                    add.setImage(obj.getString("events_image"));
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                final Event add=new Event();
+                add.setTitle(obj.getString("events_title"));
+                add.setId(obj.getInt("id"));
+                add.setDescription(obj.getString("events_description"));
+                add.setType("events");
+                String splitted_gallery[] = obj.getString("events_image").split("%2C");
+                add.setImage(splitted_gallery[0]);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 //                            progressBar.setVisibility(View.GONE);
-                            adapter.add(add);
-                        }
-                    });
+                        adapter.add(add);
+                    }
+                });
             } catch (JSONException e) {
                 createAndShowDialog(e,"No connection");
                 loadFirstPage();
                 e.printStackTrace();
             }
-        }else if(category.equals("news")){
+        }else if(obj.has("news_title")){
             try {
-                JSONObject obj = new JSONObject(data);
-                System.out.println("Object"+obj);
                 final Event add=new Event();
                 add.setTitle(obj.getString("news_title"));
                 add.setId(obj.getInt("id"));
                 add.setDescription(obj.getString("news_description"));
-                add.setImage(obj.getString("news_image"));
+                String splitted_gallery[] = obj.getString("news_image").split("%2C");
+                add.setImage(splitted_gallery[0]);
+                add.setType("news");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -537,13 +624,49 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                     Event event = eventList.get(viewHolder.getAdapterPosition());
                     System.out.println("CLICKed"+event.getId());
                     int id = event.getId();
-                    String check = "EVENTS";
-                    Intent intent = new Intent(NotificationMain.this,FullEvent.class);
-                    intent.putExtra("id", id);
-                    intent.putExtra("check",check);
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+                    String check ;
+                    String category = event.getType();
+                    switch(category){
+                        case "events":{
+                            Intent intent = new Intent(NotificationMain.this,FullEvent.class);
+                            check = "EVENTS";
+                            intent.putExtra("id", id);
+                            intent.putExtra("check",check);
+                            startActivity(intent);
+                            break;
+                        }
+                        case "news":{
+                            Intent intent = new Intent(NotificationMain.this,FullNews.class);
+                            check = "NEWS";
+                            intent.putExtra("id", id);
+                            intent.putExtra("check",check);
+                            startActivity(intent);
+                            break;
+                        }
+                        case "birthday":{
+                            Intent intent = new Intent(NotificationMain.this,BannerActivity.class);
+                            check = "birthday";
+                            intent.putExtra("id", id);
+                            intent.putExtra("check",check);
+                            startActivity(intent);
+                            break;
+                        }
+                        case "anniversary":{
+                            Intent intent = new Intent(NotificationMain.this,BannerActivity.class);
+                            check = "anniversary";
+                            intent.putExtra("id", id);
+                            intent.putExtra("check",check);
+                            startActivity(intent);
+                            break;
+                        }
+                        case "live" :{
+                            break;
+                        }
+                        case "shoutout":{
+                            break;
+                        }
+                    }
+
                 }
             };
             v1.setOnClickListener(mOnClickListener);
@@ -557,10 +680,27 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
             switch (getItemViewType(position)) {
                 case ITEM:
-                    EventVH eventVH = (EventVH) holder;
-                    eventVH.events_title.setText(event.getTitle());
-                    eventVH.events_description.setText("Created on " + notification[position]);
-                    loadImageFromUrl(eventVH.events_image,(SERVER_URL+event.getEvents_image()));
+//                    if(category.equals("birthday")){
+//                        EventVH eventVH = (EventVH) holder;
+//                        eventVH.events_title.setText("Happy Birthday! Wish you many more happy returns of the day. Have a wonderful year ahead.");
+//                        eventVH.events_image.setImageResource(R.drawable.birthday_blue);
+//                    }
+//                    else if(category.equals("anniversary")){
+//                        EventVH eventVH = (EventVH) holder;
+//                        eventVH.events_title.setText("Happy Anniversary! Your hard work and dedication are vital to the success of our organization.");
+//                        eventVH.events_image.setImageResource(R.drawable.anniversary_blue);
+//                    }else {
+                        EventVH eventVH = (EventVH) holder;
+                        eventVH.events_title.setText(event.getTitle());
+                        eventVH.events_description.setText("Created on " + notification[position]);
+                        if(event.getEvents_image().equals("1")){
+                            eventVH.events_image.setImageResource(R.drawable.birthday_blue);
+                        }else if(event.getEvents_image().equals("2")){
+                            eventVH.events_image.setImageResource(R.drawable.anniversary_blue);
+                        }else{
+                            loadImageFromUrl(eventVH.events_image, (SERVER_URL + event.getEvents_image()));
+                        }
+//                    }
                     break;
                 case LOADING:
 //                Do nothing

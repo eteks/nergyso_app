@@ -42,7 +42,7 @@ public class ImageFragment extends Fragment implements Download_data.download_co
     String[] images = new String[20];
     int currentPage = 0;
     Timer timer;
-    final long DELAY_MS = 750;//delay in milliseconds before task is to be executed
+    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
     public static int NUM_PAGES = 0;
     TextView full_events_title, full_events_description;
@@ -106,13 +106,13 @@ public class ImageFragment extends Fragment implements Download_data.download_co
             JSONObject data_array = new JSONObject(data);
             System.out.println("Object"+data_array);
             if(check.equals("NEWS")){
-                String splitted_gallery[] = data_array.getString("news_image").split(",");
+                String splitted_gallery[] = data_array.getString("news_image").split("%2C");
                 NUM_PAGES = splitted_gallery.length;
                 for(int index = 0; index < splitted_gallery.length; index++){
                     images[index] = SERVER_URL + splitted_gallery[index];
                 }
             }else if(check.equals("EVENTS")){
-                String splitted_gallery[] = data_array.getString("events_image").split(",");
+                String splitted_gallery[] = data_array.getString("events_image").split("%2C");
                 NUM_PAGES = splitted_gallery.length;
                 for(int index = 0; index < splitted_gallery.length; index++){
                     images[index] = SERVER_URL + splitted_gallery[index];
@@ -154,7 +154,7 @@ public class ImageFragment extends Fragment implements Download_data.download_co
         public MyCustomPagerAdapter(Context context, String images[]) {
             this.context = context;
             this.images = images;
-            layoutInflater = LayoutInflater.from(context);
+            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
