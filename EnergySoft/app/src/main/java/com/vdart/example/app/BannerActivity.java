@@ -97,22 +97,27 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         }
         switch(check){
             case "birthday":{
+                changeImage("first");
                 loadFragment(new FirstFragment());
                 break;
             }
             case "anniversary":{
+                changeImage("second");
                 loadFragment(new SecondFragment());
                 break;
             }
             case "shoutout":{
+                changeImage("third");
                 loadFragment(new ThirdFragment());
                 break;
             }
             case "events":{
+                changeImage("fourth");
                 loadFragment(new FourthFragment());
                 break;
             }
             case "news":{
+                changeImage("fifth");
                 loadFragment(new FifthFragment());
                 break;
             }
@@ -132,6 +137,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             @Override
             public void onClick(View v) {
                 // load First Fragment
+                changeImage("first");
                 loadFragment(new FirstFragment());
             }
         });
@@ -140,6 +146,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             @Override
             public void onClick(View v) {
                 // load Second Fragment
+                changeImage("second");
                 loadFragment(new SecondFragment());
             }
         });
@@ -148,6 +155,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             @Override
             public void onClick(View v) {
                 // load First Fragment
+                changeImage("third");
                 loadFragment(new ThirdFragment());
             }
         });
@@ -156,6 +164,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             @Override
             public void onClick(View v) {
                 // load First Fragment
+                changeImage("fourth");
                 loadFragment(new FourthFragment());
             }
         });
@@ -164,11 +173,58 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             @Override
             public void onClick(View v) {
                 // load First Fragment
+                changeImage("fifth");
                 loadFragment(new FifthFragment());
             }
         });
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(BANNER_URL);
+
+    }
+
+    public void changeImage(String image){
+        switch (image){
+            case "first":{
+                firstFragment.setImageResource(R.drawable.birthday);
+                secondFragment.setImageResource(R.drawable.anniversary_blue);
+                thirdFragment.setImageResource(R.drawable.shoutout_blue);
+                fourthFragment.setImageResource(R.drawable.events_blue);
+                fifthFragment.setImageResource(R.drawable.news_blue);
+                break;
+            }
+            case "second":{
+                firstFragment.setImageResource(R.drawable.birthday_blue);
+                secondFragment.setImageResource(R.drawable.anniversary);
+                thirdFragment.setImageResource(R.drawable.shoutout_blue);
+                fourthFragment.setImageResource(R.drawable.events_blue);
+                fifthFragment.setImageResource(R.drawable.news_blue);
+                break;
+            }
+            case "third":{
+                firstFragment.setImageResource(R.drawable.birthday_blue);
+                secondFragment.setImageResource(R.drawable.anniversary_blue);
+                thirdFragment.setImageResource(R.drawable.shoutout);
+                fourthFragment.setImageResource(R.drawable.events_blue);
+                fifthFragment.setImageResource(R.drawable.news_blue);
+                break;
+            }
+            case "fourth":{
+                firstFragment.setImageResource(R.drawable.birthday_blue);
+                secondFragment.setImageResource(R.drawable.anniversary_blue);
+                thirdFragment.setImageResource(R.drawable.shoutout_blue);
+                fourthFragment.setImageResource(R.drawable.events);
+                fifthFragment.setImageResource(R.drawable.news_blue);
+                break;
+            }
+            case "fifth":{
+                firstFragment.setImageResource(R.drawable.birthday_blue);
+                secondFragment.setImageResource(R.drawable.anniversary_blue);
+                thirdFragment.setImageResource(R.drawable.shoutout_blue);
+                fourthFragment.setImageResource(R.drawable.events_blue);
+                fifthFragment.setImageResource(R.drawable.news);
+                break;
+            }
+        }
 
     }
 
