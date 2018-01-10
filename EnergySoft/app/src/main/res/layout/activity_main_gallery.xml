@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.example.user.energysoft.MainGallery">
+    tools:context="com.vdart.example.app.MainGallery">
 
     <ScrollView
         android:id="@+id/news_scroll"

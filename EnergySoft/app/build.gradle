@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.example.user.energysoft"
+        applicationId "com.vdart.example.app"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
@@ -24,13 +24,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.firebase:firebase-messaging'
-//    apply plugin: 'com.google.gms.google-services'
+    //    apply plugin: 'com.google.gms.google-services'
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

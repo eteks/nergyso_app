@@ -41,8 +41,8 @@
     <item android:id="@+id/news"
         android:title="News" />
 
-    <item android:id="@+id/shoutout"
-        android:title="Shoutout" />
+    <!--<item android:id="@+id/shoutout"-->
+        <!--android:title="Shoutout" />-->
 
     <item android:id="@+id/gallery"
         android:title="Gallery" />
