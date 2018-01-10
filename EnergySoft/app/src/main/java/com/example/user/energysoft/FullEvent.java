@@ -6,7 +6,6 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -29,16 +28,11 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import me.relex.circleindicator.CircleIndicator;
 
 //import static com.example.user.energysoft.R.id.full_news_description;
 
@@ -71,7 +65,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         FULL_EVENTS_URL = SERVER_URL + "api/events/";
         RECENT_EVENTS_URL = SERVER_URL + "api/events/recent_events/";
         full_events_title = (TextView) findViewById(R.id.full_events_title);
-        full_events_description = (TextView) findViewById(R.id.full_events_description);
+//        full_events_description = (TextView) findViewById(R.id.full_events_description);
 //        full_text_events_description = (TextView) findViewById(R.id.full_text_events_description);
         events_photo = (ImageView) findViewById(R.id.events_photo);
         int id = getIntent().getIntExtra("id", 0);

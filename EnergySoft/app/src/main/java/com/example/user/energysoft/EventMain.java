@@ -275,7 +275,8 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                 return true;
 
             case R.id.gallery:
-                Toast.makeText(EventMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                intent = new Intent(EventMain.this,EventGallery.class);
+                startActivity(intent);
                 return true;
 
             case R.id.info:
