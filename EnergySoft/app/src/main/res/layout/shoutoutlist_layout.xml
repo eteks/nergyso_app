@@ -16,7 +16,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/shoutout_from"
             android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:src="@drawable/profile"/>
 
         <TextView
             android:id="@+id/news_title2"
@@ -27,6 +28,7 @@
             android:layout_toRightOf="@+id/shoutout_from"
             android:layout_marginLeft="10dp"
             android:textColor="#333"
+            android:text="Hi everyone good morning!"
             android:textSize="10dp" />
 
         <!--<TextView-->
@@ -50,6 +52,7 @@
             android:layout_marginStart="11dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/shoutout_from"
+            android:src="@drawable/profile_pc"
              />
 
         <!--<ImageView-->
