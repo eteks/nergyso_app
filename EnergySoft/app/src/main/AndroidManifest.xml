@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CeomessageActivity">
+        <activity android:name=".quiz_activity_frag">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,7 +53,7 @@
 
         <activity android:name=".BannerItem" />
         <activity android:name=".QuizActivity" />
-        <activity android:name=".quiz_activity_frag" />
+        <!--<activity android:name=".quiz_activity_frag" />-->
         <activity android:name=".Resetpassword_Activity"></activity>
     </application>
 

@@ -25,7 +25,6 @@
             android:maxLines="100"
             android:paddingLeft="10dp"
             android:scrollbars="vertical"
-            android:text="Text for the question"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textIsSelectable="false"
             android:layout_alignParentTop="true"
@@ -48,59 +47,73 @@
             android:layout_gravity="top"
             android:layout_weight="1">
 
-            <RadioButton
-                android:id="@+id/answerA"
-                android:layout_width="wrap_content"
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="53dp"
-                android:hint="0"
-                android:maxLines="100"
-                android:scrollbars="vertical"
-                android:text="Varianta A" />
+                android:id="@+id/answers"
+                android:orientation="vertical">
+
+
+                <RadioButton
+                    android:id="@+id/answerA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="53dp"
+                    android:maxLines="100"
+                    android:scrollbars="vertical"
+                    android:onClick="getRadioChecked" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerB"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerC"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerD"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerE"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+
+            </RadioGroup>
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/answer_b_container"
-            android:layout_weight="1">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Varianta B"
-                android:id="@+id/answerB"
-                android:hint="1"
-                android:maxLines = "100"
-                android:scrollbars = "vertical"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="53dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/answer_c_container"
-            android:layout_weight="1" >
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Varianta C"
-                android:id="@+id/answerC"
-                android:maxLines = "100"
-                android:scrollbars = "vertical"
-                android:hint="2"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="53dp" />
-
-        </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
@@ -119,7 +132,7 @@
         <!--android:onClick="FinishTest" />-->
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/vote"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="start"
@@ -129,7 +142,7 @@
             android:textColor="#fff" />
 
         <Button
-            android:id="@+id/buttonnext"
+            android:id="@+id/previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -138,9 +151,9 @@
             android:background="#c5e0f1"
             android:textSize="20dp"
             android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/button2" />
+            android:layout_alignStart="@+id/vote" />
         <Button
-            android:id="@+id/buttonpre"
+            android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -148,7 +161,7 @@
             android:textSize="20dp"
             android:background="#c5e0f1"
             android:layout_marginEnd="55dp"
-            android:layout_alignTop="@+id/buttonnext"
+            android:layout_alignTop="@+id/previous"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
