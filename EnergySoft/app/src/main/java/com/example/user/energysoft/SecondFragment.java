@@ -333,7 +333,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
                 if(data_array.length() == 0){
-                    createAndShowDialog("Server Error","No connection");
+//                    createAndShowDialog("Server Error","No connection");
                 }
                 for (int i = 0 ; i < data_array.length() ; i++)
                 {

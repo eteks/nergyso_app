@@ -38,17 +38,17 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:textColor="#333"/>
-                <TextView
-                    android:text="Read more"
-                    android:id="@+id/tvnewsreadmore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/news_description2"
-                    android:layout_alignEnd="@+id/news_description2"
-                    android:paddingLeft="10dp"
-                    android:layout_weight="1"
-                    android:textColor="#333"
-                    android:gravity="end"/>
+                <!--<TextView-->
+                    <!--android:text="Read more"-->
+                    <!--android:id="@+id/tvnewsreadmore"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/news_description2"-->
+                    <!--android:layout_alignEnd="@+id/news_description2"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:textColor="#333"-->
+                    <!--android:gravity="end"/>-->
         </RelativeLayout>
 </LinearLayout>
 

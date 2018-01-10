@@ -33,7 +33,7 @@
             android:textStyle="bold|normal" />
 
         <EditText
-            android:id="@+id/shouttext"
+            android:id="@+id/ceo_message"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -44,15 +44,15 @@
             android:layout_centerHorizontal="true" />
 
         <Button
-            android:id="@+id/shoutpost"
+            android:id="@+id/ceo_post"
             android:layout_width="65dp"
             android:layout_height="40dp"
             android:layout_marginTop="27dp"
             android:background="@drawable/rounded_edge"
             android:text="Post"
             android:textColor="#fff"
-            android:layout_below="@+id/shouttext"
-            android:layout_alignEnd="@+id/shouttext" />
+            android:layout_below="@+id/ceo_message"
+            android:layout_alignEnd="@+id/ceo_message" />
 
         <!--<EditText-->
         <!--android:id="@+id/editText"-->
@@ -78,14 +78,14 @@
             android:id="@+id/main_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/shoutpost"
+            android:layout_below="@+id/ceo_post"
             android:layout_marginTop="8dp"
             android:clipToPadding="false"
             android:paddingBottom="24dp"
             android:paddingTop="24dp" />
 
         <TextView
-            android:id="@+id/ceomessage"
+            android:id="@+id/ceo_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

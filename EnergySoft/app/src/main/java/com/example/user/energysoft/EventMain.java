@@ -194,8 +194,8 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                 add.events_description = obj.getString("events_description");
                 add.setTitle(obj.getString("events_title"));
                 add.setDescription(obj.getString("events_description"));
-                add.events_image = obj.getString("events_image");
-                add.setImage(obj.getString("events_image"));
+                String splitted_gallery[] = obj.getString("events_image").split("%2C");
+                add.setImage(splitted_gallery[0]);
                 System.out.println("Events Id"+obj.getInt("id"));
 //                news.add(add);
                 runOnUiThread(new Runnable() {

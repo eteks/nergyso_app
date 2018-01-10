@@ -127,7 +127,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                             String events_description = object.getString("events_description");
                             full_text_events_description.loadData("<p style=\"text-align: justify\">"+ events_description + "</p>", "text/html", "UTF-8");
                             System.out.println(SERVER_URL + object.getString("events_image"));
-                            loadImageUrl(SERVER_URL + object.getString("events_image"));
+                            String splitted_gallery[] = object.getString("events_image").split("%2C");
+                            loadImageUrl(SERVER_URL + splitted_gallery[0]);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

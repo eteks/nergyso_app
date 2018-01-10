@@ -10,8 +10,18 @@ public class Event {
     String events_image;
     String events_video;
     String events_document;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     String events_venue;
     String events_location;
+    String type;
     int id;
     String events_date;
 

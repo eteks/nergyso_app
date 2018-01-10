@@ -6,6 +6,8 @@ package com.example.user.energysoft;
         import android.app.FragmentTransaction;
         import android.content.Context;
         import android.content.Intent;
+        import android.content.pm.PackageManager;
+        import android.content.pm.ResolveInfo;
         import android.os.AsyncTask;
         import android.os.Build;
         import android.os.Handler;
@@ -31,6 +33,7 @@ package com.example.user.energysoft;
         import org.json.JSONException;
         import org.json.JSONObject;
 
+        import java.util.List;
         import java.util.Timer;
         import java.util.TimerTask;
 
@@ -49,6 +52,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     String[] images = new String[20];
     MyCustomPagerAdapter myCustomPagerAdapter;
     public static int NUM_PAGES = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +89,16 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             }
         }, DELAY_MS, PERIOD_MS);
 
+        String  check = "";
         //Loading Default Fragment
-        String check = getIntent().getStringExtra("check");
+        Intent intent = getIntent();
+        // Get the extras (if there are any)
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            check = getIntent().getStringExtra("check");
+        }else{
+            check = "default";
+        }
         switch(check){
             case "birthday":{
                 loadFragment(new FirstFragment());
@@ -163,6 +175,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         download_data.download_data_from_link(BANNER_URL);
 
     }
+
     private void loadFragment(Fragment fragment) {
         // create a FragmentManager
         FragmentManager fm = getFragmentManager();
@@ -336,6 +349,10 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 startActivity(intent);
                 return true;
 
+            case R.id.action_notification:
+                intent = new Intent(BannerActivity.this,NotificationMain.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
