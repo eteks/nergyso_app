@@ -324,7 +324,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                     System.out.println("CLICKed"+news.getId());
                     int id = news.getId();
                     String check = "NEWS";
-                    Intent intent = new Intent(NewsMain.this,FullNews.class);
+                    Intent intent = new Intent(NewsMain.this,FullEvent.class);
                     intent.putExtra("id", id);
                     intent.putExtra("check",check);
 //                    finish();

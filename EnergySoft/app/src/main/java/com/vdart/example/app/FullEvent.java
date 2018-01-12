@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -28,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -44,18 +46,32 @@ import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.google.android.gms.internal.zzahf.runOnUiThread;
 
 public class FullEvent extends AppCompatActivity implements Download_data.download_complete {
+
+    FullEvent.MyCustomPagerAdapter myCustomPagerAdapter;
+    ViewPager viewPager;
+    String[] images = new String[20];
+    int currentPage = 0;
+    Timer timer;
+    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+    public static int NUM_PAGES = 0;
     String SERVER_URL;
     String FULL_EVENTS_URL = "api/events/";
     String RECENT_EVENTS_URL = "api/events/recent_events/";
+    String RECENT_NEWS_URL = "api/news/recent_news/";
+    String FULL_NEWS_URL = "api/news/";
     WebView full_text_events_description;
     int TOTAL_PAGES = 0;
     LinearLayoutManager linearLayoutManager;
     Toolbar toolbar;
     int ONE_TIME = 0;
+    String check = "";
     FullEvent.PaginationAdapter adapter;
     TextView full_events_title, event_location, event_date;
     ImageView events_photo;
@@ -64,6 +80,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     public ListView list;
     public ArrayList<News> newsList = new ArrayList<News>();
     public ListAdapter NewsAdapter;
+    String DOWNLOAD_URL = "", RECENT_URL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,23 +96,54 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         //Initialising Server URL
         SERVER_URL = getString(R.string.service_url);
 
-        rv = (RecyclerView) findViewById(R.id.main_recycler);
+//        rv = (RecyclerView) findViewById(R.id.main_recycler);
 //        final ProgressBar progressBar = new ProgressBar(getActivity());
 
-        adapter = new FullEvent.PaginationAdapter(this);
+//        adapter = new FullEvent.PaginationAdapter(this);
+//
+//        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        rv.setLayoutManager(linearLayoutManager);
+//
+//        rv.setItemAnimator(new DefaultItemAnimator());
+//
+//        rv.setAdapter(adapter);
 
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rv.setLayoutManager(linearLayoutManager);
+        viewPager = (ViewPager) findViewById(R.id.viewPagerdash);
 
-        rv.setItemAnimator(new DefaultItemAnimator());
+        myCustomPagerAdapter = new FullEvent.MyCustomPagerAdapter(this, images);
 
-        rv.setAdapter(adapter);
+        viewPager.setAdapter(myCustomPagerAdapter);
 
+        /*After setting the adapter use the timer */
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
 
-        //Merging URL
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        timer = new Timer(); // This will create a new Thread
+        timer .schedule(new TimerTask() { // task to be scheduled
+
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, DELAY_MS, PERIOD_MS);
+
         int id = getIntent().getIntExtra("id", 0);
-        RECENT_EVENTS_URL = SERVER_URL + RECENT_EVENTS_URL;
-        FULL_EVENTS_URL = SERVER_URL + FULL_EVENTS_URL + id + "/";
+        check = getIntent().getStringExtra("check");
+        if(check.equals("NEWS")){
+            DOWNLOAD_URL = SERVER_URL + FULL_NEWS_URL + "/" + id;
+            RECENT_URL = SERVER_URL + RECENT_EVENTS_URL ;
+        }else if(check.equals("EVENTS")){
+            DOWNLOAD_URL = SERVER_URL + FULL_EVENTS_URL + "/" + id;
+            RECENT_URL = SERVER_URL + RECENT_NEWS_URL ;
+        }
 
         //Initialising TextView and ImageView
         full_events_title = (TextView) findViewById(R.id.full_events_title);
@@ -106,7 +154,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
         //Call the API to get the data
         Download_data download_data = new Download_data((Download_data.download_complete) this);
-        download_data.download_data_from_link(FULL_EVENTS_URL);
+        download_data.download_data_from_link(DOWNLOAD_URL);
 
         // Loading the slider Image Fragment (ImageFragment.java)
         loadFragment(new ImageFragment());
@@ -125,80 +173,111 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
     @Override
     public void get_data(String data) {
-        if (ONE_TIME == 1) {
-            try {
-                JSONArray data_array = new JSONArray(data);
-                System.out.println("Object"+data_array);
+            if (ONE_TIME == 1) {
+                try {
+                    JSONArray data_array = new JSONArray(data);
+                    System.out.println("Object" + data_array);
 //            nextPage = object.getString("next");
-                if(data_array.length() == 0){
-                    createAndShowDialog("Data is Empty","No data");
-                }
-                int length = 0;
-                if(data_array.length() == 0){
-                    length = 0;
-                }else if(data_array.length() >= 3){
-                    length = 3;
-                }else{
-                    length = data_array.length();
-                }
-                for (int i = 0 ; i < length ; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+                    if (data_array.length() == 0) {
+                        createAndShowDialog("Data is Empty", "No data");
+                    }
+                    int length = 0;
+                    if (data_array.length() == 0) {
+                        length = 0;
+                    } else if (data_array.length() >= 3) {
+                        length = 3;
+                    } else {
+                        length = data_array.length();
+                    }
+                    for (int i = 0; i < length; i++) {
+                        JSONObject obj = new JSONObject(data_array.get(i).toString());
+                        if(check.equals("EVENTS")) {
 //                System.out.println("Object"+obj);
-                    final News add=new News("Title");
-                    add.news_title = obj.getString("events_title");
-                    add.setId(obj.getInt("id"));
-                    add.news_description = obj.getString("events_description");
-                    add.news_image = obj.getString("events_image");
+                            final News add = new News("Title");
+                            add.news_title = obj.getString("events_title");
+                            add.setId(obj.getInt("id"));
+                            add.news_description = obj.getString("events_description");
+                            add.news_image = obj.getString("events_image");
 //                news.add(add);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
 //                        progressBar.setVisibility(View.GONE);
-                            adapter.add(add);
+                                    adapter.add(add);
+                                }
+                            });
+                        }else if(check.equals("NEWS")){
+                            final News add = new News("Title");
+                            add.news_title = obj.getString("news_title");
+                            add.setId(obj.getInt("id"));
+                            add.news_description = obj.getString("news_description");
+                            add.news_image = obj.getString("news_image");
+//                news.add(add);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                                    adapter.add(add);
+                                }
+                            });
                         }
-                    });
 
-                }
+                    }
 //            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
 //            else isLastPage = true;
 
 //            NewsAdapter.notifyDataSetChanged();
 
-            } catch (JSONException e) {
-                createAndShowDialog(e,"No connection");
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    createAndShowDialog(e, "No connection");
+                    e.printStackTrace();
 //            loadFirstPage();
+                }
             }
-        }
-        if (ONE_TIME == 0) {
-            try {
-                final JSONObject object = (JSONObject) new JSONTokener(data).nextValue();
-                System.out.println("Object" + object);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            full_events_title.setText(object.getString("events_title"));
-                            String events_description = object.getString("events_description");
-                            full_text_events_description.loadData("<p style=\"text-align: justify\">"+ events_description + "</p>", "text/html", "UTF-8");
-                            System.out.println(SERVER_URL + object.getString("events_image"));
-                            event_date.setText("Event Date : " + object.getString("events_date"));
-                            event_location.setText("Event Venue : " + object.getString("events_venue"));
-                            String splitted_gallery[] = object.getString("events_image").split("%2C");
-                            loadImageUrl(SERVER_URL + splitted_gallery[0]);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            if (ONE_TIME == 0) {
+                try {
+                    JSONObject data_array = new JSONObject(data);
+                    System.out.println("Object" + data_array);
+                    if (check.equals("NEWS")) {
+                        String splitted_gallery[] = data_array.getString("news_image").split("%2C");
+                        NUM_PAGES = splitted_gallery.length;
+                        for (int index = 0; index < splitted_gallery.length; index++) {
+                            images[index] = SERVER_URL + splitted_gallery[index];
+                        }
+                    } else if (check.equals("EVENTS")) {
+                        String splitted_gallery[] = data_array.getString("events_image").split("%2C");
+                        NUM_PAGES = splitted_gallery.length;
+                        for (int index = 0; index < splitted_gallery.length; index++) {
+                            images[index] = SERVER_URL + splitted_gallery[index];
                         }
                     }
-                });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//                final JSONObject object = (JSONObject) new JSONTokener(data).nextValue();
+//                System.out.println("Object" + object);
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            full_events_title.setText(object.getString("events_title"));
+//                            String events_description = object.getString("events_description");
+//                            full_text_events_description.loadData("<p style=\"text-align: justify\">"+ events_description + "</p>", "text/html", "UTF-8");
+//                            System.out.println(SERVER_URL + object.getString("events_image"));
+//                            event_date.setText("Event Date : " + object.getString("events_date"));
+//                            event_location.setText("Event Venue : " + object.getString("events_venue"));
+//                            String splitted_gallery[] = object.getString("events_image").split("%2C");
+//                            loadImageUrl(SERVER_URL + splitted_gallery[0]);
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 //            Download_data download_data = new Download_data((Download_data.download_complete) this);
 //            download_data.download_data_from_link(RECENT_EVENTS_URL);
-        }
-        ONE_TIME += 1;
+            }
+
+
     }
 
     private void createAndShowDialog(final String message, final String title) {
@@ -385,6 +464,43 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public class MyCustomPagerAdapter extends PagerAdapter {
+        Context context;
+        String images[];
+        LayoutInflater layoutInflater;
+
+        public MyCustomPagerAdapter(Context context, String images[]) {
+            this.context = context;
+            this.images = images;
+            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            return images.length;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == ((LinearLayout) object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            View itemView = layoutInflater.inflate(R.layout.activity_banner_item, container, false);
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewdash);
+            System.out.println(" in");
+            loadImageFromUrl(imageView,images[position]);
+            container.addView(itemView);
+            return itemView;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((LinearLayout) object);
         }
     }
 
