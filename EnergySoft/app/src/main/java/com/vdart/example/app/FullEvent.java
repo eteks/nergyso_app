@@ -1,14 +1,21 @@
 package com.vdart.example.app;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -21,6 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -28,11 +37,15 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.android.gms.internal.zzahf.runOnUiThread;
 
 public class FullEvent extends AppCompatActivity implements Download_data.download_complete {
     String SERVER_URL;
@@ -40,11 +53,17 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     String RECENT_EVENTS_URL = "api/events/recent_events/";
     WebView full_text_events_description;
     int TOTAL_PAGES = 0;
+    LinearLayoutManager linearLayoutManager;
     Toolbar toolbar;
     int ONE_TIME = 0;
-    TextView full_events_title;
+    FullEvent.PaginationAdapter adapter;
+    TextView full_events_title, event_location, event_date;
     ImageView events_photo;
     private static final int[] ID = new int[200];
+    RecyclerView rv;
+    public ListView list;
+    public ArrayList<News> newsList = new ArrayList<News>();
+    public ListAdapter NewsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +79,19 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         //Initialising Server URL
         SERVER_URL = getString(R.string.service_url);
 
+        rv = (RecyclerView) findViewById(R.id.main_recycler);
+//        final ProgressBar progressBar = new ProgressBar(getActivity());
+
+        adapter = new FullEvent.PaginationAdapter(this);
+
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(linearLayoutManager);
+
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        rv.setAdapter(adapter);
+
+
         //Merging URL
         int id = getIntent().getIntExtra("id", 0);
         RECENT_EVENTS_URL = SERVER_URL + RECENT_EVENTS_URL;
@@ -69,6 +101,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         full_events_title = (TextView) findViewById(R.id.full_events_title);
         full_text_events_description = (WebView) findViewById(R.id.full_text_events_description);
         events_photo = (ImageView) findViewById(R.id.events_photo);
+        event_date = (TextView) findViewById(R.id.event_date);
+        event_location = (TextView) findViewById(R.id.event_location);
 
         //Call the API to get the data
         Download_data download_data = new Download_data((Download_data.download_complete) this);
@@ -92,24 +126,50 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     @Override
     public void get_data(String data) {
         if (ONE_TIME == 1) {
-//            try {
-//                final JSONArray object = (JSONArray) new JSONTokener(data).nextValue();
-//                System.out.println("Object" + object);
-//                for (int i = 0; i < object.length(); i++) {
-//                    JSONObject obj = new JSONObject(object.get(i).toString());
-//                    System.out.println("Images" + obj);
-//                    XMEN[i] = (obj.getString("events_image"));
-//                    ID[i] = obj.getInt("id");
-//                    XMENArray.add(XMEN[i]);
-//                    TOTAL_PAGES = object.length();
-//                }
-////                init();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//                Download_data download_data = new Download_data((Download_data.download_complete) this);
-//                download_data.download_data_from_link(RECENT_EVENTS_URL);
-//                ONE_TIME--;
-//            }
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object"+data_array);
+//            nextPage = object.getString("next");
+                if(data_array.length() == 0){
+                    createAndShowDialog("Data is Empty","No data");
+                }
+                int length = 0;
+                if(data_array.length() == 0){
+                    length = 0;
+                }else if(data_array.length() >= 3){
+                    length = 3;
+                }else{
+                    length = data_array.length();
+                }
+                for (int i = 0 ; i < length ; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+//                System.out.println("Object"+obj);
+                    final News add=new News("Title");
+                    add.news_title = obj.getString("events_title");
+                    add.setId(obj.getInt("id"));
+                    add.news_description = obj.getString("events_description");
+                    add.news_image = obj.getString("events_image");
+//                news.add(add);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                            adapter.add(add);
+                        }
+                    });
+
+                }
+//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
+//            else isLastPage = true;
+
+//            NewsAdapter.notifyDataSetChanged();
+
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                e.printStackTrace();
+//            loadFirstPage();
+            }
         }
         if (ONE_TIME == 0) {
             try {
@@ -123,6 +183,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                             String events_description = object.getString("events_description");
                             full_text_events_description.loadData("<p style=\"text-align: justify\">"+ events_description + "</p>", "text/html", "UTF-8");
                             System.out.println(SERVER_URL + object.getString("events_image"));
+                            event_date.setText("Event Date : " + object.getString("events_date"));
+                            event_location.setText("Event Venue : " + object.getString("events_venue"));
                             String splitted_gallery[] = object.getString("events_image").split("%2C");
                             loadImageUrl(SERVER_URL + splitted_gallery[0]);
                         } catch (JSONException e) {
@@ -137,6 +199,30 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 //            download_data.download_data_from_link(RECENT_EVENTS_URL);
         }
         ONE_TIME += 1;
+    }
+
+    private void createAndShowDialog(final String message, final String title) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.create().show();
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+
+    private void createAndShowDialog(Exception exception, String title) {
+        Throwable ex = exception;
+        if(exception.getCause() != null){
+            ex = exception.getCause();
+        }
+        createAndShowDialog(ex.getMessage(), title);
     }
 
     private void loadImageUrl(String employee_photo) {
@@ -200,22 +286,6 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         public boolean isViewFromObject(View view, Object object) {
             return view.equals(object);
         }
-    }
-
-    private void loadImageFromUrl(ImageView myImage, String employee_photo) {
-        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
-                .into(myImage, new com.squareup.picasso.Callback() {
-
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
     }
 
     public void generateList(int position) {
@@ -318,5 +388,229 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         }
     }
 
+    public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        private static final int ITEM = 0;
+        private static final int LOADING = 1;
+        NewsMain main;
+        private List<News> newsList;
+        private Context context;
+        private boolean isLoadingAdded = false;
+
+        public PaginationAdapter(Context context) {
+            this.context = context;
+            newsList = new ArrayList<>();
+        }
+
+        public List<News> getNewsList() {
+            return newsList;
+        }
+
+        public void setNewsList(List<News> newsList) {
+            this.newsList = newsList;
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            RecyclerView.ViewHolder viewHolder = null;
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+
+            switch (viewType) {
+                case ITEM:
+                    viewHolder = getViewHolder(parent, inflater);
+                    break;
+                case LOADING:
+                    View v2 = inflater.inflate(R.layout.item_progress, parent, false);
+                    viewHolder = new FullEvent.PaginationAdapter.LoadingVH(v2);
+                    break;
+            }
+            return viewHolder;
+        }
+
+        @NonNull
+        private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
+            final RecyclerView.ViewHolder viewHolder;
+            View v1 = inflater.inflate(R.layout.newslist_layout, parent, false);
+            viewHolder = new FullEvent.PaginationAdapter.NewsVH(v1);
+            final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    News news = newsList.get(viewHolder.getAdapterPosition());
+                    System.out.println("CLICKed"+news.getId());
+                    int id = news.getId();
+                    Intent intent = new Intent(FullEvent.this,FullEvent.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("check","EVENTS");
+//                    finish();
+                    startActivity(intent);
+//                news.setPage("FullNews");
+                }
+            };
+            v1.setOnClickListener(mOnClickListener);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//        Movie movie = movies.get(position);
+            News news = newsList.get(position);
+
+            switch (getItemViewType(position)) {
+                case ITEM:
+                    FullEvent.PaginationAdapter.NewsVH newsVH = (FullEvent.PaginationAdapter.NewsVH) holder;
+                    newsVH.news_title.setText(news.getTitle());
+                    newsVH.news_description.setText(news.getNews_description());
+                    loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
+                    break;
+                case LOADING:
+//                Do nothing
+                    break;
+            }
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return newsList == null ? 0 : newsList.size();
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return (position == newsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
+        }
+
+    /*
+   Helpers
+   _________________________________________________________________________________________________
+    */
+
+        public void add(News mc) {
+            newsList.add(mc);
+            notifyItemInserted(newsList.size() - 1);
+        }
+
+        public void addAll(List<News> mcList) {
+            for (News mc : mcList) {
+                add(mc);
+            }
+        }
+
+        public void remove(News city) {
+            int position = newsList.indexOf(city);
+            if (position > -1) {
+                newsList.remove(position);
+                notifyItemRemoved(position);
+            }
+        }
+
+        public void clear() {
+            isLoadingAdded = false;
+            while (getItemCount() > 0) {
+                remove(getItem(0));
+            }
+        }
+
+        public boolean isEmpty() {
+            return getItemCount() == 0;
+        }
+
+
+        public void addLoadingFooter() {
+            isLoadingAdded = true;
+            add(new News());
+        }
+
+        public void removeLoadingFooter() {
+            isLoadingAdded = false;
+
+            int position = newsList.size() - 1;
+            News item = getItem(position);
+
+            if (item != null) {
+                newsList.remove(position);
+                notifyItemRemoved(position);
+            }
+        }
+
+        public News getItem(int position) {
+            return newsList.get(position);
+        }
+
+
+   /*
+   View Holders
+   _________________________________________________________________________________________________
+    */
+
+        /**
+         * Main list's content ViewHolder
+         */
+        protected class NewsVH extends RecyclerView.ViewHolder {
+            TextView news_title,news_description;
+            ImageView news_image;
+            //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
+            public NewsVH(View itemView) {
+                super(itemView);
+//            ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
+//            if (convertView == null) {
+//                LayoutInflater inflater = (LayoutInflater) main.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                convertView = inflater.inflate(R.layout.newslist_layout, null);
+
+//            holder.name = (TextView) convertView.findViewById(R.id.name);
+//            holder.code = (TextView) convertView.findViewById(R.id.code);
+                news_title = (TextView) itemView.findViewById(R.id.news_title2);
+                news_description = (TextView) itemView.findViewById(R.id.news_description2);
+                news_image = (ImageView) itemView.findViewById(R.id.news_image2);
+                System.out.println(itemView);
+//                news_image = (ImageView) convertView.findViewById(R.id.news_image);
+//            TextView news = (TextView) convertView.findViewById(R.id.news_title);
+//                convertView.setTag(holder);
+//            System.out.println("View "+this.main.news.get(position).news_title);
+//            }
+//            else
+//            {
+//                holder = (ListAdapter.ViewHolderItem) convertView.getTag();
+//            }
+
+            }
+        }
+
+
+        protected class LoadingVH extends RecyclerView.ViewHolder {
+
+            public LoadingVH(View itemView) {
+                super(itemView);
+            }
+        }
+
+
+    }
+
+    // Initiating Menu XML file (menu.xml)
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu)
+//    {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+
+    private void loadImageFromUrl(ImageView myImage,String employee_photo) {
+        System.out.println("Image "+myImage+employee_photo);
+        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+                .into(myImage, new com.squareup.picasso.Callback(){
+
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+    }
 
 }

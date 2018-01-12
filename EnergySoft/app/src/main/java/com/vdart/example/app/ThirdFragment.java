@@ -100,6 +100,7 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
         rv.setItemAnimator(new DefaultItemAnimator());
 
         shoutout_more = (TextView) view.findViewById(R.id.shoutout_more);
+        shoutout_more.setVisibility(View.GONE);
         shoutout_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -173,100 +174,82 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
                     String shoutout_text = shoutout_description.getText().toString();
                     String shoutout_to = actv.getText().toString();
                     int shoutout_to_employee = 0;
-                    for(int i = 0; i < Employees_Name.length; i++){
-                        if(shoutout_to.equals(Employees_Name[i])){
+                    for (int i = 0; i < Employees_Name.length; i++) {
+                        if (shoutout_to.equals(Employees_Name[i])) {
                             shoutout_to_employee = Employees_ID[i];
-                            System.out.println("Shout out employee"+shoutout_to_employee);
+                            System.out.println("Shout out employee" + shoutout_to_employee);
                         }
                     }
-                    String data = null;
-                    try {
-                        data = URLEncoder.encode("shoutout_description", "UTF-8")
-                                + "=" + URLEncoder.encode(shoutout_text, "UTF-8");
-                        data += "&" + URLEncoder.encode("shoutout_employee_to", "UTF-8")
-                                + "=" + shoutout_to_employee;
-                        data += "&" + URLEncoder.encode("shoutout_employee_from", "UTF-8")
-                                + "=" + employee_id;
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+                    if (!shoutout_text.isEmpty() && shoutout_to_employee > 0) {
+                        String data = null;
+                        try {
+                            data = URLEncoder.encode("shoutout_description", "UTF-8")
+                                    + "=" + URLEncoder.encode(shoutout_text, "UTF-8");
+                            data += "&" + URLEncoder.encode("shoutout_employee_to", "UTF-8")
+                                    + "=" + shoutout_to_employee;
+                            data += "&" + URLEncoder.encode("shoutout_employee_from", "UTF-8")
+                                    + "=" + employee_id;
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
 
-                    final BufferedReader[] reader = {null};
+                        final BufferedReader[] reader = {null};
 
-                    // Send data
-                    final String finalData = data;
-                    System.out.println("Data"+finalData);
-                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                ONE_TIME = 0;
-                                // Defined URL  where to send data
-                                URL url = new URL(SHOUT_URL);
+                        // Send data
+                        final String finalData = data;
+                        System.out.println("Data" + finalData);
+                        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                try {
+                                    ONE_TIME = 0;
+                                    // Defined URL  where to send data
+                                    URL url = new URL(SHOUT_URL);
 
-                                // Send POST data request
-                                System.out.println("URL:" + SHOUT_URL);
-                                URLConnection conn = url.openConnection();
-                                conn.setDoOutput(true);
-                                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                                wr.write(finalData);
-                                wr.flush();
+                                    // Send POST data request
+                                    System.out.println("URL:" + SHOUT_URL);
+                                    URLConnection conn = url.openConnection();
+                                    conn.setDoOutput(true);
+                                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                                    wr.write(finalData);
+                                    wr.flush();
 
-                                // Get the server response
+                                    // Get the server response
 
-                                reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                                StringBuilder sb = new StringBuilder();
-                                String line = null;
+                                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                    StringBuilder sb = new StringBuilder();
+                                    String line = null;
 
-                                // Read Server Response
-                                while ((line = reader[0].readLine()) != null) {
-                                    // Append server response in string
-                                    sb.append(line + "\n");
-                                }
-                                System.out.println("Output"+sb.toString());
-                                JSONObject object = new JSONObject(sb.toString());
-                                if(object.has("success")){
+                                    // Read Server Response
+                                    while ((line = reader[0].readLine()) != null) {
+                                        // Append server response in string
+                                        sb.append(line + "\n");
+                                    }
+                                    System.out.println("Output" + sb.toString());
+                                    JSONObject object = new JSONObject(sb.toString());
+                                    if (object.has("success")) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getActivity(), "Posted successfully!", Toast.LENGTH_SHORT).show();
+                                                shoutout_description.setText("");
+                                                shoutout_employee_to.setText("");
+                                            }
+                                        });
+                                    }
+                                } catch (Exception ex) {
+                                    System.out.println("Error" + ex);
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getActivity(), "Posted successfully!", Toast.LENGTH_SHORT).show();
-                                            shoutout_description.setText("");
-                                            shoutout_employee_to.setText("");
+                                            createAndShowDialog("No internet connection", "Error");
                                         }
                                     });
-//                                    System.out.println("object"+object.getString("key"));
-//                                    SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-//                                    SharedPreferences.Editor editor = sharedpreferences.edit();
-//                                    editor.putString("key", object.getString("key"));
-//                                    editor.putInt("id",object.getInt("user"));
-//                                    editor.putString("username",object.getString("username"));
-//                                    editor.putString("email",object.getString("email"));
-//                                    editor.commit();
-//                                Intent intent = new Intent(MainActivity.this, GridList.class);
-////                                    intent.putExtra("key", object.getString("key"));
-////                                    finish();
-//                                startActivity(intent);
-//                                }else{
-//                                    runOnUiThread(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            createAndShowDialog("Coming soon", "Not Ready");
-//                                        }
-//                                    });
-                                }
-                            } catch (Exception ex) {
-                                System.out.println("Error"+ex);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        createAndShowDialog("No internet connection", "Error");
-                                    }
-                                });
-                            } finally {
-                                try {
+                                } finally {
+                                    try {
 
-                                    reader[0].close();
-                                } catch (Exception ex) {
+                                        reader[0].close();
+                                    } catch (Exception ex) {
 //                                    runOnUiThread(new Runnable() {
 //                                        @Override
 //                                        public void run() {
@@ -274,15 +257,18 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
 //                                        }
 //                                    });
 
+                                    }
                                 }
+
+
+                                return null;
                             }
-
-
-                            return null;
-                        }
                         };
-                    runAsyncTask(task);
+                        runAsyncTask(task);
 
+                    }
+                }else {
+                    createAndShowDialog("Shoutout text or tag person is empty","Required");
                 }
             }
         });
@@ -489,9 +475,18 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
                 System.out.println("Object"+data_array);
 //                nextPage = object.getString("next");
                 if(data_array.length() == 0){
-                    createAndShowDialog("Server Error","No connection");
+                    createAndShowDialog("Data is empty","No data");
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                int length = 0;
+                if(data_array.length() == 0){
+                    length = 0;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                    shoutout_more.setVisibility(View.VISIBLE);
+                }else{
+                    length = data_array.length();
+                }
+                for (int i = 0 ; i < length ; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
 //                System.out.println("Object"+obj);

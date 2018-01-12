@@ -34,7 +34,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EventMain extends AppCompatActivity implements Download_data.download_complete {
@@ -194,7 +197,10 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                 add.events_description = obj.getString("events_description");
                 add.setTitle(obj.getString("events_title"));
                 add.setDescription(obj.getString("events_description"));
-                add.setEvents_date(obj.getString("events_date"));
+                Date date = parseDate(obj.getString("created_date"));
+                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                String strDate = formatter.format(date);
+                add.setEvents_date(strDate);
                 String splitted_gallery[] = obj.getString("events_image").split("%2C");
                 add.setImage(splitted_gallery[0]);
                 System.out.println("Events Id"+obj.getInt("id"));
@@ -219,6 +225,14 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
             e.printStackTrace();
         }
 
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     // Initiating Menu XML file (menu.xml)
@@ -428,7 +442,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                     EventVH eventVH = (EventVH) holder;
                     eventVH.events_title.setText(event.getTitle());
                     eventVH.events_description.setText(event.getEvents_description());
-                    eventVH.events_date.setText(event.getEvents_date());
+                    eventVH.events_date.setText("Posted on " + event.getEvents_date());
                     loadImageFromUrl(eventVH.events_image,(SERVER_URL+event.getEvents_image()));
                     break;
                 case LOADING:

@@ -89,6 +89,7 @@ public class FourthFragment extends Fragment implements  Download_data.download_
         RECENT_EVENTS_URL = SERVER_URL + RECENT_EVENTS_URL;
 
         events_more = (TextView) view.findViewById(R.id.events_more);
+        events_more.setVisibility(View.GONE);
         events_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -300,7 +301,16 @@ public class FourthFragment extends Fragment implements  Download_data.download_
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
-            for (int i = 0 ; i < data_array.length() ; i++)
+            int length = 0;
+            if(data_array.length() == 0){
+                length = 0;
+            }else if(data_array.length() >= 3){
+                length = 3;
+                events_more.setVisibility(View.VISIBLE);
+            }else{
+                length = data_array.length();
+            }
+            for (int i = 0 ; i < length ; i++)
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
 //                System.out.println("Object"+obj);
@@ -421,7 +431,7 @@ public class FourthFragment extends Fragment implements  Download_data.download_
                     News news = newsList.get(viewHolder.getAdapterPosition());
                     System.out.println("CLICKed"+news.getId());
                     int id = news.getId();
-                    Intent intent = new Intent(getActivity(),FullNews.class);
+                    Intent intent = new Intent(getActivity(),FullEvent.class);
                     intent.putExtra("id", id);
                     intent.putExtra("check","EVENTS");
 //                    finish();

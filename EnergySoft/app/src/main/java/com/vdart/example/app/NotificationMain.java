@@ -41,7 +41,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.vdart.example.app.MainActivity.MyPREFERENCES;
@@ -176,7 +179,10 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                     {
                         final JSONObject obj=new JSONObject(data_array.get(i).toString());
                         System.out.println("Object"+obj);
-                        notification[i] = obj.getString("notification_created_date");
+                        Date date = parseDate(obj.getString("notification_created_date"));
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                        String strDate = formatter.format(date);
+                        notification[i] = strDate;
                         category = obj.getString("notification_cateogry").toLowerCase();
                         switch(category) {
                             case "events": {
@@ -288,6 +294,14 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     // To display the events from Notification
@@ -731,7 +745,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 //                    }else {
                         EventVH eventVH = (EventVH) holder;
                         eventVH.events_title.setText(event.getTitle());
-                        eventVH.events_description.setText("Created on " + notification[position]);
+                        eventVH.events_description.setText("Posted on " + notification[position]);
                         if(event.getEvents_image().equals("1")){
                             eventVH.events_image.setImageResource(R.drawable.birthday_blue);
                         }else if(event.getEvents_image().equals("2")){

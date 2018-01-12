@@ -388,6 +388,11 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 startActivity(intent);
                 return true;
 
+            case R.id.polls:
+                intent = new Intent(this,quiz_activity_frag.class);
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

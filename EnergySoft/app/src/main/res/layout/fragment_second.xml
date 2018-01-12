@@ -57,11 +57,10 @@
             <!--android:layout_marginTop="10dp" />-->
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/today_anniversary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Today's Anniversary"
-        android:layout_below="@+id/textAnniversary"
         android:layout_alignParentStart="true"
         android:layout_marginTop="18sp"
         android:background="@drawable/border"
@@ -74,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:clipToPadding="false"
-            android:layout_below="@+id/textView21"
+            android:layout_below="@+id/today_anniversary"
             android:paddingBottom="20dp"
             android:paddingTop="2dp" />
 
@@ -104,7 +103,7 @@
             android:text="More..." />
 
         <TextView
-            android:id="@+id/textView211"
+            android:id="@+id/upcoming_anniversary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upcoming Anniversary"
@@ -133,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:clipToPadding="false"
-            android:layout_below="@+id/textView211"
+            android:layout_below="@+id/upcoming_anniversary"
             android:paddingBottom="20dp"
             android:paddingTop="2dp" />
 

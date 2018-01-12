@@ -89,6 +89,7 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
         RECENT_NEWS_URL = SERVER_URL + RECENT_NEWS_URL;
 
         news_more = (TextView) view.findViewById(R.id.news_more);
+        news_more.setVisibility(View.GONE);
         news_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -300,7 +301,16 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
-            for (int i = 0 ; i < data_array.length() ; i++)
+            int length = 0;
+            if(data_array.length() == 0){
+                length = 0;
+            }else if(data_array.length() >= 3){
+                length = 3;
+                news_more.setVisibility(View.VISIBLE);
+            }else{
+                length = data_array.length();
+            }
+            for (int i = 0 ; i < length ; i++)
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
 //                System.out.println("Object"+obj);
