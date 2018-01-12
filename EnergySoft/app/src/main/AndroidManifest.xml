@@ -37,7 +37,7 @@
         <activity android:name="com.vdart.example.app.ProfileActivity" />
         <activity android:name="com.vdart.example.app.MainActivity" />
         <activity android:name="com.vdart.example.app.EventGallery" />
-        <!--<activity android:name="com.vdart.example.app.Changepassword_Activity" />-->
+        <activity android:name="com.vdart.example.app.Changepassword_Activity" />
         <activity android:name="com.vdart.example.app.DetailActivity" />
         <activity android:name="com.vdart.example.app.ListingMore" />
 

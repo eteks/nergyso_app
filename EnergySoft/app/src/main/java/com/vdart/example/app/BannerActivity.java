@@ -1,6 +1,6 @@
 package com.vdart.example.app;
 
-        import android.app.AlertDialog;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -251,38 +251,12 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
                 images[i] = SERVER_URL+obj.getString("banner_image");
-//                System.out.println("Object"+obj);
-//                final Event add=new Event();
-//                add.events_title = obj.getString("events_title");
-//                add.setTitle(obj.getString("events_title"));
-//                add.setId(obj.getInt("id"));
-//                add.events_description = obj.getString("events_description");
-//                add.setTitle(obj.getString("events_title"));
-//                add.setDescription(obj.getString("events_description"));
-//                add.events_image = obj.getString("events_image");
-//                add.setImage(obj.getString("events_image"));
-//                System.out.println("Events Id"+obj.getInt("id"));
-//                news.add(add);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        progressBar.setVisibility(View.GONE);
-//                        adapter.add(add);
-                    }
-                });
 
             }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
-
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
-//            loadFirstPage();
             e.printStackTrace();
         }
-
     }
 
     // Initiating Menu XML file (menu.xml)
@@ -338,76 +312,79 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(BannerActivity.this,BannerActivity.class);
-                startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(BannerActivity.this,ProfileActivity.class);
+                intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.feedback:
-                intent = new Intent(BannerActivity.this,Feedback.class);
+                intent = new Intent(this,Feedback.class);
                 startActivity(intent);
                 return true;
 
             case R.id.action_search:
-                intent = new Intent(BannerActivity.this,SearchActivity.class);
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(BannerActivity.this,EventMain.class);
+                intent = new Intent(this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(BannerActivity.this,NewsMain.class);
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
-            case R.id.shoutout:
-                intent = new Intent(BannerActivity.this,Shoutout.class);
-                startActivity(intent);
-                return true;
+//            case R.id.shoutout:
+//                intent = new Intent(this,ListingMore.class);
+//                startActivity(intent);
+//                return true;
 
             case R.id.gallery:
-                intent = new Intent(BannerActivity.this,EventGallery.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(BannerActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(BannerActivity.this,Changepassword_Activity.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(BannerActivity.this,MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.facebook:
-                intent = new Intent(BannerActivity.this,FacebookActivity.class);
+                intent = new Intent(this,FacebookActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.twitter:
-                intent = new Intent(BannerActivity.this,TwitterActivity.class);
+                intent = new Intent(this,TwitterActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.action_notification:
-                intent = new Intent(BannerActivity.this,NotificationMain.class);
+                intent = new Intent(this,NotificationMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.ceomsg:
-                intent = new Intent(BannerActivity.this,CeomessageActivity.class);
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.live:
+                intent = new Intent(this,LiveTelecast.class);
                 startActivity(intent);
                 return true;
 
@@ -441,21 +418,9 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
             View itemView = layoutInflater.inflate(R.layout.activity_banner_item, container, false);
-
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewdash);
-//        imageView.setImageResource(images[position]);
-//            System.out.println("OUT ");
             loadImageFromUrl(imageView,images[position]);
             container.addView(itemView);
-
-            //listening to image click
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Toast.makeText(context, "you clicked image " + (position + 1), Toast.LENGTH_LONG).show();
-                }
-            });
-
             return itemView;
         }
 

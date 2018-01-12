@@ -237,90 +237,86 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     /**
      * Event Handling for Individual menu item selected
      * Identify single menu item by it's id
-     */
+     * */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         Intent intent;
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.action_home:
-                intent = new Intent(FullEvent.this, BannerActivity.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(FullEvent.this, ProfileActivity.class);
+                intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.feedback:
-                intent = new Intent(FullEvent.this,Feedback.class);
+                intent = new Intent(this,Feedback.class);
                 startActivity(intent);
                 return true;
 
             case R.id.action_search:
-                intent = new Intent(FullEvent.this,SearchActivity.class);
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(FullEvent.this, EventMain.class);
+                intent = new Intent(this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(FullEvent.this, NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(FullEvent.this, Shoutout.class);
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                intent = new Intent(FullEvent.this,EventGallery.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
-
-            case R.id.facebook:
-                intent = new Intent(FullEvent.this,FacebookActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.twitter:
-                intent = new Intent(FullEvent.this,TwitterActivity.class);
-                startActivity(intent);
-                return true;
-
 
             case R.id.info:
-                Toast.makeText(FullEvent.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(FullEvent.this, Changepassword_Activity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.ceomsg:
-                intent = new Intent(FullEvent.this,CeomessageActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_notification:
-                intent = new Intent(FullEvent.this,NotificationMain.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(FullEvent.this, MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -94,6 +95,7 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
         }
 
         next = (Button) findViewById(R.id.next);
+        next.setVisibility(View.GONE);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +110,7 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
         });
 
         previous = (Button) findViewById(R.id.previous);
+        previous.setVisibility(View.GONE);
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +125,7 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
         });
 
         vote = (Button) findViewById(R.id.vote);
+        vote.setVisibility(View.GONE);
         vote.setOnClickListener(new View.OnClickListener(){
             int ONE_TIME = 0;
             @Override
@@ -199,7 +203,6 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
                                 });
                             } finally {
                                 try {
-
                                     reader[0].close();
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
@@ -270,7 +273,6 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
                     }
                 });
             }
-
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
             e.printStackTrace();
@@ -283,6 +285,9 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
             questionText.setText(obj.getString("question"));
             questionId = obj.getInt("id");
             checkAnswered(questionId);
+            vote.setVisibility(View.VISIBLE);
+            next.setVisibility(View.VISIBLE);
+            previous.setVisibility(View.VISIBLE);
             JSONArray answersArray = obj.getJSONArray("answers");
             for(int j = 0; j < answersArray.length(); j++){
                 switch(j){
@@ -307,14 +312,14 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
                         answersId[j] = answers.getInt("id");
                         break;
                     }
-                    case 4 :{
+                    case 3 :{
                         JSONObject answers = new JSONObject(answersArray.get(j).toString());
                         answerD.setVisibility(View.VISIBLE);
                         answerD.setText(answers.getString("answer"));
                         answersId[j] = answers.getInt("id");
                         break;
                     }
-                    case 5 :{
+                    case 4 :{
                         JSONObject answers = new JSONObject(answersArray.get(j).toString());
                         answerE.setVisibility(View.VISIBLE);
                         answerE.setText(answers.getString("answer"));
@@ -331,7 +336,6 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
     }
 
     public void checkAnswered(int questionId){
-
         String data = null;
         try {
 
@@ -373,13 +377,29 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
                         sb.append(line + "\n");
                     }
                     System.out.println(sb.toString());
-                    JSONObject object = new JSONObject(sb.toString());
-                    if (object.has("success")) {
+                    final JSONObject object = new JSONObject(sb.toString());
+                    if (object.getInt("exists") == 1) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 answered = true;
-                                Toast.makeText(quiz_activity_frag.this, "Voted successfully!", Toast.LENGTH_SHORT).show();
+                                vote.setText("REVOTE");
+                                for(int i = 0; i < answersId.length; i++){
+                                    try {
+                                        if(answersId[i] == object.getInt("answer_id")){
+                                            answerId = object.getInt("answer_id");
+                                            switch (i){
+                                                case 0 : answerA.toggle(); break;
+                                                case 1 : answerB.toggle(); break;
+                                                case 2 : answerC.toggle(); break;
+                                                case 3 : answerD.toggle(); break;
+                                                case 4 : answerE.toggle(); break;
+                                            }
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
                             }
                         });
                     } else {
@@ -436,6 +456,90 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
             ex = exception.getCause();
         }
         createAndShowDialog(ex.getMessage(), title);
+    }
+
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_home:
+                intent = new Intent(this,BannerActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(this,SearchActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(this,NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                intent = new Intent(this,EventGallery.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.info:
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(this,Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.facebook:
+                intent = new Intent(this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

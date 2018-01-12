@@ -69,6 +69,7 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
     ProgressBar progressBar;
     boolean employee = false;
     boolean shout_list = false;
+    TextView shoutout_more;
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -97,6 +98,17 @@ public class ThirdFragment extends Fragment implements Download_data.download_co
         rv.setLayoutManager(linearLayoutManager);
 
         rv.setItemAnimator(new DefaultItemAnimator());
+
+        shoutout_more = (TextView) view.findViewById(R.id.shoutout_more);
+        shoutout_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListingMore.class);
+                intent.putExtra("more","shoutout");
+                startActivity(intent);
+            }
+        });
+
 
         SERVER_URL = getString(R.string.service_url);
         EMPLOYEE_URL = SERVER_URL+"api/employee/employee_tag_details/";

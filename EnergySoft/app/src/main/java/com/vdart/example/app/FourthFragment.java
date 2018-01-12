@@ -54,6 +54,7 @@ public class FourthFragment extends Fragment implements  Download_data.download_
     RecyclerView rv;
     ProgressBar progressBar;
     String RECENT_EVENTS_URL = "api/events/recent_events/";
+    TextView events_more ;
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -86,6 +87,15 @@ public class FourthFragment extends Fragment implements  Download_data.download_
 
         SERVER_URL = getString(R.string.service_url);
         RECENT_EVENTS_URL = SERVER_URL + RECENT_EVENTS_URL;
+
+        events_more = (TextView) view.findViewById(R.id.events_more);
+        events_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EventMain.class);
+                startActivity(intent);
+            }
+        });
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(RECENT_EVENTS_URL);
@@ -413,6 +423,7 @@ public class FourthFragment extends Fragment implements  Download_data.download_
                     int id = news.getId();
                     Intent intent = new Intent(getActivity(),FullNews.class);
                     intent.putExtra("id", id);
+                    intent.putExtra("check","EVENTS");
 //                    finish();
                     startActivity(intent);
 //                news.setPage("FullNews");

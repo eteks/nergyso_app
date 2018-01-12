@@ -67,6 +67,8 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
     boolean upcoming = false, today = false;
     String TODAY_BIRTHDAY_URL = "api/employee/employee_today_birthday/";
     TextView today_birthday_more, upcoming_birthday_more;
+    boolean TODAY = false, UPCOMING = false ;
+    TextView today_birthday, upcoming_birthday;
 
     private static final int PAGE_START = 0;
     private int currentPage = PAGE_START;
@@ -106,6 +108,8 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
         SERVER_URL = getString(R.string.service_url);
         UPCOMING_BIRTHDAY_URL = SERVER_URL + UPCOMING_BIRTHDAY_URL;
         TODAY_BIRTHDAY_URL = SERVER_URL + TODAY_BIRTHDAY_URL;
+
+        today_birthday = (TextView) view.findViewById(R.id.);
 
         today_birthday_more = (TextView) view.findViewById(R.id.today_birthday_more);
         today_birthday_more.setOnClickListener(new View.OnClickListener(){
@@ -351,10 +355,16 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 //            JSONArray data_array = object.getJSONArray("results");
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-//                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                    UPCOMING = true;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                }else{
+                    length = data_array.length();
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length ; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -383,7 +393,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 //            NewsAdapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
-                createAndShowDialog(e,"No connection");
+                createAndShowDialog(e,"No data");
                 e.printStackTrace();
 //            loadFirstPage();
             }
@@ -402,10 +412,16 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 //            JSONArray data_array = object.getJSONArray("results");
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                    TODAY = true;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                }else{
+                    length = data_array.length();
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -429,15 +445,9 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
                     });
 
                 }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
-
             } catch (JSONException e) {
-                createAndShowDialog(e,"No connection");
+                createAndShowDialog(e,"No data");
                 e.printStackTrace();
-//            loadFirstPage();
             }
             today = false;
         }
@@ -537,14 +547,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    News news = newsList.get(viewHolder.getAdapterPosition());
-                    System.out.println("CLICKed"+news.getId());
-                    int id = news.getId();
-                    Intent intent = new Intent(getActivity(),FullNews.class);
-                    intent.putExtra("id", id);
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+
                 }
             };
             v1.setOnClickListener(mOnClickListener);
@@ -558,10 +561,14 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 
             switch (getItemViewType(position)) {
                 case ITEM:
-                    FirstFragment.PaginationAdapter.NewsVH newsVH = (FirstFragment.PaginationAdapter.NewsVH) holder;
-                    newsVH.news_title.setText(news.getTitle());
-                    newsVH.news_description.setText(news.getNews_description());
-                    loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
+                    if(UPCOMING || TODAY){
+                        FirstFragment.PaginationAdapter.NewsVH newsVH = (FirstFragment.PaginationAdapter.NewsVH) holder;
+                        newsVH.news_title.setText(news.getTitle());
+                        newsVH.news_description.setText(news.getNews_description());
+                        loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
+                    }else {
+
+                    }
                     break;
                 case LOADING:
 //                Do nothing

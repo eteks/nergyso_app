@@ -71,7 +71,7 @@
             android:paddingTop="24dp" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/news_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

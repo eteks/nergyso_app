@@ -332,10 +332,15 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 //            JSONArray data_array = object.getJSONArray("results");
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-//                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                }else{
+                    length = data_array.length();
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length ; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -383,10 +388,15 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 //            JSONArray data_array = object.getJSONArray("results");
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                }else{
+                    length = data_array.length();
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length ; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -416,7 +426,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 //            NewsAdapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
-                createAndShowDialog(e,"No connection");
+                createAndShowDialog(e,"No data");
                 e.printStackTrace();
 //            loadFirstPage();
             }
@@ -518,14 +528,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    News news = newsList.get(viewHolder.getAdapterPosition());
-                    System.out.println("CLICKed"+news.getId());
-                    int id = news.getId();
-                    Intent intent = new Intent(getActivity(),FullNews.class);
-                    intent.putExtra("id", id);
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+
                 }
             };
             v1.setOnClickListener(mOnClickListener);

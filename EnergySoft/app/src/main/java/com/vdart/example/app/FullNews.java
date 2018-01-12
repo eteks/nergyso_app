@@ -325,81 +325,73 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(FullNews.this,BannerActivity.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(FullNews.this,ProfileActivity.class);
+                intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.feedback:
-                intent = new Intent(FullNews.this,Feedback.class);
+                intent = new Intent(this,Feedback.class);
                 startActivity(intent);
                 return true;
 
             case R.id.action_search:
-                intent = new Intent(FullNews.this,SearchActivity.class);
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(FullNews.this,EventMain.class);
+                intent = new Intent(this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(FullNews.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(FullNews.this,Shoutout.class);
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                intent = new Intent(FullNews.this,EventGallery.class);
-                startActivity(intent);
-                return true;
-
-
-            case R.id.ceomsg:
-                intent = new Intent(FullNews.this,CeomessageActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_notification:
-                intent = new Intent(FullNews.this,NotificationMain.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(FullNews.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(FullNews.this,Changepassword_Activity.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(FullNews.this,MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.facebook:
-                intent = new Intent(FullNews.this,FacebookActivity.class);
+                intent = new Intent(this,FacebookActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.twitter:
-                intent = new Intent(FullNews.this,TwitterActivity.class);
+                intent = new Intent(this,TwitterActivity.class);
                 startActivity(intent);
                 return true;
 
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
 
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

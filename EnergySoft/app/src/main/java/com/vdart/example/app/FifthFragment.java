@@ -54,6 +54,7 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
     RecyclerView rv;
     ProgressBar progressBar;
     String RECENT_NEWS_URL = "api/news/recent_news";
+    TextView news_more ;
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -86,6 +87,15 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
 
         SERVER_URL = getString(R.string.service_url);
         RECENT_NEWS_URL = SERVER_URL + RECENT_NEWS_URL;
+
+        news_more = (TextView) view.findViewById(R.id.news_more);
+        news_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewsMain.class);
+                startActivity(intent);
+            }
+        });
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(RECENT_NEWS_URL);
@@ -415,6 +425,7 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
                     int id = news.getId();
                     Intent intent = new Intent(getActivity(),FullNews.class);
                     intent.putExtra("id", id);
+                    intent.putExtra("check","NEWS");
 //                    finish();
                     startActivity(intent);
 //                news.setPage("FullNews");

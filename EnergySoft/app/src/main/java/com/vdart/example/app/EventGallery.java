@@ -167,76 +167,71 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(EventGallery.this,BannerActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.feedback:
-                intent = new Intent(EventGallery.this,Feedback.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_search:
-                intent = new Intent(EventGallery.this,SearchActivity.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(EventGallery.this,ProfileActivity.class);
+                intent = new Intent(this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(EventGallery.this,EventMain.class);
+                intent = new Intent(this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(EventGallery.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(EventGallery.this,Shoutout.class);
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                intent = new Intent(EventGallery.this,EventGallery.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(EventGallery.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(EventGallery.this,Changepassword_Activity.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(EventGallery.this,MainActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.ceomsg:
-                intent = new Intent(EventGallery.this,CeomessageActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_notification:
-                intent = new Intent(EventGallery.this,NotificationMain.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.facebook:
-                intent = new Intent(EventGallery.this,FacebookActivity.class);
+                intent = new Intent(this,FacebookActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.twitter:
-                intent = new Intent(EventGallery.this,TwitterActivity.class);
+                intent = new Intent(this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
                 startActivity(intent);
                 return true;
 

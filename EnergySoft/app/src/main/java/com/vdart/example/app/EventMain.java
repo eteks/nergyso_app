@@ -194,6 +194,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                 add.events_description = obj.getString("events_description");
                 add.setTitle(obj.getString("events_title"));
                 add.setDescription(obj.getString("events_description"));
+                add.setEvents_date(obj.getString("events_date"));
                 String splitted_gallery[] = obj.getString("events_image").split("%2C");
                 add.setImage(splitted_gallery[0]);
                 System.out.println("Events Id"+obj.getInt("id"));
@@ -240,79 +241,73 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(EventMain.this,BannerActivity.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(EventMain.this,ProfileActivity.class);
+                intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.feedback:
-                intent = new Intent(EventMain.this,Feedback.class);
+                intent = new Intent(this,Feedback.class);
                 startActivity(intent);
                 return true;
 
             case R.id.action_search:
-                intent = new Intent(EventMain.this,SearchActivity.class);
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(EventMain.this,EventMain.class);
+                intent = new Intent(this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(EventMain.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(EventMain.this,Shoutout.class);
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                intent = new Intent(EventMain.this,EventGallery.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(EventMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.facebook:
-                intent = new Intent(EventMain.this,FacebookActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.twitter:
-                intent = new Intent(EventMain.this,TwitterActivity.class);
-                startActivity(intent);
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(EventMain.this,Changepassword_Activity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.ceomsg:
-                intent = new Intent(EventMain.this,CeomessageActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_notification:
-                intent = new Intent(EventMain.this,NotificationMain.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(EventMain.this,MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -433,6 +428,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                     EventVH eventVH = (EventVH) holder;
                     eventVH.events_title.setText(event.getTitle());
                     eventVH.events_description.setText(event.getEvents_description());
+                    eventVH.events_date.setText(event.getEvents_date());
                     loadImageFromUrl(eventVH.events_image,(SERVER_URL+event.getEvents_image()));
                     break;
                 case LOADING:
@@ -519,7 +515,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
          * Main list's content ViewHolder
          */
         protected class EventVH extends RecyclerView.ViewHolder {
-            TextView events_title,events_description;
+            TextView events_title,events_description, events_date;
             ImageView events_image;
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public EventVH(View itemView) {
@@ -533,6 +529,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
                 events_title = (TextView) itemView.findViewById(R.id.news_title2);
                 events_description = (TextView) itemView.findViewById(R.id.news_description2);
+                events_date = (TextView) itemView.findViewById(R.id.events_date);
                 events_image = (ImageView) itemView.findViewById(R.id.news_image2);
 //                news_description = (TextView) itemView.findViewById(R.id.news_description);
                 System.out.println(itemView);

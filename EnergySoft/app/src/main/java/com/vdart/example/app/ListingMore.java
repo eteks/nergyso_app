@@ -159,6 +159,12 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 download_data.download_data_from_link(SERVER_URL+"api/employee/employee_upcoming_anniversary/");
                 break;
             }
+            case "shoutout":{
+                Download_data download_data = new Download_data((Download_data.download_complete) this);
+                download_data.download_data_from_link(SERVER_URL+"api/shoutout_list/");
+                break;
+            }
+
             default: break;
         }
     }
@@ -205,9 +211,6 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
         try {
             JSONArray data_array = new JSONArray(data);
             System.out.println("Object"+data_array);
-//            JSONArray data_array = object.getJSONArray("results");
-//            System.out.println("Object"+data_array);
-//            nextPage = object.getString("next");
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
@@ -215,34 +218,40 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
                 System.out.println("Object"+obj);
-                final Event add=new Event();
-                add.events_title = obj.getString("employee_name");
-                add.setTitle(obj.getString("employee_name"));
-                add.setId(obj.getInt("id"));
-                Date date = parseDate(obj.getString("employee_dob"));
-                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                String strDate = formatter.format(date);
-                add.events_description = strDate;
-                add.events_image = obj.getString("employee_photo");
-                System.out.println("News Id"+obj.getInt("id"));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        progressBar.setVisibility(View.GONE);
-                        adapter.add(add);
-                    }
-                });
-
+                if(obj.has("employee_name")){
+                    final Event add=new Event();
+                    add.events_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_dob"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    add.events_description = strDate;
+                    add.events_image = obj.getString("employee_photo");
+                    System.out.println("News Id"+obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.add(add);
+                        }
+                    });
+                }else if(obj.has("shoutout_description")){
+                    final Event add=new Event();
+                    add.setTitle(obj.getString("employee_from_profile"));
+                    add.setId(obj.getInt("id"));
+                    add.events_description = obj.getString("shoutout_description");
+                    add.events_image = obj.getString("employee_to_profile");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.add(add);
+                        }
+                    });
+                }
             }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
-
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
             e.printStackTrace();
-//            loadFirstPage();
         }
 
     }
@@ -275,63 +284,73 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(ListingMore.this,GridList.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(ListingMore.this,ProfileActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.events:
-                intent = new Intent(ListingMore.this,EventMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.news:
-                intent = new Intent(ListingMore.this,NewsMain.class);
+                intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.feedback:
-                intent = new Intent(ListingMore.this,Feedback.class);
+                intent = new Intent(this,Feedback.class);
                 startActivity(intent);
                 return true;
 
-            case R.id.shoutout:
-                intent = new Intent(ListingMore.this,Shoutout.class);
+            case R.id.action_search:
+                intent = new Intent(this,SearchActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                Toast.makeText(ListingMore.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this,EventGallery.class);
+                startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(ListingMore.this, "Coming soon", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.facebook:
-                intent = new Intent(ListingMore.this,FacebookActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.twitter:
-                intent = new Intent(ListingMore.this,TwitterActivity.class);
-                startActivity(intent);
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(ListingMore.this,Changepassword_Activity.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(ListingMore.this,MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
