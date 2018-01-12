@@ -229,6 +229,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 //                add.events_title = obj.getString("events_title");
                 add.setTitle(obj.getString("ceo_message"));
                 add.setId(obj.getInt("id"));
+                add.setImage(SERVER_URL + obj.getString("ceo_employee_photo"));
 //                add.events_description = obj.getString("events_description");
 //                add.setTitle(obj.getString("events_title"));
 //                add.setDescription(obj.getString("events_description"));
@@ -302,80 +303,73 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(CeomessageActivity.this,BannerActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_search:
-                intent = new Intent(CeomessageActivity.this,SearchActivity.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(CeomessageActivity.this,ProfileActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.events:
-                intent = new Intent(CeomessageActivity.this,EventMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.news:
-                intent = new Intent(CeomessageActivity.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(CeomessageActivity.this,Shoutout.class);
+                intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.feedback:
-                intent = new Intent(CeomessageActivity.this,Feedback.class);
+                intent = new Intent(this,Feedback.class);
                 startActivity(intent);
                 return true;
 
-            case R.id.ceomsg:
-                intent = new Intent(CeomessageActivity.this,CeomessageActivity.class);
+            case R.id.action_search:
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
-            case R.id.action_notification:
-                intent = new Intent(CeomessageActivity.this,NotificationMain.class);
+            case R.id.events:
+                intent = new Intent(this,EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                intent = new Intent(CeomessageActivity.this,EventGallery.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(CeomessageActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(CeomessageActivity.this,Changepassword_Activity.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(CeomessageActivity.this,MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.facebook:
-                intent = new Intent(CeomessageActivity.this,FacebookActivity.class);
+                intent = new Intent(this,FacebookActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.twitter:
-                intent = new Intent(CeomessageActivity.this,TwitterActivity.class);
+                intent = new Intent(this,TwitterActivity.class);
                 startActivity(intent);
                 return true;
 
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
 
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

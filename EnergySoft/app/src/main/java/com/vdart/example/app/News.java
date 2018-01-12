@@ -10,6 +10,16 @@ public class News {
     String news_image;
     String news_video;
     String news_document;
+    String news_date;
+
+    public String getNews_date() {
+        return news_date;
+    }
+
+    public void setNews_date(String news_date) {
+        this.news_date = news_date;
+    }
+
     int id;
 
     public News() {

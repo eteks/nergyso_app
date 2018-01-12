@@ -41,7 +41,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.vdart.example.app.MainActivity.MyPREFERENCES;
@@ -55,8 +58,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
     LinearLayoutManager linearLayoutManager;
     String nextPage;
     String SERVER_URL ;
-    EventMain main;
-    String NOTIFICATION_URL ;
+    String NOTIFICATION_URL = "api/notification/notification_list_by_employee" ;
     RecyclerView rv;
     ProgressBar progressBar;
     String DOWNLOAD_URL, category = "" ;
@@ -74,24 +76,12 @@ public class NotificationMain extends AppCompatActivity implements Download_data
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
         SERVER_URL = getString(R.string.service_url);
-        NOTIFICATION_URL = SERVER_URL+ "api/notification/notification_list_by_employee";
+        NOTIFICATION_URL = SERVER_URL+ NOTIFICATION_URL;
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        toolbar.setTitleTextColor(0xFFFFFFFF);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         int id = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);
-//        NOTIFICATION_URL = NOTIFICATION_URL + "notification_employee" + "=" + id ;
-//        ImageView home = (ImageView) findViewById(R.id.action_home);
-//        home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(EventMain.this, GridList.class);
-//                startActivity(intent);
-//            }
-//        });
-//        list = (ListView) findViewById(R.id.newslist);
-//        NewsAdapter = new com.example.user.energysoft.ListAdapter(this);
-//        list.setAdapter(NewsAdapter);
         rv = (RecyclerView) findViewById(R.id.main_recycler);
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
 
@@ -189,7 +179,10 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                     {
                         final JSONObject obj=new JSONObject(data_array.get(i).toString());
                         System.out.println("Object"+obj);
-                        notification[i] = obj.getString("notification_created_date");
+                        Date date = parseDate(obj.getString("notification_created_date"));
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                        String strDate = formatter.format(date);
+                        notification[i] = strDate;
                         category = obj.getString("notification_cateogry").toLowerCase();
                         switch(category) {
                             case "events": {
@@ -301,6 +294,14 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     // To display the events from Notification
@@ -422,7 +423,6 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                            progressBar.setVisibility(View.GONE);
                         adapter.add(add);
                     }
                 });
@@ -443,7 +443,42 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        progressBar.setVisibility(View.GONE);
+                        adapter.add(add);
+                    }
+                });
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                loadFirstPage();
+                e.printStackTrace();
+            }
+        }else if(obj.has("shoutout_description")){
+            try {
+                final Event add=new Event();
+                add.setTitle(obj.getString("shoutout_description"));
+                add.setId(obj.getInt("id"));
+                add.setImage(obj.getString("employee_from_profile"));
+                add.setType("shoutout");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.add(add);
+                    }
+                });
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No connection");
+                loadFirstPage();
+                e.printStackTrace();
+            }
+        }else if(obj.has("ceo_message")){
+            try {
+                final Event add=new Event();
+                add.setTitle(obj.getString("ceo_message"));
+                add.setId(obj.getInt("id"));
+                add.setImage(obj.getString("ceo_employee_photo"));
+                add.setType("ceo");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         adapter.add(add);
                     }
                 });
@@ -475,69 +510,73 @@ public class NotificationMain extends AppCompatActivity implements Download_data
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(NotificationMain.this,GridList.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(NotificationMain.this,ProfileActivity.class);
+                intent = new Intent(this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.feedback:
+                intent = new Intent(this,Feedback.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_search:
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(NotificationMain.this,EventMain.class);
+                intent = new Intent(this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(NotificationMain.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(NotificationMain.this,Shoutout.class);
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                intent = new Intent(NotificationMain.this,EventGallery.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.ceomsg:
-                intent = new Intent(NotificationMain.this,CeomessageActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_notification:
-                intent = new Intent(NotificationMain.this,NotificationMain.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(NotificationMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.facebook:
-                intent = new Intent(NotificationMain.this,FacebookActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.twitter:
-                intent = new Intent(NotificationMain.this,TwitterActivity.class);
-                startActivity(intent);
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(NotificationMain.this,Changepassword_Activity.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(NotificationMain.this,MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
+            case R.id.facebook:
+                intent = new Intent(this,FacebookActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.twitter:
+                intent = new Intent(this,TwitterActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -676,6 +715,9 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         case "shoutout":{
                             break;
                         }
+                        case "ceo" : {
+                            break;
+                        }
                     }
 
                 }
@@ -703,7 +745,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 //                    }else {
                         EventVH eventVH = (EventVH) holder;
                         eventVH.events_title.setText(event.getTitle());
-                        eventVH.events_description.setText("Created on " + notification[position]);
+                        eventVH.events_description.setText("Posted on " + notification[position]);
                         if(event.getEvents_image().equals("1")){
                             eventVH.events_image.setImageResource(R.drawable.birthday_blue);
                         }else if(event.getEvents_image().equals("2")){

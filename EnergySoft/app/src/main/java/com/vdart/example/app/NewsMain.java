@@ -34,7 +34,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class NewsMain extends AppCompatActivity implements Download_data.download_complete {
@@ -195,6 +198,10 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                 add.news_description = obj.getString("news_description");
                 String splitted_gallery[] = obj.getString("news_image").split("%2C");
                 add.news_image = splitted_gallery[0];
+                Date date = parseDate(obj.getString("created_date"));
+                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                String strDate = formatter.format(date);
+                add.setNews_date(strDate);
                 System.out.println("News Id"+obj.getInt("id"));
 //                news.add(add);
                 runOnUiThread(new Runnable() {
@@ -217,6 +224,14 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
             loadFirstPage();
         }
 
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     private void createAndShowDialog(final String message, final String title) {
@@ -300,7 +315,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         @NonNull
         private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
             final RecyclerView.ViewHolder viewHolder;
-            View v1 = inflater.inflate(R.layout.newslist_layout, parent, false);
+            View v1 = inflater.inflate(R.layout.eventlist_layout, parent, false);
             viewHolder = new NewsVH(v1);
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
@@ -331,6 +346,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                     NewsVH newsVH = (NewsVH) holder;
                     newsVH.news_title.setText(news.getTitle());
                     newsVH.news_description.setText(news.getNews_description());
+                    newsVH.news_date.setText("Posted on " + news.getNews_date());
                     loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
                     break;
                 case LOADING:
@@ -417,7 +433,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
          * Main list's content ViewHolder
          */
         protected class NewsVH extends RecyclerView.ViewHolder {
-            TextView news_title,news_description;
+            TextView news_title,news_description, news_date;
             ImageView news_image;
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public NewsVH(View itemView) {
@@ -432,6 +448,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                 news_title = (TextView) itemView.findViewById(R.id.news_title2);
                 news_description = (TextView) itemView.findViewById(R.id.news_description2);
                 news_image = (ImageView) itemView.findViewById(R.id.news_image2);
+                news_date = (TextView) itemView.findViewById(R.id.events_date);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
 //            TextView news = (TextView) convertView.findViewById(R.id.news_title);
@@ -477,80 +494,73 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         switch (item.getItemId())
         {
             case R.id.action_home:
-                intent = new Intent(NewsMain.this,BannerActivity.class);
+                intent = new Intent(this,BannerActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.profile:
-                intent = new Intent(NewsMain.this,ProfileActivity.class);
+                intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.feedback:
-                intent = new Intent(NewsMain.this,Feedback.class);
+                intent = new Intent(this,Feedback.class);
                 startActivity(intent);
                 return true;
 
             case R.id.action_search:
-                intent = new Intent(NewsMain.this,SearchActivity.class);
+                intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.events:
-                intent = new Intent(NewsMain.this,EventMain.class);
+                intent = new Intent(this,EventMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.news:
-                intent = new Intent(NewsMain.this,NewsMain.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.shoutout:
-                intent = new Intent(NewsMain.this,Shoutout.class);
+                intent = new Intent(this,NewsMain.class);
                 startActivity(intent);
                 return true;
 
             case R.id.gallery:
-                intent = new Intent(NewsMain.this,EventGallery.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.ceomsg:
-                intent = new Intent(NewsMain.this,CeomessageActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_notification:
-                intent = new Intent(NewsMain.this,NotificationMain.class);
+                intent = new Intent(this,EventGallery.class);
                 startActivity(intent);
                 return true;
 
             case R.id.info:
-                Toast.makeText(NewsMain.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.settings:
-                intent = new Intent(NewsMain.this,Changepassword_Activity.class);
+                intent = new Intent(this,Changepassword_Activity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.logout:
-                intent = new Intent(NewsMain.this,MainActivity.class);
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.facebook:
-                intent = new Intent(NewsMain.this,FacebookActivity.class);
+                intent = new Intent(this,FacebookActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.twitter:
-                intent = new Intent(NewsMain.this,TwitterActivity.class);
+                intent = new Intent(this,TwitterActivity.class);
                 startActivity(intent);
                 return true;
 
+            case R.id.action_notification:
+                intent = new Intent(this,NotificationMain.class);
+                startActivity(intent);
+                return true;
 
+            case R.id.ceomsg:
+                intent = new Intent(this,CeomessageActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

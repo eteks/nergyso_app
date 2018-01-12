@@ -65,7 +65,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
     TextView titleAnniversary, textAnniversary;
     ImageView imageAnniversary;
     boolean upcoming = false, today = false;
-    TextView today_anniversary_more, upcoming_anniversary_more;
+    TextView today_anniversary_more, upcoming_anniversary_more, today_anniversary, upcoming_anniversary;
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -112,6 +112,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
 
 
         today_anniversary_more = (TextView) view.findViewById(R.id.today_anniversary_more);
+        today_anniversary_more.setVisibility(View.GONE);
         today_anniversary_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -121,7 +122,14 @@ public class SecondFragment extends Fragment implements Download_data.download_c
             }
         });
 
+        today_anniversary = (TextView) view.findViewById(R.id.today_anniversary);
+        today_anniversary.setVisibility(View.GONE);
+
+        upcoming_anniversary = (TextView) view.findViewById(R.id.upcoming_anniversary);
+        upcoming_anniversary.setVisibility(View.GONE);
+
         upcoming_anniversary_more = (TextView) view.findViewById(R.id.upcoming_anniversary_more);
+        upcoming_anniversary_more.setVisibility(View.GONE);
         upcoming_anniversary_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -187,103 +195,6 @@ public class SecondFragment extends Fragment implements Download_data.download_c
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        rv = (RecyclerView) getView().findViewById(R.id.main_recycler);
-////        final ProgressBar progressBar = new ProgressBar(getActivity());
-//
-//        adapter = new FifthFragment.PaginationAdapter(getActivity());
-//
-//        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-//        rv.setLayoutManager(linearLayoutManager);
-//
-//        rv.setItemAnimator(new DefaultItemAnimator());
-//
-//        rv.setAdapter(adapter);
-//        final News add=new News("Title");
-//        add.news_title = "News Title - 1";
-//        add.setTitle("News Title - 1");
-//        add.setId(1);
-//        add.news_description = "News Description - 1";
-//        add.news_image = "";
-////        System.out.println("News Id"+obj.getInt("id"));
-////                news.add(add);
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-////                progressBar.setVisibility(View.GONE);
-//                adapter.add(add);
-//            }
-//        });
-//        setContentView(R.layout.activity_news_main);
-//        SERVER_URL = getString(R.string.service_url);
-//        NEWS_URL = SERVER_URL+ "api/news/";
-//        toolbar = (Toolbar)findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        toolbar.setTitleTextColor(0xFFFFFFFF);
-//        ImageView home = (ImageView) findViewById(R.id.action_home);
-//        home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(NewsMain.this, GridList.class);
-//                startActivity(intent);
-//            }
-//        });
-//        list = (ListView) findViewById(R.id.newslist);
-//        NewsAdapter = new com.example.user.energysoft.ListAdapter(this);
-//        list.setAdapter(NewsAdapter);
-//        rv = (RecyclerView) findViewById(R.id.main_recycler);
-//        progressBar = (ProgressBar) findViewById(R.id.main_progress);
-//
-//        adapter = new FifthFragment.PaginationAdapter(this);
-//
-//        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        rv.setLayoutManager(linearLayoutManager);
-//
-//        rv.setItemAnimator(new DefaultItemAnimator());
-//
-//        rv.setAdapter(adapter);
-
-//        rv.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
-//            @Override
-//            protected void loadMoreItems() {
-//                isLoading = true;
-//                currentPage += 1;
-//
-//                // mocking network delay for API call
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        loadNextPage();
-//                    }
-//                }, 1000);
-//            }
-//
-//            @Override
-//            public int getTotalPageCount() {
-//                return TOTAL_PAGES;
-//            }
-//
-//            @Override
-//            public boolean isLastPage() {
-//                return isLastPage;
-//            }
-//
-//            @Override
-//            public boolean isLoading() {
-//                return isLoading;
-//            }
-//        });
-//
-//
-//        // mocking network delay for API call
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                loadFirstPage();
-//            }
-//        }, 1000);
-
-        Download_data download_data = new Download_data((Download_data.download_complete) this);
-        download_data.download_data_from_link("http://10.0.0.15:8000/api/news/");
     }
 
     private void loadFirstPage() {
@@ -329,13 +240,18 @@ public class SecondFragment extends Fragment implements Download_data.download_c
             try {
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object"+data_array);
-//            JSONArray data_array = object.getJSONArray("results");
-//            System.out.println("Object"+data_array);
-//            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-//                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                    upcoming_anniversary.setVisibility(View.VISIBLE);
+                    upcoming_anniversary_more.setVisibility(View.VISIBLE);
+                }else{
+                    length = data_array.length();
+                    upcoming_anniversary.setVisibility(View.VISIBLE);
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length ; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -380,13 +296,18 @@ public class SecondFragment extends Fragment implements Download_data.download_c
             try {
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object"+data_array);
-//            JSONArray data_array = object.getJSONArray("results");
-//            System.out.println("Object"+data_array);
-//            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                    today_anniversary.setVisibility(View.VISIBLE);
+                    today_anniversary_more.setVisibility(View.VISIBLE);
+                }else{
+                    length = data_array.length();
+                    today_anniversary.setVisibility(View.VISIBLE);
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length ; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -397,7 +318,6 @@ public class SecondFragment extends Fragment implements Download_data.download_c
                     Date date = parseDate(obj.getString("employee_doj"));
                     SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
                     String strDate = formatter.format(date);
-//                    System.out.println(strDate);
                     add.news_description = strDate;
                     add.news_image = obj.getString("employee_photo");
                     System.out.println("News Id"+obj.getInt("id"));
@@ -410,16 +330,11 @@ public class SecondFragment extends Fragment implements Download_data.download_c
                     });
 
                 }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
-
             } catch (JSONException e) {
-                createAndShowDialog(e,"No connection");
+                createAndShowDialog(e,"No data");
                 e.printStackTrace();
-//            loadFirstPage();
             }
+
             today = false;
         }
     }
@@ -518,14 +433,7 @@ public class SecondFragment extends Fragment implements Download_data.download_c
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    News news = newsList.get(viewHolder.getAdapterPosition());
-                    System.out.println("CLICKed"+news.getId());
-                    int id = news.getId();
-                    Intent intent = new Intent(getActivity(),FullNews.class);
-                    intent.putExtra("id", id);
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+
                 }
             };
             v1.setOnClickListener(mOnClickListener);

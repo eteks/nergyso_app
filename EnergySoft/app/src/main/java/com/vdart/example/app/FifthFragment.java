@@ -54,6 +54,7 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
     RecyclerView rv;
     ProgressBar progressBar;
     String RECENT_NEWS_URL = "api/news/recent_news";
+    TextView news_more ;
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -86,6 +87,16 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
 
         SERVER_URL = getString(R.string.service_url);
         RECENT_NEWS_URL = SERVER_URL + RECENT_NEWS_URL;
+
+        news_more = (TextView) view.findViewById(R.id.news_more);
+        news_more.setVisibility(View.GONE);
+        news_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewsMain.class);
+                startActivity(intent);
+            }
+        });
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(RECENT_NEWS_URL);
@@ -290,7 +301,16 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
             }
-            for (int i = 0 ; i < data_array.length() ; i++)
+            int length = 0;
+            if(data_array.length() == 0){
+                length = 0;
+            }else if(data_array.length() >= 3){
+                length = 3;
+                news_more.setVisibility(View.VISIBLE);
+            }else{
+                length = data_array.length();
+            }
+            for (int i = 0 ; i < length ; i++)
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
 //                System.out.println("Object"+obj);
@@ -415,6 +435,7 @@ public class FifthFragment extends Fragment implements  Download_data.download_c
                     int id = news.getId();
                     Intent intent = new Intent(getActivity(),FullNews.class);
                     intent.putExtra("id", id);
+                    intent.putExtra("check","NEWS");
 //                    finish();
                     startActivity(intent);
 //                news.setPage("FullNews");

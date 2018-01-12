@@ -35,7 +35,7 @@
     <item android:id="@+id/feedback"
         android:title="Feedback" />
 
-    <item android:id="@+id/polss"
+    <item android:id="@+id/polls"
         android:title="Polls" />
 
     <item android:id="@+id/news"

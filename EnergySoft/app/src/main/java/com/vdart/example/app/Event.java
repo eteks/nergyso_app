@@ -9,6 +9,15 @@ public class Event {
     String events_description;
     String events_image;
     String events_video;
+
+    public String getEvents_date() {
+        return events_date;
+    }
+
+    public void setEvents_date(String events_date) {
+        this.events_date = events_date;
+    }
+
     String events_document;
 
     public String getType() {

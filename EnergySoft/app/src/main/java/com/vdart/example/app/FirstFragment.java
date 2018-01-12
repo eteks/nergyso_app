@@ -67,6 +67,8 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
     boolean upcoming = false, today = false;
     String TODAY_BIRTHDAY_URL = "api/employee/employee_today_birthday/";
     TextView today_birthday_more, upcoming_birthday_more;
+    boolean TODAY = false, UPCOMING = false ;
+    TextView today_birthday, upcoming_birthday;
 
     private static final int PAGE_START = 0;
     private int currentPage = PAGE_START;
@@ -107,7 +109,14 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
         UPCOMING_BIRTHDAY_URL = SERVER_URL + UPCOMING_BIRTHDAY_URL;
         TODAY_BIRTHDAY_URL = SERVER_URL + TODAY_BIRTHDAY_URL;
 
+        today_birthday = (TextView) view.findViewById(R.id.today_birthday);
+        today_birthday.setVisibility(View.GONE);
+
+        upcoming_birthday = (TextView) view.findViewById(R.id.upcoming_birthday);
+        upcoming_birthday.setVisibility(View.GONE);
+
         today_birthday_more = (TextView) view.findViewById(R.id.today_birthday_more);
+        today_birthday_more.setVisibility(View.GONE);
         today_birthday_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -118,6 +127,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
         });
 
         upcoming_birthday_more = (TextView) view.findViewById(R.id.upcoming_birthday_more);
+        upcoming_birthday_more.setVisibility(View.GONE);
         upcoming_birthday_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -155,192 +165,18 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(UPCOMING_BIRTHDAY_URL);
         upcoming = true;
-//        final News add=new News("Title");
-////        add.news_title = "Ravichandran";
-//        add.setTitle("Ravichandran");
-//        add.setId(1);
-//        add.news_description = "11 November";
-//        add.news_image = "";
-//        final News add1=new News("Title");
-////        add1.news_title = "Harihara Prabu";
-//        add1.setTitle("Harihara Prabu");
-//        add1.setId(1);
-//        add1.news_description = "23 December";
-//        add1.news_image = "";
-//        final News add2=new News("Title");
-////        add2.news_title = "Anand";
-//        add2.setTitle("Anand");
-//        add2.setId(1);
-//        add2.news_description = "03 December";
-//        add2.news_image = "";
-////        System.out.println("News Id"+obj.getInt("id"));
-////                news.add(add);
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-////                progressBar.setVisibility(View.GONE);
-//                adapter.add(add);
-//                adapter.add(add1);
-//                adapter.add(add2);
-//            }
-//        });
-//        TextView r = (TextView) getView().findViewById(R.id.news_title2);
-//        r.setText("");
-        // get the reference of Button
-//        firstButton = (Button) view.findViewById(R.id.firstButton);
-//        // perform setOnClickListener on first Button
-//        firstButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // display a message by using a Toast
-//                Toast.makeText(getActivity(), "First Fragment", Toast.LENGTH_LONG).show();
-//            }
-//        });
         return view;
     }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        mAdapter = new ListAdapter(this, R.layout.newslist_layout);
-//        ListView listViewTodo = (ListView) findViewById(R.id.);
-//        listViewTodo.setAdapter(mAdapter);
-//    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        rv = (RecyclerView) getView().findViewById(R.id.main_recycler);
-////        final ProgressBar progressBar = new ProgressBar(getActivity());
-//
-//        adapter = new FifthFragment.PaginationAdapter(getActivity());
-//
-//        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-//        rv.setLayoutManager(linearLayoutManager);
-//
-//        rv.setItemAnimator(new DefaultItemAnimator());
-//
-//        rv.setAdapter(adapter);
-//        final News add=new News("Title");
-//        add.news_title = "News Title - 1";
-//        add.setTitle("News Title - 1");
-//        add.setId(1);
-//        add.news_description = "News Description - 1";
-//        add.news_image = "";
-////        System.out.println("News Id"+obj.getInt("id"));
-////                news.add(add);
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-////                progressBar.setVisibility(View.GONE);
-//                adapter.add(add);
-//            }
-//        });
-//        setContentView(R.layout.activity_news_main);
-//        SERVER_URL = getString(R.string.service_url);
-//        NEWS_URL = SERVER_URL+ "api/news/";
-//        toolbar = (Toolbar)findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        toolbar.setTitleTextColor(0xFFFFFFFF);
-//        ImageView home = (ImageView) findViewById(R.id.action_home);
-//        home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(NewsMain.this, GridList.class);
-//                startActivity(intent);
-//            }
-//        });
-//        list = (ListView) findViewById(R.id.newslist);
-//        NewsAdapter = new com.example.user.energysoft.ListAdapter(this);
-//        list.setAdapter(NewsAdapter);
-//        rv = (RecyclerView) findViewById(R.id.main_recycler);
-//        progressBar = (ProgressBar) findViewById(R.id.main_progress);
-//
-//        adapter = new FifthFragment.PaginationAdapter(this);
-//
-//        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        rv.setLayoutManager(linearLayoutManager);
-//
-//        rv.setItemAnimator(new DefaultItemAnimator());
-//
-//        rv.setAdapter(adapter);
-
-//        rv.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
-//            @Override
-//            protected void loadMoreItems() {
-//                isLoading = true;
-//                currentPage += 1;
-//
-//                // mocking network delay for API call
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        loadNextPage();
-//                    }
-//                }, 1000);
-//            }
-//
-//            @Override
-//            public int getTotalPageCount() {
-//                return TOTAL_PAGES;
-//            }
-//
-//            @Override
-//            public boolean isLastPage() {
-//                return isLastPage;
-//            }
-//
-//            @Override
-//            public boolean isLoading() {
-//                return isLoading;
-//            }
-//        });
-//
-//
-//        // mocking network delay for API call
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                loadFirstPage();
-//            }
-//        }, 1000);
     }
 
     private void loadFirstPage() {
         Log.d(TAG, "loadFirstPage: ");
-//        final List<News> newsList = News.createMovies(adapter.getItemCount());
-//        Download_data download_data = new Download_data((Download_data.download_complete) this);
-//        download_data.download_data_from_link(NEWS_URL);
-
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                adapter.addAll(newsList);
-//                if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//                else isLastPage = true;
-//            }
-//        });
-
-
     }
-
-//    private void loadNextPage() {
-//        Log.d(TAG, "loadNextPage: " + currentPage);
-////        final List<News> newsList = News.createMovies(adapter.getItemCount());
-//        Download_data download_data = new Download_data((Download_data.download_complete) this);
-//        System.out.println(nextPage);
-//        download_data.download_data_from_link(nextPage);
-//        isLoading = false;
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-////                adapter.removeLoadingFooter();
-////                adapter.addAll(newsList);
-////                if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
-////                else isLastPage = true;
-//            }
-//        });
-//
-//    }
 
     public void get_data(String data)
     {
@@ -351,10 +187,19 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 //            JSONArray data_array = object.getJSONArray("results");
 //            System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-//                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                    UPCOMING = true;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                    upcoming_birthday.setVisibility(View.VISIBLE);
+                    upcoming_birthday_more.setVisibility(View.VISIBLE);
+                }else{
+                    upcoming_birthday.setVisibility(View.VISIBLE);
+                    length = data_array.length();
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length ; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -377,15 +222,10 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
                     });
 
                 }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
-                createAndShowDialog(e,"No connection");
+                createAndShowDialog(e,"No data");
                 e.printStackTrace();
-//            loadFirstPage();
             }
             Download_data download_data = new Download_data((Download_data.download_complete) this);
             download_data.download_data_from_link(TODAY_BIRTHDAY_URL);
@@ -399,13 +239,19 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
             try {
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object"+data_array);
-//            JSONArray data_array = object.getJSONArray("results");
-//            System.out.println("Object"+data_array);
-//            nextPage = object.getString("next");
+                int length = 0;
                 if(data_array.length() == 0){
-                    createAndShowDialog("Server Error","No connection");
+                    length = 0;
+                    TODAY = true;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                    today_birthday.setVisibility(View.VISIBLE);
+                    today_birthday_more.setVisibility(View.VISIBLE);
+                }else{
+                    length = data_array.length();
+                    today_birthday.setVisibility(View.VISIBLE);
                 }
-                for (int i = 0 ; i < data_array.length() ; i++)
+                for (int i = 0 ; i < length; i++)
                 {
                     JSONObject obj=new JSONObject(data_array.get(i).toString());
                     System.out.println("Object"+obj);
@@ -416,7 +262,6 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
                     Date date = parseDate(obj.getString("employee_dob"));
                     SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
                     String strDate = formatter.format(date);
-//                    System.out.println(strDate);
                     add.news_description = strDate;
                     add.news_image = obj.getString("employee_photo");
                     System.out.println("News Id"+obj.getInt("id"));
@@ -429,15 +274,9 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
                     });
 
                 }
-//            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
-//            else isLastPage = true;
-
-//            NewsAdapter.notifyDataSetChanged();
-
             } catch (JSONException e) {
-                createAndShowDialog(e,"No connection");
+                createAndShowDialog(e,"No data");
                 e.printStackTrace();
-//            loadFirstPage();
             }
             today = false;
         }
@@ -537,14 +376,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
             final View.OnClickListener mOnClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    News news = newsList.get(viewHolder.getAdapterPosition());
-                    System.out.println("CLICKed"+news.getId());
-                    int id = news.getId();
-                    Intent intent = new Intent(getActivity(),FullNews.class);
-                    intent.putExtra("id", id);
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+
                 }
             };
             v1.setOnClickListener(mOnClickListener);
@@ -558,10 +390,10 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
 
             switch (getItemViewType(position)) {
                 case ITEM:
-                    FirstFragment.PaginationAdapter.NewsVH newsVH = (FirstFragment.PaginationAdapter.NewsVH) holder;
-                    newsVH.news_title.setText(news.getTitle());
-                    newsVH.news_description.setText(news.getNews_description());
-                    loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
+                        FirstFragment.PaginationAdapter.NewsVH newsVH = (FirstFragment.PaginationAdapter.NewsVH) holder;
+                        newsVH.news_title.setText(news.getTitle());
+                        newsVH.news_description.setText(news.getNews_description());
+                        loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
                     break;
                 case LOADING:
 //                Do nothing
