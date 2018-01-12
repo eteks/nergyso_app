@@ -58,11 +58,11 @@
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="250dp" />
 
     </LinearLayout>
 
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="194dp">
 
@@ -70,8 +70,7 @@
                 android:id="@+id/full_text_events_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="4dp"
                 android:padding="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"

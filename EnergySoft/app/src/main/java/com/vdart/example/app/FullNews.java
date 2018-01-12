@@ -34,8 +34,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import me.relex.circleindicator.CircleIndicator;
-
 
 public class FullNews extends AppCompatActivity implements Download_data.download_complete{
     String SERVER_URL ;
@@ -140,8 +138,8 @@ public class FullNews extends AppCompatActivity implements Download_data.downloa
 //            }
 //        });
 
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(mPager);
+//        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+//        indicator.setViewPager(mPager);
 
         // Auto start of viewpager
         final Handler handler = new Handler();

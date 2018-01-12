@@ -39,7 +39,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     ImageButton firstFragment, secondFragment, thirdFragment, fourthFragment, fifthFragment;
     int currentPage = 0;
     Timer timer;
-    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    final long DELAY_MS = 100;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
     ViewPager viewPager;
     String SERVER_URL ;

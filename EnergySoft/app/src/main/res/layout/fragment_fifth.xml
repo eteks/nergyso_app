@@ -8,8 +8,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:padding="15dp"
+        android:layout_marginTop="0dp"
+        android:padding="1dp"
         android:background="@drawable/border">
         <!--<ImageView-->
             <!--android:src="@drawable/profile_pc"-->
@@ -65,10 +65,9 @@
             android:id="@+id/main_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:clipToPadding="false"
-            android:paddingBottom="24dp"
-            android:paddingTop="24dp" />
+            android:paddingBottom="24dp" />
 
         <TextView
             android:id="@+id/textView12"
@@ -76,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/main_recycler"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
             android:layout_marginRight="15dp"
             android:textStyle="bold"

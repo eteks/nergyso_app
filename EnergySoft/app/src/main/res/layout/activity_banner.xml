@@ -12,9 +12,11 @@
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="175dp"
         android:id="@+id/viewPagerdash"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/border_bottom"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,8 +24,12 @@
         android:id="@+id/menuicons"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
         android:layout_below="@+id/viewPagerdash"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@drawable/border_bottom"
+        >
+
 
         <ImageButton
             android:id="@+id/firstFragment"
@@ -57,17 +63,17 @@
             android:id="@+id/fourthFragment"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            app:srcCompat="@drawable/news_blue"
+            app:srcCompat="@drawable/events_blue"
             android:background="@drawable/border"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/thirdFragment"
-            android:layout_marginStart="24dp" />
+            android:layout_toStartOf="@+id/fifthFragment"
+            android:layout_marginEnd="17dp" />
 
         <ImageButton
             android:id="@+id/fifthFragment"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            app:srcCompat="@drawable/events_blue"
+            app:srcCompat="@drawable/news_blue"
             android:layout_marginEnd="40dp"
             android:background="@drawable/border"
             android:layout_alignParentTop="true"
