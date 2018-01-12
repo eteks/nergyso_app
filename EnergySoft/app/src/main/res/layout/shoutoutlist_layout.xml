@@ -9,26 +9,26 @@
         android:id="@+id/shoutoutlist_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
         android:layout_marginTop="0dp"
+        android:background="@drawable/border"
         android:padding="15dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/shoutout_from"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/profile"/>
+            android:src="@drawable/profile" />
 
         <TextView
             android:id="@+id/news_title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/shoutout_from"
             android:layout_toRightOf="@+id/shoutout_from"
-            android:layout_marginLeft="10dp"
-            android:textColor="#333"
             android:text="Hi everyone good morning!"
+            android:textColor="#333"
             android:textSize="10dp" />
 
         <!--<TextView-->
@@ -52,17 +52,45 @@
             android:layout_marginStart="11dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/shoutout_from"
-            android:src="@drawable/profile_pc"
-             />
+            android:src="@drawable/profile_pc" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/shoutout_to"
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@+id/shoutout_to"
+            android:text="Sender"
+            android:textSize="9dp" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:srcCompat="@drawable/play"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBottom="@+id/textView12"
+            android:layout_toEndOf="@+id/textView12" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView6"
+            android:layout_toEndOf="@+id/imageView6"
+            android:layout_marginLeft="5dp"
+            android:text="Receiver"
+            android:textSize="9dp" />
 
         <!--<ImageView-->
-            <!--android:id="@+id/imageView8"-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:layout_alignTop="@+id/imageView72"-->
-            <!--android:layout_marginStart="13dp"-->
-            <!--android:layout_toEndOf="@+id/imageView72"-->
-            <!--app:srcCompat="@drawable/protest" />-->
+        <!--android:id="@+id/imageView8"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_alignTop="@+id/imageView72"-->
+        <!--android:layout_marginStart="13dp"-->
+        <!--android:layout_toEndOf="@+id/imageView72"-->
+        <!--app:srcCompat="@drawable/protest" />-->
     </RelativeLayout>
 
 </LinearLayout>

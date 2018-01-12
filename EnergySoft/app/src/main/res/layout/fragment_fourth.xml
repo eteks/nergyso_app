@@ -66,16 +66,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingBottom="20dp"
-            android:paddingTop="24dp" />
-
+            android:layout_marginTop="2dp"
+            android:paddingBottom="24dp" />
         <TextView
             android:id="@+id/events_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/main_recycler"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="30dp"
             android:textStyle="bold"

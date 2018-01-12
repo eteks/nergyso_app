@@ -21,13 +21,13 @@
 
 
     <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/main_recycler"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:clipToPadding="false"-->
-        <!--android:paddingBottom="24dp"-->
-        <!--android:paddingTop="24dp" />-->
+    <!--android:id="@+id/main_recycler"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="40dp"-->
+    <!--android:clipToPadding="false"-->
+    <!--android:paddingBottom="24dp"-->
+    <!--android:paddingTop="24dp" />-->
     <ProgressBar
         android:id="@+id/main_progress"
         android:layout_width="wrap_content"
