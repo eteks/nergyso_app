@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.vdart.example.app"
+        applicationId "com.vdart.apps.app"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1

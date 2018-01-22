@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        package = "com.vdart.example.app"
+        package = "com.vdart.apps.app"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.vdart.example.app.MainActivity">
+        tools:context="com.vdart.apps.app.MainActivity">
 
     <include
         android:id="@+id/toolbar"

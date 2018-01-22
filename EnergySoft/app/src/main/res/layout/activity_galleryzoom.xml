@@ -8,7 +8,7 @@
     android:paddingRight="64dp"
     android:paddingTop="16dp"
     android:background="#fff"
-    tools:context="com.vdart.example.app.GalleryZoomActivity">
+    tools:context="com.vdart.apps.app.GalleryZoomActivity">
 
     <ImageView
         android:id="@+id/selectedImage"
