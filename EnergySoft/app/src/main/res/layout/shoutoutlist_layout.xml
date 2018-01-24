@@ -55,13 +55,12 @@
             android:src="@drawable/profile_pc" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/sender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/shoutout_to"
             android:layout_marginStart="11dp"
             android:layout_toEndOf="@+id/shoutout_to"
-            android:text="Sender"
             android:textSize="9dp" />
 
         <ImageView
@@ -70,17 +69,16 @@
             android:layout_height="10dp"
             app:srcCompat="@drawable/play"
             android:layout_marginLeft="5dp"
-            android:layout_alignBottom="@+id/textView12"
-            android:layout_toEndOf="@+id/textView12" />
+            android:layout_alignBottom="@+id/sender"
+            android:layout_toEndOf="@+id/sender" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/receiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView6"
             android:layout_toEndOf="@+id/imageView6"
             android:layout_marginLeft="5dp"
-            android:text="Receiver"
             android:textSize="9dp" />
 
         <!--<ImageView-->

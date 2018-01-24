@@ -17,7 +17,7 @@
             />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/searchText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -27,43 +27,66 @@
             android:inputType="textPersonName"
             android:hint="Search" />
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/editText"
-            android:layout_below="@+id/editText"
-            android:layout_marginTop="30dp"
-            android:text="News" />
+        <RelativeLayout
+            android:id="@+id/searching"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/searchText"
+            android:layout_gravity="top"
+            android:layout_weight="1">
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/radioButton"
-            android:layout_below="@+id/radioButton"
-            android:layout_marginTop="30dp"
-            android:text="Events" />
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/answers"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="52dp"
+                android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/radioButton2"
-            android:layout_below="@+id/radioButton2"
-            android:layout_marginTop="30dp"
-            android:text="Shoutout" />
+                <RadioButton
+                    android:id="@+id/news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/answers"
+                    android:layout_below="@+id/answers"
+                    android:layout_marginTop="30dp"
+                    android:onClick="getRadioChecked"
+                    android:text="News" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/radioButton3"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_edge"
-            android:layout_toEndOf="@+id/radioButton3"
-            android:text="Search"
-            android:textColor="#fff"/>
+                <RadioButton
+                    android:id="@+id/events"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/news"
+                    android:layout_below="@+id/news"
+                    android:layout_marginTop="30dp"
+                    android:onClick="getRadioChecked"
+                    android:text="Events" />
+
+                <RadioButton
+                    android:id="@+id/shoutout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/events"
+                    android:layout_below="@+id/events"
+                    android:layout_marginTop="30dp"
+                    android:onClick="getRadioChecked"
+                    android:text="Shoutout" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/searchbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/answers"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="54dp"
+                android:text="Search" />
+
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

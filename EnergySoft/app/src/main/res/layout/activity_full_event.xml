@@ -35,89 +35,6 @@
             <!--android:fillViewport="true">-->
 
 
-            <WebView
-                android:id="@+id/full_text_events_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="10dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="10dp"/>
-
-            <TextView
-                android:id="@+id/event_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text=""
-                android:paddingLeft="10dp"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="28dp"
-                android:layout_below="@+id/full_text_events_description"
-                android:layout_marginLeft="5dp"/>
-
-            <TextView
-                android:id="@+id/event_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text=""
-                android:paddingLeft="10dp"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="28dp"
-                android:layout_below="@+id/event_location"
-                android:layout_marginLeft="5dp"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="20dp"
-                android:paddingTop="24dp"
-                android:layout_below="@+id/event_date"
-                android:layout_alignParentEnd="true" />
-
-            <TextView
-                android:id="@+id/events_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/main_recycler"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="30dp"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="More..." />
-
-            <!--<FrameLayout-->
-                <!--android:id="@+id/frameLayout"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_alignParentStart="true" />-->
-
-            <!--<android.support.v4.view.ViewPager-->
-                <!--android:id="@+id/pager"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:layout_margin="10dp"-->
-                <!--android:layout_below="@+id/recent_events"-->
-                <!--android:layout_alignParentStart="true" />-->
-            <!--<me.relex.circleindicator.CircleIndicator-->
-                <!--android:id="@+id/indicator"-->
-
-            <!--android:layout_height="194dp">-->
-        <!--&lt;!&ndash;<ScrollView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:fillViewport="true">&ndash;&gt;-->
-
             <!--<WebView-->
                 <!--android:id="@+id/full_text_events_description"-->
                 <!--android:layout_width="wrap_content"-->
@@ -194,10 +111,93 @@
                 <!--&lt;!&ndash;android:layout_alignParentStart="true" />&ndash;&gt;-->
             <!--&lt;!&ndash;<me.relex.circleindicator.CircleIndicator&ndash;&gt;-->
                 <!--&lt;!&ndash;android:id="@+id/indicator"&ndash;&gt;-->
+
+            <!--&lt;!&ndash;android:layout_height="194dp">&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<ScrollView&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;android:fillViewport="true">&ndash;&gt;&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<WebView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/full_text_events_description"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="4dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:padding="10dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentTop="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingLeft="10dp"/>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/event_location"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text=""&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingLeft="10dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="20dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="28dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_below="@+id/full_text_events_description"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="5dp"/>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/event_date"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text=""&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingLeft="10dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="20dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="28dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_below="@+id/event_location"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="5dp"/>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/main_recycler"&ndash;&gt;-->
                 <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_height="48dp"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_alignParentBottom="true"/>&ndash;&gt;-->
-        <!--</RelativeLayout>-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:clipToPadding="false"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingBottom="20dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingTop="24dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_below="@+id/event_date"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentEnd="true" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/events_more"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentEnd="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_below="@+id/main_recycler"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="2dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginRight="15dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginBottom="30dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="15dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="More..." />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;&lt;!&ndash;<FrameLayout&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/frameLayout"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_alignParentStart="true" />&ndash;&gt;&ndash;&gt;-->
+
+            <!--&lt;!&ndash;&lt;!&ndash;<android.support.v4.view.ViewPager&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/pager"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="fill_parent"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_margin="10dp"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_below="@+id/recent_events"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_alignParentStart="true" />&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;<me.relex.circleindicator.CircleIndicator&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/indicator"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="48dp"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_alignParentBottom="true"/>&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
 
 
 

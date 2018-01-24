@@ -22,6 +22,7 @@
         <activity android:name="com.vdart.apps.app.BannerActivity" />
         <activity android:name="com.vdart.apps.app.Slidescreen" />
         <activity android:name="com.vdart.apps.app.SearchActivity" />
+        <activity android:name="com.vdart.apps.app.SearchResults" />
         <activity android:name="com.vdart.apps.app.NotificationMain" />
         <activity android:name="com.vdart.apps.app.Feedback" />
         <activity android:name="com.vdart.apps.app.CeomessageActivity" />
