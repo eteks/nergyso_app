@@ -70,7 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/news_description2"
             android:layout_alignParentEnd="true"
-            android:paddingLeft="10dp"
+            android:paddingLeft="8dp"
+            android:textStyle="normal|italic"
             android:layout_weight="1"
             android:textColor="#333"
             android:gravity="end"/>
