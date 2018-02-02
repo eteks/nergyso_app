@@ -41,6 +41,12 @@
         <activity android:name="com.vdart.apps.app.Changepassword_Activity" />
         <activity android:name="com.vdart.apps.app.DetailActivity" />
         <activity android:name="com.vdart.apps.app.ListingMore" />
+        <activity android:name="com.vdart.apps.app.BannerItem" />
+        <activity android:name="com.vdart.apps.app.QuizActivity" />
+        <activity android:name="com.vdart.apps.app.quiz_activity_frag" />
+        <activity android:name="com.vdart.apps.app.Resetpassword_Activity" />
+        <activity android:name="com.vdart.apps.app.VideoActivity" />
+        <activity android:name="com.vdart.apps.app.LiveTelecast" />
 
         <service android:name="com.vdart.apps.app.MyAndroidFirebaseMsgService">
             <intent-filter>
@@ -53,12 +59,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.vdart.apps.app.BannerItem" />
-        <activity android:name="com.vdart.apps.app.QuizActivity" />
-        <activity android:name="com.vdart.apps.app.quiz_activity_frag" />
-        <activity android:name="com.vdart.apps.app.Resetpassword_Activity" />
-        <activity android:name="com.vdart.apps.app.VideoActivity" />
-        <activity android:name="com.vdart.apps.app.LiveTelecast" />
     </application>
 
 </manifest>

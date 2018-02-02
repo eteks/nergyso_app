@@ -41,8 +41,8 @@ import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.google.android.gms.internal.zzagz.runOnUiThread;
 import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
-import static com.google.android.gms.internal.zzahf.runOnUiThread;
 
 
 public class SecondFragment extends Fragment implements Download_data.download_complete{

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
@@ -126,9 +127,10 @@ public class MainActivity extends AppCompatActivity
                                         }
                                     });
                                     System.out.println("object"+object.getString("key"));
-//                                    String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-//                                    //Log the token
-//                                    System.out.println( "Refreshed token: " + refreshedToken);
+                                    FirebaseApp.initializeApp(getBaseContext());
+                                    String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+                                    //Log the token
+                                    System.out.println( "Refreshed token: " + refreshedToken);
                                     SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
                                     editor.putString("key", object.getString("key"));
