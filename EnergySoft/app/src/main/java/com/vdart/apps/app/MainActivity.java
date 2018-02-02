@@ -32,7 +32,7 @@ import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity
 {
-    String SERVER_URL,LOGIN_URL;
+    String SERVER_URL,LOGIN_URL, REGISTRATION_URL;
     Toolbar toolbar;
     TextView forgot_password ;
     private ProgressBar mProgressBar;
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity
         mProgressBar.setVisibility(ProgressBar.GONE);
         SERVER_URL = getString(R.string.service_url);
         LOGIN_URL = SERVER_URL+ "api/rest-auth/login/";
+        REGISTRATION_URL = SERVER_URL + "api/push_notification/create_device";
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FirebaseApp.initializeApp(this);
@@ -131,6 +132,63 @@ public class MainActivity extends AppCompatActivity
                                     String refreshedToken = FirebaseInstanceId.getInstance().getToken();
                                     //Log the token
                                     System.out.println( "Refreshed token: " + refreshedToken);
+
+                                    String data = null;
+                                    try {
+
+                                        data = URLEncoder.encode("registration_id", "UTF-8")
+                                                + "=" + URLEncoder.encode(refreshedToken, "UTF-8");
+                                        data += "&" + URLEncoder.encode("user", "UTF-8") + "="
+                                                + object.getInt("user");
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    final BufferedReader[] reader = {null};
+
+                                    // Send data
+                                    final String finalData = data;
+                                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                                        @Override
+                                        protected Void doInBackground(Void... params) {
+                                            try {
+                                                ONE_TIME = 0;
+                                                // Defined URL  where to send data
+                                                URL url = new URL(REGISTRATION_URL);
+
+                                                // Send POST data request
+                                                System.out.println("URL:" + REGISTRATION_URL);
+                                                URLConnection conn = url.openConnection();
+                                                conn.setDoOutput(true);
+                                                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                                                wr.write(finalData);
+                                                wr.flush();
+
+                                                // Get the server response
+
+                                                reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                                StringBuilder sb = new StringBuilder();
+                                                String line = null;
+
+                                                // Read Server Response
+                                                while ((line = reader[0].readLine()) != null) {
+                                                    // Append server response in string
+                                                    sb.append(line + "\n");
+                                                }
+                                                System.out.println(sb.toString());
+                                                JSONObject object = new JSONObject(sb.toString());
+                                                if(object.has("success")) {
+                                                    System.out.println("Registration token saved successfully");
+                                                }
+                                            } catch (Exception ex) {
+                                                System.out.println(ex);
+                                            }
+                                            return null;
+                                        }
+
+                                    };
+                                    runAsyncTask(task);
+
                                     SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
                                     editor.putString("key", object.getString("key"));

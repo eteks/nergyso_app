@@ -18,11 +18,13 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
         //Log data to Log Cat
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        System.out.println("Data : " + remoteMessage.getData());
         //create notification
         createNotification(remoteMessage.getNotification().getBody());
     }
 
     private void createNotification( String messageBody) {
+        System.out.println("Message" + messageBody);
         Intent intent = new Intent( this , FullEvent. class );
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent resultIntent = PendingIntent.getActivity( this , 0, intent,
