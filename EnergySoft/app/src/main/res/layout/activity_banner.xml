@@ -17,7 +17,17 @@
         android:layout_below="@+id/toolbar"
         android:background="@drawable/border_bottom"
         />
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,7 +96,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="10dp"/>
     </RelativeLayout>
-    
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
