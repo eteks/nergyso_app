@@ -1,0 +1,607 @@
+package com.vdart.apps.app;
+
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
+import static com.google.android.gms.internal.zzahf.runOnUiThread;
+
+public class FirstFragment extends Fragment implements  Download_data.download_complete{
+
+    View view;
+    Button firstButton;
+    private ListAdapter mAdapter;
+    Toolbar toolbar;
+    private static final String TAG = "NewsMain";
+    String listValue = "NULL";
+    FirstFragment.PaginationAdapter adapter, adapter2;
+    LinearLayoutManager linearLayoutManager, linearLayoutManager2;
+    String nextPage;
+    String SERVER_URL;
+    RecyclerView rv, rv_today;
+    ProgressBar progressBar;
+    String UPCOMING_BIRTHDAY_URL = "api/employee/employee_upcoming_birthday/";
+//    String UPCOMING_BIRTHDAY_URL = "api/events/recent_events/";
+    String BIRTHDAY_WISHES = "Wish you many more happy returns of the day. Have a wonderful year ahead.";
+    String BIRTHDAY = "Happy Birthday!";
+    TextView birthday, birthday_wishes;
+    ImageView birthday_photo;
+    boolean upcoming = false, today = false;
+    String TODAY_BIRTHDAY_URL = "api/employee/employee_today_birthday/";
+    TextView today_birthday_more, upcoming_birthday_more;
+    boolean TODAY = false, UPCOMING = false ;
+    TextView today_birthday, upcoming_birthday;
+
+    private static final int PAGE_START = 0;
+    private int currentPage = PAGE_START;
+
+    //    String event = "{\"events\":[ {\"id\":\"1\",\"events_title\":\"Event-1\",\"events_description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\"events_venue\":\"Pondicherry\",\"events_image\":\"http://www.fotothing.com/photos/df3/df309f51ae73de90d1ea09aa2e3d312d.jpg\",\"events_video\":\"http://www.fotothing.com/photos/df3/df309f51ae73de90d1ea09aa2e3d312d.jpg\",\"events_document\":\"https://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=4&cad=rja&uact=8&ved=0ahUKEwjM99DFtfzXAhVMqo8KHXxEDg0QFgg5MAM&url=http%3A%2F%2Funec.edu.az%2Fapplication%2Fuploads%2F2014%2F12%2Fpdf-sample.pdf&usg=AOvVaw2a4IUOgpX0IaeRxQpCN2l0\",\"events_date\":\"21-07-2017\"]}";
+    public ListView list;
+    public ArrayList<News> newsList = new ArrayList<News>();
+    public ListAdapter NewsAdapter;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_first, container, false);
+//        TextView t = (TextView) view.findViewById(R.id.news_title2);
+//        t.setText("Dei");
+        rv = (RecyclerView) view.findViewById(R.id.main_recycler);
+//        final ProgressBar progressBar = new ProgressBar(getActivity());
+        rv_today = (RecyclerView) view.findViewById(R.id.main_recycler2);
+
+        adapter = new FirstFragment.PaginationAdapter(getActivity());
+        adapter2 = new FirstFragment.PaginationAdapter(getActivity());
+
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(linearLayoutManager);
+
+        linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        linearLayoutManager2.setAutoMeasureEnabled(true);
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        rv.setAdapter(adapter);
+
+        birthday = (TextView) view.findViewById(R.id.birthday);
+        birthday_wishes = (TextView) view.findViewById(R.id.birthday_wishes);
+        birthday_photo = (ImageView) view.findViewById(R.id.birthday_photo);
+
+        SERVER_URL = getString(R.string.service_url);
+        UPCOMING_BIRTHDAY_URL = SERVER_URL + UPCOMING_BIRTHDAY_URL;
+        TODAY_BIRTHDAY_URL = SERVER_URL + TODAY_BIRTHDAY_URL;
+
+        today_birthday = (TextView) view.findViewById(R.id.today_birthday);
+        today_birthday.setVisibility(View.GONE);
+
+        upcoming_birthday = (TextView) view.findViewById(R.id.upcoming_birthday);
+        upcoming_birthday.setVisibility(View.GONE);
+
+        today_birthday_more = (TextView) view.findViewById(R.id.today_birthday_more);
+        today_birthday_more.setVisibility(View.GONE);
+        today_birthday_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListingMore.class);
+                intent.putExtra("more","today_birthday");
+                startActivity(intent);
+            }
+        });
+
+        upcoming_birthday_more = (TextView) view.findViewById(R.id.upcoming_birthday_more);
+        upcoming_birthday_more.setVisibility(View.GONE);
+        upcoming_birthday_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListingMore.class);
+                intent.putExtra("more","upcoming_birthday");
+                startActivity(intent);
+            }
+        });
+
+        SharedPreferences shared = getActivity().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        System.out.println("USer : "+shared.getString("employee_photo",""));
+        String employee_dob = shared.getString("employee_dob","");
+        String employee_doj = shared.getString("employee_doj","");
+        String employee_photo = shared.getString("employee_photo","");
+
+        if(!employee_dob.isEmpty()){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String today = dateFormat.format(date);
+            String today_splitted[] = today.split("-");
+            String dob_splitted[] = employee_dob.split("-");
+            if(today_splitted[1].equals(dob_splitted[1]) &&  (today_splitted[2].equals(dob_splitted[2]))){
+                birthday.setText(BIRTHDAY);
+                birthday_wishes.setText(BIRTHDAY_WISHES);
+                loadImageFromUrl(birthday_photo,SERVER_URL+employee_photo);
+            }
+            else
+            {
+                birthday.setVisibility(View.GONE);
+                birthday_wishes.setVisibility(View.GONE);
+                birthday_photo.setVisibility(View.GONE);
+            }
+        }
+
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(UPCOMING_BIRTHDAY_URL);
+        upcoming = true;
+        return view;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    private void loadFirstPage() {
+        Log.d(TAG, "loadFirstPage: ");
+    }
+
+    public void get_data(String data)
+    {
+        if(upcoming){
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object"+data_array);
+//            JSONArray data_array = object.getJSONArray("results");
+//            System.out.println("Object"+data_array);
+//            nextPage = object.getString("next");
+                int length = 0;
+                if(data_array.length() == 0){
+                    length = 0;
+                    UPCOMING = true;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                    upcoming_birthday.setVisibility(View.VISIBLE);
+                    upcoming_birthday_more.setVisibility(View.VISIBLE);
+                }else{
+                    upcoming_birthday.setVisibility(View.VISIBLE);
+                    length = data_array.length();
+                }
+                for (int i = 0 ; i < length ; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+                    System.out.println("Object"+obj);
+                    final News add=new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_dob"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    System.out.println("News Id"+obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                            adapter.add(add);
+                        }
+                    });
+
+                }
+
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No data");
+                e.printStackTrace();
+            }
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(TODAY_BIRTHDAY_URL);
+            rv_today.setLayoutManager(linearLayoutManager2);
+            rv_today.setItemAnimator(new DefaultItemAnimator());
+            rv_today.setAdapter(adapter2);
+            today = true;
+            upcoming = false;
+
+        }else if(today){
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object"+data_array);
+                int length = 0;
+                if(data_array.length() == 0){
+                    length = 0;
+                    TODAY = true;
+                }else if(data_array.length() > 3){
+                    length = 3;
+                    today_birthday.setVisibility(View.VISIBLE);
+                    today_birthday_more.setVisibility(View.VISIBLE);
+                }else{
+                    length = data_array.length();
+                    today_birthday.setVisibility(View.VISIBLE);
+                }
+                for (int i = 0 ; i < length; i++)
+                {
+                    JSONObject obj=new JSONObject(data_array.get(i).toString());
+                    System.out.println("Object"+obj);
+                    final News add=new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_dob"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    System.out.println("News Id"+obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                        progressBar.setVisibility(View.GONE);
+                            adapter2.add(add);
+                        }
+                    });
+
+                }
+            } catch (JSONException e) {
+                createAndShowDialog(e,"No data");
+                e.printStackTrace();
+            }
+            today = false;
+        }
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    private void createAndShowDialog(final String message, final String title) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.create().show();
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+
+    private void createAndShowDialog(Exception exception, String title) {
+        Throwable ex = exception;
+        if(exception.getCause() != null){
+            ex = exception.getCause();
+        }
+        createAndShowDialog(ex.getMessage(), title);
+    }
+
+    private void createAndShowDialogFromTask(final Exception exception, String title) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                createAndShowDialog(exception, "Error");
+            }
+        });
+    }
+
+    public void clickList(){
+        Intent intent = new Intent(getActivity(),FullNews.class);
+        startActivity(intent);
+    }
+
+    public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        private static final int ITEM = 0;
+        private static final int LOADING = 1;
+        NewsMain main;
+        private List<News> newsList;
+        private Context context;
+        private boolean isLoadingAdded = false;
+
+        public PaginationAdapter(Context context) {
+            this.context = context;
+            newsList = new ArrayList<>();
+        }
+
+        public List<News> getNewsList() {
+            return newsList;
+        }
+
+        public void setNewsList(List<News> newsList) {
+            this.newsList = newsList;
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            RecyclerView.ViewHolder viewHolder = null;
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+
+            switch (viewType) {
+                case ITEM:
+                    viewHolder = getViewHolder(parent, inflater);
+                    break;
+                case LOADING:
+                    View v2 = inflater.inflate(R.layout.item_progress, parent, false);
+                    viewHolder = new FirstFragment.PaginationAdapter.LoadingVH(v2);
+                    break;
+            }
+            return viewHolder;
+        }
+
+        @NonNull
+        private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
+            final RecyclerView.ViewHolder viewHolder;
+            View v1 = inflater.inflate(R.layout.birthdaylist_layout, parent, false);
+            viewHolder = new FirstFragment.PaginationAdapter.NewsVH(v1);
+            final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            };
+            v1.setOnClickListener(mOnClickListener);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//        Movie movie = movies.get(position);
+            News news = newsList.get(position);
+
+            switch (getItemViewType(position)) {
+                case ITEM:
+                        FirstFragment.PaginationAdapter.NewsVH newsVH = (FirstFragment.PaginationAdapter.NewsVH) holder;
+                        newsVH.news_title.setText(news.getTitle());
+                        newsVH.news_description.setText(news.getNews_description());
+                        loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
+                    break;
+                case LOADING:
+//                Do nothing
+                    break;
+            }
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return newsList == null ? 0 : newsList.size();
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return (position == newsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
+        }
+
+    /*
+   Helpers
+   _________________________________________________________________________________________________
+    */
+
+        public void add(News mc) {
+            newsList.add(mc);
+            notifyItemInserted(newsList.size() - 1);
+        }
+
+        public void addAll(List<News> mcList) {
+            for (News mc : mcList) {
+                add(mc);
+            }
+        }
+
+        public void remove(News city) {
+            int position = newsList.indexOf(city);
+            if (position > -1) {
+                newsList.remove(position);
+                notifyItemRemoved(position);
+            }
+        }
+
+        public void clear() {
+            isLoadingAdded = false;
+            while (getItemCount() > 0) {
+                remove(getItem(0));
+            }
+        }
+
+        public boolean isEmpty() {
+            return getItemCount() == 0;
+        }
+
+
+        public void addLoadingFooter() {
+            isLoadingAdded = true;
+            add(new News());
+        }
+
+        public void removeLoadingFooter() {
+            isLoadingAdded = false;
+
+            int position = newsList.size() - 1;
+            News item = getItem(position);
+
+            if (item != null) {
+                newsList.remove(position);
+                notifyItemRemoved(position);
+            }
+        }
+
+        public News getItem(int position) {
+            return newsList.get(position);
+        }
+
+
+   /*
+   View Holders
+   _________________________________________________________________________________________________
+    */
+
+        /**
+         * Main list's content ViewHolder
+         */
+        protected class NewsVH extends RecyclerView.ViewHolder {
+            TextView news_title,news_description;
+            ImageView news_image;
+            //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
+            public NewsVH(View itemView) {
+                super(itemView);
+//            ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
+//            if (convertView == null) {
+//                LayoutInflater inflater = (LayoutInflater) main.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                convertView = inflater.inflate(R.layout.newslist_layout, null);
+
+//            holder.name = (TextView) convertView.findViewById(R.id.name);
+//            holder.code = (TextView) convertView.findViewById(R.id.code);
+                news_title = (TextView) itemView.findViewById(R.id.news_title2);
+                news_description = (TextView) itemView.findViewById(R.id.news_description2);
+                news_image = (ImageView) itemView.findViewById(R.id.news_image2);
+                System.out.println(itemView);
+//                news_image = (ImageView) convertView.findViewById(R.id.news_image);
+//            TextView news = (TextView) convertView.findViewById(R.id.news_title);
+//                convertView.setTag(holder);
+//            System.out.println("View "+this.main.news.get(position).news_title);
+//            }
+//            else
+//            {
+//                holder = (ListAdapter.ViewHolderItem) convertView.getTag();
+//            }
+
+            }
+        }
+
+
+        protected class LoadingVH extends RecyclerView.ViewHolder {
+
+            public LoadingVH(View itemView) {
+                super(itemView);
+            }
+        }
+
+
+    }
+
+    // Initiating Menu XML file (menu.xml)
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu)
+//    {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_home:
+                intent = new Intent(getActivity(),GridList.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.profile:
+                intent = new Intent(getActivity(),ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.events:
+                intent = new Intent(getActivity(),EventMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.news:
+                intent = new Intent(getActivity(),NewsMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(getActivity(),Shoutout.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.gallery:
+                Toast.makeText(getActivity(), "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.info:
+                Toast.makeText(getActivity(), "Coming soon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.settings:
+                intent = new Intent(getActivity(),Changepassword_Activity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.logout:
+                intent = new Intent(getActivity(),MainActivity.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void loadImageFromUrl(ImageView myImage,String employee_photo) {
+        System.out.println("Image "+myImage+employee_photo);
+        Picasso.with(getActivity()).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+                .into(myImage, new com.squareup.picasso.Callback(){
+
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+    }
+
+}
