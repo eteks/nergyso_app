@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +56,8 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
     CeomessageActivity.PaginationAdapter adapter;
     ProgressBar progressBar;
     LinearLayoutManager linearLayoutManager;
-    TextView ceo_more;
+    TextView ceo_more, ceomsgtitle;
+    RelativeLayout ceo_messaging;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,12 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 
         ceo_message = (EditText) findViewById(R.id.ceo_message);
         ceo_post = (Button) findViewById(R.id.ceo_post);
+        ceomsgtitle = (TextView) findViewById(R.id.ceomsgtitle);
+
+        String designation = shared.getString("employee_designation","");
+        if(designation.toUpperCase().equals("CEO")){
+            ceo_messaging.setVisibility(View.VISIBLE);
+        }
         ceo_post.setOnClickListener(new View.OnClickListener() {
             int ONE_TIME = 0;
             @Override

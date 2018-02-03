@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
     TextView today_birthday_more, upcoming_birthday_more;
     boolean TODAY = false, UPCOMING = false ;
     TextView today_birthday, upcoming_birthday;
+    RelativeLayout relativeLayout2;
 
     private static final int PAGE_START = 0;
     private int currentPage = PAGE_START;
@@ -100,6 +102,8 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
         rv.setItemAnimator(new DefaultItemAnimator());
 
         rv.setAdapter(adapter);
+
+        relativeLayout2 = (RelativeLayout) view.findViewById(R.id.relativeLayout2);
 
         birthday = (TextView) view.findViewById(R.id.birthday);
         birthday_wishes = (TextView) view.findViewById(R.id.birthday_wishes);
@@ -150,6 +154,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
             String today_splitted[] = today.split("-");
             String dob_splitted[] = employee_dob.split("-");
             if(today_splitted[1].equals(dob_splitted[1]) &&  (today_splitted[2].equals(dob_splitted[2]))){
+                relativeLayout2.setVisibility(View.VISIBLE);
                 birthday.setText(BIRTHDAY);
                 birthday_wishes.setText(BIRTHDAY_WISHES);
                 loadImageFromUrl(birthday_photo,SERVER_URL+employee_photo);
