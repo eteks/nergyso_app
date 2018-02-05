@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -78,6 +79,8 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
         rv = (RecyclerView) findViewById(R.id.main_recycler);
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
 
+        ceo_messaging = (RelativeLayout) findViewById(R.id.ceo_messaging);
+
         adapter = new CeomessageActivity.PaginationAdapter(this);
 
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -88,6 +91,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
         rv.setAdapter(adapter);
 
         ceo_more = (TextView) findViewById(R.id.ceo_more);
+        ceo_more.setVisibility(View.GONE);
         ceo_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -223,13 +227,17 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 //            JSONObject object = new JSONObject(data);
 //            System.out.println("Object"+object);
             JSONArray data_array = new JSONArray(data);
+            int length = data_array.length();
 //            JSONArray data_array = object.getJSONArray("results");
             System.out.println("Object"+data_array);
 //            nextPage = object.getString("next");
             if(data_array.length() == 0){
                 createAndShowDialog("Server Error","No connection");
+            }else if(data_array.length() > 3){
+                ceo_more.setVisibility(View.VISIBLE);
+                length = 3;
             }
-            for (int i = 0 ; i < data_array.length() ; i++)
+            for (int i = 0 ; i < length ; i++)
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
 //                System.out.println("Object"+obj);
