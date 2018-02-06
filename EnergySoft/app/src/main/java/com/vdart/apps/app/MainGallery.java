@@ -13,6 +13,5 @@ public class MainGallery extends AppCompatActivity {
         System.out.println("Notification");
         Intent intent = new Intent(MainGallery.this, MyAndroidFirebaseMsgService.class);
         startActivity(intent);
-
     }
 }
