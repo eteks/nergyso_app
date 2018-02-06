@@ -220,6 +220,8 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                         add.setId(obj.getInt("id"));
                         add.events_description = obj.getString("employee_to_profile");
                         add.events_image = obj.getString("employee_from_profile");
+                        add.setEvents_video(obj.getString("employee_from_name"));
+                        add.setEvents_document(obj.getString("employee_to_name"));
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -498,6 +500,8 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                     EventVH eventVH = (EventVH) holder;
                     if(more.equals("shoutout")){
                         eventVH.events_title.setText(event.getTitle());
+                        eventVH.sender.setText(event.getEvents_video());
+                        eventVH.receiver.setText(event.getEvents_document());
                         loadImageFromUrl(eventVH.shoutout_to,(SERVER_URL+event.getEvents_description()));
                         loadImageFromUrl(eventVH.shoutout_from,(SERVER_URL+event.getEvents_image()));
                     }else{
@@ -590,8 +594,9 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
          * Main list's content ViewHolder
          */
         protected class EventVH extends RecyclerView.ViewHolder {
-            TextView events_title,events_description;
+            TextView events_title,events_description,sender, receiver;;
             ImageView events_image, shoutout_to, shoutout_from;
+
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public EventVH(View itemView) {
                 super(itemView);
@@ -607,6 +612,8 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 events_image = (ImageView) itemView.findViewById(R.id.news_image2);
                 shoutout_to = (ImageView) itemView.findViewById(R.id.shoutout_to);
                 shoutout_from = (ImageView) itemView.findViewById(R.id.shoutout_from);
+                sender = (TextView) itemView.findViewById(R.id.sender);
+                receiver = (TextView) itemView.findViewById(R.id.receiver);
 //                news_description = (TextView) itemView.findViewById(R.id.news_description);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);

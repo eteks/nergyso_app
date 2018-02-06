@@ -99,6 +99,7 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 editor.putString("employee_dob", obj.getString("employee_dob"));
                 editor.putString("employee_photo", obj.getString("employee_photo"));
                 editor.putString("employee_doj",obj.getString("employee_doj"));
+                editor.putString("employee_designation",obj.getString("employee_designation"));
                 editor.commit();
             } catch (JSONException e) {
                 e.printStackTrace();

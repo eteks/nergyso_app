@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:271284960175:android:9af22bff79cfa447",
+        "mobilesdk_app_id": "1:271284960175:android:c9896b7ab233534b",
         "android_client_info": {
-          "package_name": "com.example.user.energysoft"
+          "package_name": "com.vdart.apps.app"
         }
       },
       "oauth_client": [
