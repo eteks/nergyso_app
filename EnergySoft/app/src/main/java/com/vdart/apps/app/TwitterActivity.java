@@ -38,6 +38,15 @@ public class TwitterActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.loadUrl("https://twitter.com/VDartInc/");
+        webView.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public void onPageFinished(WebView view, String url)
+            {
+                // Page loading finished
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            }
+        });
 
     }
     private class MyBrowser extends WebViewClient {

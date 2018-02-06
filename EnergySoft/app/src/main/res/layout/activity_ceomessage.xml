@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar" />
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/tool_bar"
-            />
-
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="35dp"
+        android:id="@+id/ceo_messaging"
+        android:visibility="gone">
             <TextView
                 android:id="@+id/ceomsgtitle"
                 android:layout_width="wrap_content"
@@ -27,7 +38,6 @@
                 android:layout_marginTop="35dp"
                 android:text="CEO Message"
                 android:textColor="@color/blueText"
-                android:layout_below="@id/toolbar"
                 android:textSize="22dp"
                 android:textStyle="bold|normal" />
 
@@ -52,7 +62,7 @@
                 android:textColor="#fff"
                 android:layout_below="@+id/ceo_message"
                 android:layout_alignEnd="@+id/ceo_message" />
-
+    </RelativeLayout>
 
         <!--<EditText-->
         <!--android:id="@+id/editText"-->
@@ -74,27 +84,35 @@
         <!--android:divider="@null"-->
         <!--android:layout_below="@+id/shoutpost"-->
         <!--/>-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_recycler"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:clipToPadding="false"
-            android:paddingBottom="24dp"
-            android:paddingTop="24dp" />
+            android:orientation="horizontal"
+            android:layout_below="@id/ceo_messaging">
 
-        <TextView
-            android:id="@+id/ceo_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/main_recycler"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="15dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:text="More..." />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/main_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:clipToPadding="false"
+                android:paddingBottom="24dp"
+                android:paddingTop="24dp" />
+
+            <TextView
+                android:id="@+id/ceo_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/main_recycler"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="15dp"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="More..." />
+
+        </LinearLayout>
 
     <!--Only the Listveiw-->
 
@@ -175,10 +193,7 @@
     <!--android:layout_toEndOf="@+id/news_title"-->
     <!--app:srcCompat="@drawable/protest" />-->
 
-    </RelativeLayout>
-
-
-</ScrollView>
+</RelativeLayout>
 
 
 
