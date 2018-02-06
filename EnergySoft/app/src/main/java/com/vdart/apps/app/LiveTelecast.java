@@ -202,11 +202,11 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        progressBar.setVisibility(View.GONE);
                         adapter.add(add);
                     }
                 });
             }
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");
             loadFirstPage();

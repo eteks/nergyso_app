@@ -426,6 +426,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         adapter.add(add);
                     }
                 });
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             } catch (JSONException e) {
                 createAndShowDialog(e,"No connection");
                 loadFirstPage();
@@ -446,6 +447,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         adapter.add(add);
                     }
                 });
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             } catch (JSONException e) {
                 createAndShowDialog(e,"No connection");
                 loadFirstPage();
@@ -464,6 +466,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         adapter.add(add);
                     }
                 });
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             } catch (JSONException e) {
                 createAndShowDialog(e,"No connection");
                 loadFirstPage();
@@ -482,6 +485,8 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         adapter.add(add);
                     }
                 });
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+
             } catch (JSONException e) {
                 createAndShowDialog(e,"No connection");
                 loadFirstPage();

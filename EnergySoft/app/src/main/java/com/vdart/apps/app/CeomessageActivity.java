@@ -266,8 +266,9 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 //            else isLastPage = true;
 
 //            NewsAdapter.notifyDataSetChanged();
-
-        } catch (JSONException e) {
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        }
+        catch (JSONException e) {
             createAndShowDialog(e,"No connection");
 //            loadFirstPage();
             e.printStackTrace();
