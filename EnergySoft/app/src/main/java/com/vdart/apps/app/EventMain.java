@@ -207,8 +207,8 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
 //                news.add(add);
                 runOnUiThread(new Runnable() {
                     @Override
-                    public void run() {
-                        progressBar.setVisibility(View.GONE);
+                    public void run()
+                    {
                         adapter.add(add);
                     }
                 });
@@ -216,7 +216,7 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
             }
 //            if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
 //            else isLastPage = true;
-
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 //            NewsAdapter.notifyDataSetChanged();
 
         } catch (JSONException e) {

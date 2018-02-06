@@ -52,7 +52,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_banner);
-        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+//        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -183,13 +183,6 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
     }
 
-    @Override
-    protected void onStart()
-    {
-        // TODO Auto-generated method stub
-        super.onStart();
-        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-    }
 
 
     public void changeImage(String image){
@@ -250,7 +243,8 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
     public void get_data(String data)
     {
-        try {
+        try
+        {
             JSONArray data_array = new JSONArray(data);
             System.out.println("Object"+data_array);
             if(data_array.length() == 0){
@@ -261,9 +255,11 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
                 images[i] = SERVER_URL+obj.getString("banner_image");
-
             }
-        } catch (JSONException e) {
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        }
+        catch (JSONException e)
+        {
             createAndShowDialog(e,"No connection");
             e.printStackTrace();
         }
