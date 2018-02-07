@@ -468,7 +468,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     }
 
     private void loadImageFromUrl(ImageView myImage,String employee_photo) {
-        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_loader).error(R.mipmap.ic_loader)
                 .into(myImage, new com.squareup.picasso.Callback(){
 
                     @Override
