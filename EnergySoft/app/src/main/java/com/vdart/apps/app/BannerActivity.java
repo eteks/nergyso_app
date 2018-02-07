@@ -31,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,9 +45,13 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     ViewPager viewPager;
     String SERVER_URL ;
     String BANNER_URL ;
-    String[] images = new String[20];
+//    String[] images = new String[20];
     MyCustomPagerAdapter myCustomPagerAdapter;
     public static int NUM_PAGES = 0;
+
+    ArrayList<String> images = new ArrayList<String>();
+//    images[1] = "test";
+//    images.add("text"); //this adds an element to the list.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,8 +259,11 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             for (int i = 0 ; i < data_array.length() ; i++)
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
-                images[i] = SERVER_URL+obj.getString("banner_image");
+//                images[i] = SERVER_URL+obj.getString("banner_image");
+                images.add(SERVER_URL+obj.getString("banner_image"));
+                myCustomPagerAdapter.notifyDataSetChanged();
             }
+            System.out.println("Images_list"+images);
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         }
         catch (JSONException e)
@@ -406,11 +414,11 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
     public class MyCustomPagerAdapter extends PagerAdapter {
         Context context;
-        String images[];
+        ArrayList<String> images;
         LayoutInflater layoutInflater;
 
 
-        public MyCustomPagerAdapter(Context context, String images[]) {
+        public MyCustomPagerAdapter(Context context, ArrayList<String> images) {
             this.context = context;
             this.images = images;
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -418,7 +426,24 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
         @Override
         public int getCount() {
-            return images.length;
+//            System.out.println("NUM_PAGES"+NUM_PAGES);
+////            System.out.println("IMAGE_SIZE"+images.size());
+////
+////            System.out.println("IMAGES"+images);
+////            return images.size();
+////            int count =  images.size();
+////            if(count == 0) {
+////                System.out.println("IF");
+////                return 1;
+////            }
+////            else {
+////                return count;
+////            }
+////            return NUM_PAGES;
+//            if(images.size() == 0)
+//                return 0;
+//            else
+              return images.size();
         }
 
         @Override
@@ -431,7 +456,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             View itemView = layoutInflater.inflate(R.layout.activity_banner_item, container, false);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewdash);
             System.out.println("in");
-            loadImageFromUrl(imageView,images[position]);
+            loadImageFromUrl(imageView, images.get(position));
             container.addView(itemView);
             return itemView;
         }
