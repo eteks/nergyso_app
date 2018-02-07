@@ -96,11 +96,6 @@ public class FacebookActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            case R.id.shoutout:
-                intent = new Intent(FacebookActivity.this,Shoutout.class);
-                startActivity(intent);
-                return true;
-
             case R.id.feedback:
                 intent = new Intent(FacebookActivity.this,Feedback.class);
                 startActivity(intent);
@@ -143,6 +138,12 @@ public class FacebookActivity extends AppCompatActivity {
 
             case R.id.action_notification:
                 intent = new Intent(FacebookActivity.this,NotificationMain.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
                 startActivity(intent);
                 return true;
 

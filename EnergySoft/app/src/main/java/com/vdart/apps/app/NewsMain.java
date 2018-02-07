@@ -563,6 +563,12 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
                 startActivity(intent);
                 return true;
 
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

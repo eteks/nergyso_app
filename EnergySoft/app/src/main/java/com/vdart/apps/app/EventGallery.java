@@ -247,6 +247,12 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
                 startActivity(intent);
                 return true;
 
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
