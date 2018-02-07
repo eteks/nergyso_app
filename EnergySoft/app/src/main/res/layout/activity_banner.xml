@@ -44,57 +44,62 @@
 
         <ImageButton
             android:id="@+id/firstFragment"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/birthday_blue"
             android:background="@drawable/border"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/secondFragment"
             android:layout_marginRight="10dp"
+            android:scaleType="centerCrop"
             />
 
         <ImageButton
             android:id="@+id/secondFragment"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/anniversary_blue"
             android:background="@drawable/border"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/thirdFragment"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:scaleType="centerCrop"/>
 
         <ImageButton
             android:id="@+id/thirdFragment"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/shoutout_blue"
             android:background="@drawable/border"
             android:layout_centerHorizontal="true"
             android:layout_toStartOf="@+id/fourthFragment"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:scaleType="centerCrop"/>
 
         <ImageButton
             android:id="@+id/fourthFragment"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/events_blue"
             android:background="@drawable/border"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/fifthFragment"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:scaleType="centerCrop"/>
 
         <ImageButton
             android:id="@+id/fifthFragment"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/news_blue"
             android:background="@drawable/border"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:scaleType="centerCrop"/>
     </RelativeLayout>
 
     <FrameLayout
