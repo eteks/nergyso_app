@@ -735,6 +735,8 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             break;
                         }
                         case "ceo" : {
+                            Intent intent = new Intent(NotificationMain.this,CeomessageActivity.class);
+                            startActivity(intent);
                             break;
                         }
                     }

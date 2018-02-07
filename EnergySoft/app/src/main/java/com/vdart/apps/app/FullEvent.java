@@ -459,6 +459,16 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                 startActivity(intent);
                 return true;
 
+            case R.id.live:
+                intent = new Intent(this,LiveTelecast.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.polls:
+                intent = new Intent(this,quiz_activity_frag.class);
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
