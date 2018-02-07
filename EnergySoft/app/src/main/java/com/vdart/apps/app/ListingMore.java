@@ -225,11 +225,13 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+//                                progressBar.setVisibility(View.GONE);
                                 adapter.add(add);
                             }
                         });
                     }
                 }
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

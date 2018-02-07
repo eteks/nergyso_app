@@ -728,6 +728,10 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             break;
                         }
                         case "shoutout":{
+                            Intent intent = new Intent(NotificationMain.this,ListingMore.class);
+                            check = "shoutout";
+                            intent.putExtra("more",check);
+                            startActivity(intent);
                             break;
                         }
                         case "ceo" : {
