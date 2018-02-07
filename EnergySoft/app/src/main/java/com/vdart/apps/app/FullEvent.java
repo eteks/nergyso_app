@@ -47,7 +47,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
     MyCustomPagerAdapter myCustomPagerAdapter;
     ViewPager viewPager;
-    String[] images = new String[20];
+//    String[] images = new String[20];
+    ArrayList<String> images = new ArrayList<String>();
     int currentPage = 0;
     Timer timer;
     final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
@@ -234,13 +235,17 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                         String splitted_gallery[] = data_array.getString("news_image").split("%2C");
                         NUM_PAGES = splitted_gallery.length;
                         for (int index = 0; index < splitted_gallery.length; index++) {
-                            images[index] = SERVER_URL + splitted_gallery[index];
+//                            images[index] = SERVER_URL + splitted_gallery[index];
+                                images.add(SERVER_URL + splitted_gallery[index]);
+                                myCustomPagerAdapter.notifyDataSetChanged();
                         }
                     } else if (check.equals("EVENTS")) {
                         String splitted_gallery[] = data_array.getString("events_image").split("%2C");
                         NUM_PAGES = splitted_gallery.length;
                         for (int index = 0; index < splitted_gallery.length; index++) {
-                            images[index] = SERVER_URL + splitted_gallery[index];
+//                            images[index] = SERVER_URL + splitted_gallery[index];
+                            images.add(SERVER_URL + splitted_gallery[index]);
+                            myCustomPagerAdapter.notifyDataSetChanged();
                         }
                     }
 //                final JSONObject object = (JSONObject) new JSONTokener(data).nextValue();
@@ -461,10 +466,10 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
     public class MyCustomPagerAdapter extends PagerAdapter {
         Context context;
-        String images[];
+        ArrayList<String> images;
         LayoutInflater layoutInflater;
 
-        public MyCustomPagerAdapter(Context context, String images[]) {
+        public MyCustomPagerAdapter(Context context, ArrayList<String> images) {
             this.context = context;
             this.images = images;
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -472,7 +477,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
         @Override
         public int getCount() {
-            return images.length;
+            return images.size();
         }
 
         @Override
@@ -485,7 +490,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             View itemView = layoutInflater.inflate(R.layout.activity_banner_item, container, false);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewdash);
             System.out.println(" in");
-            loadImageFromUrl(imageView,images[position]);
+            loadImageFromUrl(imageView, images.get(position));
             container.addView(itemView);
             return itemView;
         }
