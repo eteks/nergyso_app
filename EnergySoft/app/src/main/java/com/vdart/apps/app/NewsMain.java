@@ -217,6 +217,7 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
 //            else isLastPage = true;
 
 //            NewsAdapter.notifyDataSetChanged();
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
         } catch (JSONException e) {
             createAndShowDialog(e,"No connection");

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,6 +102,7 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 editor.putString("employee_doj",obj.getString("employee_doj"));
                 editor.putString("employee_designation",obj.getString("employee_designation"));
                 editor.commit();
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

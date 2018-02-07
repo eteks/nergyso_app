@@ -11,7 +11,17 @@
         android:id="@+id/toolbar"
         layout="@layout/tool_bar"
         />
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
     <RelativeLayout
         android:background="@drawable/bd_header"
         android:layout_width="match_parent"
