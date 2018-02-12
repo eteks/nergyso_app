@@ -250,7 +250,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 //                add.setTitle(obj.getString("events_title"));
 //                add.setDescription(obj.getString("events_description"));
 //                add.events_image = obj.getString("events_image");
-                add.setImage("");
+//                add.setImage("");
                 System.out.println("Events Id"+obj.getInt("id"));
 //                news.add(add);
                 runOnUiThread(new Runnable() {
@@ -398,6 +398,12 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
                 startActivity(intent);
                 return true;
 
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -476,8 +482,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
                 case ITEM:
                     CeomessageActivity.PaginationAdapter.EventVH eventVH = (CeomessageActivity.PaginationAdapter.EventVH) holder;
                     eventVH.events_title.setText(event.getTitle());
-                    eventVH.events_description.setText(event.getEvents_description());
-                    loadImageFromUrl(eventVH.events_image,(SERVER_URL+event.getEvents_image()));
+                    loadImageFromUrl(eventVH.events_image,event.getEvents_image());
                     break;
                 case LOADING:
 //                Do nothing
@@ -563,8 +568,9 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
          * Main list's content ViewHolder
          */
         protected class EventVH extends RecyclerView.ViewHolder {
-            TextView events_title,events_description;
+            TextView events_title,events_description, readMore;
             ImageView events_image;
+            int ONE = 1;
             //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
             public EventVH(View itemView) {
                 super(itemView);
@@ -578,6 +584,7 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
                 events_title = (TextView) itemView.findViewById(R.id.news_title2);
                 events_description = (TextView) itemView.findViewById(R.id.news_description2);
                 events_image = (ImageView) itemView.findViewById(R.id.news_image2);
+                readMore = (TextView) itemView.findViewById(R.id.readMore);
 //                news_description = (TextView) itemView.findViewById(R.id.news_description);
                 System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
@@ -589,7 +596,18 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
 //            {
 //                holder = (ListAdapter.ViewHolderItem) convertView.getTag();
 //            }
-
+                readMore.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        if(ONE == 1){
+                            events_title.setMaxLines(10);
+                            ONE = 0;
+                        }else if(ONE == 0){
+                            events_title.setMaxLines(1);
+                            ONE = 1;
+                        }
+                    }
+                });
             }
         }
 

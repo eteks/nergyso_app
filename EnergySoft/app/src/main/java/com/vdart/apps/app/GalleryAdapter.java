@@ -21,6 +21,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     Context context;
     List<ImageModel> data = new ArrayList<>();
+    int count = 1;
 
     public GalleryAdapter(Context context, List<ImageModel> data) {
         this.context = context;
@@ -62,8 +63,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    }
 //                });
         ((MyItemHolder) holder).mText.setText(text.getName());
-
+//        if(count == 1){
+//            data.remove(0);
+//            count = 0;
+//        }
     }
+
 
     @Override
     public int getItemCount() {

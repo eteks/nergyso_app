@@ -333,6 +333,12 @@ public class EventMain extends AppCompatActivity implements Download_data.downlo
                 startActivity(intent);
                 return true;
 
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

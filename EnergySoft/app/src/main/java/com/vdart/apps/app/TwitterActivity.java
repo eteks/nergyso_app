@@ -97,11 +97,6 @@ public class TwitterActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            case R.id.shoutout:
-                intent = new Intent(TwitterActivity.this,Shoutout.class);
-                startActivity(intent);
-                return true;
-
             case R.id.feedback:
                 intent = new Intent(TwitterActivity.this,Feedback.class);
                 startActivity(intent);
@@ -154,6 +149,12 @@ public class TwitterActivity extends AppCompatActivity {
 
             case R.id.polls:
                 intent = new Intent(this,quiz_activity_frag.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
                 startActivity(intent);
                 return true;
 

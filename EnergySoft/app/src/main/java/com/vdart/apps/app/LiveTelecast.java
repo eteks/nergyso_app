@@ -194,7 +194,7 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
             {
                 JSONObject obj=new JSONObject(data_array.get(i).toString());
                 final Event add=new Event();
-                add.setTitle(obj.getString("livetelecast_url"));
+                add.setTitle(obj.getString("livetelecast_title"));
                 add.setId(obj.getInt("id"));
                 String splitted_gallery[] = obj.getString("livetelecast_url").split("/");
                 add.setType(splitted_gallery[3]);
@@ -305,6 +305,12 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
 
             case R.id.live:
                 intent = new Intent(this,LiveTelecast.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
                 startActivity(intent);
                 return true;
 

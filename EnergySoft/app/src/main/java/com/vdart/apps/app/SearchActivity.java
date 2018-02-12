@@ -1,5 +1,6 @@
 package com.vdart.apps.app;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,7 @@ public class SearchActivity extends AppCompatActivity {
     Toolbar toolbar;
     EditText searchText;
     RadioButton news, events, shoutout;
-    String category;
+    String category = "";
     Button searchbutton;
 
     @Override
@@ -37,11 +38,15 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String search = searchText.getText().toString();
-                if(!search.isEmpty() && !category.isEmpty()){
+                if(!search.isEmpty() && (!category.isEmpty())){
                     Intent intent = new Intent(SearchActivity.this,SearchResults.class);
                     intent.putExtra("search",search);
                     intent.putExtra("category",category);
                     startActivity(intent);
+                }else if(search.isEmpty()){
+                    createAndShowDialog("Please insert the search text","Empty");
+                }else if(category.isEmpty()){
+                    createAndShowDialog("Please select any category","Empty");
                 }
             }
         });
@@ -63,6 +68,14 @@ public class SearchActivity extends AppCompatActivity {
                     category = "SHOUTOUT";
                 break;
         }
+    }
+
+    private void createAndShowDialog(final String message, final String title) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.create().show();
     }
 
     /**

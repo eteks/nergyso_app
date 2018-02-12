@@ -459,6 +459,22 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                 startActivity(intent);
                 return true;
 
+            case R.id.live:
+                intent = new Intent(this,LiveTelecast.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.polls:
+                intent = new Intent(this,quiz_activity_frag.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -711,7 +727,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
     private void loadImageFromUrl(ImageView myImage,String employee_photo) {
         System.out.println("Image "+myImage+employee_photo);
-        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_loader).error(R.mipmap.ic_loader)
                 .into(myImage, new com.squareup.picasso.Callback(){
 
                     @Override

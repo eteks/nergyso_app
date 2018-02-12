@@ -593,6 +593,12 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 startActivity(intent);
                 return true;
 
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -728,9 +734,15 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             break;
                         }
                         case "shoutout":{
+                            Intent intent = new Intent(NotificationMain.this,ListingMore.class);
+                            check = "shoutout";
+                            intent.putExtra("more",check);
+                            startActivity(intent);
                             break;
                         }
                         case "ceo" : {
+                            Intent intent = new Intent(NotificationMain.this,CeomessageActivity.class);
+                            startActivity(intent);
                             break;
                         }
                     }

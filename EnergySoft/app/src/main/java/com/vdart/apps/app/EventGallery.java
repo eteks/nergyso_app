@@ -75,6 +75,7 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
             ImageModel imageModel = new ImageModel();
             imageModel.setName("");
             imageModel.setUrl("https://d2q79iu7y748jz.cloudfront.net/s/_logo/41e2d8289eeca06856d4d543321be3cf.png");
+//            imageModel.setUrl("");
             images.add(imageModel);
 
 //        }
@@ -129,7 +130,7 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
                 String splitted_gallery[] = obj.getString("gallery_image").split(",");
                 for(int index = 0; index < splitted_gallery.length; index++){
                     final ImageModel imageModel = new ImageModel();
-//                    imageModel.setName(obj.getString("gallery_title"));
+                    imageModel.setName(obj.getString("gallery_title"));
                     imageModel.setUrl(SERVER_URL+splitted_gallery[index]);
                     runOnUiThread(new Runnable() {
                         @Override
@@ -243,6 +244,12 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
 
             case R.id.polls:
                 intent = new Intent(this,quiz_activity_frag.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
                 startActivity(intent);
                 return true;
 

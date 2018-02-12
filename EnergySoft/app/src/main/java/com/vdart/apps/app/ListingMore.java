@@ -225,11 +225,13 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+//                                progressBar.setVisibility(View.GONE);
                                 adapter.add(add);
                             }
                         });
                     }
                 }
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -375,6 +377,12 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
 
             case R.id.polls:
                 intent = new Intent(this,quiz_activity_frag.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.shoutout:
+                intent = new Intent(this,ListingMore.class);
+                intent.putExtra("more","shoutout");
                 startActivity(intent);
                 return true;
 
