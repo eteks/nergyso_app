@@ -53,6 +53,15 @@
             android:layout_marginRight="10dp"
             android:scaleType="centerCrop"
             />
+        <TextView
+            android:id="@+id/test_button_text1"
+            android:layout_width="wrap_content"
+            android:text="B'day"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignLeft="@+id/firstFragment"
+            android:layout_below="@+id/firstFragment"/>
 
         <ImageButton
             android:id="@+id/secondFragment"
@@ -65,6 +74,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/test_button_text2"
+            android:layout_width="wrap_content"
+            android:text="Anniversary"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="-6dp"
+            android:layout_alignLeft="@+id/secondFragment"
+            android:layout_below="@+id/firstFragment"/>
 
         <ImageButton
             android:id="@+id/thirdFragment"
@@ -77,6 +95,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/test_button_text3"
+            android:layout_width="wrap_content"
+            android:text="ShoutOut"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="-2dp"
+            android:layout_alignLeft="@+id/thirdFragment"
+            android:layout_below="@+id/firstFragment"/>
 
         <ImageButton
             android:id="@+id/fourthFragment"
@@ -89,7 +116,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:scaleType="centerCrop"/>
-
+        <TextView
+            android:id="@+id/test_button_text4"
+            android:layout_width="wrap_content"
+            android:text="Events"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="3dp"
+            android:layout_alignLeft="@+id/fourthFragment"
+            android:layout_below="@+id/firstFragment"/>
         <ImageButton
             android:id="@+id/fifthFragment"
             android:layout_width="40dp"
@@ -100,14 +135,22 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="10dp"
             android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/test_button_text5"
+            android:layout_width="wrap_content"
+            android:text="News"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="7dp"
+            android:layout_alignLeft="@+id/fifthFragment"
+            android:layout_below="@+id/firstFragment"/>
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/menuicons"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
