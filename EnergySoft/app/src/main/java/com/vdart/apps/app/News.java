@@ -11,6 +11,15 @@ public class News {
     String news_video;
     String news_document;
     String news_date;
+    String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getNews_date() {
         return news_date;

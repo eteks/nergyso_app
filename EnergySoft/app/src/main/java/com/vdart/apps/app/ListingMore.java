@@ -231,7 +231,6 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                         });
                     }
                 }
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -271,6 +270,7 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 e.printStackTrace();
             }
         }
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
     }
 

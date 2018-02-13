@@ -77,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
        try {
                 JSONObject obj = (JSONObject) new JSONTokener(data).nextValue();
                 System.out.println("Object"+obj);
-                empName.setText(obj.getString("employee_name"));
+                empName.setText(obj.getString("employee_id").toUpperCase());
                 empEmail.setText(obj.getString("employee_email"));
                 empDob.setText(obj.getString("employee_dob"));
                 empMobile.setText(obj.getString("employee_mobile"));
@@ -85,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 empBloodGroup.setText(obj.getString("employee_bloodgroup"));
                 empDoj.setText(obj.getString("employee_doj"));
                 empAddress.setText(obj.getString("employee_address"));
+                empId.setText(obj.getString("employee_name"));
 //                empAadharId.setText(obj.getString("employee_aadhar_id"));
                 empDeptId.setText(obj.getString("employee_department_name"));
                 int empExperience = obj.getInt("employee_experience_in_years");

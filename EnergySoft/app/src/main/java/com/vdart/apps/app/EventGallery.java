@@ -75,7 +75,6 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
             ImageModel imageModel = new ImageModel();
             imageModel.setName("");
             imageModel.setUrl("https://d2q79iu7y748jz.cloudfront.net/s/_logo/41e2d8289eeca06856d4d543321be3cf.png");
-//            imageModel.setUrl("");
             images.add(imageModel);
 
 //        }
@@ -92,6 +91,8 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
         mRecyclerView.setLayoutManager(new GridLayoutManager(EventGallery.this, 3));
         mRecyclerView.setHasFixedSize(true);
 
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(GALLERY_URL);
 
         mAdapter = new GalleryAdapter(EventGallery.this, images);
         mRecyclerView.setAdapter(mAdapter);
@@ -108,9 +109,6 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
 
                     }
                 }));
-
-        Download_data download_data = new Download_data((Download_data.download_complete) this);
-        download_data.download_data_from_link(GALLERY_URL);
 
     }
 

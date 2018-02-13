@@ -102,6 +102,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
         rv.setItemAnimator(new DefaultItemAnimator());
 
         rv.setAdapter(adapter);
+        rv_today.setAdapter(adapter2);
 
         relativeLayout2 = (RelativeLayout) view.findViewById(R.id.relativeLayout2);
 

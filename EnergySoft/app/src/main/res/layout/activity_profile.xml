@@ -46,7 +46,6 @@
                 android:id="@+id/empId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
                 android:textColor="#fff"
                 android:textSize="20dp"
                 android:layout_alignTop="@+id/empPhoto"
@@ -54,7 +53,7 @@
                 android:layout_marginTop="12dp" />
 
             <TextView
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:layout_gravity="center"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"

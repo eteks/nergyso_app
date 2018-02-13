@@ -63,15 +63,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    }
 //                });
         ((MyItemHolder) holder).mText.setText(text.getName());
-//        if(count == 1){
-//            data.remove(0);
-//            count = 0;
-//        }
+        if(count == 1){
+            data.remove(0);
+            count = 0;
+        }
     }
 
 
     @Override
     public int getItemCount() {
+
         return data.size();
     }
 

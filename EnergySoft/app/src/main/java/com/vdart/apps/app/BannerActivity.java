@@ -91,6 +91,8 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             }
         }, DELAY_MS, PERIOD_MS);
 
+        loadFragment(new DefaultFragment());
+
         String  check = "";
         //Loading Default Fragment
         Intent intent = getIntent();
@@ -128,7 +130,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 break;
             }
             default:{
-                loadFragment(new FirstFragment());
+//                loadFragment(new FirstFragment());
             }
         }
 
@@ -326,6 +328,8 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         switch (item.getItemId())
         {
             case R.id.action_home:
+                intent = new Intent(this,BannerActivity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.profile:
