@@ -69,16 +69,6 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_gallery);
-
-//        for (int i = 0; i < 1; i++) {
-
-            ImageModel imageModel = new ImageModel();
-            imageModel.setName("");
-            imageModel.setUrl("https://d2q79iu7y748jz.cloudfront.net/s/_logo/41e2d8289eeca06856d4d543321be3cf.png");
-            images.add(imageModel);
-
-//        }
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -99,14 +89,12 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
                 new RecyclerItemClickListener.OnItemClickListener() {
-
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(EventGallery.this, DetailActivity.class);
                         intent.putParcelableArrayListExtra("data", images);
                         intent.putExtra("pos", position);
                         startActivity(intent);
-
                     }
                 }));
 
@@ -134,6 +122,7 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
                         @Override
                         public void run() {
                             images.add(imageModel);
+                            mAdapter.notifyDataSetChanged();
                         }
                     });
                 }
