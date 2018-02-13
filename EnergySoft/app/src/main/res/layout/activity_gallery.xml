@@ -14,7 +14,7 @@
         android:id="@+id/galleryGridView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:footerDividersEnabled="false"
+        android:footerDividersEnabled="true"
         android:padding="1dp"
         android:numColumns="3" />
 </LinearLayout>
