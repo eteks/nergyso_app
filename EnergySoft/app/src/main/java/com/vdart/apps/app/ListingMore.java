@@ -71,6 +71,7 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 //        ImageView home = (ImageView) findViewById(R.id.action_home);
 //        home.setOnClickListener(new View.OnClickListener() {
 //            @Override
