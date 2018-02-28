@@ -17,11 +17,14 @@
         android:layout_below="@+id/toolbar"
         android:background="@drawable/border_bottom"
         />
+
     <RelativeLayout
         android:id="@+id/loadingPanel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center" >
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center">
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -33,11 +36,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/menuicons"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:paddingTop="20dp"
         android:paddingBottom="10dp"
         android:layout_below="@+id/viewPagerdash"
         android:layout_alignParentStart="true"
-        android:background="@drawable/border_bottom"
         android:gravity="center"
         >
 
@@ -46,8 +48,8 @@
             android:id="@+id/firstFragment"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/birthday_blue"
-            android:background="@drawable/border"
+            app:srcCompat="@drawable/bir_black"
+            android:background="@drawable/colorbutton"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/secondFragment"
             android:layout_marginRight="10dp"
@@ -56,10 +58,11 @@
         <TextView
             android:id="@+id/test_button_text1"
             android:layout_width="wrap_content"
-            android:text="B'day"
+            android:text="Birthday"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginLeft="6dp"
+            android:textSize="10sp"
+            android:layout_marginLeft="0dp"
             android:layout_alignLeft="@+id/firstFragment"
             android:layout_below="@+id/firstFragment"/>
 
@@ -67,8 +70,8 @@
             android:id="@+id/secondFragment"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/anniversary_blue"
-            android:background="@drawable/border"
+            app:srcCompat="@drawable/anni_black"
+            android:background="@drawable/colorbutton"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/thirdFragment"
             android:layout_marginLeft="10dp"
@@ -78,9 +81,10 @@
             android:id="@+id/test_button_text2"
             android:layout_width="wrap_content"
             android:text="Anniversary"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginLeft="-14dp"
+            android:textSize="10sp"
+            android:layout_marginLeft="-9dp"
             android:layout_alignLeft="@+id/secondFragment"
             android:layout_below="@+id/firstFragment"/>
 
@@ -88,8 +92,8 @@
             android:id="@+id/thirdFragment"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/shoutout_blue"
-            android:background="@drawable/border"
+            app:srcCompat="@drawable/shout_black"
+            android:background="@drawable/colorbutton"
             android:layout_centerHorizontal="true"
             android:layout_toStartOf="@+id/fourthFragment"
             android:layout_marginLeft="10dp"
@@ -99,9 +103,10 @@
             android:id="@+id/test_button_text3"
             android:layout_width="wrap_content"
             android:text="ShoutOut"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginLeft="-5dp"
+            android:textSize="10sp"
+            android:layout_marginLeft="-1dp"
             android:layout_alignLeft="@+id/thirdFragment"
             android:layout_below="@+id/firstFragment"/>
 
@@ -109,8 +114,8 @@
             android:id="@+id/fourthFragment"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/events_blue"
-            android:background="@drawable/border"
+            app:srcCompat="@drawable/even_black"
+            android:background="@drawable/colorbutton"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/fifthFragment"
             android:layout_marginLeft="10dp"
@@ -120,17 +125,18 @@
             android:id="@+id/test_button_text4"
             android:layout_width="wrap_content"
             android:text="Events"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginLeft="1dp"
+            android:textSize="10sp"
+            android:layout_marginLeft="5dp"
             android:layout_alignLeft="@+id/fourthFragment"
             android:layout_below="@+id/firstFragment"/>
         <ImageButton
             android:id="@+id/fifthFragment"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/news_blue"
-            android:background="@drawable/border"
+            app:srcCompat="@drawable/newss_black"
+            android:background="@drawable/colorbutton"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="10dp"
@@ -139,8 +145,9 @@
             android:id="@+id/test_button_text5"
             android:layout_width="wrap_content"
             android:text="News"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:layout_marginLeft="6dp"
             android:layout_alignLeft="@+id/fifthFragment"
             android:layout_below="@+id/firstFragment"/>
@@ -151,6 +158,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/menuicons"
+        android:background="@drawable/border_top"
         />
 
 </RelativeLayout>
