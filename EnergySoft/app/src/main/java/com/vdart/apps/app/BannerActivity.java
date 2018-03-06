@@ -195,43 +195,43 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     public void changeImage(String image){
         switch (image){
             case "first":{
-                firstFragment.setImageResource(R.drawable.birthday);
-                secondFragment.setImageResource(R.drawable.anniversary_blue);
-                thirdFragment.setImageResource(R.drawable.shoutout_blue);
-                fourthFragment.setImageResource(R.drawable.events_blue);
-                fifthFragment.setImageResource(R.drawable.news_blue);
+                firstFragment.setImageResource(R.drawable.bir);
+                secondFragment.setImageResource(R.drawable.anni_black);
+                thirdFragment.setImageResource(R.drawable.shout_black);
+                fourthFragment.setImageResource(R.drawable.even_black);
+                fifthFragment.setImageResource(R.drawable.newss_black);
                 break;
             }
             case "second":{
-                firstFragment.setImageResource(R.drawable.birthday_blue);
-                secondFragment.setImageResource(R.drawable.anniversary);
-                thirdFragment.setImageResource(R.drawable.shoutout_blue);
-                fourthFragment.setImageResource(R.drawable.events_blue);
-                fifthFragment.setImageResource(R.drawable.news_blue);
+                firstFragment.setImageResource(R.drawable.bir_black);
+                secondFragment.setImageResource(R.drawable.ann);
+                thirdFragment.setImageResource(R.drawable.shout_black);
+                fourthFragment.setImageResource(R.drawable.even_black);
+                fifthFragment.setImageResource(R.drawable.newss_black);
                 break;
             }
             case "third":{
-                firstFragment.setImageResource(R.drawable.birthday_blue);
-                secondFragment.setImageResource(R.drawable.anniversary_blue);
-                thirdFragment.setImageResource(R.drawable.shoutout);
-                fourthFragment.setImageResource(R.drawable.events_blue);
-                fifthFragment.setImageResource(R.drawable.news_blue);
+                firstFragment.setImageResource(R.drawable.bir_black);
+                secondFragment.setImageResource(R.drawable.anni_black);
+                thirdFragment.setImageResource(R.drawable.shout);
+                fourthFragment.setImageResource(R.drawable.even_black);
+                fifthFragment.setImageResource(R.drawable.newss_black);
                 break;
             }
             case "fourth":{
-                firstFragment.setImageResource(R.drawable.birthday_blue);
-                secondFragment.setImageResource(R.drawable.anniversary_blue);
-                thirdFragment.setImageResource(R.drawable.shoutout_blue);
-                fourthFragment.setImageResource(R.drawable.events);
-                fifthFragment.setImageResource(R.drawable.news_blue);
+                firstFragment.setImageResource(R.drawable.bir_black);
+                secondFragment.setImageResource(R.drawable.anni_black);
+                thirdFragment.setImageResource(R.drawable.shout_black);
+                fourthFragment.setImageResource(R.drawable.even);
+                fifthFragment.setImageResource(R.drawable.newss_black);
                 break;
             }
             case "fifth":{
-                firstFragment.setImageResource(R.drawable.birthday_blue);
-                secondFragment.setImageResource(R.drawable.anniversary_blue);
-                thirdFragment.setImageResource(R.drawable.shoutout_blue);
-                fourthFragment.setImageResource(R.drawable.events_blue);
-                fifthFragment.setImageResource(R.drawable.news);
+                firstFragment.setImageResource(R.drawable.bir_black);
+                secondFragment.setImageResource(R.drawable.anni_black);
+                thirdFragment.setImageResource(R.drawable.shout_black);
+                fourthFragment.setImageResource(R.drawable.even_black);
+                fifthFragment.setImageResource(R.drawable.newss);
                 break;
             }
         }
