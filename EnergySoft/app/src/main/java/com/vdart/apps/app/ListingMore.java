@@ -251,7 +251,14 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                         add.events_title = obj.getString("employee_name");
                         add.setTitle(obj.getString("employee_name"));
                         add.setId(obj.getInt("id"));
-                        Date date = parseDate(obj.getString("employee_dob"));
+                        Date date;
+                        if(more.equals("today_birthday") || more.equals("today_birthday")){
+                            date = parseDate(obj.getString("employee_dob"));
+                        }else if(more.equals("today_anniversary") || more.equals("today_anniversary")){
+                            date = parseDate(obj.getString("employee_doj"));
+                        }else {
+                            date = parseDate(obj.getString("employee_doj"));
+                        }
                         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
                         String strDate = formatter.format(date);
                         add.events_description = strDate;

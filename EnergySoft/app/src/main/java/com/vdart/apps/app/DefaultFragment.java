@@ -14,6 +14,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,14 +39,17 @@ import static com.google.android.gms.internal.zzagz.runOnUiThread;
 public class DefaultFragment extends Fragment implements  Download_data.download_complete{
 
     View view;
-    RecyclerView main_recycler_birthday, main_recycler_anniversary, main_recycler_shoutout, main_recycler_news, main_recycler_event;
-    DefaultFragment.PaginationAdapter adapter1, adapter2, adapter4, adapter5;
+    RecyclerView main_recycler_birthday, main_recycler_anniversary, main_recycler_shoutout, main_recycler_news, main_recycler_event, main_recycler_today_birthday, main_recycler_today_anniversary;
+    DefaultFragment.PaginationAdapter adapter1, adapter2, adapter4, adapter5, adapter6, adapter7 ;
     DefaultFragment.PaginationAdapter1 adapter3;
-    LinearLayoutManager linearLayoutManager1, linearLayoutManager2, linearLayoutManager3, linearLayoutManager4, linearLayoutManager5;
+    LinearLayoutManager linearLayoutManager1, linearLayoutManager2, linearLayoutManager3, linearLayoutManager4, linearLayoutManager5, linearLayoutManager6, linearLayoutManager7;
     String SERVER_URL = "";
-    String BIRTHDAY_URL = "api/employee/employee_upcoming_birthday/", ANNIVERSARY_URL = "api/employee/employee_upcoming_anniversary/", SHOUTOUT_URL = "api/shoutout_list/", NEWS_URL = "api/news/recent_news", EVENT_URL = "api/events/recent_events/";
-    boolean birthday = false, anniversary = false, shoutout_ = false, news_ = false, event_ = false;
-    TextView more_upcoming_birthday, more_upcoming_anniversary, more_shoutout, more_news, more_event;
+    String BIRTHDAY_URL = "api/employee/employee_upcoming_birthday/", ANNIVERSARY_URL = "api/employee/employee_upcoming_anniversary/", SHOUTOUT_URL = "api/shoutout_list/", NEWS_URL = "api/news/recent_news", EVENT_URL = "api/events/recent_events/", TODAY_BIRTHDAY_URL = "api/employee/employee_today_birthday/", TODAY_ANNIVERSARY_URL = "api/employee/employee_today_anniversary/";
+    boolean birthday = false, anniversary = false, shoutout_ = false, news_ = false, event_ = false, birthday_today = false, anniversary_today = false;
+    TextView more_upcoming_birthday, more_upcoming_anniversary, more_shoutout, more_news, more_event, more_today_anniversary, more_today_birthday;
+    TextView upcoming_birthday,upcoming_anniversary, upcoming_shoutout, upcoming_news, upcoming_event, today_birthday, today_anniversary;
+    View birthday_end,anniversary_end,shoutout_end,news_end,event_end, birthday_today_end, anniversary_today_end;
+    Button facebook, twitter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,18 +63,40 @@ public class DefaultFragment extends Fragment implements  Download_data.download
         SHOUTOUT_URL = SERVER_URL + SHOUTOUT_URL;
         NEWS_URL = SERVER_URL + NEWS_URL ;
         EVENT_URL = SERVER_URL + EVENT_URL ;
+        TODAY_BIRTHDAY_URL = SERVER_URL + TODAY_BIRTHDAY_URL;
+        TODAY_ANNIVERSARY_URL = SERVER_URL + TODAY_ANNIVERSARY_URL;
 
         main_recycler_birthday = (RecyclerView) view.findViewById(R.id.main_recycler_birthday);
         main_recycler_anniversary = (RecyclerView) view.findViewById(R.id.main_recycler_anniversary);
         main_recycler_shoutout = (RecyclerView) view.findViewById(R.id.main_recycler_shoutout);
         main_recycler_news = (RecyclerView) view.findViewById(R.id.main_recycler_news);
         main_recycler_event = (RecyclerView) view.findViewById(R.id.main_recycler_event);
+        main_recycler_today_birthday = (RecyclerView) view.findViewById(R.id.main_recycler_today_birthday);
+        main_recycler_today_anniversary = (RecyclerView) view.findViewById(R.id.main_recycler_today_anniversary);
+
+        upcoming_birthday = (TextView) view.findViewById(R.id.upcoming_birthday);
+        upcoming_anniversary = (TextView) view.findViewById(R.id.upcoming_birthday);
+        upcoming_shoutout = (TextView) view.findViewById(R.id.upcoming_shoutout);
+        upcoming_news = (TextView) view.findViewById(R.id.upcoming_news);
+        upcoming_event = (TextView) view.findViewById(R.id.upcoming_event);
+        today_birthday = (TextView) view.findViewById(R.id.today_birthday);
+        today_anniversary = (TextView) view.findViewById(R.id.today_anniversary);
+
+        birthday_end = (View) view.findViewById(R.id.birthday_end);
+        anniversary_end = (View) view.findViewById(R.id.anniversary_end);
+        shoutout_end = (View) view.findViewById(R.id.shoutout_end);
+        news_end = (View) view.findViewById(R.id.news_end);
+        event_end = (View) view.findViewById(R.id.event_end);
+        birthday_today_end = (View) view.findViewById(R.id.birthday_today_end);
+        anniversary_today_end = (View) view.findViewById(R.id.anniversary_today_end);
 
         adapter1 = new DefaultFragment.PaginationAdapter(getActivity());
         adapter2 = new DefaultFragment.PaginationAdapter(getActivity());
         adapter3 = new DefaultFragment.PaginationAdapter1(getActivity());
         adapter4 = new DefaultFragment.PaginationAdapter(getActivity());
         adapter5 = new DefaultFragment.PaginationAdapter(getActivity());
+        adapter6 = new DefaultFragment.PaginationAdapter(getActivity());
+        adapter7 = new DefaultFragment.PaginationAdapter(getActivity());
 
         linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         main_recycler_birthday.setLayoutManager(linearLayoutManager1);
@@ -87,11 +113,19 @@ public class DefaultFragment extends Fragment implements  Download_data.download
         linearLayoutManager5 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         main_recycler_event.setLayoutManager(linearLayoutManager5);
 
+        linearLayoutManager6 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        main_recycler_today_birthday.setLayoutManager(linearLayoutManager6);
+
+        linearLayoutManager7 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        main_recycler_today_anniversary.setLayoutManager(linearLayoutManager7);
+
         main_recycler_birthday.setAdapter(adapter1);
         main_recycler_anniversary.setAdapter(adapter2);
         main_recycler_shoutout.setAdapter(adapter3);
         main_recycler_news.setAdapter(adapter4);
         main_recycler_event.setAdapter(adapter5);
+        main_recycler_today_birthday.setAdapter(adapter6);
+        main_recycler_today_anniversary.setAdapter(adapter7);
 
         more_upcoming_birthday = (TextView) view.findViewById(R.id.more_upcoming_birthday);
         more_upcoming_birthday.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +136,17 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                 startActivity(intent);
             }
         });
+
+        more_today_birthday = (TextView) view.findViewById(R.id.more_today_birthday);
+        more_today_birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ListingMore.class);
+                intent.putExtra("more","today_birthday");
+                startActivity(intent);
+            }
+        });
+
         more_upcoming_anniversary = (TextView) view.findViewById(R.id.more_upcoming_anniversary);
         more_upcoming_anniversary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +156,17 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                 startActivity(intent);
             }
         });
+
+        more_today_anniversary = (TextView) view.findViewById(R.id.more_today_anniversary);
+        more_today_anniversary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ListingMore.class);
+                intent.putExtra("more","today_anniversary");
+                startActivity(intent);
+            }
+        });
+
         more_shoutout = (TextView) view.findViewById(R.id.more_shoutout);
         more_shoutout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,24 +193,79 @@ public class DefaultFragment extends Fragment implements  Download_data.download
             }
         });
 
+        facebook = (Button) view.findViewById(R.id.facebook);
+        facebook.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(),FacebookActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        twitter = (Button) view.findViewById(R.id.twitter);
+        twitter.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(),TwitterActivity.class);
+                startActivity(intent);
+            }
+        });
         Download_data download_data = new Download_data((Download_data.download_complete) this);
-        download_data.download_data_from_link(BIRTHDAY_URL);
-        birthday = true;
+        download_data.download_data_from_link(TODAY_BIRTHDAY_URL);
+        birthday_today = true;
 
         return view;
     }
 
-    public void get_data(String data)
-    {
-        try {
-            if(birthday){
+    public void get_data(String data) {
+        if (birthday_today) {
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(BIRTHDAY_URL);
+            birthday = true;
+            birthday_today = false;
+            try {
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    System.out.println("Object"+obj);
-                    final News add=new News("Title");
+                for (int i = 0; i < 1; i++) {
+                    JSONObject obj = new JSONObject(data_array.get(0).toString());
+                    System.out.println("Object" + obj);
+                    final News add = new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_dob"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    add.setType("birthday_today");
+                    System.out.println("News Id" + obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter6.add(add);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+//            createAndShowDialog(e,"No data");
+                e.printStackTrace();
+                today_birthday.setVisibility(View.GONE);
+                more_today_birthday.setVisibility(View.GONE);
+                birthday_today_end.setVisibility(View.GONE);
+            }
+        }else if (birthday) {
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(TODAY_ANNIVERSARY_URL);
+            anniversary_today = true;
+            birthday = false;
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object" + data_array);
+                for (int i = 0; i < 1; i++) {
+                    JSONObject obj = new JSONObject(data_array.get(0).toString());
+                    System.out.println("Object" + obj);
+                    final News add = new News("Title");
                     add.news_title = obj.getString("employee_name");
                     add.setTitle(obj.getString("employee_name"));
                     add.setId(obj.getInt("id"));
@@ -164,28 +275,70 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                     add.news_description = strDate;
                     add.news_image = obj.getString("employee_photo");
                     add.setType("birthday");
-                    System.out.println("News Id"+obj.getInt("id"));
+                    System.out.println("News Id" + obj.getInt("id"));
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             adapter1.add(add);
                         }
                     });
-
                 }
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(ANNIVERSARY_URL);
-                anniversary = true;
-                birthday = false;
+            } catch (JSONException e) {
+//            createAndShowDialog(e,"No data");
+                e.printStackTrace();
+                upcoming_birthday.setVisibility(View.GONE);
+                more_upcoming_birthday.setVisibility(View.GONE);
+                birthday_end.setVisibility(View.GONE);
+            }
 
-            }else if(anniversary){
+        }else if (anniversary_today) {
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(ANNIVERSARY_URL);
+            anniversary_today = false;
+            anniversary = true;
+            try {
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    System.out.println("Object"+obj);
-                    final News add=new News("Title");
+                for (int i = 0; i < 1; i++) {
+                    JSONObject obj = new JSONObject(data_array.get(0).toString());
+                    System.out.println("Object" + obj);
+                    final News add = new News("Title");
+                    add.news_title = obj.getString("employee_name");
+                    add.setTitle(obj.getString("employee_name"));
+                    add.setId(obj.getInt("id"));
+                    Date date = parseDate(obj.getString("employee_doj"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    add.news_description = strDate;
+                    add.news_image = obj.getString("employee_photo");
+                    add.setType("anniversary_today");
+                    System.out.println("News Id" + obj.getInt("id"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter7.add(add);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+//            createAndShowDialog(e,"No data");
+                e.printStackTrace();
+                today_anniversary.setVisibility(View.GONE);
+                more_today_anniversary.setVisibility(View.GONE);
+                anniversary_today_end.setVisibility(View.GONE);
+            }
+        } else if (anniversary) {
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(SHOUTOUT_URL);
+            shoutout_ = true;
+            anniversary = false;
+            try {
+                JSONArray data_array = new JSONArray(data);
+                System.out.println("Object" + data_array);
+                for (int i = 0; i < 1; i++) {
+                    JSONObject obj = new JSONObject(data_array.get(0).toString());
+                    System.out.println("Object" + obj);
+                    final News add = new News("Title");
                     add.news_title = obj.getString("employee_name");
                     add.setTitle(obj.getString("employee_name"));
                     add.setId(obj.getInt("id"));
@@ -195,7 +348,7 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                     add.news_description = strDate;
                     add.news_image = obj.getString("employee_photo");
                     add.setType("anniversary");
-                    System.out.println("News Id"+obj.getInt("id"));
+                    System.out.println("News Id" + obj.getInt("id"));
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -203,18 +356,25 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                         }
                     });
                 }
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(SHOUTOUT_URL);
-                shoutout_ = true;
-                anniversary = false;
-            }else if(shoutout_){
+            } catch (JSONException e) {
+//            createAndShowDialog(e,"No data");
+                e.printStackTrace();
+                upcoming_anniversary.setVisibility(View.GONE);
+                more_upcoming_anniversary.setVisibility(View.GONE);
+                anniversary_end.setVisibility(View.GONE);
+            }
+        } else if (shoutout_) {
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(NEWS_URL);
+            news_ = true;
+            shoutout_ = false;
+            try {
                 JSONObject object = new JSONObject(data);
                 JSONArray data_array = object.getJSONArray("results");
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    final News add=new News();
+                for (int i = 0; i < 1; i++) {
+                    JSONObject obj = new JSONObject(data_array.get(0).toString());
+                    final News add = new News();
                     add.news_title = obj.getString("employee_from_profile");
                     add.setTitle(obj.getString("employee_from_profile"));
                     add.setId(obj.getInt("id"));
@@ -230,24 +390,31 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                         }
                     });
                 }
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(NEWS_URL);
-                news_ = true;
-                shoutout_ = false;
-            }else if(news_){
+            } catch (JSONException e) {
+//            createAndShowDialog(e,"No data");
+                e.printStackTrace();
+                upcoming_shoutout.setVisibility(View.GONE);
+                more_shoutout.setVisibility(View.GONE);
+                shoutout_end.setVisibility(View.GONE);
+            }
+        } else if (news_) {
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(EVENT_URL);
+            event_ = true;
+            news_ = false;
+            try {
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    final News add=new News("Title");
+                for (int i = 0; i < 1; i++) {
+                    JSONObject obj = new JSONObject(data_array.get(0).toString());
+                    final News add = new News("Title");
                     add.news_title = obj.getString("news_title");
                     add.setTitle(obj.getString("news_title"));
                     add.setId(obj.getInt("id"));
                     add.news_description = obj.getString("news_description");
                     add.news_image = obj.getString("news_image");
                     add.setType("news");
-                    System.out.println("News Id"+obj.getInt("id"));
+                    System.out.println("News Id" + obj.getInt("id"));
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -255,17 +422,21 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                         }
                     });
                 }
-                Download_data download_data = new Download_data((Download_data.download_complete) this);
-                download_data.download_data_from_link(EVENT_URL);
-                event_ = true;
-                news_ = false;
-            }else if(event_){
+            } catch (JSONException e) {
+//            createAndShowDialog(e,"No data");
+                e.printStackTrace();
+                upcoming_news.setVisibility(View.GONE);
+                more_news.setVisibility(View.GONE);
+                news_end.setVisibility(View.GONE);
+            }
+
+        } else if (event_) {
+            try {
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    final News add=new News("Title");
+                for (int i = 0; i < 1; i++) {
+                    JSONObject obj = new JSONObject(data_array.get(0).toString());
+                    final News add = new News("Title");
                     add.news_title = obj.getString("events_title");
                     add.setId(obj.getInt("id"));
                     add.news_description = obj.getString("events_description");
@@ -279,10 +450,11 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                     });
                 }
                 event_ = false;
-            }
-        }catch (JSONException e) {
+            } catch (JSONException e) {
 //            createAndShowDialog(e,"No data");
-            e.printStackTrace();
+                e.printStackTrace();
+                event_end.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -372,6 +544,18 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                         case "birthday":{
                             Intent intent = new Intent(getActivity(),ListingMore.class);
                             intent.putExtra("more","upcoming_birthday");
+                            startActivity(intent);
+                            break;
+                        }
+                        case "birthday_today":{
+                            Intent intent = new Intent(getActivity(),ListingMore.class);
+                            intent.putExtra("more","today_birthday");
+                            startActivity(intent);
+                            break;
+                        }
+                        case "anniversary_today":{
+                            Intent intent = new Intent(getActivity(),ListingMore.class);
+                            intent.putExtra("more","today_birthday");
                             startActivity(intent);
                             break;
                         }

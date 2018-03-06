@@ -58,8 +58,8 @@
             android:layout_width="wrap_content"
             android:text="B'day"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_marginLeft="10dp"
+            android:textSize="12sp"
+            android:layout_marginLeft="6dp"
             android:layout_alignLeft="@+id/firstFragment"
             android:layout_below="@+id/firstFragment"/>
 
@@ -79,8 +79,8 @@
             android:layout_width="wrap_content"
             android:text="Anniversary"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_marginLeft="-6dp"
+            android:textSize="12sp"
+            android:layout_marginLeft="-14dp"
             android:layout_alignLeft="@+id/secondFragment"
             android:layout_below="@+id/firstFragment"/>
 
@@ -100,8 +100,8 @@
             android:layout_width="wrap_content"
             android:text="ShoutOut"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_marginLeft="-2dp"
+            android:textSize="12sp"
+            android:layout_marginLeft="-5dp"
             android:layout_alignLeft="@+id/thirdFragment"
             android:layout_below="@+id/firstFragment"/>
 
@@ -121,8 +121,8 @@
             android:layout_width="wrap_content"
             android:text="Events"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_marginLeft="3dp"
+            android:textSize="12sp"
+            android:layout_marginLeft="1dp"
             android:layout_alignLeft="@+id/fourthFragment"
             android:layout_below="@+id/firstFragment"/>
         <ImageButton
@@ -140,8 +140,8 @@
             android:layout_width="wrap_content"
             android:text="News"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_marginLeft="7dp"
+            android:textSize="12sp"
+            android:layout_marginLeft="6dp"
             android:layout_alignLeft="@+id/fifthFragment"
             android:layout_below="@+id/firstFragment"/>
     </RelativeLayout>
@@ -151,6 +151,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/menuicons"
-         />
+        />
 
 </RelativeLayout>
