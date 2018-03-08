@@ -75,6 +75,19 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
         empPhoto = (ImageView) findViewById(R.id.empPhoto);
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(EMPLOYEE_URL);
+
+//        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void get_data(String data)
@@ -160,6 +173,9 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
         setCount(this,notification_count);
         return true;
     }
+
+
+
 
     /**
      * Event Handling for Individual menu item selected
@@ -250,10 +266,20 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
                 startActivity(intent);
                 return true;
 
+            case R.id.vdart_logo:
+                intent = new Intent(this,BannerActivity.class);
+                startActivity(intent);
+                return true;
+
             case R.id.shoutout:
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

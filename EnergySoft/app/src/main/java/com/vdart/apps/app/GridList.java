@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -65,6 +66,18 @@ public class GridList extends AppCompatActivity {
                         break;
                     }
                 }
+            }
+        });
+
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GridList.this, BannerActivity.class);
+                startActivity(intent);
             }
         });
     }

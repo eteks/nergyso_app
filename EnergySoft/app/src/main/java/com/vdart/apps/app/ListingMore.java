@@ -132,7 +132,17 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 return isLoading;
             }
         });
+        //        Click Logo to home screen
 
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListingMore.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // mocking network delay for API call
         new Handler().postDelayed(new Runnable() {
@@ -259,14 +269,7 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                         add.events_title = obj.getString("employee_name");
                         add.setTitle(obj.getString("employee_name"));
                         add.setId(obj.getInt("id"));
-                        Date date;
-                        if(more.equals("today_birthday") || more.equals("today_birthday")){
-                            date = parseDate(obj.getString("employee_dob"));
-                        }else if(more.equals("today_anniversary") || more.equals("today_anniversary")){
-                            date = parseDate(obj.getString("employee_doj"));
-                        }else {
-                            date = parseDate(obj.getString("employee_doj"));
-                        }
+                        Date date = parseDate(obj.getString("employee_dob"));
                         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
                         String strDate = formatter.format(date);
                         add.events_description = strDate;
@@ -420,6 +423,11 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

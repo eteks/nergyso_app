@@ -582,6 +582,7 @@ public class FirstFragment extends Fragment implements  Download_data.download_c
                 startActivity(intent);
                 return true;
 
+
             case R.id.logout:
                 intent = new Intent(getActivity(),MainActivity.class);
                 startActivity(intent);

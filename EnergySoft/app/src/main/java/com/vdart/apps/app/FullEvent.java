@@ -160,6 +160,18 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         // Loading the slider Image Fragment (ImageFragment.java)
         loadFragment(new ImageFragment());
 
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FullEvent.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loadFragment(Fragment fragment) {
@@ -503,6 +515,11 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

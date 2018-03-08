@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
 
@@ -34,7 +35,17 @@ public class TwitterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+//        Click Logo to home screen
 
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TwitterActivity.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
 //Get a reference to your WebView//
         WebView webView = (WebView) findViewById(R.id.webview);
 
@@ -186,6 +197,11 @@ public class TwitterActivity extends AppCompatActivity {
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
 
