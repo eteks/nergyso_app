@@ -1,0 +1,192 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/upcoming_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upcoming Birthday"
+            android:layout_below="@+id/menuicons"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/upcoming_birthday"
+            />
+        <TextView
+            android:id="@+id/more_upcoming_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" >> Upcoming Birthday"
+            android:layout_below="@+id/main_recycler_birthday"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/more_upcoming_birthday"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/upcoming_anniversary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upcoming Anniversary"
+            android:layout_below="@+id/more_upcoming_birthday"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_anniversary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/upcoming_anniversary"
+            />
+        <TextView
+            android:id="@+id/more_upcoming_anniversary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" >> Upcoming Anniversary"
+            android:layout_below="@+id/main_recycler_anniversary"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/more_upcoming_anniversary"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/upcoming_shoutout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shoutout"
+            android:layout_below="@+id/more_upcoming_anniversary"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_shoutout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/upcoming_shoutout"
+            />
+        <TextView
+            android:id="@+id/more_shoutout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" >> Read More"
+            android:layout_below="@+id/main_recycler_shoutout"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/more_shoutout"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/upcoming_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="News"
+            android:layout_below="@+id/more_shoutout"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/upcoming_news"
+            />
+        <TextView
+            android:id="@+id/more_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" >> Read More"
+            android:layout_below="@+id/main_recycler_news"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/more_news"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/upcoming_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Events"
+            android:layout_below="@+id/more_news"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/upcoming_event"
+            />
+        <TextView
+            android:id="@+id/more_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" >> Read More"
+            android:layout_below="@+id/main_recycler_event"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/more_event"
+            android:background="@android:color/darker_gray"/>
+
+
+
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vdart.apps.app">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="VDart"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.vdart.apps.app.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.vdart.apps.app.BannerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.Slidescreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.SearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.SearchResults"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.NotificationMain"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.Feedback"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.CeomessageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.EventMain"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.FullEvent"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.FullNews"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.NewsMain"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.CeoMain"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.GridList"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.FacebookActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.TwitterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.ForgetpasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.EventGallery"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.Changepassword_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.DetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.ListingMore"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.BannerItem"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.QuizActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.quiz_activity_frag"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.Resetpassword_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.VideoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vdart.apps.app.LiveTelecast"
+            android:screenOrientation="portrait"/>
+
+        <service android:name="com.vdart.apps.app.MyAndroidFirebaseMsgService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.vdart.apps.app.MyAndroidFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".MainGallery"
+            android:label="Details of notification"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+    </application>
+
+</manifest>

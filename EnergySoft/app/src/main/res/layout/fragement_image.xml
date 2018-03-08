@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/eventhead_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:padding="15dp">-->
+
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/events_photo"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="80dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="80dp"/>&ndash;&gt;-->
+
+       <!---->
+
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/full_events_description"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_below="@+id/full_events_title"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_toEndOf="@+id/events_photo"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_toRightOf="@+id/events_photo"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:maxLines="2"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:paddingLeft="10dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textColor="#333" />&ndash;&gt;-->
+
+    <!--</RelativeLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="194dp">
+        <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fillViewport="true">-->
+
+        <TextView
+            android:id="@+id/full_events_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="10dp"
+            android:textColor="#333"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+        <WebView
+            android:id="@+id/full_text_events_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="40dp"
+            android:padding="10dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/full_events_title"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/event_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="28dp"
+            android:layout_below="@+id/full_text_events_description"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="28dp"
+            android:layout_below="@+id/event_location"
+            android:layout_marginLeft="5dp"/>
+
+        <!--<FrameLayout-->
+        <!--android:id="@+id/frameLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+        <TextView
+            android:id="@+id/recent_events"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_marginTop="28dp"
+            android:layout_below="@+id/event_date"
+            android:layout_marginLeft="5dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="20dp"
+            android:paddingTop="2dp"
+            android:layout_below="@+id/recent_events"
+            android:layout_toEndOf="@+id/relativeLayout2" />
+
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

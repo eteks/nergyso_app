@@ -1,0 +1,47 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--&lt;!&ndash;    list_item.xml   &ndash;&gt;-->
+<!--<ImageView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/item_img"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="128dp"-->
+    <!--android:layout_margin="1dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:scaleType="centerCrop" />-->
+
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/relativelayout"
+android:layout_width="fill_parent"
+android:layout_height="100dp" >
+
+<!--<ImageView-->
+    <!--android:id="@+id/myImageView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/myImageSouce" />-->
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_img"
+    android:layout_width="match_parent"
+    android:layout_height="128dp"
+    android:layout_margin="1dp"
+    android:adjustViewBounds="true"
+    android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/item_img"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginStart="25dp"
+        android:gravity="center"
+        android:text="New image"
+        android:textColor="#000000"
+        android:textStyle="bold|normal"
+        android:background="#FFFFFF"/>
+
+</RelativeLayout>
+

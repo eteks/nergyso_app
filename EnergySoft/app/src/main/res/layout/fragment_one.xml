@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ecf1f4">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+        />
+
+    <RelativeLayout
+        android:id="@+id/questionContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="5">
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="true"
+            android:gravity="center_vertical"
+            android:maxLines="100"
+            android:paddingLeft="10dp"
+            android:scrollbars="vertical"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textIsSelectable="false"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/answers_container"
+        android:layout_weight="4">
+
+        <RelativeLayout
+            android:id="@+id/answer_a_container"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_weight="1">
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/answers"
+                android:orientation="vertical">
+
+
+                <RadioButton
+                    android:id="@+id/answerA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="53dp"
+                    android:maxLines="100"
+                    android:scrollbars="vertical"
+                    android:onClick="getRadioChecked" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerB"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerC"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerD"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answerE"
+                    android:maxLines = "100"
+                    android:scrollbars = "vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="getRadioChecked"
+                    android:layout_marginStart="53dp" />
+
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+        <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Verifica Raspunsurile"-->
+        <!--android:id="@+id/button"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:onClick="FinishTest" />-->
+
+        <Button
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="53dp"
+            android:background="@drawable/rounded_edge"
+            android:text="Vote"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:drawable="@android:drawable/ic_menu_search"
+            android:text="Prev"
+            android:background="#c5e0f1"
+            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/vote" />
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Next"
+            android:textSize="20dp"
+            android:background="#c5e0f1"
+            android:layout_marginEnd="55dp"
+            android:layout_alignTop="@+id/previous"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+</LinearLayout>

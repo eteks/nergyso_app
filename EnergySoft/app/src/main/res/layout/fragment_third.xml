@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/shouthead"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginStart="28dp"-->
+            <!--android:layout_marginTop="29dp"-->
+            <!--android:text="Shoutout"-->
+            <!--android:textColor="@color/blueText"-->
+            <!--android:textSize="18sp"-->
+            <!--android:textStyle="bold|normal" />-->
+
+        <EditText
+            android:id="@+id/shoutout_description"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:textSize="18dp"
+            android:hint="Message"
+            android:inputType="textMultiLine"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/shoutpost"
+            android:layout_width="65dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded_edge"
+            android:text="Post"
+            android:textColor="#fff"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/shoutout_employee_to" />
+
+        <!--<EditText-->
+            <!--android:id="@+id/shoutout_employee_to"-->
+            <!--android:layout_width="270dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@+id/shoutout_description"-->
+            <!--android:layout_below="@+id/shoutout_description"-->
+            <!--android:layout_marginTop="12dp"-->
+            <!--android:ems="10"-->
+            <!--android:hint="Tag name"-->
+            <!--android:inputType="textPersonName" />-->
+
+        <AutoCompleteTextView
+            android:id="@+id/shoutout_employee_to"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/shoutout_description"
+            android:layout_below="@+id/shoutout_description"
+            android:layout_marginTop="12dp"
+            android:textSize="18dp"
+            android:hint="Tag name"
+            android:inputType="textPersonName"/>
+
+        <!--<ListView-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--tools:listitem="@layout/shoutoutlist_layout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/listViewshoutout"-->
+            <!--android:divider="@null"-->
+            <!--android:layout_below="@+id/shoutpost"-->
+            <!--/>-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shoutpost"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            android:paddingTop="24dp" />
+
+        <TextView
+            android:id="@+id/shoutout_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/main_recycler"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="15dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="More..." />
+
+    </RelativeLayout>
+
+    <!--Only the Listveiw-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_below="@+id/shoutout">-->
+
+        <!--<ListView-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--tools:listitem="@layout/shoutoutlist_layout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/listViewshoutout"-->
+            <!--android:divider="@null"-->
+            <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--Only the Listveiw ends-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="15dp"-->
+        <!--android:id="@+id/listsam"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentStart="true">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/news_image"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_weight="0.11"-->
+            <!--android:src="@drawable/megaphone" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/news_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_toEndOf="@+id/news_image"-->
+            <!--android:layout_toRightOf="@+id/news_image"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:text="Shoutout"-->
+            <!--android:textColor="#333"-->
+            <!--android:textSize="22dp"-->
+            <!--android:textStyle="bold" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/news_description"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/news_title"-->
+            <!--android:layout_toEndOf="@+id/news_image"-->
+            <!--android:layout_toRightOf="@+id/news_image"-->
+            <!--android:layout_weight="1"-->
+            <!--android:maxLines="1"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:text="Admin What a awesome presentation"-->
+            <!--android:textColor="#333" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView7"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginStart="23dp"-->
+            <!--app:srcCompat="@drawable/profile_pc"-->
+            <!--android:layout_below="@+id/news_description"-->
+            <!--android:layout_toEndOf="@+id/news_image" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView8"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_alignTop="@+id/imageView7"-->
+            <!--android:layout_toEndOf="@+id/news_title"-->
+            <!--app:srcCompat="@drawable/protest" />-->
+
+    <!--</RelativeLayout>-->
+
+
+</ScrollView>
+
+
+
+
+
+

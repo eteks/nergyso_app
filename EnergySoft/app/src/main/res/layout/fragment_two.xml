@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ecf1f4">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+        />
+
+    <RelativeLayout
+        android:id="@+id/questionContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="5">
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="true"
+            android:gravity="center_vertical"
+            android:maxLines="100"
+            android:paddingLeft="10dp"
+            android:scrollbars="vertical"
+            android:text="Text for the second question"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textIsSelectable="false"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/answers_container"
+        android:layout_weight="4">
+
+        <RelativeLayout
+            android:id="@+id/answer_a_container"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/answerA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="53dp"
+                android:hint="0"
+                android:maxLines="100"
+                android:scrollbars="vertical"
+                android:text="Varianta A" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/answer_b_container"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Varianta B"
+                android:id="@+id/answerB"
+                android:hint="1"
+                android:maxLines = "100"
+                android:scrollbars = "vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="53dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/answer_c_container"
+            android:layout_weight="1" >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Varianta C"
+                android:id="@+id/answerC"
+                android:maxLines = "100"
+                android:scrollbars = "vertical"
+                android:hint="2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="53dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+        <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Verifica Raspunsurile"-->
+        <!--android:id="@+id/button"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:onClick="FinishTest" />-->
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="53dp"
+            android:background="@drawable/rounded_edge"
+            android:text="Revote"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/buttonnext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:drawable="@android:drawable/ic_menu_search"
+            android:text="PREV"
+            android:background="#c5e0f1"
+            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/button2" />
+        <Button
+            android:id="@+id/buttonpre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="NEXT"
+            android:textSize="20dp"
+            android:background="#c5e0f1"
+            android:layout_marginEnd="55dp"
+            android:layout_alignTop="@+id/buttonnext"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+</LinearLayout>

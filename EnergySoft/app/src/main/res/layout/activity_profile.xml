@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.vdart.apps.app.ProfileActivity">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+        />
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="@drawable/bd_header"
+        android:layout_width="match_parent"
+        android:layout_height="128dp">
+        
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/empPhoto"
+                android:src="@drawable/protest"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="16dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/empId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:layout_alignTop="@+id/empPhoto"
+                android:layout_alignStart="@+id/empName"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:id="@+id/empName"
+                android:layout_below="@+id/empId"
+                android:layout_toEndOf="@+id/empPhoto"
+                android:layout_marginTop="14dp" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="14dp"
+                android:text="Email"
+                android:textSize="15sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold|normal"/>
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/email"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/empdept_id"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/dob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/email"
+                android:layout_below="@+id/email"
+                android:layout_marginTop="25dp"
+                android:text="DOB"
+                android:textSize="15sp"
+                android:textStyle="bold|normal"/>
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empDob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/empEmail"
+                android:layout_alignTop="@+id/dob"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/dob"
+                android:layout_below="@+id/dob"
+                android:layout_marginTop="20dp"
+                android:text="Mobile"
+                android:textSize="15sp"
+                android:textStyle="bold|normal"/>
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/empDob"
+                android:layout_alignTop="@+id/mobile"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/doj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/mobile"
+                android:layout_below="@+id/mobile"
+                android:layout_marginTop="20dp"
+                android:text="DOJ"
+                android:textSize="15sp"
+                android:textStyle="bold|normal"/>
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empDoj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/doj"
+                android:layout_alignBottom="@+id/doj"
+                android:layout_alignStart="@+id/empMobile"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/doj"
+                android:layout_below="@+id/doj"
+                android:layout_marginTop="15dp"
+                android:text="Designation"
+                android:textSize="15sp"
+                android:textStyle="bold|normal"/>
+
+            <!--<ProgressBar-->
+                <!--android:id="@+id/profileprogressBar"-->
+                <!--style="?android:attr/progressBarStyle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="141dp" />-->
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empDesignation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/designation"
+                android:layout_alignStart="@+id/empDoj"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/blood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/designation"
+                android:layout_below="@+id/designation"
+                android:layout_marginTop="20dp"
+                android:text="Blood Group"
+                android:textSize="15sp"
+                android:textStyle="bold|normal"/>
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empBloodGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/blood"
+                android:layout_alignStart="@+id/empDesignation"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/expyears"
+                android:layout_below="@+id/expyears"
+                android:layout_marginTop="20dp"
+                android:text="Address"
+                android:textSize="15sp"
+                android:textStyle="bold|normal"/>
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/empBloodGroup"
+                android:layout_alignTop="@+id/address"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empdept_id"
+                android:textStyle="bold|normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/blood"
+                android:layout_alignStart="@+id/blood"
+                android:layout_marginTop="25dp"
+                android:text="Department"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/empDeptId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/empdept_id"
+                android:layout_alignStart="@+id/empAddress"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/expyears"
+                android:textStyle="bold|normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/empdept_id"
+                android:layout_below="@+id/empdept_id"
+                android:layout_marginTop="15dp"
+                android:text="Exp. Years"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/blueText"
+                android:id="@+id/EmpExpYears"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/empDeptId"
+                android:layout_alignTop="@+id/expyears"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
