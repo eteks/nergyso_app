@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">VDart</string>
-    <!--Local-->
-    <!--<string name="service_url">http://10.0.0.9:8000/</string>-->
-    <!--Server-->
-    <string name="service_url">http://182.72.238.164/</string>
-    <string name="action_settings">Settings</string>
-</resources>
