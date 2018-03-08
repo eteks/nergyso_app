@@ -129,7 +129,17 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
             }
         });
 
+        //        Click Logo to home screen
 
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LiveTelecast.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
         // mocking network delay for API call
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -317,6 +327,11 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
             case R.id.polls:
                 intent = new Intent(this,quiz_activity_frag.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

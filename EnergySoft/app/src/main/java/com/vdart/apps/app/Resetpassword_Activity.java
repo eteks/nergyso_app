@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -53,6 +54,18 @@ public class Resetpassword_Activity extends AppCompatActivity {
                         token.setText("");
                     }
                 });
+            }
+        });
+
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Resetpassword_Activity.this, BannerActivity.class);
+                startActivity(intent);
             }
         });
         Button submit = (Button) findViewById(R.id.submit);
@@ -303,6 +316,11 @@ public class Resetpassword_Activity extends AppCompatActivity {
             case R.id.polls:
                 intent = new Intent(Resetpassword_Activity.this,quiz_activity_frag.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
 

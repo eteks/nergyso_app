@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -50,7 +51,21 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
     public void getRadioChecked(View view){
         boolean checked = ((RadioButton) view).isChecked();
@@ -165,6 +180,11 @@ public class SearchActivity extends AppCompatActivity {
             case R.id.polls:
                 intent = new Intent(this,quiz_activity_frag.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

@@ -125,6 +125,18 @@ public class NotificationMain extends AppCompatActivity implements Download_data
             }
         });
 
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NotificationMain.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // mocking network delay for API call
         new Handler().postDelayed(new Runnable() {
@@ -295,6 +307,8 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link(NOTIFICATION_URL);
     }
+
+
 
     public static Date parseDate(String date) {
         try {
@@ -597,6 +611,11 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

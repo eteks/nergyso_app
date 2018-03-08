@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 /**
  * Created by ets-prabhu on 2/1/18.
@@ -45,6 +46,17 @@ public class FacebookActivity extends AppCompatActivity {
             {
                 // Page loading finished
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            }
+        });
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FacebookActivity.this, BannerActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -155,6 +167,11 @@ public class FacebookActivity extends AppCompatActivity {
             case R.id.polls:
                 intent = new Intent(this,quiz_activity_frag.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

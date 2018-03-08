@@ -125,7 +125,17 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 return isLoading;
             }
         });
+        //        Click Logo to home screen
 
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListingMore.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // mocking network delay for API call
         new Handler().postDelayed(new Runnable() {
@@ -385,6 +395,11 @@ public class ListingMore extends AppCompatActivity implements Download_data.down
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -97,6 +98,18 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
                         startActivity(intent);
                     }
                 }));
+
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EventGallery.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -238,6 +251,11 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:

@@ -188,6 +188,18 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(BANNER_URL);
 
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BannerActivity.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -275,12 +287,13 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         }
     }
 
+
     // Initiating Menu XML file (menu.xml)
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
+        MenuInflater inflater  = getMenuInflater();
+        inflater .inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -409,6 +422,11 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             case R.id.polls:
                 intent = new Intent(this,quiz_activity_frag.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             case R.id.shoutout:

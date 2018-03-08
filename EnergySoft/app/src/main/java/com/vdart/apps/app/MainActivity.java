@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity
                                         @Override
                                         public void run() {
                                             mProgressBar.setVisibility(ProgressBar.GONE);
-                                            createAndShowDialog("Drunk?! Please check your credentials", "Error");
+                                            createAndShowDialog("Invalid username or password. Please try again.", "Error");
                                         }
                                     });
                                 }
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity
                                     @Override
                                     public void run() {
                                         mProgressBar.setVisibility(ProgressBar.GONE);
-                                        createAndShowDialog("Drunk?! Please check your credentials", "Error");
+                                        createAndShowDialog("Invalid username or password. Please try again.", "Error");
                                     }
                                 });
                             } finally {

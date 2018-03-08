@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -96,6 +97,7 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
 
         next = (Button) findViewById(R.id.next);
         next.setVisibility(View.GONE);
+        next.setEnabled(false);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +113,7 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
 
         previous = (Button) findViewById(R.id.previous);
         previous.setVisibility(View.GONE);
+        previous.setEnabled(false);
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,12 +127,26 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
             }
         });
 
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(quiz_activity_frag.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
         vote = (Button) findViewById(R.id.vote);
         vote.setVisibility(View.GONE);
         vote.setOnClickListener(new View.OnClickListener(){
             int ONE_TIME = 0;
             @Override
             public void onClick(View view) {
+                previous.setEnabled(true);
+                next.setEnabled(true);
                 if((questionId > 0) && (answerId > 0)) {
                     String data = null;
                     try {
@@ -383,6 +400,8 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
                             @Override
                             public void run() {
                                 answered = true;
+                                previous.setEnabled(true);
+                                next.setEnabled(true);
                                 vote.setText("REVOTE");
                                 for(int i = 0; i < answersId.length; i++){
                                     try {
@@ -560,6 +579,11 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
                 intent = new Intent(this,ListingMore.class);
                 intent.putExtra("more","shoutout");
                 startActivity(intent);
+                return true;
+
+            case R.id.action_refresh:
+//                intent = new Intent(this,BannerActivity.class);
+                startActivity(getIntent());
                 return true;
 
             default:
