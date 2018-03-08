@@ -12,6 +12,16 @@ public class Event {
     String events_document;
     String events_venue;
     String events_location;
+    int notification_id;
+
+    public int getNotification_id() {
+        return notification_id;
+    }
+
+    public void setNotification_id(int notification_id) {
+        this.notification_id = notification_id;
+    }
+
     String type;
     int id;
     String events_date;

@@ -1,6 +1,9 @@
 package com.vdart.apps.app;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,12 +14,17 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
+
 /**
  * Created by ets-prabhu on 2/1/18.
  */
 
 public class TwitterActivity extends AppCompatActivity {
     Toolbar toolbar;
+    Menu menuInflate;
+    String notification_count = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +33,7 @@ public class TwitterActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
 //Get a reference to your WebView//
         WebView webView = (WebView) findViewById(R.id.webview);
@@ -59,11 +68,32 @@ public class TwitterActivity extends AppCompatActivity {
     }
 
     // Initiating Menu XML file (menu.xml)
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 

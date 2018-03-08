@@ -3,6 +3,8 @@ package com.vdart.apps.app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -59,6 +61,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
     String nextPage;
     String SERVER_URL ;
     String NOTIFICATION_URL = "api/notification/notification_list_by_employee" ;
+    String NOTIFICATION_POST_URL = "api/notification/notification_status/";
     RecyclerView rv;
     ProgressBar progressBar;
     String DOWNLOAD_URL, category = "" ;
@@ -70,7 +73,10 @@ public class NotificationMain extends AppCompatActivity implements Download_data
     public ListView list;
     public ArrayList<Event> eventList = new ArrayList<Event>();
     public ListAdapter NewsAdapter;
-    String notification[] = new String[100];
+    String notification[] = new String[1000];
+    int notification_id[] = new int[1000];
+    String notification_count = "";
+    Menu menuInflate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +150,8 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
         final BufferedReader[] reader = {null};
 
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+
         // Send data
         final String finalData = data;
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -183,6 +191,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
                         String strDate = formatter.format(date);
                         notification[i] = strDate;
+                        notification_id[i] = obj.getInt("id");
                         category = obj.getString("notification_cateogry").toLowerCase();
                         switch(category) {
                             case "events": {
@@ -294,6 +303,25 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+        badge.setCount(notification_count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
     }
 
     public static Date parseDate(String date) {
@@ -418,6 +446,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 add.setId(obj.getInt("id"));
                 add.setDescription(obj.getString("events_description"));
                 add.setType("events");
+                add.setNotification_id(obj.getInt("id"));
                 String splitted_gallery[] = obj.getString("events_image").split("%2C");
                 add.setImage(splitted_gallery[0]);
                 runOnUiThread(new Runnable() {
@@ -438,6 +467,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 add.setTitle(obj.getString("news_title"));
                 add.setId(obj.getInt("id"));
                 add.setDescription(obj.getString("news_description"));
+                add.setNotification_id(obj.getInt("id"));
                 String splitted_gallery[] = obj.getString("news_image").split("%2C");
                 add.setImage(splitted_gallery[0]);
                 add.setType("news");
@@ -458,6 +488,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 final Event add=new Event();
                 add.setTitle(obj.getString("shoutout_description"));
                 add.setId(obj.getInt("id"));
+                add.setNotification_id(obj.getInt("id"));
                 add.setImage(obj.getString("employee_from_profile"));
                 add.setType("shoutout");
                 runOnUiThread(new Runnable() {
@@ -477,6 +508,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 final Event add=new Event();
                 add.setTitle(obj.getString("ceo_message"));
                 add.setId(obj.getInt("id"));
+                add.setNotification_id(obj.getInt("id"));
                 add.setImage(obj.getString("ceo_employee_photo"));
                 add.setType("ceo");
                 runOnUiThread(new Runnable() {
@@ -499,8 +531,10 @@ public class NotificationMain extends AppCompatActivity implements Download_data
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(NotificationMain.this,notification_count);
         return true;
     }
 
@@ -701,6 +735,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         case "events":{
                             Intent intent = new Intent(NotificationMain.this,FullEvent.class);
                             check = "EVENTS";
+                            postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
@@ -709,6 +744,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         case "news":{
                             Intent intent = new Intent(NotificationMain.this,FullEvent.class);
                             check = "NEWS";
+                            postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
@@ -717,6 +753,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         case "birthday":{
                             Intent intent = new Intent(NotificationMain.this,BannerActivity.class);
                             check = "birthday";
+                            postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
@@ -725,6 +762,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         case "anniversary":{
                             Intent intent = new Intent(NotificationMain.this,BannerActivity.class);
                             check = "anniversary";
+                            postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
@@ -736,11 +774,13 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         case "shoutout":{
                             Intent intent = new Intent(NotificationMain.this,ListingMore.class);
                             check = "shoutout";
+                            postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             intent.putExtra("more",check);
                             startActivity(intent);
                             break;
                         }
                         case "ceo" : {
+                            postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             Intent intent = new Intent(NotificationMain.this,CeomessageActivity.class);
                             startActivity(intent);
                             break;
@@ -923,6 +963,16 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
                     }
                 });
+    }
+
+    public void postNotificationRead(int notification_id){
+
+        NOTIFICATION_POST_URL = SERVER_URL + NOTIFICATION_POST_URL + notification_id + "/" ;
+        System.out.println("Notification" + NOTIFICATION_POST_URL + notification_id);
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(NOTIFICATION_POST_URL);
+
+        NOTIFICATION_POST_URL = "api/notification/notification_status/";
     }
 
 

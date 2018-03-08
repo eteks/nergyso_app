@@ -6,6 +6,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +45,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
+
 public class FullEvent extends AppCompatActivity implements Download_data.download_complete {
 
     MyCustomPagerAdapter myCustomPagerAdapter;
@@ -74,6 +78,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     public ArrayList<News> newsList = new ArrayList<News>();
     public ListAdapter NewsAdapter;
     String DOWNLOAD_URL = "", RECENT_URL = "";
+    Menu menuInflate;
+    String notification_count = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         myCustomPagerAdapter = new MyCustomPagerAdapter(this, images);
 
         viewPager.setAdapter(myCustomPagerAdapter);
+
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
         /*After setting the adapter use the timer */
         final Handler handler = new Handler();
@@ -373,10 +381,32 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     }
 
     // Initiating Menu XML file (menu.xml)
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 

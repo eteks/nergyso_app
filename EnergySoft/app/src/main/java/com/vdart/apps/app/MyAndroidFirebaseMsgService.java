@@ -1,30 +1,64 @@
 package com.vdart.apps.app;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Switch;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
+
 public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
+    int id = 0;
+    int NOTIFICATION_COUNT = 0;
+    BannerActivity banner;
+    String SERVER_URL = "";
+    String NOTIFICATION_URL = "api/notification/notification_list_by_employee";
     private static final String TAG = "MyAndroidFCMService";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        //Log data to Log Cat
+        //        //Log data to Log Cat
+        NOTIFICATION_URL = SERVER_URL + NOTIFICATION_URL;
+        SERVER_URL = getString(R.string.service_url);
+
+        id = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);
+
+        String notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+
+        int nc = Integer.valueOf(notification_count) +1 ;
+
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
         System.out.println("Data : " + remoteMessage.getData());
+
+        banner.setCount(banner,String.valueOf(nc));
+
         //create notification
         try{
             JSONObject obj = new JSONObject(remoteMessage.getData());
@@ -125,5 +159,29 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, mNotificationBuilder.build());
+    }
+
+    private void createAndShowDialog(final String message, final String title) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.create().show();
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+
+    private void createAndShowDialog(Exception exception, String title) {
+        Throwable ex = exception;
+        if(exception.getCause() != null){
+            ex = exception.getCause();
+        }
+        createAndShowDialog(ex.getMessage(), title);
     }
 }

@@ -37,13 +37,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.FullEvent"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.vdart.apps.app.FullNews"
-            android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.NewsMain"
             android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.CeoMain"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.vdart.apps.app.GridList"
             android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.FacebookActivity"
             android:screenOrientation="portrait"/>
@@ -65,13 +61,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.BannerItem"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.vdart.apps.app.QuizActivity"
-            android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.quiz_activity_frag"
             android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.Resetpassword_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.vdart.apps.app.VideoActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.vdart.apps.app.LiveTelecast"
             android:screenOrientation="portrait"/>

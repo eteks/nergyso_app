@@ -6,6 +6,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,9 +34,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
 
 public class BannerActivity extends AppCompatActivity implements Download_data.download_complete{
     Toolbar toolbar;
@@ -45,6 +59,11 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     ViewPager viewPager;
     String SERVER_URL ;
     String BANNER_URL ;
+    MenuItem menuItem;
+    Menu menuInflate;
+    int id = 0;
+    int NOTIFICATION_COUNT = 0;
+    String NOTIFICATION_URL = "api/notification/notification_list_by_employee";
 //    String[] images = new String[20];
     MyCustomPagerAdapter myCustomPagerAdapter;
     public static int NUM_PAGES = 0;
@@ -65,10 +84,14 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         SERVER_URL = getString(R.string.service_url);
         BANNER_URL = SERVER_URL+"api/banner/";
 
+        NOTIFICATION_URL = SERVER_URL + NOTIFICATION_URL;
+
         viewPager = (ViewPager)findViewById(R.id.viewPagerdash);
 
         myCustomPagerAdapter = new MyCustomPagerAdapter(BannerActivity.this, images);
         viewPager.setAdapter(myCustomPagerAdapter);
+
+        id = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);
 
         /*After setting the adapter use the timer */
         final Handler handler = new Handler();
@@ -81,6 +104,8 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 viewPager.setCurrentItem(currentPage++, true);
             }
         };
+
+        getNotificationCount();
 
         timer = new Timer(); // This will create a new Thread
         timer .schedule(new TimerTask() { // task to be scheduled
@@ -133,6 +158,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 //                loadFragment(new FirstFragment());
             }
         }
+
 
         // get the reference of Button's
         firstFragment = (ImageButton) findViewById(R.id.firstFragment);
@@ -190,7 +216,30 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setCount(this, String.valueOf(NOTIFICATION_COUNT));
+        return  true;
+    }
 
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
 
     public void changeImage(String image){
         switch (image){
@@ -280,6 +329,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater menuInflater = getMenuInflater();
+        menuInflate = menu;
         menuInflater.inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -324,6 +374,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        menuItem = item;
         Intent intent;
         switch (item.getItemId())
         {
@@ -491,6 +542,80 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
                     }
                 });
+    }
+
+    public void getNotificationCount(){
+        String data = null;
+        try {
+
+            data = URLEncoder.encode("notification_employee", "UTF-8")
+                    + "=" + id;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        final BufferedReader[] reader = {null};
+
+        // Send data
+        final String finalData = data;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    // Defined URL  where to send data
+                    URL url = new URL(NOTIFICATION_URL);
+
+                    // Send POST data request
+                    System.out.println("URL:" + NOTIFICATION_URL);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(finalData);
+                    wr.flush();
+                    System.out.println(finalData);
+                    // Get the server response
+
+                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader[0].readLine()) != null) {
+                        // Append server response in string
+                        sb.append(line + "\n");
+                    }
+                    System.out.println("Output" + sb.toString());
+                    JSONArray data_array = new JSONArray(sb.toString());
+                    System.out.println("Data array Length" + data_array.length());
+                    for (int i = 0; i < data_array.length(); i++) {
+                        final JSONObject obj = new JSONObject(data_array.get(i).toString());
+                        System.out.println("Object" + obj);
+                        if (!obj.getBoolean("notification_read_status")) {
+                            NOTIFICATION_COUNT++;
+                        }
+                    }
+                    System.out.println("Notification"+ NOTIFICATION_COUNT);
+                    SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("nc", String.valueOf(NOTIFICATION_COUNT));
+                    editor.commit();
+                    setCount(BannerActivity.this, String.valueOf(NOTIFICATION_COUNT));
+                }catch (Exception ex) {
+                    System.out.println(ex);
+                } finally {
+                    try {
+                        reader[0].close();
+                    } catch (Exception ex) {
+                    }
+                }
+                return null;
+            }
+
+        };
+        runAsyncTask(task);
+
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        download_data.download_data_from_link(NOTIFICATION_URL);
     }
 }
 

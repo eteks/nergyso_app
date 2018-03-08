@@ -11,6 +11,15 @@ public class Notification {
     String notification_video;
     String notification_document;
     int id;
+    int notification_count ;
+
+    public int getNotification_count() {
+        return notification_count;
+    }
+
+    public void setNotification_count(int notification_count) {
+        this.notification_count = notification_count;
+    }
 
     public Notification() {
     }

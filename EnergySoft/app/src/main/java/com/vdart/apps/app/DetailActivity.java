@@ -1,5 +1,8 @@
 package com.vdart.apps.app;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -28,6 +34,9 @@ public class DetailActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
+    Menu menuInflate;
+    String notification_count = "";
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     public ArrayList<ImageModel> data = new ArrayList<>();
@@ -63,6 +72,8 @@ public class DetailActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(pos);
 
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -87,10 +98,32 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_detail, menu);
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        menuInflate = menu;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 

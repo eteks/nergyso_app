@@ -1,7 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -47,6 +50,8 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
     int NEXT_QUESTION_ID = 0, CURRENT_QUESTION_ID = 0, PREVIOUS_QUESTION_ID = 0, TOTAL_QUESTIONS = 0;
     boolean answered = false;
     int employee_id = 0;
+    Menu menuInflate;
+    String notification_count = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +84,8 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
         employee_id = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);
 
         answer = (RadioButton) findViewById(answers.getCheckedRadioButtonId());
+
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
@@ -459,11 +466,32 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
     }
 
     // Initiating Menu XML file (menu.xml)
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 

@@ -10,5 +10,13 @@
         android:background="@drawable/toolbartitle"
         />
 
+    <!--<TextView-->
+        <!--android:id="@+id/count"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="123456789445555"-->
+        <!--android:textSize="25dp"-->
+        <!--android:textColor="#FFFFFF" />-->
+
 
 </android.support.v7.widget.Toolbar>

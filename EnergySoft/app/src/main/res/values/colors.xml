@@ -6,4 +6,6 @@
     <color name="boldText">#4b4949</color>
     <color name="blueText">#043c77</color>
     <color name="mildBlue">#b0fcff</color>
+    <color name="background_color">#000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

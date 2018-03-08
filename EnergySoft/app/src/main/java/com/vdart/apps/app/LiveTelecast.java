@@ -3,6 +3,8 @@ package com.vdart.apps.app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -38,6 +40,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
+
 /**
  * Created by ets-prabhu on 11/1/18.
  */
@@ -55,7 +59,8 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
     String LIVE_URL = "api/livetelecast" ;
     RecyclerView rv;
     ProgressBar progressBar;
-
+    Menu menuInflate;
+    String notification_count = "";
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -93,6 +98,8 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
 
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
+
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
         rv.setItemAnimator(new DefaultItemAnimator());
 
@@ -216,11 +223,33 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
     }
 
     // Initiating Menu XML file (menu.xml)
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+        badge.setCount(notification_count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 

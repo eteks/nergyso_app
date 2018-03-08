@@ -2,276 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dda236ff-644f-47e3-aad3-712359d5622d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.gitignore" afterPath="$PROJECT_DIR$/EnergySoft/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/compiler.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/gradle.xml" afterPath="$PROJECT_DIR$/EnergySoft/.idea/gradle.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/misc.xml" afterPath="$PROJECT_DIR$/EnergySoft/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/modules.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/EnergySoft/.idea/runConfigurations.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app-release.apk" afterPath="$PROJECT_DIR$/EnergySoft/app-release.apk" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/.gitignore" afterPath="$PROJECT_DIR$/EnergySoft/app/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/VDart.apk" afterPath="$PROJECT_DIR$/EnergySoft/app/VDart.apk" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/app-release.apk" afterPath="$PROJECT_DIR$/EnergySoft/app/app-release.apk" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/build.gradle" afterPath="$PROJECT_DIR$/EnergySoft/app/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/google-services.json" afterPath="$PROJECT_DIR$/EnergySoft/app/google-services.json" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/libs/YouTubeAndroidPlayerApi.jar" afterPath="$PROJECT_DIR$/EnergySoft/app/libs/YouTubeAndroidPlayerApi.jar" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/proguard-rules.pro" afterPath="$PROJECT_DIR$/EnergySoft/app/proguard-rules.pro" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/androidTest/java/com/vdart/apps/app/ExampleInstrumentedTest.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/androidTest/java/com/vdart/apps/app/ExampleInstrumentedTest.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/gen/com/vdart/apps/app/BuildConfig.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/gen/com/vdart/apps/app/BuildConfig.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/gen/com/vdart/apps/app/Manifest.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/gen/com/vdart/apps/app/Manifest.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/gen/com/vdart/apps/app/R.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/gen/com/vdart/apps/app/R.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/ic_launcher-web.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/ic_launcher-web.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/ic_launcher_round-web.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/ic_launcher_round-web.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/BannerActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/BannerActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/BannerItem.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/BannerItem.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/CeoMain.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/CeoMain.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/CeomessageActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/CeomessageActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Changepassword_Activity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Changepassword_Activity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/CustomAdapter.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/CustomAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/DepthPageTransformer.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/DepthPageTransformer.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/DetailActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/DetailActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Download_data.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Download_data.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Employee.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Employee.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Event.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Event.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/EventGallery.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/EventGallery.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/EventMain.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/EventMain.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FacebookActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FacebookActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Feedback.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Feedback.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FifthFragment.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FifthFragment.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FirstFragment.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FirstFragment.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ForgetpasswordActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ForgetpasswordActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FourthFragment.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FourthFragment.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FullEvent.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FullEvent.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FullNews.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/FullNews.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/GalleryAdapter.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/GalleryAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/GalleryZoomActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/GalleryZoomActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/GridList.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/GridList.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ImageFragment.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ImageFragment.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ImageModel.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ImageModel.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ListingMore.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ListingMore.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/LiveTelecast.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/LiveTelecast.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MainActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MainGallery.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MainGallery.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MyAndroidFirebaseInstanceIdService.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MyAndroidFirebaseInstanceIdService.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MyAndroidFirebaseMsgService.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MyAndroidFirebaseMsgService.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MyServerData.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/MyServerData.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/News.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/News.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/NewsMain.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/NewsMain.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Notification.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Notification.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/NotificationMain.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/NotificationMain.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/PlayerConfig.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/PlayerConfig.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ProfileActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ProfileActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Question.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Question.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/QuizActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/QuizActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/RecyclerItemClickListener.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/RecyclerItemClickListener.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Resetpassword_Activity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Resetpassword_Activity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SampleFragment.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SampleFragment.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SampleFragmentTwo.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SampleFragmentTwo.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SearchActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SearchActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SearchResults.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SearchResults.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SecondFragment.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SecondFragment.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Shoutout.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Shoutout.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Slidescreen.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/Slidescreen.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SplashActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/SplashActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ThirdFragment.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/ThirdFragment.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/TwitterActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/TwitterActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/VerticalScrollView.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/VerticalScrollView.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/VideoActivity.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/VideoActivity.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/WrapContentHeightViewPager.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/WrapContentHeightViewPager.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/quiz_activity_frag.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/quiz_activity_frag.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/utils/PaginationScrollListener.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/java/com/vdart/apps/app/utils/PaginationScrollListener.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_home.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_home.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_menu.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_menu.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_notification.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_notification.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_search.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-hdpi/ic_action_search.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_home.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_home.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_menu.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_menu.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_notification.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_notification.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_search.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-mdpi/ic_action_search.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_camera.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_camera.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_gallery.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_gallery.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_manage.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_manage.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_send.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_send.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_share.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_share.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_slideshow.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-v21/ic_menu_slideshow.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_home.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_home.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_menu.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_menu.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_notification.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_notification.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_search.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xhdpi/ic_action_search.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_home.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_home.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_menu.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_menu.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_notification.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_notification.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_search.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable-xxhdpi/ic_action_search.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/anniversary.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/anniversary.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/anniversary_blue.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/anniversary_blue.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/anniversary_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/anniversary_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/bd_header.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/bd_header.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/bd_profile.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/bd_profile.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/beast.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/beast.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/birthday.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/birthday.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/birthday_blue.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/birthday_blue.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/birthday_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/birthday_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/border.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/border.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/border_bottom.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/border_bottom.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/charles.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/charles.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/chat.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/chat.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events_blue.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events_blue.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events_tile_100.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/events_tile_100.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/feedback_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/feedback_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/gallery_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/gallery_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/ic_access_alarms_24px.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/ic_access_alarms_24px.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/ic_airplanemode_active_24px.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/ic_airplanemode_active_24px.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/ic_battery_30_24px.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/ic_battery_30_24px.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_1.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_1.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_11.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_11.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_2.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_2.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_22.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_22.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_3.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_3.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_33.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_33.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_4.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_4.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_44.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/image_44.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/live_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/live_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo1.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo1.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo10.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo10.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo11.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo11.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo12.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo12.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo13.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo13.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo2.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo2.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo3.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo3.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo4.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo4.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo5.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo5.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo6.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo6.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo7.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo7.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo8.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo8.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo9.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo9.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo_ess.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo_ess.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo_ess2.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo_ess2.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo_vdart.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/logo_vdart.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/magneto.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/magneto.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/megaphone.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/megaphone.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/more.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/more.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/mystique.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/mystique.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news_blue.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news_blue.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news_tile_100.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/news_tile_100.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/play.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/play.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/polls_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/polls_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/profile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/profile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/profile_pc.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/profile_pc.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/profile_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/profile_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/protest.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/protest.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/rounded_edge.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/rounded_edge.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout_blue.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout_blue.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout_tile.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout_tile.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout_tile_100.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/shoutout_tile_100.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/side_nav_bar.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/side_nav_bar.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/toolbartitle.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/toolbartitle.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/user.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/user.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/wolverine.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/drawable/wolverine.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_anniversary_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_anniversary_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_banner.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_banner.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_banner_item.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_banner_item.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_birthday_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_birthday_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_ceo_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_ceo_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_ceomessage.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_ceomessage.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_changepassword.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_changepassword.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_detail.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_detail.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_event_gallery.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_event_gallery.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_event_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_event_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_facebook.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_facebook.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_feedback.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_feedback.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_forgetpassword.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_forgetpassword.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_full_event.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_full_event.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_full_news.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_full_news.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_gallery.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_gallery.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_galleryzoom.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_galleryzoom.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_grid_list.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_grid_list.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_gridgallery.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_gridgallery.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_gridview.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_gridview.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_main_gallery.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_main_gallery.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_news_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_news_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_notification_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_notification_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_profile.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_profile.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_quiz_frag.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_quiz_frag.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_resetpassword.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_resetpassword.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_search.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_search.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_second.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_second.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_shoutout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_shoutout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_shoutout_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_shoutout_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_slidescreen.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_slidescreen.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_splash.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_splash.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_video.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/activity_video.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/anniversarylist_layout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/anniversarylist_layout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/birthdaylist_layout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/birthdaylist_layout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/ceolist_layout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/ceolist_layout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/eventlist_layout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/eventlist_layout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragement_image.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragement_image.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_detail.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_detail.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_fifth.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_fifth.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_first.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_first.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_fourth.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_fourth.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_one.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_one.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_second.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_second.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_third.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_third.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_two.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/fragment_two.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/item_progress.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/item_progress.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/list_item.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/list_item.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/newslist_layout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/newslist_layout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/notificationlist_layout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/notificationlist_layout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/quiz_activity_fragment.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/quiz_activity_fragment.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/quiz_activity_view_pager.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/quiz_activity_view_pager.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/scroll.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/scroll.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/shoutoutlist_layout.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/shoutoutlist_layout.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/slide.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/slide.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/tool_bar.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/layout/tool_bar.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/menu/menu_detail.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/menu/menu_detail.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/menu/menu_main.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-hdpi/ic_loader.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-hdpi/ic_loader.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-mdpi/ic_loader.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-mdpi/ic_loader.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xhdpi/ic_loader.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xhdpi/ic_loader.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxhdpi/ic_loader.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxhdpi/ic_loader.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxxhdpi/ic_loader.jpg" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/mipmap-xxxhdpi/ic_loader.jpg" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/colors.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/dimens.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/drawables.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/drawables.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/EnergySoft/app/src/main/res/values/styles.xml" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/app/src/test/java/com/vdart/apps/app/ExampleUnitTest.java" afterPath="$PROJECT_DIR$/EnergySoft/app/src/test/java/com/vdart/apps/app/ExampleUnitTest.java" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/build.gradle" afterPath="$PROJECT_DIR$/EnergySoft/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/gradle.properties" afterPath="$PROJECT_DIR$/EnergySoft/gradle.properties" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/gradle/wrapper/gradle-wrapper.jar" afterPath="$PROJECT_DIR$/EnergySoft/gradle/wrapper/gradle-wrapper.jar" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/EnergySoft/gradle/wrapper/gradle-wrapper.properties" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/gradlew" afterPath="$PROJECT_DIR$/EnergySoft/gradlew" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/gradlew.bat" afterPath="$PROJECT_DIR$/EnergySoft/gradlew.bat" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/hs_err_pid1464.log" afterPath="$PROJECT_DIR$/EnergySoft/hs_err_pid1464.log" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/hs_err_pid4104.log" afterPath="$PROJECT_DIR$/EnergySoft/hs_err_pid4104.log" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/replay_pid1464.log" afterPath="$PROJECT_DIR$/EnergySoft/replay_pid1464.log" />
-      <change beforePath="$PROJECT_DIR$/EnergySoft/settings.gradle" afterPath="$PROJECT_DIR$/EnergySoft/settings.gradle" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="$PROJECT_DIR$/vdart_1.jks" afterPath="$PROJECT_DIR$/vdart_1.jks" />
+      <change beforePath="$PROJECT_DIR$/EnergySoft/app-release.apk" afterPath="" />
     </list>
     <ignored path="nergyso_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -308,7 +39,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="AndroidView" proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -322,6 +53,45 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="EnergySoft/app/src/main" type="cbb8eebc:String" user="EnergySoft/app/src/main" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="nergyso_app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nergyso_app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nergyso_app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -353,52 +123,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="nergyso_app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nergyso_app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nergyso_app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="main" type="cbb8eebc:String" user="main" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="main" type="cbb8eebc:String" user="main" />
-              <item name="EnergySoft/app/src/main" type="cbb8eebc:String" user="EnergySoft/app/src/main" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/EnergySoft" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -416,7 +147,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.App">
+  <component name="RunManager" selected="Unknown.App1166579865">
     <configuration name="App" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="main" />
       <option name="DEPLOY" value="true" />
@@ -465,51 +196,6 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="false" />
         <option name="com.android.instantApps.provision.BeforeRunTask" enabled="false" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518506622077" />
       </method>
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="main" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Hybrid>
-      <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Native>
-      <Profilers>
-        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
     </configuration>
     <configuration name="All Tests" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
       <module name="main" />
@@ -569,6 +255,26 @@
       <module name="" />
       <envs />
     </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -603,6 +309,51 @@
       <properties />
       <listeners />
     </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="main" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+    </configuration>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="HTML_FILE_NAME" />
@@ -612,24 +363,9 @@
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
     </configuration>
-    <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-    </configuration>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Android App.App" />
-      <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.All Tests" />
-    </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.All Tests" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -650,37 +386,37 @@
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16340561" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380237" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -699,13 +435,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/EnergySoft/app/src/main/main.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/EnergySoft/app/src/main/main.iml" />
   </component>
   <component name="masterDetails">
     <states>

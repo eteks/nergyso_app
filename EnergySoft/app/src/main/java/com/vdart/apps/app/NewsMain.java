@@ -3,6 +3,8 @@ package com.vdart.apps.app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +42,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
+
 public class NewsMain extends AppCompatActivity implements Download_data.download_complete {
     Toolbar toolbar;
     private static final String TAG = "NewsMain";
@@ -51,6 +55,8 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
     String NEWS_URL;
     RecyclerView rv;
     ProgressBar progressBar;
+    Menu menuInflate;
+    String notification_count = "";
 
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
@@ -92,6 +98,8 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         rv.setLayoutManager(linearLayoutManager);
 
         rv.setItemAnimator(new DefaultItemAnimator());
+
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
         rv.setAdapter(adapter);
 
@@ -476,11 +484,32 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
     }
 
     // Initiating Menu XML file (menu.xml)
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 

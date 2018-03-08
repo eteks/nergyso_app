@@ -1,7 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +28,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
+
 public class EventGallery extends AppCompatActivity implements Download_data.download_complete{
 
     GalleryAdapter mAdapter;
@@ -40,7 +45,8 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
     String GALLERY_URL ;
     RecyclerView rv;
     ProgressBar progressBar;
-
+    Menu menuInflate;
+    String notification_count = "";
     private static final int PAGE_START = 0;
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -80,6 +86,8 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(EventGallery.this, 3));
         mRecyclerView.setHasFixedSize(true);
+
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
         Download_data download_data = new Download_data((Download_data.download_complete) this);
         download_data.download_data_from_link(GALLERY_URL);
@@ -137,11 +145,32 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
     }
 
     // Initiating Menu XML file (menu.xml)
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 

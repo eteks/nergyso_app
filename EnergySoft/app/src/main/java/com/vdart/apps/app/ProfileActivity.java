@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -31,6 +33,8 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
     ImageView empPhoto;
     String SERVER_URL;
     String EMPLOYEE_URL ;
+    Menu menuInflate;
+    String notification_count = "";
     JSONObject jsonObject = new JSONObject();
     String str = "{\"employee\":{\"employee_id\":\"EMP001\",\"employee_name\":\"Harihara prabu U\",\"employee_dob\":\"24-04-1995\",\"employee_email\":\"harihara@etekchnoservices.com\",\"employee_mobile\":\"97900 22747\",\"employee_doj\":\"01-08-2017\",\"employee_designation\":\"Software Developer\",\"employee_photo\":\"http://www.lucidian.net/assets/pages/media/profile/people19.png\",\"employee_bloodgroup\":\"B +ve\",\"employee_address\":\"No: 17, Nalla thanni kinaru street, Kosapalayam, Puducherry-13.\",\"employee_aadhar_id\":\"8521 4785 2369\",\"employee_experience_in_years\":\"0.5\",\"employee_depaartment_id\":\"258\"}}";
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -51,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
 //                startActivity(intent);
 //            }
 //        });
+        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
         SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         System.out.println("USer : "+shared.getInt("id",0));
         EMPLOYEE_URL = EMPLOYEE_URL+shared.getInt("id",0)+"/";
@@ -127,11 +132,32 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
     }
 
     // Initiating Menu XML file (menu.xml)
+    public void setCount(Context context, String count) {
+        MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
+
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_group_count, badge);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
+        setCount(this,notification_count);
         return true;
     }
 
