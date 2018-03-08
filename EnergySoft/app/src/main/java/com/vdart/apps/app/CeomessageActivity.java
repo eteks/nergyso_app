@@ -112,6 +112,18 @@ public class CeomessageActivity extends AppCompatActivity implements Download_da
         ceo_post = (Button) findViewById(R.id.ceo_post);
         ceomsgtitle = (TextView) findViewById(R.id.ceomsgtitle);
 
+        //        Click Logo to home screen
+
+        ImageView imageButton = (ImageView) toolbar.findViewById(R.id.vdart_logo);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
         String designation = shared.getString("employee_designation","");
         if(designation.toUpperCase().equals("CEO")){
             ceo_messaging.setVisibility(View.VISIBLE);
