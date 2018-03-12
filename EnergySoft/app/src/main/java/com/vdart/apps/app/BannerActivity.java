@@ -63,7 +63,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     Menu menuInflate;
     int id = 0;
     int NOTIFICATION_COUNT = 0;
-    String NOTIFICATION_URL = "api/notification/notification_list_by_employee";
+    String NOTIFICATION_URL = "api/notification/notification_employee_unread_count";
 //    String[] images = new String[20];
     MyCustomPagerAdapter myCustomPagerAdapter;
     public static int NUM_PAGES = 0;
@@ -603,20 +603,10 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                         sb.append(line + "\n");
                     }
                     System.out.println("Output" + sb.toString());
-                    JSONArray data_array = new JSONArray(sb.toString());
-                    System.out.println("Data array Length" + data_array.length());
-                    for (int i = 0; i < data_array.length(); i++) {
-                        final JSONObject obj = new JSONObject(data_array.get(i).toString());
-                        System.out.println("Object" + obj);
-                        if (!obj.getBoolean("notification_read_status")) {
-                            NOTIFICATION_COUNT++;
-                        }
+                    JSONObject obj = new JSONObject(sb.toString());
+                    if(obj.has("unread")){
+                        NOTIFICATION_COUNT = obj.getInt("unread");
                     }
-                    System.out.println("Notification"+ NOTIFICATION_COUNT);
-                    SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putString("nc", String.valueOf(NOTIFICATION_COUNT));
-                    editor.commit();
                     setCount(BannerActivity.this, String.valueOf(NOTIFICATION_COUNT));
                 }catch (Exception ex) {
                     System.out.println(ex);

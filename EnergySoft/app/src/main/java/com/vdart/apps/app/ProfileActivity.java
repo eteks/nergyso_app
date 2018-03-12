@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -25,6 +26,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
 import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
 
 public class ProfileActivity extends AppCompatActivity implements  Download_data.download_complete{
@@ -35,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
     String EMPLOYEE_URL ;
     Menu menuInflate;
     String notification_count = "";
+    int NOTIFICATION_COUNT = 0;
+    String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
     JSONObject jsonObject = new JSONObject();
     String str = "{\"employee\":{\"employee_id\":\"EMP001\",\"employee_name\":\"Harihara prabu U\",\"employee_dob\":\"24-04-1995\",\"employee_email\":\"harihara@etekchnoservices.com\",\"employee_mobile\":\"97900 22747\",\"employee_doj\":\"01-08-2017\",\"employee_designation\":\"Software Developer\",\"employee_photo\":\"http://www.lucidian.net/assets/pages/media/profile/people19.png\",\"employee_bloodgroup\":\"B +ve\",\"employee_address\":\"No: 17, Nalla thanni kinaru street, Kosapalayam, Puducherry-13.\",\"employee_aadhar_id\":\"8521 4785 2369\",\"employee_experience_in_years\":\"0.5\",\"employee_depaartment_id\":\"258\"}}";
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -56,6 +67,10 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
 //            }
 //        });
         notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+
+        NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
+        getNotificationCount();
+
         SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         System.out.println("USer : "+shared.getInt("id",0));
         EMPLOYEE_URL = EMPLOYEE_URL+shared.getInt("id",0)+"/";
@@ -88,6 +103,84 @@ public class ProfileActivity extends AppCompatActivity implements  Download_data
             }
         });
 
+    }
+
+    public void getNotificationCount(){
+        String data = null;
+        try {
+
+            data = URLEncoder.encode("notification_employee", "UTF-8")
+                    + "=" + getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        final BufferedReader[] reader = {null};
+
+        // Send data
+        final String finalData = data;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    // Defined URL  where to send data
+                    URL url = new URL(NOTIFICATION_COUNT_URL);
+
+                    // Send POST data request
+                    System.out.println("URL:" + NOTIFICATION_COUNT_URL);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(finalData);
+                    wr.flush();
+                    System.out.println(finalData);
+                    // Get the server response
+
+                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader[0].readLine()) != null) {
+                        // Append server response in string
+                        sb.append(line + "\n");
+                    }
+                    System.out.println("Output" + sb.toString());
+                    JSONObject obj = new JSONObject(sb.toString());
+                    if(obj.has("unread")){
+                        NOTIFICATION_COUNT = obj.getInt("unread");
+                    }
+                    setCount(ProfileActivity.this, String.valueOf(NOTIFICATION_COUNT));
+                }catch (Exception ex) {
+                    System.out.println(ex);
+                } finally {
+                    try {
+                        reader[0].close();
+                    } catch (Exception ex) {
+                    }
+                }
+                return null;
+            }
+
+        };
+        runAsyncTask(task);
+
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setCount(this, String.valueOf(NOTIFICATION_COUNT));
+        return  true;
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
     }
 
     public void get_data(String data)

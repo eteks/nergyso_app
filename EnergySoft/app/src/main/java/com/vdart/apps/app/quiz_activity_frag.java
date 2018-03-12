@@ -53,6 +53,8 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
     int employee_id = 0;
     Menu menuInflate;
     String notification_count = "";
+    int NOTIFICATION_COUNT = 0;
+    String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,9 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
         POLLS_URL = SERVER_URL + POLLS_URL;
         POLLS_POST_URL = SERVER_URL + POLLS_POST_URL ;
         POLLS_CHECK_URL = SERVER_URL + POLLS_CHECK_URL;
+
+        NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
+        getNotificationCount();
 
         questionText = (TextView) findViewById(R.id.questionText);
         answerA = (RadioButton) findViewById(R.id.answerA);
@@ -243,6 +248,76 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
             }
         });
 
+    }
+
+    public void getNotificationCount(){
+        String data = null;
+        try {
+
+            data = URLEncoder.encode("notification_employee", "UTF-8")
+                    + "=" + getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        final BufferedReader[] reader = {null};
+
+        // Send data
+        final String finalData = data;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    // Defined URL  where to send data
+                    URL url = new URL(NOTIFICATION_COUNT_URL);
+
+                    // Send POST data request
+                    System.out.println("URL:" + NOTIFICATION_COUNT_URL);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(finalData);
+                    wr.flush();
+                    System.out.println(finalData);
+                    // Get the server response
+
+                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader[0].readLine()) != null) {
+                        // Append server response in string
+                        sb.append(line + "\n");
+                    }
+                    System.out.println("Output" + sb.toString());
+                    JSONObject obj = new JSONObject(sb.toString());
+                    if(obj.has("unread")){
+                        NOTIFICATION_COUNT = obj.getInt("unread");
+                    }
+                    setCount(quiz_activity_frag.this, String.valueOf(NOTIFICATION_COUNT));
+                }catch (Exception ex) {
+                    System.out.println(ex);
+                } finally {
+                    try {
+                        reader[0].close();
+                    } catch (Exception ex) {
+                    }
+                }
+                return null;
+            }
+
+        };
+        runAsyncTask(task);
+
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setCount(this, String.valueOf(NOTIFICATION_COUNT));
+        return  true;
     }
 
     public void getRadioChecked(View view){

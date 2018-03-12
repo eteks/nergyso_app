@@ -10,6 +10,16 @@ public class Notification {
     String notification_image;
     String notification_video;
     String notification_document;
+    boolean read;
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
+    }
+
     int id;
     int notification_count ;
 

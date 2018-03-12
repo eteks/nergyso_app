@@ -40,6 +40,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -80,6 +87,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     String DOWNLOAD_URL = "", RECENT_URL = "";
     Menu menuInflate;
     String notification_count = "";
+    int NOTIFICATION_COUNT = 0;
+    String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +123,10 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         viewPager.setAdapter(myCustomPagerAdapter);
 
         notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
+
+        NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
+        getNotificationCount();
+
 
         /*After setting the adapter use the timer */
         final Handler handler = new Handler();
@@ -172,6 +185,76 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             }
         });
 
+    }
+
+    public void getNotificationCount(){
+        String data = null;
+        try {
+
+            data = URLEncoder.encode("notification_employee", "UTF-8")
+                    + "=" + getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        final BufferedReader[] reader = {null};
+
+        // Send data
+        final String finalData = data;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    // Defined URL  where to send data
+                    URL url = new URL(NOTIFICATION_COUNT_URL);
+
+                    // Send POST data request
+                    System.out.println("URL:" + NOTIFICATION_COUNT_URL);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(finalData);
+                    wr.flush();
+                    System.out.println(finalData);
+                    // Get the server response
+
+                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader[0].readLine()) != null) {
+                        // Append server response in string
+                        sb.append(line + "\n");
+                    }
+                    System.out.println("Output" + sb.toString());
+                    JSONObject obj = new JSONObject(sb.toString());
+                    if(obj.has("unread")){
+                        NOTIFICATION_COUNT = obj.getInt("unread");
+                    }
+                    setCount(FullEvent.this, String.valueOf(NOTIFICATION_COUNT));
+                }catch (Exception ex) {
+                    System.out.println(ex);
+                } finally {
+                    try {
+                        reader[0].close();
+                    } catch (Exception ex) {
+                    }
+                }
+                return null;
+            }
+
+        };
+        runAsyncTask(task);
+
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setCount(this, String.valueOf(NOTIFICATION_COUNT));
+        return  true;
     }
 
     private void loadFragment(Fragment fragment) {

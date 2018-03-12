@@ -42,9 +42,10 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
     String SERVER_URL = "";
     String NOTIFICATION_URL = "api/notification/notification_list_by_employee";
     private static final String TAG = "MyAndroidFCMService";
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        //        //Log data to Log Cat
+        //Log data to Log Cat
         NOTIFICATION_URL = SERVER_URL + NOTIFICATION_URL;
         SERVER_URL = getString(R.string.service_url);
 
