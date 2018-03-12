@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +17,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
 import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
 
 /**
@@ -25,6 +37,9 @@ public class TwitterActivity extends AppCompatActivity {
     Toolbar toolbar;
     Menu menuInflate;
     String notification_count = "";
+    int NOTIFICATION_COUNT = 0;
+    String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
+    String SERVER_URL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +48,8 @@ public class TwitterActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        SERVER_URL = getString(R.string.service_url);
 
         notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 //        Click Logo to home screen
@@ -68,6 +85,9 @@ public class TwitterActivity extends AppCompatActivity {
             }
         });
 
+        NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
+        getNotificationCount();
+
     }
     private class MyBrowser extends WebViewClient {
         @Override
@@ -76,6 +96,84 @@ public class TwitterActivity extends AppCompatActivity {
             view.loadUrl(url);
             return true;
         }
+    }
+
+    public void getNotificationCount(){
+        String data = null;
+        try {
+
+            data = URLEncoder.encode("notification_employee", "UTF-8")
+                    + "=" + getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        final BufferedReader[] reader = {null};
+
+        // Send data
+        final String finalData = data;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    // Defined URL  where to send data
+                    URL url = new URL(NOTIFICATION_COUNT_URL);
+
+                    // Send POST data request
+                    System.out.println("URL:" + NOTIFICATION_COUNT_URL);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(finalData);
+                    wr.flush();
+                    System.out.println(finalData);
+                    // Get the server response
+
+                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader[0].readLine()) != null) {
+                        // Append server response in string
+                        sb.append(line + "\n");
+                    }
+                    System.out.println("Output" + sb.toString());
+                    JSONObject obj = new JSONObject(sb.toString());
+                    if(obj.has("unread")){
+                        NOTIFICATION_COUNT = obj.getInt("unread");
+                    }
+                    setCount(TwitterActivity.this, String.valueOf(NOTIFICATION_COUNT));
+                }catch (Exception ex) {
+                    System.out.println(ex);
+                } finally {
+                    try {
+                        reader[0].close();
+                    } catch (Exception ex) {
+                    }
+                }
+                return null;
+            }
+
+        };
+        runAsyncTask(task);
+
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setCount(this, String.valueOf(NOTIFICATION_COUNT));
+        return  true;
     }
 
     // Initiating Menu XML file (menu.xml)

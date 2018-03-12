@@ -75,7 +75,11 @@ public class NotificationMain extends AppCompatActivity implements Download_data
     public ListAdapter NewsAdapter;
     String notification[] = new String[1000];
     int notification_id[] = new int[1000];
+    boolean notification_read[] = new boolean[1000];
     String notification_count = "";
+    int NOTIFICATION_COUNT = 0;
+    String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
+
     Menu menuInflate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,9 @@ public class NotificationMain extends AppCompatActivity implements Download_data
         progressBar = (ProgressBar) findViewById(R.id.main_progress);
 
         adapter = new PaginationAdapter(this);
+
+        NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
+        getNotificationCount();
 
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
@@ -161,9 +168,6 @@ public class NotificationMain extends AppCompatActivity implements Download_data
         }
 
         final BufferedReader[] reader = {null};
-
-        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
-
         // Send data
         final String finalData = data;
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -204,6 +208,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         String strDate = formatter.format(date);
                         notification[i] = strDate;
                         notification_id[i] = obj.getInt("id");
+                        notification_read[i] = obj.getBoolean("notification_read_status");
                         category = obj.getString("notification_cateogry").toLowerCase();
                         switch(category) {
                             case "events": {
@@ -317,6 +322,76 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 //        download_data.download_data_from_link(NOTIFICATION_URL);
     }
 
+    public void getNotificationCount(){
+        String data = null;
+        try {
+
+            data = URLEncoder.encode("notification_employee", "UTF-8")
+                    + "=" + getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        final BufferedReader[] reader = {null};
+
+        // Send data
+        final String finalData = data;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    // Defined URL  where to send data
+                    URL url = new URL(NOTIFICATION_COUNT_URL);
+
+                    // Send POST data request
+                    System.out.println("URL:" + NOTIFICATION_COUNT_URL);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(finalData);
+                    wr.flush();
+                    System.out.println(finalData);
+                    // Get the server response
+
+                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader[0].readLine()) != null) {
+                        // Append server response in string
+                        sb.append(line + "\n");
+                    }
+                    System.out.println("Output" + sb.toString());
+                    JSONObject obj = new JSONObject(sb.toString());
+                    if(obj.has("unread")){
+                        NOTIFICATION_COUNT = obj.getInt("unread");
+                    }
+                    setCount(NotificationMain.this, String.valueOf(NOTIFICATION_COUNT));
+                }catch (Exception ex) {
+                    System.out.println(ex);
+                } finally {
+                    try {
+                        reader[0].close();
+                    } catch (Exception ex) {
+                    }
+                }
+                return null;
+            }
+
+        };
+        runAsyncTask(task);
+
+//        Download_data download_data = new Download_data((Download_data.download_complete) this);
+//        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setCount(this, String.valueOf(NOTIFICATION_COUNT));
+        return  true;
+    }
+
     public void setCount(Context context, String count) {
         MenuItem menuItem = (MenuItem) menuInflate.findItem(R.id.action_notification);
         LayerDrawable icon = (LayerDrawable) menuItem.getIcon();
@@ -330,8 +405,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
         } else {
             badge = new CountDrawable(context);
         }
-        notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
-        badge.setCount(notification_count);
+        badge.setCount(count);
         icon.mutate();
         icon.setDrawableByLayerId(R.id.ic_group_count, badge);
     }
@@ -546,7 +620,6 @@ public class NotificationMain extends AppCompatActivity implements Download_data
         menuInflate = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
-        setCount(NotificationMain.this,notification_count);
         return true;
     }
 
@@ -748,6 +821,9 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                     int id = event.getId();
                     String check ;
                     String category = event.getType();
+                    if(notification_read[viewHolder.getAdapterPosition()]){
+                        notification_read[viewHolder.getAdapterPosition()] = false;
+                    }
                     switch(category){
                         case "events":{
                             Intent intent = new Intent(NotificationMain.this,FullEvent.class);
@@ -837,6 +913,12 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         }else{
                             loadImageFromUrl(eventVH.events_image, (SERVER_URL + event.getEvents_image()));
                         }
+                        if(notification_read[position]){
+                            holder.itemView.setBackgroundResource(R.color.white);
+                        }else{
+                            holder.itemView.setBackgroundResource(R.color.lightBlue);
+                        }
+
 //                    }
                     break;
                 case LOADING:

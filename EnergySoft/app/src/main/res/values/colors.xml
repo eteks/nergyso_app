@@ -7,5 +7,7 @@
     <color name="blueText">#043c77</color>
     <color name="mildBlue">#b0fcff</color>
     <color name="background_color">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="lightBlue">#528ae5</color>
 </resources>
