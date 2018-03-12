@@ -43,9 +43,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -267,43 +265,43 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     public void changeImage(String image){
         switch (image){
             case "first":{
-                firstFragment.setImageResource(R.drawable.bir);
-                secondFragment.setImageResource(R.drawable.anni_black);
-                thirdFragment.setImageResource(R.drawable.shout_black);
-                fourthFragment.setImageResource(R.drawable.even_black);
-                fifthFragment.setImageResource(R.drawable.newss_black);
+                firstFragment.setImageResource(R.drawable.bir_black);
+                secondFragment.setImageResource(R.drawable.ann);
+                thirdFragment.setImageResource(R.drawable.shout);
+                fourthFragment.setImageResource(R.drawable.even);
+                fifthFragment.setImageResource(R.drawable.newss);
                 break;
             }
             case "second":{
-                firstFragment.setImageResource(R.drawable.bir_black);
-                secondFragment.setImageResource(R.drawable.ann);
-                thirdFragment.setImageResource(R.drawable.shout_black);
-                fourthFragment.setImageResource(R.drawable.even_black);
-                fifthFragment.setImageResource(R.drawable.newss_black);
+                firstFragment.setImageResource(R.drawable.bir);
+                secondFragment.setImageResource(R.drawable.anni_black);
+                thirdFragment.setImageResource(R.drawable.shout);
+                fourthFragment.setImageResource(R.drawable.even);
+                fifthFragment.setImageResource(R.drawable.newss);
                 break;
             }
             case "third":{
-                firstFragment.setImageResource(R.drawable.bir_black);
-                secondFragment.setImageResource(R.drawable.anni_black);
-                thirdFragment.setImageResource(R.drawable.shout);
-                fourthFragment.setImageResource(R.drawable.even_black);
-                fifthFragment.setImageResource(R.drawable.newss_black);
+                firstFragment.setImageResource(R.drawable.bir);
+                secondFragment.setImageResource(R.drawable.ann);
+                thirdFragment.setImageResource(R.drawable.shout_black);
+                fourthFragment.setImageResource(R.drawable.even);
+                fifthFragment.setImageResource(R.drawable.newss);
                 break;
             }
             case "fourth":{
-                firstFragment.setImageResource(R.drawable.bir_black);
-                secondFragment.setImageResource(R.drawable.anni_black);
-                thirdFragment.setImageResource(R.drawable.shout_black);
-                fourthFragment.setImageResource(R.drawable.even);
-                fifthFragment.setImageResource(R.drawable.newss_black);
+                firstFragment.setImageResource(R.drawable.bir);
+                secondFragment.setImageResource(R.drawable.ann);
+                thirdFragment.setImageResource(R.drawable.shout);
+                fourthFragment.setImageResource(R.drawable.even_black);
+                fifthFragment.setImageResource(R.drawable.newss);
                 break;
             }
             case "fifth":{
-                firstFragment.setImageResource(R.drawable.bir_black);
-                secondFragment.setImageResource(R.drawable.anni_black);
-                thirdFragment.setImageResource(R.drawable.shout_black);
-                fourthFragment.setImageResource(R.drawable.even_black);
-                fifthFragment.setImageResource(R.drawable.newss);
+                firstFragment.setImageResource(R.drawable.bir);
+                secondFragment.setImageResource(R.drawable.ann);
+                thirdFragment.setImageResource(R.drawable.shout);
+                fourthFragment.setImageResource(R.drawable.even);
+                fifthFragment.setImageResource(R.drawable.newss_black);
                 break;
             }
         }
