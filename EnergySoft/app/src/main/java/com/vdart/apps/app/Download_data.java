@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -92,8 +93,6 @@ public class Download_data implements Runnable  {
         return response.toString();
 
     }
-
-
 }
 
 
