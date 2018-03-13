@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -88,6 +90,8 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
         myCustomPagerAdapter = new MyCustomPagerAdapter(BannerActivity.this, images);
         viewPager.setAdapter(myCustomPagerAdapter);
+
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
 
         id = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);
 
@@ -225,6 +229,13 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         });
 
     }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -623,5 +634,12 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link(NOTIFICATION_URL);
     }
+
+//    public void onDestroy() {
+//
+//        unregisterReceiver(myReceiver);
+//        super.onDestroy();
+//
+//    }
 }
 

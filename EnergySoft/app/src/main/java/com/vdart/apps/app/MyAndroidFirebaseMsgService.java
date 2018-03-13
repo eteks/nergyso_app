@@ -34,7 +34,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
-
 public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
     int id = 0;
     int NOTIFICATION_COUNT = 0;
@@ -42,6 +41,7 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
     String SERVER_URL = "";
     String NOTIFICATION_URL = "api/notification/notification_list_by_employee";
     private static final String TAG = "MyAndroidFCMService";
+    public static final String INTENT_FILTER = "INTENT_FILTER";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -59,10 +59,13 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
         System.out.println("Data : " + remoteMessage.getData());
 
-        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("nc", String.valueOf(nc));
-        editor.commit();
+//        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedpreferences.edit();
+//        editor.putString("nc", String.valueOf(nc));
+//        editor.commit();
+
+        Intent intent = new Intent("INTENT_FILTER");
+        sendBroadcast(intent);
 
         //create notification
         try{

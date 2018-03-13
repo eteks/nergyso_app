@@ -79,6 +79,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
     String notification_count = "";
     int NOTIFICATION_COUNT = 0;
     String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
+    boolean IS_NOTIFICATION_EXISTS = false;
 
     Menu menuInflate;
     @Override
@@ -158,149 +159,148 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                 loadFirstPage();
             }
         }, 1000);
-        String data = null;
-        try {
+            String data = null;
+            try {
 
-            data = URLEncoder.encode("notification_employee", "UTF-8")
-                    + "=" + id;
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+                data = URLEncoder.encode("notification_employee", "UTF-8")
+                        + "=" + id;
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
 
-        final BufferedReader[] reader = {null};
-        // Send data
-        final String finalData = data;
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    // Defined URL  where to send data
-                    URL url = new URL(NOTIFICATION_URL);
-
-                    // Send POST data request
-                    System.out.println("URL:" + NOTIFICATION_URL);
-                    URLConnection conn = url.openConnection();
-                    conn.setDoOutput(true);
-                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                    wr.write(finalData);
-                    wr.flush();
-                    System.out.println(finalData);
-                    // Get the server response
-
-                    reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder sb = new StringBuilder();
-                    String line = null;
-
-                    // Read Server Response
-                    while ((line = reader[0].readLine()) != null) {
-                        // Append server response in string
-                        sb.append(line + "\n");
-                    }
-                    System.out.println("Output"+sb.toString());
-                    JSONArray data_array = new JSONArray(sb.toString());
-
-                    for (int i = 0 ; i < data_array.length() ; i++)
-                    {
-                        final JSONObject obj=new JSONObject(data_array.get(i).toString());
-                        System.out.println("Object"+obj);
-                        Date date = parseDate(obj.getString("notification_created_date"));
-                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                        String strDate = formatter.format(date);
-                        notification[i] = strDate;
-                        notification_id[i] = obj.getInt("id");
-                        notification_read[i] = obj.getBoolean("notification_read_status");
-                        category = obj.getString("notification_cateogry").toLowerCase();
-                        switch(category) {
-                            case "events": {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            showEvents(obj.getInt("notification_cateogry_id"));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                                break;
-                            }
-                            case "news": {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            showNews(obj.getInt("notification_cateogry_id"));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                                break;
-                            }
-                            case "live": {
-//                                showLive();
-                                break;
-                            }
-                            case "birthday":{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                            showBirthday();
-                                    }
-                                });
-                                break;
-                            }
-                            case "anniversary":{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        showAnniversary();
-                                    }
-                                });
-                                break;
-                            }
-                            case "shoutout":{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            showShoutout(obj.getInt("notification_cateogry_id"));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                                break;
-                            }
-                            case "ceo":{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            showCeoMessage(obj.getInt("notification_cateogry_id"));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                                break;
-                            }
-                        }
-                    }
-                } catch (Exception ex) {
-                    System.out.println(ex);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-//                            mProgressBar.setVisibility(ProgressBar.GONE);
-                            createAndShowDialog("Drunk?! Please check your credentials", "Error");
-                        }
-                    });
-                } finally {
+            final BufferedReader[] reader = {null};
+            // Send data
+            final String finalData = data;
+            AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
                     try {
+                        // Defined URL  where to send data
+                        URL url = new URL(NOTIFICATION_URL);
 
-                        reader[0].close();
+                        // Send POST data request
+                        System.out.println("URL:" + NOTIFICATION_URL);
+                        URLConnection conn = url.openConnection();
+                        conn.setDoOutput(true);
+                        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                        wr.write(finalData);
+                        wr.flush();
+                        System.out.println(finalData);
+                        // Get the server response
+
+                        reader[0] = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String line = null;
+
+                        // Read Server Response
+                        while ((line = reader[0].readLine()) != null) {
+                            // Append server response in string
+                            sb.append(line + "\n");
+                        }
+                        System.out.println("Output" + sb.toString());
+                        JSONArray data_array = new JSONArray(sb.toString());
+
+                        for (int i = 0; i < data_array.length(); i++) {
+                            final JSONObject obj = new JSONObject(data_array.get(i).toString());
+                            System.out.println("Object" + obj);
+                            Date date = parseDate(obj.getString("notification_created_date"));
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                            String strDate = formatter.format(date);
+                            notification[i] = strDate;
+                            notification_id[i] = obj.getInt("id");
+                            notification_read[i] = obj.getBoolean("notification_read_status");
+                            category = obj.getString("notification_cateogry").toLowerCase();
+                            switch (category) {
+                                case "events": {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                showEvents(obj.getInt("notification_cateogry_id"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                    break;
+                                }
+                                case "news": {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                showNews(obj.getInt("notification_cateogry_id"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                    break;
+                                }
+                                case "live": {
+//                                showLive();
+                                    break;
+                                }
+                                case "birthday": {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            showBirthday();
+                                        }
+                                    });
+                                    break;
+                                }
+                                case "anniversary": {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            showAnniversary();
+                                        }
+                                    });
+                                    break;
+                                }
+                                case "shoutout": {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                showShoutout(obj.getInt("notification_cateogry_id"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                    break;
+                                }
+                                case "ceo": {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                showCeoMessage(obj.getInt("notification_cateogry_id"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                    break;
+                                }
+                            }
+                        }
                     } catch (Exception ex) {
+                        System.out.println(ex);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+//                            mProgressBar.setVisibility(ProgressBar.GONE);
+                                createAndShowDialog("Drunk?! Please check your credentials", "Error");
+                            }
+                        });
+                    } finally {
+                        try {
+
+                            reader[0].close();
+                        } catch (Exception ex) {
 //                                    runOnUiThread(new Runnable() {
 //                                        @Override
 //                                        public void run() {
@@ -308,15 +308,15 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 //                                        }
 //                                    });
 
+                        }
                     }
+
+
+                    return null;
                 }
 
-
-                return null;
-            }
-
-        };
-        runAsyncTask(task);
+            };
+            runAsyncTask(task);
 
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link(NOTIFICATION_URL);
@@ -366,6 +366,9 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                     JSONObject obj = new JSONObject(sb.toString());
                     if(obj.has("unread")){
                         NOTIFICATION_COUNT = obj.getInt("unread");
+                        if(obj.getInt("unread") > 0){
+                            IS_NOTIFICATION_EXISTS = true;
+                        }
                     }
                     setCount(NotificationMain.this, String.valueOf(NOTIFICATION_COUNT));
                 }catch (Exception ex) {
@@ -832,6 +835,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
+                            finish();
                             break;
                         }
                         case "news":{
@@ -841,6 +845,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
+                            finish();
                             break;
                         }
                         case "birthday":{
@@ -850,6 +855,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
+                            finish();
                             break;
                         }
                         case "anniversary":{
@@ -859,6 +865,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             intent.putExtra("id", id);
                             intent.putExtra("check",check);
                             startActivity(intent);
+                            finish();
                             break;
                         }
                         case "live" :{
@@ -870,12 +877,14 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             intent.putExtra("more",check);
                             startActivity(intent);
+                            finish();
                             break;
                         }
                         case "ceo" : {
                             postNotificationRead(notification_id[viewHolder.getAdapterPosition()]);
                             Intent intent = new Intent(NotificationMain.this,CeomessageActivity.class);
                             startActivity(intent);
+                            finish();
                             break;
                         }
                     }
