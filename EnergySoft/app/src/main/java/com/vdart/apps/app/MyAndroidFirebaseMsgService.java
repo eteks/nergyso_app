@@ -39,21 +39,18 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
     int NOTIFICATION_COUNT = 0;
     BannerActivity banner;
     String SERVER_URL = "";
-    String NOTIFICATION_URL = "api/notification/notification_list_by_employee";
     private static final String TAG = "MyAndroidFCMService";
     public static final String INTENT_FILTER = "INTENT_FILTER";
+    String NOTIFICATION_POST_URL = "api/notification/notification_status/";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+
+        int notification_id = 0;
         //Log data to Log Cat
-        NOTIFICATION_URL = SERVER_URL + NOTIFICATION_URL;
         SERVER_URL = getString(R.string.service_url);
 
         id = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getInt("id",0);
-
-        String notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
-
-        int nc = Integer.valueOf(notification_count) +1 ;
 
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
@@ -71,6 +68,9 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
         try{
             JSONObject obj = new JSONObject(remoteMessage.getData());
             String category = obj.getString("category");
+
+            notification_id = obj.getInt("notification_id");
+
             int id = 0;
             if(category.equals("events")){
                 id = obj.getInt("events_id");
@@ -81,23 +81,23 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
             }
             switch (category){
                 case "events" : {
-                    createNotification(id,category,remoteMessage.getNotification().getBody());
+                    createNotification(id,category,remoteMessage.getNotification().getBody(),notification_id);
                     break;
                 }
                 case "news":{
-                    createNotification(id, category,remoteMessage.getNotification().getBody());
+                    createNotification(id, category,remoteMessage.getNotification().getBody(),notification_id);
                     break;
                 }
                 case "shoutout":{
-                    createNotification(id, category, remoteMessage.getNotification().getBody());
+                    createNotification(id, category, remoteMessage.getNotification().getBody(),notification_id);
                     break;
                 }
                 case "livetelecast":{
-                    createNotification(id, category, remoteMessage.getNotification().getBody());
+                    createNotification(id, category, remoteMessage.getNotification().getBody(),notification_id);
                     break;
                 }
                 case "ceo":{
-                    createNotification(id, category, remoteMessage.getNotification().getBody());
+                    createNotification(id, category, remoteMessage.getNotification().getBody(),notification_id);
                     break;
                 }
             }
@@ -105,10 +105,9 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
 
         }
 
-//        createNotification(remoteMessage.getNotification().getBody());
     }
 
-    private void createNotification(int id,  String category, String messageBody) {
+    private void createNotification(int id,  String category, String messageBody,int notification_id) {
         PendingIntent resultIntent ;
         if(category.equals("events")){
             System.out.println("Message" + messageBody);
@@ -116,6 +115,7 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
             intent.putExtra("id", id);
             String check = "EVENTS";
             intent.putExtra("check",check);
+            intent.putExtra("notification_id",notification_id);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             resultIntent = PendingIntent.getActivity( this , 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);
@@ -124,6 +124,7 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
             Intent intent = new Intent( this , FullEvent. class);
             intent.putExtra("id", id);
             intent.putExtra("check", "NEWS");
+            intent.putExtra("notification_id",notification_id);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             resultIntent = PendingIntent.getActivity( this , 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);
@@ -131,6 +132,7 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
             System.out.println("Message" + messageBody);
             Intent intent = new Intent( this , ListingMore. class);
             intent.putExtra("more","shoutout");
+            intent.putExtra("notification_id",notification_id);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             resultIntent = PendingIntent.getActivity( this , 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);
@@ -138,6 +140,7 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
         }else if(category.equals("livetelecast")){
             System.out.println("Message" + messageBody);
             Intent intent = new Intent( this , LiveTelecast. class);
+            intent.putExtra("notification_id",notification_id);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             resultIntent = PendingIntent.getActivity( this , 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);
@@ -145,12 +148,14 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
         }else if(category.equals("ceo")){
             System.out.println("Message" + messageBody);
             Intent intent = new Intent( this , CeoMain. class);
+            intent.putExtra("notification_id",notification_id);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             resultIntent = PendingIntent.getActivity( this , 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);
 
         }else{
             Intent intent = new Intent( this , BannerActivity. class);
+            intent.putExtra("notification_id",notification_id);
             resultIntent = PendingIntent.getActivity( this , 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);
         }
@@ -167,29 +172,8 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, mNotificationBuilder.build());
+
     }
 
-    private void createAndShowDialog(final String message, final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.create().show();
-    }
-
-    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        } else {
-            return task.execute();
-        }
-    }
-
-    private void createAndShowDialog(Exception exception, String title) {
-        Throwable ex = exception;
-        if(exception.getCause() != null){
-            ex = exception.getCause();
-        }
-        createAndShowDialog(ex.getMessage(), title);
-    }
 }

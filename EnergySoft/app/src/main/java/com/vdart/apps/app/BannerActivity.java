@@ -63,6 +63,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     Menu menuInflate;
     int id = 0;
     int NOTIFICATION_COUNT = 0;
+    String NOTIFICATION_POST_URL = "api/notification/notification_status/";
     String NOTIFICATION_URL = "api/notification/notification_employee_unread_count";
 //    String[] images = new String[20];
     MyCustomPagerAdapter myCustomPagerAdapter;
@@ -107,8 +108,6 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
             }
         };
 
-        getNotificationCount();
-
         timer = new Timer(); // This will create a new Thread
         timer .schedule(new TimerTask() { // task to be scheduled
 
@@ -117,6 +116,19 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
+
+        if(getIntent().getIntExtra("notification_id",0) > 0){
+            postNotificationRead(getIntent().getIntExtra("notification_id",0));
+        }
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        getNotificationCount();
+                    }
+                },
+                100);
+
 
         loadFragment(new DefaultFragment());
 
@@ -635,11 +647,20 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 //        download_data.download_data_from_link(NOTIFICATION_URL);
     }
 
-//    public void onDestroy() {
-//
-//        unregisterReceiver(myReceiver);
-//        super.onDestroy();
-//
-//    }
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
+    }
+
+    public void postNotificationRead(int notification_id){
+        NOTIFICATION_POST_URL = SERVER_URL + NOTIFICATION_POST_URL + notification_id + "/" ;
+
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(NOTIFICATION_POST_URL);
+
+        NOTIFICATION_POST_URL = "api/notification/notification_status/";
+    }
 }
 

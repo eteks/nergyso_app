@@ -1,7 +1,9 @@
 package com.vdart.apps.app;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -88,7 +90,24 @@ public class TwitterActivity extends AppCompatActivity {
         NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
         getNotificationCount();
 
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
+
     }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
+    }
+
     private class MyBrowser extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {

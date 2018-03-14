@@ -1,8 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -130,6 +132,22 @@ public class EventGallery extends AppCompatActivity implements Download_data.dow
                 startActivity(intent);
             }
         });
+
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
+
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
 
     }
 
