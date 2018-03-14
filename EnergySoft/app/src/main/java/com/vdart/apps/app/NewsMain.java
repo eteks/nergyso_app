@@ -1,8 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -114,6 +116,8 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
         NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
         getNotificationCount();
 
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
+
         rv.setAdapter(adapter);
 
         rv.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
@@ -169,6 +173,20 @@ public class NewsMain extends AppCompatActivity implements Download_data.downloa
 
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link("http://10.0.0.15:8000/api/news/");
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
     }
 
     private void loadFirstPage() {

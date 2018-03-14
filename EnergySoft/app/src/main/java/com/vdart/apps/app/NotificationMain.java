@@ -1,8 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -103,6 +105,8 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
+
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
 
         rv.setItemAnimator(new DefaultItemAnimator());
 
@@ -320,6 +324,20 @@ public class NotificationMain extends AppCompatActivity implements Download_data
 
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link(NOTIFICATION_URL);
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
     }
 
     public void getNotificationCount(){

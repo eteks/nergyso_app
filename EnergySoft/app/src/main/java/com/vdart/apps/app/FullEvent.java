@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -89,6 +91,7 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     String notification_count = "";
     int NOTIFICATION_COUNT = 0;
     String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
+    String NOTIFICATION_POST_URL = "api/notification/notification_status/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,10 +127,6 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
         notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
-        NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
-        getNotificationCount();
-
-
         /*After setting the adapter use the timer */
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
@@ -159,6 +158,10 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             RECENT_URL = SERVER_URL + RECENT_NEWS_URL ;
         }
 
+        if(getIntent().getIntExtra("notification_id",0) > 0){
+            postNotificationRead(getIntent().getIntExtra("notification_id",0));
+        }
+
         //Initialising TextView and ImageView
         full_events_title = (TextView) findViewById(R.id.full_events_title);
         full_text_events_description = (WebView) findViewById(R.id.full_text_events_description);
@@ -185,6 +188,40 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
             }
         });
 
+        NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        getNotificationCount();
+                    }
+                },
+                100);
+
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
+    }
+
+    public void postNotificationRead(int notification_id){
+        NOTIFICATION_POST_URL = SERVER_URL + NOTIFICATION_POST_URL + notification_id + "/" ;
+
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(NOTIFICATION_POST_URL);
+
+        NOTIFICATION_POST_URL = "api/notification/notification_status/";
     }
 
     public void getNotificationCount(){

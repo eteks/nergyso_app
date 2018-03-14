@@ -1,8 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -61,6 +63,8 @@ public class SearchActivity extends AppCompatActivity {
 
         SERVER_URL = getString(R.string.service_url);
 
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
+
         NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
         getNotificationCount();
 
@@ -94,6 +98,20 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
     }
 
     public void getNotificationCount(){

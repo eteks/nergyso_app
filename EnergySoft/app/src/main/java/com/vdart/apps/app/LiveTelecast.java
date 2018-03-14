@@ -1,8 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -79,6 +81,7 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
     public String video_url[] = new String[10];
     int NOTIFICATION_COUNT = 0;
     String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
+    String NOTIFICATION_POST_URL = "api/notification/notification_status/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +113,20 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
 
         notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
+        if(getIntent().getIntExtra("notification_id",0) > 0){
+            postNotificationRead(getIntent().getIntExtra("notification_id",0));
+        }
+
         NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
-        getNotificationCount();
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        getNotificationCount();
+                    }
+                },
+                100);
+
 
         rv.setItemAnimator(new DefaultItemAnimator());
 
@@ -167,8 +182,33 @@ public class LiveTelecast extends AppCompatActivity implements Download_data.dow
             }
         }, 1000);
 
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
+
 //        Download_data download_data = new Download_data((Download_data.download_complete) this);
 //        download_data.download_data_from_link("http://10.0.0.15:8000/api/news/");
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
+    }
+
+    public void postNotificationRead(int notification_id){
+        NOTIFICATION_POST_URL = SERVER_URL + NOTIFICATION_POST_URL + notification_id + "/" ;
+
+        Download_data download_data = new Download_data((Download_data.download_complete) this);
+        download_data.download_data_from_link(NOTIFICATION_POST_URL);
+
+        NOTIFICATION_POST_URL = "api/notification/notification_status/";
     }
 
     private void loadFirstPage() {

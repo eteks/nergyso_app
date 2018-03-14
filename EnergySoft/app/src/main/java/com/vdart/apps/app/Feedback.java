@@ -1,8 +1,10 @@
 package com.vdart.apps.app;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -69,6 +71,8 @@ public class Feedback extends AppCompatActivity {
 
         NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
         getNotificationCount();
+
+        registerReceiver(myReceiver, new IntentFilter(MyAndroidFirebaseMsgService.INTENT_FILTER));
 
         final EditText Feedback = (EditText) findViewById(R.id.feedback);
         final EditText Query = (EditText) findViewById(R.id.query);
@@ -196,6 +200,20 @@ public class Feedback extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getNotificationCount();
+        }
+    };
+
+    public void onDestroy() {
+
+        unregisterReceiver(myReceiver);
+        super.onDestroy();
+
     }
 
     public void getNotificationCount(){
