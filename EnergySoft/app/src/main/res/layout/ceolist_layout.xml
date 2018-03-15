@@ -24,7 +24,7 @@
                     android:layout_toRightOf="@+id/news_image2"
                     android:paddingLeft="10dp"
                     android:textColor="#333"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     android:maxLines="1"
                     />
                 <TextView
