@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/answers"
                 android:layout_below="@+id/answers"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:onClick="getRadioChecked"
                 android:text="News" />
 
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/news"
                 android:layout_below="@+id/news"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:onClick="getRadioChecked"
                 android:text="Events" />
 
@@ -62,20 +62,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/events"
                 android:layout_below="@+id/events"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:onClick="getRadioChecked"
                 android:text="Shoutout" />
 
         </RadioGroup>
 
-            <Button
-                android:id="@+id/searchbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/answers"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="54dp"
-                android:text="Search" />
+        <Button
+            android:id="@+id/searchbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/searchText"
+            android:layout_below="@+id/answers"
+            android:text="Search" />
 
         </RelativeLayout>
 
