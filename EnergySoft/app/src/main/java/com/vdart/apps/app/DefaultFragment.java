@@ -46,6 +46,8 @@ public class DefaultFragment extends Fragment implements  Download_data.download
     String BIRTHDAY_URL = "api/employee/employee_upcoming_birthday/", ANNIVERSARY_URL = "api/employee/employee_upcoming_anniversary/", SHOUTOUT_URL = "api/shoutout_list/", NEWS_URL = "api/news/recent_news", EVENT_URL = "api/events/recent_events/";
     boolean birthday = false, anniversary = false, shoutout_ = false, news_ = false, event_ = false;
     TextView more_upcoming_birthday, more_upcoming_anniversary, more_shoutout, more_news, more_event;
+    TextView upcoming_birthday,upcoming_anniversary,upcoming_shoutout,upcoming_news,upcoming_event;
+    View birthday_line,anniversary_line,shoutout_line,news_line,event_line;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +61,18 @@ public class DefaultFragment extends Fragment implements  Download_data.download
         SHOUTOUT_URL = SERVER_URL + SHOUTOUT_URL;
         NEWS_URL = SERVER_URL + NEWS_URL ;
         EVENT_URL = SERVER_URL + EVENT_URL ;
+
+        upcoming_birthday = (TextView) view.findViewById(R.id.upcoming_birthday);
+        upcoming_anniversary = (TextView) view.findViewById(R.id.upcoming_anniversary);
+        upcoming_shoutout = (TextView) view.findViewById(R.id.upcoming_shoutout);
+        upcoming_news = (TextView) view.findViewById(R.id.upcoming_news);
+        upcoming_event = (TextView) view.findViewById(R.id.upcoming_event);
+
+        birthday_line = (View) view.findViewById(R.id.birthday_line);
+        anniversary_line = (View) view.findViewById(R.id.anniversary_line);
+        shoutout_line = (View) view.findViewById(R.id.shoutout_line);
+        news_line = (View) view.findViewById(R.id.news_line);
+        event_line = (View) view.findViewById(R.id.event_line);
 
         main_recycler_birthday = (RecyclerView) view.findViewById(R.id.main_recycler_birthday);
         main_recycler_anniversary = (RecyclerView) view.findViewById(R.id.main_recycler_anniversary);
@@ -149,29 +163,35 @@ public class DefaultFragment extends Fragment implements  Download_data.download
         try {
             if(birthday){
                 JSONArray data_array = new JSONArray(data);
-                System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    System.out.println("Object"+obj);
-                    final News add=new News("Title");
-                    add.news_title = obj.getString("employee_name");
-                    add.setTitle(obj.getString("employee_name"));
-                    add.setId(obj.getInt("id"));
-                    Date date = parseDate(obj.getString("employee_dob"));
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                    String strDate = formatter.format(date);
-                    add.news_description = strDate;
-                    add.news_image = obj.getString("employee_photo");
-                    add.setType("birthday");
-                    System.out.println("News Id"+obj.getInt("id"));
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter1.add(add);
-                        }
-                    });
+//                System.out.println("Object" + data_array);
+                if(data_array.length() == 0){
+                    upcoming_birthday.setVisibility(View.INVISIBLE);
+                    birthday_line.setVisibility(View.INVISIBLE);
+                    main_recycler_birthday.setVisibility(View.INVISIBLE);
+                    more_upcoming_birthday.setVisibility(View.INVISIBLE);
+                }else {
+                    for (int i = 0; i < 1; i++) {
+                        JSONObject obj = new JSONObject(data_array.get(0).toString());
+                        System.out.println("Object" + obj);
+                        final News add = new News("Title");
+                        add.news_title = obj.getString("employee_name");
+                        add.setTitle(obj.getString("employee_name"));
+                        add.setId(obj.getInt("id"));
+                        Date date = parseDate(obj.getString("employee_dob"));
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                        String strDate = formatter.format(date);
+                        add.news_description = strDate;
+                        add.news_image = obj.getString("employee_photo");
+                        add.setType("birthday");
+                        System.out.println("News Id" + obj.getInt("id"));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter1.add(add);
+                            }
+                        });
 
+                    }
                 }
                 Download_data download_data = new Download_data((Download_data.download_complete) this);
                 download_data.download_data_from_link(ANNIVERSARY_URL);
@@ -181,27 +201,33 @@ public class DefaultFragment extends Fragment implements  Download_data.download
             }else if(anniversary){
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    System.out.println("Object"+obj);
-                    final News add=new News("Title");
-                    add.news_title = obj.getString("employee_name");
-                    add.setTitle(obj.getString("employee_name"));
-                    add.setId(obj.getInt("id"));
-                    Date date = parseDate(obj.getString("employee_doj"));
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                    String strDate = formatter.format(date);
-                    add.news_description = strDate;
-                    add.news_image = obj.getString("employee_photo");
-                    add.setType("anniversary");
-                    System.out.println("News Id"+obj.getInt("id"));
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter2.add(add);
-                        }
-                    });
+                if(data_array.length() == 0){
+                    upcoming_anniversary.setVisibility(View.INVISIBLE);
+                    anniversary_line.setVisibility(View.INVISIBLE);
+                    main_recycler_anniversary.setVisibility(View.INVISIBLE);
+                    more_upcoming_anniversary.setVisibility(View.INVISIBLE);
+                }else {
+                    for (int i = 0; i < 1; i++) {
+                        JSONObject obj = new JSONObject(data_array.get(0).toString());
+                        System.out.println("Object" + obj);
+                        final News add = new News("Title");
+                        add.news_title = obj.getString("employee_name");
+                        add.setTitle(obj.getString("employee_name"));
+                        add.setId(obj.getInt("id"));
+                        Date date = parseDate(obj.getString("employee_doj"));
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                        String strDate = formatter.format(date);
+                        add.news_description = strDate;
+                        add.news_image = obj.getString("employee_photo");
+                        add.setType("anniversary");
+                        System.out.println("News Id" + obj.getInt("id"));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter2.add(add);
+                            }
+                        });
+                    }
                 }
                 Download_data download_data = new Download_data((Download_data.download_complete) this);
                 download_data.download_data_from_link(SHOUTOUT_URL);
@@ -210,25 +236,31 @@ public class DefaultFragment extends Fragment implements  Download_data.download
             }else if(shoutout_){
                 JSONObject object = new JSONObject(data);
                 JSONArray data_array = object.getJSONArray("results");
-                System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    final News add=new News();
-                    add.news_title = obj.getString("employee_from_profile");
-                    add.setTitle(obj.getString("employee_from_profile"));
-                    add.setId(obj.getInt("id"));
-                    add.news_description = obj.getString("shoutout_description");
-                    add.setNews_video(obj.getString("employee_from_name"));
-                    add.setNews_document(obj.getString("employee_to_name"));
-                    add.news_image = obj.getString("employee_to_profile");
-                    add.setType("shoutout");
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter3.add(add);
-                        }
-                    });
+//                System.out.println("Object" + data_array);
+                if(data_array.length() == 0){
+                    upcoming_shoutout.setVisibility(View.INVISIBLE);
+                    shoutout_line.setVisibility(View.INVISIBLE);
+                    main_recycler_shoutout.setVisibility(View.INVISIBLE);
+                    more_shoutout.setVisibility(View.INVISIBLE);
+                }else {
+                    for (int i = 0; i < 1; i++) {
+                        JSONObject obj = new JSONObject(data_array.get(0).toString());
+                        final News add = new News();
+                        add.news_title = obj.getString("employee_from_profile");
+                        add.setTitle(obj.getString("employee_from_profile"));
+                        add.setId(obj.getInt("id"));
+                        add.news_description = obj.getString("shoutout_description");
+                        add.setNews_video(obj.getString("employee_from_name"));
+                        add.setNews_document(obj.getString("employee_to_name"));
+                        add.news_image = obj.getString("employee_to_profile");
+                        add.setType("shoutout");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter3.add(add);
+                            }
+                        });
+                    }
                 }
                 Download_data download_data = new Download_data((Download_data.download_complete) this);
                 download_data.download_data_from_link(NEWS_URL);
@@ -237,23 +269,29 @@ public class DefaultFragment extends Fragment implements  Download_data.download
             }else if(news_){
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    final News add=new News("Title");
-                    add.news_title = obj.getString("news_title");
-                    add.setTitle(obj.getString("news_title"));
-                    add.setId(obj.getInt("id"));
-                    add.news_description = obj.getString("news_description");
-                    add.news_image = obj.getString("news_image");
-                    add.setType("news");
-                    System.out.println("News Id"+obj.getInt("id"));
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter4.add(add);
-                        }
-                    });
+                if(data_array.length() == 0){
+                    upcoming_news.setVisibility(View.INVISIBLE);
+                    news_line.setVisibility(View.INVISIBLE);
+                    main_recycler_news.setVisibility(View.INVISIBLE);
+                    more_news.setVisibility(View.INVISIBLE);
+                }else {
+                    for (int i = 0; i < 1; i++) {
+                        JSONObject obj = new JSONObject(data_array.get(0).toString());
+                        final News add = new News("Title");
+                        add.news_title = obj.getString("news_title");
+                        add.setTitle(obj.getString("news_title"));
+                        add.setId(obj.getInt("id"));
+                        add.news_description = obj.getString("news_description");
+                        add.news_image = obj.getString("news_image");
+                        add.setType("news");
+                        System.out.println("News Id" + obj.getInt("id"));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter4.add(add);
+                            }
+                        });
+                    }
                 }
                 Download_data download_data = new Download_data((Download_data.download_complete) this);
                 download_data.download_data_from_link(EVENT_URL);
@@ -262,21 +300,27 @@ public class DefaultFragment extends Fragment implements  Download_data.download
             }else if(event_){
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
-                for (int i = 0 ; i < 1; i++)
-                {
-                    JSONObject obj=new JSONObject(data_array.get(0).toString());
-                    final News add=new News("Title");
-                    add.news_title = obj.getString("events_title");
-                    add.setId(obj.getInt("id"));
-                    add.news_description = obj.getString("events_description");
-                    add.news_image = obj.getString("events_image");
-                    add.setType("events");
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter5.add(add);
-                        }
-                    });
+                if(data_array.length() == 0){
+                    upcoming_event.setVisibility(View.INVISIBLE);
+                    event_line.setVisibility(View.INVISIBLE);
+                    main_recycler_event.setVisibility(View.INVISIBLE);
+                    more_event.setVisibility(View.INVISIBLE);
+                }else {
+                    for (int i = 0; i < 1; i++) {
+                        JSONObject obj = new JSONObject(data_array.get(0).toString());
+                        final News add = new News("Title");
+                        add.news_title = obj.getString("events_title");
+                        add.setId(obj.getInt("id"));
+                        add.news_description = obj.getString("events_description");
+                        add.news_image = obj.getString("events_image");
+                        add.setType("events");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter5.add(add);
+                            }
+                        });
+                    }
                 }
                 event_ = false;
             }

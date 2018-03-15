@@ -55,6 +55,7 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
     String notification_count = "";
     int NOTIFICATION_COUNT = 0;
     String NOTIFICATION_COUNT_URL = "api/notification/notification_employee_unread_count";
+    Boolean previousAlert = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,20 +94,6 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
 
         notification_count = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).getString("nc","");
 
-        Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            if(extras.getInt("next",0) > 0){
-                CURRENT_QUESTION_ID = extras.getInt("next",0);
-            }else if(extras.getInt("previous",0) > 0){
-                CURRENT_QUESTION_ID = extras.getInt("previous",0);
-            }
-            Download_data download_data = new Download_data((Download_data.download_complete) this);
-            download_data.download_data_from_link(POLLS_URL);
-        }else {
-            Download_data download_data = new Download_data((Download_data.download_complete) this);
-            download_data.download_data_from_link(POLLS_URL);
-        }
-
         next = (Button) findViewById(R.id.next);
         next.setVisibility(View.GONE);
         next.setEnabled(false);
@@ -138,6 +125,21 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
                 }
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            if(extras.getInt("next",0) > 0){
+                CURRENT_QUESTION_ID = extras.getInt("next",0);
+            }else if(extras.getInt("previous",0) > 0){
+                CURRENT_QUESTION_ID = extras.getInt("previous",0);
+            }
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(POLLS_URL);
+        }else {
+            previousAlert = true;
+            Download_data download_data = new Download_data((Download_data.download_complete) this);
+            download_data.download_data_from_link(POLLS_URL);
+        }
 
         //        Click Logo to home screen
 
@@ -386,7 +388,11 @@ public class quiz_activity_frag extends AppCompatActivity implements Download_da
             checkAnswered(questionId);
             vote.setVisibility(View.VISIBLE);
             next.setVisibility(View.VISIBLE);
-            previous.setVisibility(View.VISIBLE);
+            if(previousAlert){
+                previous.setVisibility(View.INVISIBLE);
+            }else{
+                previous.setVisibility(View.VISIBLE);
+            }
             JSONArray answersArray = obj.getJSONArray("answers");
             for(int j = 0; j < answersArray.length(); j++){
                 switch(j){

@@ -68,6 +68,10 @@ public class SearchActivity extends AppCompatActivity {
         NOTIFICATION_COUNT_URL = SERVER_URL + NOTIFICATION_COUNT_URL;
         getNotificationCount();
 
+        if(getIntent().getIntExtra("result",0) > 0){
+            createAndShowDialog("No results found","Empty");
+        }
+
         searchbutton = (Button) findViewById(R.id.searchbutton);
         searchbutton.setOnClickListener(new View.OnClickListener(){
             int ONE_TIME = 0;

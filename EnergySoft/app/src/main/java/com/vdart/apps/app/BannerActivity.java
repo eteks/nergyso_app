@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -253,6 +254,24 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     public boolean onPrepareOptionsMenu(Menu menu) {
         setCount(this, String.valueOf(NOTIFICATION_COUNT));
         return  true;
+    }
+
+    public void createDialogToExit(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure?");
+        builder.setTitle("Exit");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //do nothing;
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public void setCount(Context context, String count) {
@@ -648,7 +667,6 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
     }
 
     public void onDestroy() {
-
         unregisterReceiver(myReceiver);
         super.onDestroy();
 
@@ -661,12 +679,10 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
     @Override
     public void onBackPressed() {
+        finishAffinity();
         super.onBackPressed();
-        finish();
+//        createDialogToExit();
     }
-
-
-
 
     public void postNotificationRead(int notification_id){
         NOTIFICATION_POST_URL = SERVER_URL + NOTIFICATION_POST_URL + notification_id + "/" ;

@@ -203,7 +203,9 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                         }
                         System.out.println("Output" + sb.toString());
                         JSONArray data_array = new JSONArray(sb.toString());
-
+                        if(data_array.length() == 0){
+                            createAndShowDialog("No notifications available","Empty");
+                        }
                         for (int i = 0; i < data_array.length(); i++) {
                             final JSONObject obj = new JSONObject(data_array.get(i).toString());
                             System.out.println("Object" + obj);

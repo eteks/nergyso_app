@@ -258,8 +258,8 @@ public class SearchResults extends AppCompatActivity implements Download_data.do
     public void get_data(String data) {
         JSONArray array = null;
         if(data.length() == 2){
-            createAndShowDialog("No results found","Empty");
             Intent intent = new Intent(SearchResults.this,SearchActivity.class);
+            intent.putExtra("result",1);
             startActivity(intent);
         }
         try {
