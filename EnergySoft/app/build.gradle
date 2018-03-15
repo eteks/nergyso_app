@@ -7,9 +7,9 @@ android {
         applicationId "com.vdart.apps.app"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 9
+        versionCode 10
         multiDexEnabled true
-        versionName "1.9"
+        versionName "1.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     aaptOptions {

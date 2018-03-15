@@ -654,6 +654,20 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
     }
 
+    public void onRestart() {
+        super.onRestart();
+        getNotificationCount();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+
+
+
     public void postNotificationRead(int notification_id){
         NOTIFICATION_POST_URL = SERVER_URL + NOTIFICATION_POST_URL + notification_id + "/" ;
 
