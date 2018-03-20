@@ -262,7 +262,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
         builder.setTitle("Exit");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                finish();
+                finishAffinity();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -270,8 +270,7 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
                 //do nothing;
             }
         });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        builder.create().show();
     }
 
     public void setCount(Context context, String count) {
@@ -679,9 +678,9 @@ public class BannerActivity extends AppCompatActivity implements Download_data.d
 
     @Override
     public void onBackPressed() {
-        finishAffinity();
-        super.onBackPressed();
-//        createDialogToExit();
+//        finishAffinity();
+//        super.onBackPressed();
+        createDialogToExit();
     }
 
     public void postNotificationRead(int notification_id){

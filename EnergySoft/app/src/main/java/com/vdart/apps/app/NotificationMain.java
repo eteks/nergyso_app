@@ -299,7 +299,7 @@ public class NotificationMain extends AppCompatActivity implements Download_data
                             @Override
                             public void run() {
 //                            mProgressBar.setVisibility(ProgressBar.GONE);
-                                createAndShowDialog("Drunk?! Please check your credentials", "Error");
+                                createAndShowDialog("No notifications", "Empty");
                             }
                         });
                     } finally {

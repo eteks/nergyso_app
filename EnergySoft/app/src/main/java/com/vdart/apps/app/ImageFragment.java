@@ -218,11 +218,16 @@ public class ImageFragment extends Fragment implements Download_data.download_co
                             String events_description = object.getString("events_description");
                             full_text_events_description.loadData("<p style=\"text-align: justify\">" + events_description + "</p>", "text/html", "UTF-8");
                             System.out.println(SERVER_URL + object.getString("events_image"));
-                            Date date = parseDate(object.getString("created_date"));
-                            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                            Date date = parseDate(object.getString("events_date"));
+                            String formatted_time[] = object.getString("events_date").split("T");
+                            String time[] = formatted_time[1].split(":");
+//                            System.out.println("Hour" + time[0]);
+//                            System.out.println("Min" + time[1]);
+//                            System.out.println("Date " + date.toString());
+                            SimpleDateFormat formatter = new SimpleDateFormat("E dd MMM yyyy 'at' "+ time[0] + ":" + time[1]);
                             String strDate = formatter.format(date);
-                            event_date.setText("Event Date : " + strDate);
-                            event_location.setText("Event Venue : " + object.getString("events_venue"));
+                            event_date.setText("Date & Time : " + strDate);
+                            event_location.setText("Venue : " + object.getString("events_venue"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -257,8 +262,10 @@ public class ImageFragment extends Fragment implements Download_data.download_co
 
     public static Date parseDate(String date) {
         try {
+            System.out.println("Date 1 : "+ date.toString());
             return new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (ParseException e) {
+            System.out.println("Exception "+ e);
             return null;
         }
     }

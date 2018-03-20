@@ -165,10 +165,10 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                 JSONArray data_array = new JSONArray(data);
 //                System.out.println("Object" + data_array);
                 if(data_array.length() == 0){
-                    upcoming_birthday.setVisibility(View.INVISIBLE);
-                    birthday_line.setVisibility(View.INVISIBLE);
-                    main_recycler_birthday.setVisibility(View.INVISIBLE);
-                    more_upcoming_birthday.setVisibility(View.INVISIBLE);
+                    upcoming_birthday.setVisibility(View.GONE);
+                    birthday_line.setVisibility(View.GONE);
+                    main_recycler_birthday.setVisibility(View.GONE);
+                    more_upcoming_birthday.setVisibility(View.GONE);
                 }else {
                     for (int i = 0; i < 1; i++) {
                         JSONObject obj = new JSONObject(data_array.get(0).toString());
@@ -202,10 +202,10 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
                 if(data_array.length() == 0){
-                    upcoming_anniversary.setVisibility(View.INVISIBLE);
-                    anniversary_line.setVisibility(View.INVISIBLE);
-                    main_recycler_anniversary.setVisibility(View.INVISIBLE);
-                    more_upcoming_anniversary.setVisibility(View.INVISIBLE);
+                    upcoming_anniversary.setVisibility(View.GONE);
+                    anniversary_line.setVisibility(View.GONE);
+                    main_recycler_anniversary.setVisibility(View.GONE);
+                    more_upcoming_anniversary.setVisibility(View.GONE);
                 }else {
                     for (int i = 0; i < 1; i++) {
                         JSONObject obj = new JSONObject(data_array.get(0).toString());
@@ -238,10 +238,10 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                 JSONArray data_array = object.getJSONArray("results");
 //                System.out.println("Object" + data_array);
                 if(data_array.length() == 0){
-                    upcoming_shoutout.setVisibility(View.INVISIBLE);
-                    shoutout_line.setVisibility(View.INVISIBLE);
-                    main_recycler_shoutout.setVisibility(View.INVISIBLE);
-                    more_shoutout.setVisibility(View.INVISIBLE);
+                    upcoming_shoutout.setVisibility(View.GONE);
+                    shoutout_line.setVisibility(View.GONE);
+                    main_recycler_shoutout.setVisibility(View.GONE);
+                    more_shoutout.setVisibility(View.GONE);
                 }else {
                     for (int i = 0; i < 1; i++) {
                         JSONObject obj = new JSONObject(data_array.get(0).toString());
@@ -270,10 +270,10 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
                 if(data_array.length() == 0){
-                    upcoming_news.setVisibility(View.INVISIBLE);
-                    news_line.setVisibility(View.INVISIBLE);
-                    main_recycler_news.setVisibility(View.INVISIBLE);
-                    more_news.setVisibility(View.INVISIBLE);
+                    upcoming_news.setVisibility(View.GONE);
+                    news_line.setVisibility(View.GONE);
+                    main_recycler_news.setVisibility(View.GONE);
+                    more_news.setVisibility(View.GONE);
                 }else {
                     for (int i = 0; i < 1; i++) {
                         JSONObject obj = new JSONObject(data_array.get(0).toString());
@@ -301,10 +301,10 @@ public class DefaultFragment extends Fragment implements  Download_data.download
                 JSONArray data_array = new JSONArray(data);
                 System.out.println("Object" + data_array);
                 if(data_array.length() == 0){
-                    upcoming_event.setVisibility(View.INVISIBLE);
-                    event_line.setVisibility(View.INVISIBLE);
-                    main_recycler_event.setVisibility(View.INVISIBLE);
-                    more_event.setVisibility(View.INVISIBLE);
+                    upcoming_event.setVisibility(View.GONE);
+                    event_line.setVisibility(View.GONE);
+                    main_recycler_event.setVisibility(View.GONE);
+                    more_event.setVisibility(View.GONE);
                 }else {
                     for (int i = 0; i < 1; i++) {
                         JSONObject obj = new JSONObject(data_array.get(0).toString());
