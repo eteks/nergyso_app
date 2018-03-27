@@ -421,14 +421,19 @@ public class ImageFragment extends Fragment implements Download_data.download_co
                 @Override
                 public void onClick(View v) {
                     News news = newsList.get(viewHolder.getAdapterPosition());
-                    System.out.println("CLICKed"+news.getId());
+                    System.out.println("CLICKed" + news.getId() + check);
                     int id = news.getId();
-                    Intent intent = new Intent(getActivity(),FullEvent.class);
-                    intent.putExtra("id", id);
-                    intent.putExtra("check","EVENTS");
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+                    if (check.equals("EVENTS")) {
+                        Intent intent = new Intent(getActivity(), FullEvent.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("check", "EVENTS");
+                        startActivity(intent);
+                    } else if (check.equals("NEWS")) {
+                        Intent intent = new Intent(getActivity(), FullEvent.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("check", "NEWS");
+                        startActivity(intent);
+                    }
                 }
             };
             v1.setOnClickListener(mOnClickListener);

@@ -56,11 +56,16 @@ import java.util.TimerTask;
 
 import static com.vdart.apps.app.MainActivity.MyPREFERENCES;
 
+/*
+    Full event & news display splitups.
+    Image slider displaying is at FullEvent.java.
+    The content displaying of the event and news and also the recent news & events were written in ImageFragment.java
+ */
+
 public class FullEvent extends AppCompatActivity implements Download_data.download_complete {
 
     MyCustomPagerAdapter myCustomPagerAdapter;
     ViewPager viewPager;
-//    String[] images = new String[20];
     ArrayList<String> images = new ArrayList<String>();
     int currentPage = 0;
     Timer timer;
@@ -77,8 +82,8 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     LinearLayoutManager linearLayoutManager;
     Toolbar toolbar;
     int ONE_TIME = 0;
-    String check = "";
-    PaginationAdapter adapter;
+    String check = "DEFAULT";
+    MyCustomPagerAdapter.PaginationAdapter adapter;
     TextView full_events_title, event_location, event_date;
     ImageView events_photo;
     private static final int[] ID = new int[200];
@@ -106,18 +111,6 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
         //Initialising Server URL
         SERVER_URL = getString(R.string.service_url);
-
-//        rv = (RecyclerView) findViewById(R.id.main_recycler);
-//        final ProgressBar progressBar = new ProgressBar(getActivity());
-
-//        adapter = new FullEvent.PaginationAdapter(this);
-//
-//        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        rv.setLayoutManager(linearLayoutManager);
-//
-//        rv.setItemAnimator(new DefaultItemAnimator());
-//
-//        rv.setAdapter(adapter);
 
         viewPager = (ViewPager) findViewById(R.id.viewPagerdash);
 
@@ -209,7 +202,6 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
     };
 
     public void onDestroy() {
-
         unregisterReceiver(myReceiver);
         super.onDestroy();
 
@@ -682,156 +674,158 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((LinearLayout) object);
         }
-    }
 
-    public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+        public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private static final int ITEM = 0;
-        private static final int LOADING = 1;
-        NewsMain main;
-        private List<News> newsList;
-        private Context context;
-        private boolean isLoadingAdded = false;
+            private static final int ITEM = 0;
+            private static final int LOADING = 1;
+            NewsMain main;
+            private List<News> newsList;
+            private Context context;
+            private boolean isLoadingAdded = false;
 
-        public PaginationAdapter(Context context) {
-            this.context = context;
-            newsList = new ArrayList<>();
-        }
-
-        public List<News> getNewsList() {
-            return newsList;
-        }
-
-        public void setNewsList(List<News> newsList) {
-            this.newsList = newsList;
-        }
-
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            RecyclerView.ViewHolder viewHolder = null;
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-
-            switch (viewType) {
-                case ITEM:
-                    viewHolder = getViewHolder(parent, inflater);
-                    break;
-                case LOADING:
-                    View v2 = inflater.inflate(R.layout.item_progress, parent, false);
-                    viewHolder = new LoadingVH(v2);
-                    break;
+            public PaginationAdapter(Context context) {
+                this.context = context;
+                newsList = new ArrayList<>();
             }
-            return viewHolder;
-        }
 
-        @NonNull
-        private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
-            final RecyclerView.ViewHolder viewHolder;
-            View v1 = inflater.inflate(R.layout.newslist_layout, parent, false);
-            viewHolder = new NewsVH(v1);
-            final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    News news = newsList.get(viewHolder.getAdapterPosition());
-                    System.out.println("CLICKed"+news.getId());
-                    int id = news.getId();
-                    Intent intent = new Intent(FullEvent.this,FullEvent.class);
-                    intent.putExtra("id", id);
-                    intent.putExtra("check","EVENTS");
-//                    finish();
-                    startActivity(intent);
-//                news.setPage("FullNews");
+            public List<News> getNewsList() {
+                return newsList;
+            }
+
+            public void setNewsList(List<News> newsList) {
+                this.newsList = newsList;
+            }
+
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                RecyclerView.ViewHolder viewHolder = null;
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                switch (viewType) {
+                    case ITEM:
+                        viewHolder = getViewHolder(parent, inflater);
+                        break;
+                    case LOADING:
+                        View v2 = inflater.inflate(R.layout.item_progress, parent, false);
+                        viewHolder = new LoadingVH(v2);
+                        break;
                 }
-            };
-            v1.setOnClickListener(mOnClickListener);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        Movie movie = movies.get(position);
-            News news = newsList.get(position);
-
-            switch (getItemViewType(position)) {
-                case ITEM:
-                    NewsVH newsVH = (NewsVH) holder;
-                    newsVH.news_title.setText(news.getTitle());
-                    newsVH.news_description.setText(news.getNews_description());
-                    loadImageFromUrl(newsVH.news_image,(SERVER_URL+news.getNews_image()));
-                    break;
-                case LOADING:
-//                Do nothing
-                    break;
+                return viewHolder;
             }
 
-        }
+            @NonNull
+            private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
+                final RecyclerView.ViewHolder viewHolder;
+                View v1 = inflater.inflate(R.layout.newslist_layout, parent, false);
+                viewHolder = new NewsVH(v1);
+                final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        News news = newsList.get(viewHolder.getAdapterPosition());
+                        System.out.println("CLICKed" + news.getId() + check);
+                        int id = news.getId();
+                        if (check.equals("EVENTS")) {
+                            Intent intent = new Intent(FullEvent.this, FullEvent.class);
+                            intent.putExtra("id", id);
+                            intent.putExtra("check", "EVENTS");
+                            startActivity(intent);
+                        } else if (check.equals("NEWS")) {
+                            Intent intent = new Intent(FullEvent.this, FullEvent.class);
+                            intent.putExtra("id", id);
+                            intent.putExtra("check", "NEWS");
+                            startActivity(intent);
+                        }
+                    }
+                };
+                v1.setOnClickListener(mOnClickListener);
+                return viewHolder;
+            }
 
-        @Override
-        public int getItemCount() {
-            return newsList == null ? 0 : newsList.size();
-        }
+            @Override
+            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//        Movie movie = movies.get(position);
+                News news = newsList.get(position);
 
-        @Override
-        public int getItemViewType(int position) {
-            return (position == newsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
-        }
+                switch (getItemViewType(position)) {
+                    case ITEM:
+                        NewsVH newsVH = (NewsVH) holder;
+                        newsVH.news_title.setText(news.getTitle());
+                        newsVH.news_description.setText(news.getNews_description());
+                        loadImageFromUrl(newsVH.news_image, (SERVER_URL + news.getNews_image()));
+                        break;
+                    case LOADING:
+//                Do nothing
+                        break;
+                }
+
+            }
+
+            @Override
+            public int getItemCount() {
+                return newsList == null ? 0 : newsList.size();
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return (position == newsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
+            }
 
     /*
    Helpers
    _________________________________________________________________________________________________
     */
 
-        public void add(News mc) {
-            newsList.add(mc);
-            notifyItemInserted(newsList.size() - 1);
-        }
-
-        public void addAll(List<News> mcList) {
-            for (News mc : mcList) {
-                add(mc);
+            public void add(News mc) {
+                newsList.add(mc);
+                notifyItemInserted(newsList.size() - 1);
             }
-        }
 
-        public void remove(News city) {
-            int position = newsList.indexOf(city);
-            if (position > -1) {
-                newsList.remove(position);
-                notifyItemRemoved(position);
+            public void addAll(List<News> mcList) {
+                for (News mc : mcList) {
+                    add(mc);
+                }
             }
-        }
 
-        public void clear() {
-            isLoadingAdded = false;
-            while (getItemCount() > 0) {
-                remove(getItem(0));
+            public void remove(News city) {
+                int position = newsList.indexOf(city);
+                if (position > -1) {
+                    newsList.remove(position);
+                    notifyItemRemoved(position);
+                }
             }
-        }
 
-        public boolean isEmpty() {
-            return getItemCount() == 0;
-        }
-
-
-        public void addLoadingFooter() {
-            isLoadingAdded = true;
-            add(new News());
-        }
-
-        public void removeLoadingFooter() {
-            isLoadingAdded = false;
-
-            int position = newsList.size() - 1;
-            News item = getItem(position);
-
-            if (item != null) {
-                newsList.remove(position);
-                notifyItemRemoved(position);
+            public void clear() {
+                isLoadingAdded = false;
+                while (getItemCount() > 0) {
+                    remove(getItem(0));
+                }
             }
-        }
 
-        public News getItem(int position) {
-            return newsList.get(position);
-        }
+            public boolean isEmpty() {
+                return getItemCount() == 0;
+            }
+
+
+            public void addLoadingFooter() {
+                isLoadingAdded = true;
+                add(new News());
+            }
+
+            public void removeLoadingFooter() {
+                isLoadingAdded = false;
+
+                int position = newsList.size() - 1;
+                News item = getItem(position);
+
+                if (item != null) {
+                    newsList.remove(position);
+                    notifyItemRemoved(position);
+                }
+            }
+
+            public News getItem(int position) {
+                return newsList.get(position);
+            }
 
 
    /*
@@ -839,15 +833,16 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
    _________________________________________________________________________________________________
     */
 
-        /**
-         * Main list's content ViewHolder
-         */
-        protected class NewsVH extends RecyclerView.ViewHolder {
-            TextView news_title,news_description;
-            ImageView news_image;
-            //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
-            public NewsVH(View itemView) {
-                super(itemView);
+            /**
+             * Main list's content ViewHolder
+             */
+            protected class NewsVH extends RecyclerView.ViewHolder {
+                TextView news_title, news_description;
+                ImageView news_image;
+
+                //        ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
+                public NewsVH(View itemView) {
+                    super(itemView);
 //            ListAdapter.ViewHolderItem holder = new ListAdapter.ViewHolderItem();
 //            if (convertView == null) {
 //                LayoutInflater inflater = (LayoutInflater) main.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -855,10 +850,10 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 
 //            holder.name = (TextView) convertView.findViewById(R.id.name);
 //            holder.code = (TextView) convertView.findViewById(R.id.code);
-                news_title = (TextView) itemView.findViewById(R.id.news_title2);
-                news_description = (TextView) itemView.findViewById(R.id.news_description2);
-                news_image = (ImageView) itemView.findViewById(R.id.news_image2);
-                System.out.println(itemView);
+                    news_title = (TextView) itemView.findViewById(R.id.news_title2);
+                    news_description = (TextView) itemView.findViewById(R.id.news_description2);
+                    news_image = (ImageView) itemView.findViewById(R.id.news_image2);
+                    System.out.println(itemView);
 //                news_image = (ImageView) convertView.findViewById(R.id.news_image);
 //            TextView news = (TextView) convertView.findViewById(R.id.news_title);
 //                convertView.setTag(holder);
@@ -869,21 +864,21 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 //                holder = (ListAdapter.ViewHolderItem) convertView.getTag();
 //            }
 
+                }
             }
+
+
+            protected class LoadingVH extends RecyclerView.ViewHolder {
+
+                public LoadingVH(View itemView) {
+                    super(itemView);
+                }
+            }
+
+
         }
 
-
-        protected class LoadingVH extends RecyclerView.ViewHolder {
-
-            public LoadingVH(View itemView) {
-                super(itemView);
-            }
-        }
-
-
-    }
-
-    // Initiating Menu XML file (menu.xml)
+        // Initiating Menu XML file (menu.xml)
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu)
 //    {
@@ -891,22 +886,22 @@ public class FullEvent extends AppCompatActivity implements Download_data.downlo
 //        menuInflater.inflate(R.menu.menu_main, menu);
 //        return true;
 //    }
-
-    private void loadImageFromUrl(ImageView myImage,String employee_photo) {
-        System.out.println("Image "+myImage+employee_photo);
-        Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_loader).error(R.mipmap.ic_loader)
-                .into(myImage, new com.squareup.picasso.Callback(){
-
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
     }
 
+        private void loadImageFromUrl(ImageView myImage, String employee_photo) {
+            System.out.println("Image " + myImage + employee_photo);
+            Picasso.with(this).load(employee_photo).placeholder(R.mipmap.ic_loader).error(R.mipmap.ic_loader)
+                    .into(myImage, new com.squareup.picasso.Callback() {
+
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
+        }
 }
